@@ -1,0 +1,415 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+ <HEAD>
+  <TITLE>Klepp_Jakob_H12</TITLE>
+  <META NAME="generator" CONTENT="wxMaxima">
+  <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+  <STYLE TYPE="text/css">
+body {
+  background-color: rgb(255,255,255);
+}
+.input {
+  color: rgb(0,0,255);
+}
+.comment {
+  color: rgb(0,0,0);
+  background-color: rgb(255,255,255);
+  padding: 2mm;
+}
+.image {
+  color: rgb(0,0,0);
+  padding: 2mm;
+}
+.section {
+  color: rgb(0,0,0);
+  font-size: 1.5em;
+  padding: 2mm;
+}
+.subsect {
+  color: rgb(0,0,0);
+  font-size: 1.2em;
+  padding: 2mm;
+}
+.title {
+  color: rgb(0,0,0);
+  font-size: 2em;
+  padding: 2mm;
+}
+.prompt {
+  color: rgb(255,0,0);
+}
+table {
+  border: 0px;
+}
+td {
+  vertical-align: top;
+  padding: 1mm;
+}
+  </STYLE>
+ </HEAD>
+ <BODY>
+
+<!---------------------------------------------------------->
+<!--          Created with wxMaxima version 14.09.0         -->
+<!---------------------------------------------------------->
+
+
+<!-- Title cell -->
+
+
+<P CLASS="title">
+Wahrscheinlichkeitsrechnung<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Jakob  Klepp        <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2014-11-23         
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Unabhängige Eriegnisse<BR>
+<BR>
+&nbsp;&nbsp;Gilt für 2 Ereignisse A,B dass die Wahrscheindlichkeit von B<BR>
+&nbsp;&nbsp;gleich der Wahrscheindlichkeit von B unter Einfluss von A ist,<BR>
+&nbsp;&nbsp;so hat keinen Einfluss auf B.<BR>
+<BR>
+&nbsp;&nbsp;A und B sind unabhängig.<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;P(A|B) = P(B)<BR>
+<BR>
+UND-Regel<BR>
+<BR>
+&nbsp;&nbsp;P(A und B) = P(A) * P(B)      Wenn A,B unabhängig<BR>
+<BR>
+&nbsp;&nbsp;P(A und B) = P(A) * P(A|B)    Wenn A,B abhängig<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;P(A und B)<BR>
+&nbsp;&nbsp;P(B|A) = ----------<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;P(A)<BR>
+<BR>
+Gegenereignis<BR>
+&nbsp;&nbsp;_<BR>
+&nbsp;&nbsp;A, ¬A   Gegenereignis zum Ereignis A<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_<BR>
+&nbsp;&nbsp;P(A) + P(A) = 1
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Baumdiagramm<BR>
+<BR>
+&nbsp;&nbsp;Bsp:<BR>
+<BR>
+&nbsp;&nbsp;Irtümlicherweise werden 3 nicht maturable Schüler und 9 maturable<BR>
+&nbsp;&nbsp;Schüler in einen Kurs gesteckt. Maturable und nicht maturable Schüler<BR>
+&nbsp;&nbsp;sind äusserlich nicht unterscheidbar.<BR>
+<BR>
+&nbsp;&nbsp;Man prüft hintereinander 3 Schüler. Wie groß ist die Wahrscheindlichkeit<BR>
+&nbsp;&nbsp;dass mindestens 2 maturabel sind.<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_.-°-._<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_.-'       '-._<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;9/12_.-'               '-._3/12<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_.-'                       '-._<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.-'                               '-.<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.✓.                                   .x.<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8/11.'   '.3/11                       9/11.'   '.2/11<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.'       '.                           .'       '.<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.'           '.                       .'           '.<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✓               x                    ✓'               'x<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/\               /\                  /\                 /\<BR>
+7/12/  \3/10     8/10/  \2/10        8/10/  \2/10       9/10/  \1/10<BR>
+&nbsp;&nbsp;&nbsp;/    \           /    \              /    \             /    \<BR>
+&nbsp;&nbsp;/      \         /      \            /      \           /      \<BR>
+&nbsp;&nbsp;✓      x         ✓      x            ✓      x           ✓      x<BR>
+<BR>
+&nbsp;&nbsp;v      v         v                   v                              Passende Ereignisse sind mit<BR>
+&nbsp;&nbsp;✓      ✓         ✓      ✓            x      x           x      x    v und ^ markiert<BR>
+&nbsp;&nbsp;✓      ✓         x      x            ✓      ✓           x      x<BR>
+&nbsp;&nbsp;✓      x         ✓      x            ✓      x           ✓      x<BR>
+&nbsp;&nbsp;^      ^         ^                   ^<BR>
+<BR>
+&nbsp;&nbsp;7      9         9      9            9      9           9      1<BR>
+&nbsp;--     --        --     ---          --     ---         ---    ---<BR>
+&nbsp;22     55        55     220          55     220         220    220<BR>
+<BR>
+1. Pfadregel:<BR>
+&nbsp;&nbsp;Die Wahrscheindlichkeit eines Pfades ist gleich dem Produkt<BR>
+&nbsp;&nbsp;der Wahrscheindlichkeiten Längs des Pfades.<BR>
+<BR>
+&nbsp;&nbsp;Pfad #1:<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;(9/12) * (8/11) * (7/12) = 7/22<BR>
+<BR>
+2. Pfadregel:<BR>
+&nbsp;&nbsp;Die Wahrscheindlichketi eines Ereignis ist gleich der Summe<BR>
+&nbsp;&nbsp;der Wahrscheindlichkeiten die zu diesem Ereignis gehören.<BR>
+<BR>
+&nbsp;&nbsp;Wahrscheindlichkeit dass beide Schüler Maturabel sind:<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;(7/22) + (9/55) + (9/55)  + (9/55) = 89/110<BR>
+
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Verknüpfung von Wahrscheinlichkeiten mit Tabelle<BR>
+<BR>
+&nbsp;&nbsp;Bsp:<BR>
+<BR>
+&nbsp;&nbsp;Bei der Fertigung von Spulen gibt es 2 unabhängige Fehlerarten:<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;P(A) = 0.05     P(A) = 0.95<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;P(B) = 0.08     P(B) = 0.92<BR>
+<BR>
+&nbsp;&nbsp;a) kein Fehler<BR>
+&nbsp;&nbsp;b) nur eine Fehlerart<BR>
+&nbsp;&nbsp;c) höchstens eine Fehlerart<BR>
+&nbsp;&nbsp;d) entweder A oder B<BR>
+&nbsp;&nbsp;e) mindestens eine Fehlerart<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_             _         _ _<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A B         A B         A B         A B<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0.05 * 0.08 0.95 * 0.08 0.05 * 0.92 0.95 * 0.92<BR>
+&nbsp;=========== =========== =========== ===========  <BR>
+&nbsp;&nbsp;a)                                           ✓       <BR>
+<BR>
+&nbsp;&nbsp;b)                   ✓           ✓                   <BR>
+<BR>
+&nbsp;&nbsp;c)                   ✓           ✓           ✓       <BR>
+<BR>
+&nbsp;&nbsp;d)                   ✓           ✓                   <BR>
+<BR>
+&nbsp;&nbsp;e)       ✓           ✓           ✓<BR>
+<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_     _<BR>
+&nbsp;&nbsp;a)                                                A und B<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_                    _<BR>
+&nbsp;&nbsp;b)                 (A und B) oder (A und B)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_                    _        _     _<BR>
+&nbsp;&nbsp;c)                 (A und B) oder (A und B) oder (A und B)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_                    _<BR>
+&nbsp;&nbsp;d)                 (A und B) oder (A und B)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_                    _<BR>
+&nbsp;&nbsp;e)  (A und B) oder (A und B) oder (A und B)<BR>
+<BR>
+<BR>
+<BR>
+&nbsp;&nbsp;a)                                                0.874<BR>
+<BR>
+&nbsp;&nbsp;b)                  0.076     +    0.046 <BR>
+<BR>
+&nbsp;&nbsp;c)                  0.076     +    0.046     +    0.874<BR>
+<BR>
+&nbsp;&nbsp;d)                  0.076     +    0.046<BR>
+<BR>
+&nbsp;&nbsp;e)   0.004     +    0.076     +    0.046<BR>
+<BR>
+<BR>
+<BR>
+&nbsp;&nbsp;a)   0.874<BR>
+<BR>
+&nbsp;&nbsp;b)   0.122<BR>
+<BR>
+&nbsp;&nbsp;c)   0.966<BR>
+<BR>
+&nbsp;&nbsp;d)   0.122<BR>
+<BR>
+&nbsp;&nbsp;e)   0.126
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+1)<BR>
+<BR>
+&nbsp;&nbsp;Ein Schüler schätzt die Erfolgsaussichten bei einer Prüfung auf 70% ein. Wie groß ist die<BR>
+&nbsp;&nbsp;Wahrscheinlichkeit, dass er spätestens beim zweiten Antreten Erfolg hat?<BR>
+<BR>
+&nbsp;&nbsp;Lösung: 91%<BR>
+<BR>
+P(A) = 70%<BR>
+P(B) = 70%<BR>
+<BR>
+P(A oder (¬A und B)) = 91%<BR>
+<BR>
+&nbsp;&nbsp;0.7 + (0.3 * 0.7)  = 0.91<BR>
+
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+2)<BR>
+<BR>
+&nbsp;&nbsp;Eine Fehlerdiagnose bei einem elektronischen Bauteil erfolgt in 2 Schritten: Im 1.Schritt wird der<BR>
+&nbsp;&nbsp;Fehler mit einer Wahrscheinlichkeit von 60% entdeckt. Falls der 1.Diagnoseschritt nicht<BR>
+&nbsp;&nbsp;erfolgreich war, wird im 2.Schritt der Fehler mit einer Wahrscheinlichkeit von 80% entdeckt.<BR>
+&nbsp;&nbsp;Mit welcher Wahrscheinlichkeit wird ein Fehler durch die beschriebene Fehlerdiagnose nicht<BR>
+&nbsp;&nbsp;entdeckt?<BR>
+<BR>
+&nbsp;&nbsp;Lösung: 8%<BR>
+<BR>
+P(A) = 0.6<BR>
+P(B) = 0.8<BR>
+<BR>
+P(¬(A v (¬A ^ B)))<BR>
+<BR>
+1- (0.6 + (0.4 * 0.8))
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+1- (0.6 + (0.4 * 0.8));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H12_img/Klepp_Jakob_H12_0.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+3)<BR>
+<BR>
+&nbsp;&nbsp;Eine Anlage besteht aus 2 unabhängigen Teilen. Die Wahrscheinlichkeit, dass Teil A während<BR>
+&nbsp;&nbsp;eines Zeitraumes störungsfrei arbeitet, ist 90%, bei Teil B ist diese Wahrscheinlichkeit 80%. Wie<BR>
+&nbsp;&nbsp;groß ist die Wahrscheinlichkeit, dass<BR>
+<BR>
+&nbsp;&nbsp;a)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;beide Teile störungsfrei arbeiten,<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Lösung: 72%<BR>
+<BR>
+&nbsp;&nbsp;b)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;nur Teil A störungsfrei arbeitet,<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Lösung: 18%<BR>
+<BR>
+&nbsp;&nbsp;c)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;nur Teil B störungsfrei arbeitet,<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Lösung: 8%<BR>
+<BR>
+&nbsp;&nbsp;d)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;wenigstens einer der beiden Teile störungsfrei arbeitet?<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Lösung: 98%<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_<BR>
+P(A) = 0.9      P(A) = 0.1<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_<BR>
+P(B) = 0.8      P(B) = 0.2<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_           _       _ _<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A B       A B       A B       A B<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;0.9 * 0.8 0.1 * 0.8 0.9 * 0.2 0.1 * 0.2<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0.72      0.08      0.18      0.02<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;========= ========= ========= =========<BR>
+a)      X<BR>
+&nbsp;&nbsp;=> 72%<BR>
+<BR>
+b)                          X<BR>
+&nbsp;&nbsp;=> 18%<BR>
+<BR>
+c)                X<BR>
+&nbsp;&nbsp;=>  8%<BR>
+<BR>
+d)      X         X         X<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0.72    + 0.8     + 0.18            = 0.98<BR>
+&nbsp;&nbsp;=> 98%<BR>
+
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+4)<BR>
+<BR>
+&nbsp;&nbsp;Eine Lieferung von 20 Einheiten wird nach folgendem Doppelstichprobenplan geprüft: Man<BR>
+&nbsp;&nbsp;entnimmt eine Zufallsstichprobe von 3 Einheiten. Ist wenigstens eine Einheit fehlerhaft, wird die<BR>
+&nbsp;&nbsp;Lieferung zurückgewiesen. Nur wenn alle 3 Einheiten einwandfrei sind, wird nochmals eine<BR>
+&nbsp;&nbsp;Zufallsstichprobe von wieder 3 Einheiten entnommen. Die Lieferung wird danach angenommen,<BR>
+&nbsp;&nbsp;wenn alle Einheiten einwandfrei sind, sonst zurückgewiesen.<BR>
+&nbsp;&nbsp;Wie groß ist die Wahrscheinlichkeit, dass eine Lieferung angenommen wird, wenn die Lieferung<BR>
+<BR>
+&nbsp;&nbsp;a)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;eine fehlerhafte Einheit enthält?<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Lösung: 70%<BR>
+<BR>
+<BR>
+P(A) = 3/20<BR>
+<BR>
+P(B) = (3/17) und ¬A<BR>
+<BR>
+P    = ¬(A oder B)<BR>
+<BR>
+&nbsp;&nbsp;b)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;zwei fehlerhafte Einheiten enthält?<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Lösung: 47.9%<BR>
+
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/* a)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3/20     (3/17) und ¬A     <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A   oder       B  */<BR>
+1 - ((3/20) + ((3/17) * (17/20)));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H12_img/Klepp_Jakob_H12_1.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+1 - ((6/20) + (6/17) * (14/20));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H12_img/Klepp_Jakob_H12_2.png">
+</P>
+
+ <HR>
+ <SMALL> Created with <A HREF="http://wxmaxima.sourceforge.net/">wxMaxima</A>.</SMALL>
+
+ </BODY>
+</HTML>
