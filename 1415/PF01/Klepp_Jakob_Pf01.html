@@ -1,0 +1,1834 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+ <HEAD>
+  <TITLE>Klepp_Jakob_Pf01</TITLE>
+  <META NAME="generator" CONTENT="wxMaxima">
+  <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+  <STYLE TYPE="text/css">
+body {
+  background-color: rgb(255,255,255);
+}
+.input {
+  color: rgb(0,0,255);
+}
+.comment {
+  color: rgb(0,0,0);
+  background-color: rgb(255,255,255);
+  padding: 2mm;
+}
+.image {
+  color: rgb(0,0,0);
+  padding: 2mm;
+}
+.section {
+  color: rgb(0,0,0);
+  font-size: 1.5em;
+  padding: 2mm;
+}
+.subsect {
+  color: rgb(0,0,0);
+  font-size: 1.2em;
+  padding: 2mm;
+}
+.title {
+  color: rgb(0,0,0);
+  font-size: 2em;
+  padding: 2mm;
+}
+.prompt {
+  color: rgb(255,0,0);
+}
+table {
+  border: 0px;
+}
+td {
+  vertical-align: top;
+  padding: 1mm;
+}
+  </STYLE>
+ </HEAD>
+ <BODY>
+
+<!---------------------------------------------------------->
+<!--          Created with wxMaxima version 14.09.0         -->
+<!---------------------------------------------------------->
+
+
+<!-- Title cell -->
+
+
+<P CLASS="title">
+ 1. Portfolio: Numerische Verfahren  <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;zur Nullstellen findung.       
+</P>
+
+
+<!-- Section cell -->
+
+
+<P CLASS="section">
+ 1 Verfahren nach Newton
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Das Newton-Verfahren ist ein Iterationsverfahren zum lösen einer<BR>
+Gleichung:<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;f(x) = 0<BR>
+<BR>
+Dabei wird an einen gewählten Startpunkt die Funktion durch ihre Tagente<BR>
+ersetzt. Der Schnittpunkt der Tagente mit der x-Achse ist eine Näherung an die<BR>
+Nullstelle der Funktion.<BR>
+Das Verfahren kann nun erneut durchfeführt werden um die Genauigkeit zu erhöhen.<BR>
+Hierbei wird die erhaltene Näherung an die Nullstelle als neuer Startpunkt genommen.<BR>
+<BR>
+Schon nach wenigen Iterationen wird ein recht genaues Ergebnis erzielt.
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  1.1 Codeblock
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i1) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+kill(all);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf01_img/Klepp_Jakob_Pf01_0.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Vorraussetzungen:<BR>
+Die Funktion muss stetig und Differenzierbar sein<BR>
+Man muss ein x nahe der Nullstelle kennen, umso näher umso besser.<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Finden kann man dieses x etwa durch wxplot2d
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Die Funktion newton gibt EINE Nullstelle zurück, durch veränderung von<BR>
+x0 lassen sich die Restlichen finden.<BR>
+Meistens gibt newton die nächstgelegene Nullstelle zurück, manchmal<BR>
+auch eine andere. Durch herumspiele an x0 hab ich bisher jede<BR>
+Nullstelle finden können.<BR>
+<BR>
+Erläuterung der Parameter:<BR>
+exp -   Der Ausdruck der dessen Nullstelle gefunden werden soll.<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Muss stetig und differenzierbar sein.<BR>
+var -   Die Variable welche ermittelt werden soll wenn der Ausdruck<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Null gesetzt wird.<BR>
+x0  -   Der Startwert von dem aus eine Nullstelle gesucht werden soll.<BR>
+Sollte so nah wie möglich am tatsächlichen Wert liegen.<BR>
+eps -   Die maximale Ungenauigkeit mit der nach der Nullstelle gesucht<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.3 Visualisierung mit Slider   werden soll.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i1) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+newton(exp,var,x0,eps):=<BR>
+	block([xn,s,numer],<BR>
+	numer:true,<BR>
+	s:diff(exp,var),<BR>
+	xn:x0,<BR>
+&nbsp;&nbsp;loop, if abs(subst(xn,var,exp))<eps then return(xn),<BR>
+	xn:xn-subst(xn,var,exp)/subst(xn,var,s),<BR>
+	go(loop) )$
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  1.2 Beispiel
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Die Angegebene Funktion. Sie Soll im Intervall(0,1) untersucht werden
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i2) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+f:tan(x)/tan(x-1);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf01_img/Klepp_Jakob_Pf01_1.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i3) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxplot2d([f], [x,-1,1], [y,-10, 5])$
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf01_img/Klepp_Jakob_Pf01_2.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Sieht nach einer Nullstelle auf 0/0 aus, <BR>
+doch damit es spannender wird setze ich 0.5 ein. 
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+In newton einsetzen
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i4) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+out:newton(f, x, 0.5, 0.000000000000001);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf01_img/Klepp_Jakob_Pf01_3.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i5) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+f(x):=''f; ''f(out);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf01_img/Klepp_Jakob_Pf01_4.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Leider schreibt Maxima die Zahl nicht weit hinterm Komma an,<BR>
+sondern mit einer Zehnerpotenz, somit ist nicht ganz so deutlich<BR>
+zu sehen das die Nullstelle wirklich bei 0 liegt.<BR>
+Wenn man 0.5 durch 0 ersetz kann man sehen das die Nullstelle wirklich<BR>
+bei 0/0 liegt.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i7) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+out:newton(f, x, 0, 0.000000000000001);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf01_img/Klepp_Jakob_Pf01_5.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i8) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+f(x):=''f; ''f(out);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf01_img/Klepp_Jakob_Pf01_6.png">
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  1.3 Erläuterung
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i10) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+kill(all);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf01_img/Klepp_Jakob_Pf01_7.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Hier werde ich den Mathematischen hintergrund etwas näher erläutern.<BR>
+Da ich hierzu die Funktion newton auseinandernehme kann ich nicht mit <BR>
+Blocks arbeiten, der Code wird folglich vollkommen anders ausschauen <BR>
+als in der Funktion newton.
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+newton(exp,var,x0,eps):=
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i1) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+exp:f:tan(x)/tan(x-1);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf01_img/Klepp_Jakob_Pf01_8.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i2) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+var:x;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf01_img/Klepp_Jakob_Pf01_9.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i3) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+x0:0.5;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf01_img/Klepp_Jakob_Pf01_10.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+An dieser Stelle würde ich eigendlich eps definieren. <BR>
+Jedoch werde zu demonstrationszwecke die Rechnung komplett <BR>
+ausschreiben und nicht mit Sprüngen arbeiten. Daher kann<BR>
+ich selber entscheiden wann weit genug angenähert wurde.<BR>
+Eine so kleine Epsilon umgebung wie bei der newton Funktion<BR>
+werde ich ohnehin nicht erreichen.
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+block([xn,s,numer],<BR>
+	numer:true,<BR>
+	s:diff(exp,var),<BR>
+	xn:x0,
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i4) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+numer:true;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf01_img/Klepp_Jakob_Pf01_11.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i5) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+s:diff(exp,var);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf01_img/Klepp_Jakob_Pf01_12.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Statt xn zu verwenden werde ich jedes mal eine neue Variable <BR>
+benutzen und durchnummerieren. Das hat den Vorteil das ich<BR>
+später noch auf die Werte zugreifen kann.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i6) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+x0:x0;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf01_img/Klepp_Jakob_Pf01_13.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+hier würde "loop, if abs(subst(xn,var,exp))<eps then return(xn)," <BR>
+kommen wird aber nicht gebraucht da ich weder eine loop noch<BR>
+eine ausstiegs bedingung verwende.<BR>
+<BR>
+Mit "subst(xn,var,exp)" werden alle var in exp durch xn ersetzt, <BR>
+es wird also in die Funktion das Aktuelle x eingesetzt.<BR>
+abs() bildet den Betrag<BR>
+<BR>
+Mit "abs(subst(xn,var,exp))<eps" wird insgesamt geschaut ob die<BR>
+Funktion schon innerhalb der epsilon Umgebung liegt wenn man das<BR>
+aktuelle x einsetzt.<BR>
+<BR>
+Wenn das der Fall ist wird das aktuelle x zurück gegeben und die<BR>
+newton Funktion somit beendet.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i7) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+x1:''x0-subst(x0,var,exp)/subst(x0,var,s);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf01_img/Klepp_Jakob_Pf01_14.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i8) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+x2:x1-''subst(x1,var,exp)/subst(x1,var,s);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf01_img/Klepp_Jakob_Pf01_15.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i9) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+x3:x2-''subst(x2,var,exp)/subst(x2,var,s);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf01_img/Klepp_Jakob_Pf01_16.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i10) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+x4:x3-''subst(x3,var,exp)/subst(x3,var,s);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf01_img/Klepp_Jakob_Pf01_17.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i11) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+x5:''x4-subst(x4,var,exp)/subst(x4,var,s);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf01_img/Klepp_Jakob_Pf01_18.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Wie zu sehen ist nähern sich die x immer näher an 0 an, wo wie wir <BR>
+bereits festgestellt haben die Nullstelle zu finden ist.
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Ergebnisse werden als Punkte in einer Liste abgelegt.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i12) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+f(x):=''f;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf01_img/Klepp_Jakob_Pf01_19.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i13) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+points:[discrete,[  [''x0,''f(x0)],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[''x1,''f(x1)],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[''x2,''f(x2)],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[''x3,''f(x3)],<BR>
+&nbsp;&nbsp;&nbsp;[''x4,''f(x4)],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[''x5,''f(x5)]<BR>
+]];
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf01_img/Klepp_Jakob_Pf01_20.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Hier noch eine Grafik in der alle diese Werte an der gegebenen <BR>
+Funktion zu sehen sind.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i14) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxplot2d(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;[f(x),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;points],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;[x, 0,x0],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;[y, f(0.5),0],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;[style,[], [points, 3, 5, 2]],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;[legend, "f(x)", "N"]<BR>
+), wxplot_size=[500,600]$
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf01_img/Klepp_Jakob_Pf01_21.png">
+</P>
+
+
+<!-- Section cell -->
+
+
+<P CLASS="section">
+ 2 Intervallhalbierung
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Vorraussetzungen:<BR>
+Die Funktion muss stetig sein.<BR>
+Man muss 2 x Werte kennen, einer größer und einer kleiner als x auf welche zutrifft:<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|f(x0)| != |f(x1)|
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Bei der Intervallhalbierung werden 2 Start x Werte angegeben, einer kleiner und einer<BR>
+größer als der x Wert der Nullstelle.<BR>
+<BR>
+Der _Intervall_ zwischen den beiden Werten wird in der Mitte _halbiert_ <BR>
+^<BR>
+|   Jetzt kann die Nullstelle entweder am Mittelpunkt oder auf einen der Halbintervalle<BR>
+|   liegen. Im ersten Fall hat man Nullstelle gefunden, wenn das zweite der Fall ist muss<BR>
+|   heraus gefunden werden in welchen Halbintervall die Nullstelle liegt.<BR>
+|<BR>
++-- Die beiden enden des Halbintervalls sind die neuen x Werte.<BR>
+<BR>
+Dieser Vorgang wird so oft ausgeführt bis man ausreichend nah an die Nullstelle herangekommen ist.
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  2.1 Berechnung Schritt für Schritt
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i15) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+kill(all);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf01_img/Klepp_Jakob_Pf01_22.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Funktion derer Nullstelle gefunden werden soll
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i1) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+f(x):=x^3+2*x-5;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf01_img/Klepp_Jakob_Pf01_23.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Anhand der Grafik ist zu sehen das es zwischen 0 und 2 eine <BR>
+Nullstelle gibt
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i2) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+x0:0; x1:2;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf01_img/Klepp_Jakob_Pf01_24.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i4) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/*<BR>
+&nbsp;* _fv      die Funktion      Blau  <BR>
+&nbsp;* _v1      erste Schranke    Rot<BR>
+&nbsp;* _v2      zweite Schranke   Rot<BR>
+&nbsp;*/<BR>
+_fv:explicit(f(x),x,-5,5)$<BR>
+_v1:vector([x0,-7],[0,15])$<BR>
+_v2:vector([x1,-7],[0,15])$<BR>
+wxdraw2d(xrange=[-0.5,2.5],yrange=[-7,7],<BR>
+xaxis=true, yaxis=true,<BR>
+_fv,<BR>
+color=red,_v1,_v2)$
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf01_img/Klepp_Jakob_Pf01_25.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Nun wird der Mittelwert zwischen x0 und x1 gebildet und als x2 <BR>
+gespeichert
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i8) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+x2:'(x0+x1)/2;<BR>
+x2:''x2;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf01_img/Klepp_Jakob_Pf01_26.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Welches x soll weiter verwendet werden<BR>
+Wenn f(x1) und f(x2) das gleiche Vorzeichen haben sind die nächsten Werte<BR>
+x0 und x2<BR>
+ansonsten <BR>
+x1 und x2
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i10) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+x1:(if (signum(f(x1)) = signum(f(''x2))) then x0 else x1);<BR>
+x0:x2;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf01_img/Klepp_Jakob_Pf01_27.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Der Bereich in dem Sich die Nullstelle befinden kann wurde somit weiter eingeschränkt
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i12) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/*<BR>
+&nbsp;* _fv      die Funktion      Blau  <BR>
+&nbsp;* _v1      erste Schranke    Rot<BR>
+&nbsp;* _v2      zweite Schranke   Rot<BR>
+&nbsp;*/<BR>
+_fv:explicit(f(x),x,-5,5)$<BR>
+_v1:vector([x0,-7],[0,15])$<BR>
+_v2:vector([x1,-7],[0,15])$<BR>
+<BR>
+wxdraw2d(xrange=[-0.5,2.5],yrange=[-7,7],<BR>
+xaxis=true, yaxis=true,<BR>
+_fv,<BR>
+color=red,_v1,_v2)$
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf01_img/Klepp_Jakob_Pf01_28.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Jetzt kann der Teil vom Mittelwert ab beliebig oft ausgeführt werden<BR>
+Jedes Mal werden die Schranken dabei näher zusammen wandern
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  2.2 Codeblock
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i16) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+kill(all);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf01_img/Klepp_Jakob_Pf01_29.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Die Funktion interhalb gibt EINE Nullstelle zurück, durch veränderung <BR>
+von x0 und x1 lassen sich die Restlichen finden.<BR>
+Meistens gibt interhalb die nächstgelegene Nullstelle zurück, manchmal<BR>
+auch eine andere. Durch herumspiele an den x Werten lässt sich jede der<BR>
+Nullstellen finden.<BR>
+Erläuterung der Parameter:<BR>
+<BR>
+x0, x1  -   Die Startwerte von dem aus eine Nullstelle gesucht werden <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;soll. Sollten so nah wie möglich am tatsächlichen Wert <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;liegen. Der y Wert an der Stelle des einen x muss größer als <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0 sein der des anderen Kleiner.<BR>
+n       -   Maximale Anzahl an Iterationen.<BR>
+e       -   Die maximale Ungenauigkeit mit der nach der Nullstelle <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gesucht werden soll.<BR>
+<BR>
+Zusätzlich muss vor dem Codeblock eine Funktion f(x) definiert sein<BR>
+die Nullstelle dieser Funktion wird berechnet.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i1) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+interhalb(x0,x1,n,e):=block(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;[x2],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;for i:0 step 1 thru n do <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;[<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x2:(x0+x1)/2,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/* Überprüfen ob die Genauigkeit erreicht ist */<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if abs(f(x2))<e then return(x2),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x1:(if signum(f(x1))=signum(f(x2)) then x0 else x1),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x0:x2<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;/* Nach ablauf der maximalen Anzahl an Iterationen */<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;return(x2)<BR>
+)$
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Funktion
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i2) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+f(x):=x^3+2*x-5;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf01_img/Klepp_Jakob_Pf01_30.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Startvariablen<BR>
+Abstand muss verdoppelt werden weil der erste Schritt<BR>
+nicht Visualisiert wird, eigentlich x0:0
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i3) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+x0:0;<BR>
+x1:2;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf01_img/Klepp_Jakob_Pf01_31.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Aufruf des Codeblocks
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i5) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+''interhalb(x0, x1, 1000, 0.00000001);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf01_img/Klepp_Jakob_Pf01_32.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Zum Test in f(x) einssetzen
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i6) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+f(%);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf01_img/Klepp_Jakob_Pf01_33.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+10^-9 ist schon sehr nah an 0 dran, eben so nah wie <BR>
+es mit dem 4. Parameter eingestellt ist
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  2.3 Visualisierung mit Slider
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i7) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+kill(all)$<BR>
+load(draw)$
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Funktion
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i2) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+f(x):=x^3+2*x-5;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf01_img/Klepp_Jakob_Pf01_34.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Startvariablen<BR>
+Abstand muss verdoppelt werden weil der erste Schritt<BR>
+nicht Visualisiert wird, eigentlich x0:0
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i3) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+x0:-2;<BR>
+x1:2;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf01_img/Klepp_Jakob_Pf01_35.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Gibt den nächsten x0 zurück<BR>
+eine Leicht abgewandelte Form der bereits präsentierten <BR>
+Funktion inthalb
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i5) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+ihx0(x0,x1,n):=block(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;[x2],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;for i:0 step 1 thru n do <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;[<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x2:(x0+x1)/2,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x1:(if signum(f(x1))=signum(f(x2)) then x0 else x1),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x0:x2<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;return(x0)<BR>
+)$
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Gibt den nächsten x1 zurück<BR>
+eine Leicht abgewandelte Form der bereits präsentierten <BR>
+Funktion inthalb
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i6) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+ihx1(x0,x1,n):=block(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;[x2],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;for i:0 step 1 thru n do <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;[<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x2:(x0+x1)/2,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x1:(if signum(f(x1))=signum(f(x2)) then x0 else x1),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x0:x2<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;return(x1)<BR>
+)$
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Verwendung des Sliders und Zeichnen<BR>
+k ist die Variable die durch den Slider verändert wird<BR>
+makelist stellt die möglichen Werte bereit welche k annehmen kann, in diesen Fall die ganzen Zahlen von 0 bis 10<BR>
+
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i7) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+with_slider_draw(<BR>
+/*<BR>
+Sliden<BR>
+*/<BR>
+k, makelist(i,i,0,10),<BR>
+/*<BR>
+Zeichnen<BR>
+*/<BR>
+xrange=[-0.5,2.5],yrange=[-7,7],<BR>
+xaxis=true, yaxis=true,<BR>
+explicit(f(x),x,-5,5),<BR>
+color=red,<BR>
+vector([ihx0(x0,x1,k),-7],[0,15]),<BR>
+vector([ihx1(x0,x1,k),-7],[0,15])<BR>
+);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf01_img/Klepp_Jakob_Pf01_36.png">
+</P>
+
+
+<!-- Section cell -->
+
+
+<P CLASS="section">
+ 3 Regula Falsi
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Vorraussetzungen:<BR>
+Die Funktion muss stetig sein.<BR>
+Man muss 2 x Werte kennen, einer größer und einer kleiner als x auf welche zutrifft:<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|f(x0)| != |f(x1)|
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Bei Regula Falsi wird nun eine Gerade von (x0|f(x0)) nach (x1|f(x1)) gezogen.<BR>
+Diese sollte die  Nullstelle schneiden. Mit dem x Wert der Nullstelle <BR>
+ersetzt man nun entweder x0 oder x1 so dass immer noch |f(x0)| != |f(x1)| <BR>
+zutrifft.
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  3.1 Berechnung Schritt für Schritt
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i8) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+kill(all);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf01_img/Klepp_Jakob_Pf01_37.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Funktion derer Nullstelle gefunden werden soll
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i1) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+f(x):=x^3+2*x-5;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf01_img/Klepp_Jakob_Pf01_38.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Zwischen diesen x Werten wird nach einer Nullstelle gesucht.<BR>
+x0 sollte der kleinere Wert sein.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i2) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+x0:0; x1:2;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf01_img/Klepp_Jakob_Pf01_39.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Einige Werte zum automatischen Skalieren der Grafiken
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i4) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+x0i:x0; x1i:x1;<BR>
+y0i_:f(x0i); y1i_:f(x1i);<BR>
+y0i:y1i:y0i_;<BR>
+if(y0i_<=0) then y1i:y1i_ else y0i:y1i_;<BR>
+xdist:(x1i-x0i)/8;<BR>
+ydist:(y1i-y0i)/8;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf01_img/Klepp_Jakob_Pf01_40.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+In dieser Grafik sind (x0|f(x0)) und (x1|f(x1)) schon als<BR>
+gruene Punkte eingezeichnet.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i12) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/*<BR>
+&nbsp;* _fv      die Funktion      Blau  <BR>
+&nbsp;* _v1      erste Schranke    Rot<BR>
+&nbsp;* _v2      zweite Schranke   Rot<BR>
+&nbsp;* _p1      erster Punkt      Gruen<BR>
+&nbsp;* _p2      zweiter Punkt     Gruen<BR>
+&nbsp;*/<BR>
+_fv:explicit(f(x),x,x0i-xdist,x1i+xdist)$       /*x0i-xdist ist der linke Rand des Zeichenfeld x1i+xdist der rechte*/<BR>
+_v1:vector([x0,y0i-ydist],[0,y1i+10*ydist])$    /*y0i-ydist ist der untere Rand des Zeichenfeld*/<BR>
+_v2:vector([x1,y0i-ydist],[0,y1i+10*ydist])$    /*y1i+10*ydist ist ein gutes Stück über den oberen Rand weil der Kopf des Vectors nicht zu sehen sein soll*/<BR>
+_p1:points([x0],[f(x0)])$<BR>
+_p2:points([x1],[f(x1)])$<BR>
+wxdraw2d(xrange=[x0i-xdist,x1i+xdist],yrange=[y0i-ydist,y1i+ydist],<BR>
+xaxis=true, yaxis=true,<BR>
+color=green,point_size=2,point_type=filled_circle,_p1,_p2,<BR>
+color=blue,_fv,<BR>
+color=red,_v1,_v2)$
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf01_img/Klepp_Jakob_Pf01_41.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Nun wird eine Gerade durch die beiden Punkte gezogen<BR>
+Die allgemeine Geraden Funktion ist:<BR>
+g(x)=k*x + d
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+k ist die Steigung <BR>
+k = Delta y / Delta x <BR>
+k = ( f(x1) - f(x0) )/( x1 - x0 )
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i18) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+k:(f(x1) - f(x0))/(x1 - x0);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf01_img/Klepp_Jakob_Pf01_42.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+d ist der Wert der Gerade wenn x=0<BR>
+Das ergibt sich schon daraus g(0)=k*0 + d <BR>
+Man erhält d wenn man einen Punkt und k in die Gerade einsetzt 
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i19) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+solve([f(x1)=x1*k + d], [d]);<BR>
+d:rhs(%[1]);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf01_img/Klepp_Jakob_Pf01_43.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Die Gerade ist nun also:
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i21) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+g(x):=''k*x + ''d;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf01_img/Klepp_Jakob_Pf01_44.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i22) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/*<BR>
+&nbsp;* _fv      die Funktion      Blau  <BR>
+&nbsp;* _v1      erste Schranke    Rot<BR>
+&nbsp;* _v2      zweite Schranke   Rot<BR>
+&nbsp;* _p1      erster Punkt      Gruen<BR>
+&nbsp;* _p2      zweiter Punkt     Gruen<BR>
+&nbsp;* _g       Gerade            Gruen<BR>
+&nbsp;* _xn      neuer x Wert      Orange<BR>
+&nbsp;*/<BR>
+_fv:explicit(f(x),x,x0i-xdist,x1i+xdist)$<BR>
+_v1:vector([x0,y0i-ydist],[0,y1i+10*ydist])$<BR>
+_v2:vector([x1,y0i-ydist],[0,y1i+10*ydist])$<BR>
+_p1:points([x0],[f(x0)])$<BR>
+_p2:points([x1],[f(x1)])$<BR>
+_g:explicit(g(x),x,x0i-xdist,x1i+xdist)$<BR>
+_xn:points([rhs(solve(g(x),x)[1])],[0])$<BR>
+wxdraw2d(xrange=[x0i-xdist,x1i+xdist],yrange=[y0i-ydist,y1i+ydist],<BR>
+xaxis=true, yaxis=true,<BR>
+color=green,point_size=2,point_type=filled_circle,_p1,_p2,<BR>
+color=green,_g,<BR>
+color=blue,_fv,<BR>
+color=red,_v1,_v2,<BR>
+color=orange,point_size=1,_xn)$
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf01_img/Klepp_Jakob_Pf01_45.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Jetzt wird der neue x Wert gesucht, oben auf der Grafik ist er<BR>
+bereits als kleiner oranger Punkt eingezeichnet.<BR>
+<BR>
+Der Punkt befindet sich auf der Nullstelle der Geraden.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i30) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+solve(g(x),x);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf01_img/Klepp_Jakob_Pf01_46.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Maxima packt die Lösung von solve in eine recht unpraktische Liste ein.<BR>
+So lässt sich der neue x Wert auspacken:
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i31) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+xn:rhs(%[1]) /*Das erste Element und davon nur die Rechte Seite*/;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf01_img/Klepp_Jakob_Pf01_47.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Nun wird geschaut welcher der x Werte ersetzt werden soll.<BR>
+Man erkennt ihn daran das der f(x) des Wertes das gleiche Vorzeichen<BR>
+wie f(xn) hat.<BR>
+<BR>
+Als bedingte Zuweisung lässt sich das so Schreiben:
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i32) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+x1:(if (signum(f(x1)) = signum(f(''xn))) then x0 else x1);<BR>
+x0:xn;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf01_img/Klepp_Jakob_Pf01_48.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Durch mehrmaliges durchlaufen des Codes ab i16 lässt sich das Ergebnis beliebig<BR>
+verfeinern.
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  3.2 Codeblock
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i34) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+kill(all);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf01_img/Klepp_Jakob_Pf01_49.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Ein Codeblock zum berechnen einer Nullstelle mit hilfe des Numerischen<BR>
+Verfahrens Regula Falsi.<BR>
+<BR>
+x0, x1  Der bereich zwischen den beiden Schranken wird nach einer Nullstelle durchsucht.<BR>
+nmax    Maximale Anzahl an Iterationen, bei erreichen dieser Anzahl wird Unabhängig der <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;erreichten genauigkeit abgebrochen und der aktuelle Wert zurück gegeben.<BR>
+e       Die angestrebte Genauigkeit. Wenn die Genauigkeit erreicht wurde wird die<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Iteration abgebrochen.<BR>
+Vor dem Aufruf des Codeblocks muss eine Funktion f(x) definiert sein<BR>
+die Nullstelle dieser Funktion wird gesucht.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i1) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+regulafalsi(x0,x1,nmax,e):=block(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;[x2],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;/*Schleife mit Abbruchbedingung anzahl an Iterationen (nmax)*/<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;for i:0 step 1 thru nmax do<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[/*Steigungsdreieck*/<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x2: x0-(f(x0)*(x0-x1))/(f(x0)-f(x1)),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/*Abbruchbedingung Genauigkeit (e)*/<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if abs(f(x2))<e then return(x2),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x1: x2<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;return(x2)<BR>
+)$
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Funktion
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i2) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+f(x):=x^3+2*x-5;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf01_img/Klepp_Jakob_Pf01_50.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Startvariablen
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i3) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+x0:0;<BR>
+x1:2;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf01_img/Klepp_Jakob_Pf01_51.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Einsetzten in den Codeblock
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i5) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+regulafalsi(0,1,1000,0.00001),numer;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf01_img/Klepp_Jakob_Pf01_52.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i6) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+f(%),numer;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf01_img/Klepp_Jakob_Pf01_53.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Der Epsilonumgebung entsprechend ein erwartungsmäßig genaues Ergebnis
+</P>
+
+ <HR>
+ <SMALL> Created with <A HREF="http://wxmaxima.sourceforge.net/">wxMaxima</A>.</SMALL>
+
+ </BODY>
+</HTML>

@@ -1,0 +1,801 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 13.04.2 ] */
+
+/* [wxMaxima: title   start ]
+ 1. Portfolio: Numerische Verfahren  
+      zur Nullstellen findung.       
+   [wxMaxima: title   end   ] */
+
+/* [wxMaxima: section start ]
+Verfahren nach Newton
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: comment start ]
+Das Newton-Verfahren ist ein Iterationsverfahren zum lösen einer
+Gleichung:
+
+    f(x) = 0
+
+Dabei wird an einen gewählten Startpunkt die Funktion durch ihre Tagente
+ersetzt. Der Schnittpunkt der Tagente mit der x-Achse ist eine Näherung an die
+Nullstelle der Funktion.
+Das Verfahren kann nun erneut durchfeführt werden um die Genauigkeit zu erhöhen.
+Hierbei wird die erhaltene Näherung an die Nullstelle als neuer Startpunkt genommen.
+
+Schon nach wenigen Iterationen wird ein recht genaues Ergebnis erzielt.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: subsect start ]
+Codeblock
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(all);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Vorraussetzungen:
+Die Funktion muss stetig und Differenzierbar sein
+Man muss ein x nahe der Nullstelle kennen, umso näher umso besser.
+    Finden kann man dieses x etwa durch wxplot2d
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Die Funktion newton gibt EINE Nullstelle zurück, durch veränderung von
+x0 lassen sich die Restlichen finden.
+Meistens gibt newton die nächstgelegene Nullstelle zurück, manchmal
+auch eine andere. Durch herumspiele an x0 hab ich bisher jede
+Nullstelle finden können.
+
+Erläuterung der Parameter:
+exp -   Der Ausdruck der dessen Nullstelle gefunden werden soll.
+        Muss stetig und differenzierbar sein.
+var -   Die Variable welche ermittelt werden soll wenn der Ausdruck
+        Null gesetzt wird.
+x0  -   Der Startwert von dem aus eine Nullstelle gesucht werden soll.
+Sollte so nah wie möglich am tatsächlichen Wert liegen.
+eps -   Die maximale Ungenauigkeit mit der nach der Nullstelle gesucht
+       2.3 Visualisierung mit Slider   werden soll.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+newton(exp,var,x0,eps):=
+	block([xn,s,numer],
+	numer:true,
+	s:diff(exp,var),
+	xn:x0,
+  loop, if abs(subst(xn,var,exp))<eps then return(xn),
+	xn:xn-subst(xn,var,exp)/subst(xn,var,s),
+	go(loop) )$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: subsect start ]
+Beispiel
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Die Angegebene Funktion. Sie Soll im Intervall(0,1) untersucht werden
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+f:tan(x)/tan(x-1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+wxplot2d([f], [x,-1,1], [y,-10, 5])$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Sieht nach einer Nullstelle auf 0/0 aus, 
+doch damit es spannender wird setze ich 0.5 ein. 
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+In newton einsetzen
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+out:newton(f, x, 0.5, 0.000000000000001);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+f(x):=''f; ''f(out);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Leider schreibt Maxima die Zahl nicht weit hinterm Komma an,
+sondern mit einer Zehnerpotenz, somit ist nicht ganz so deutlich
+zu sehen das die Nullstelle wirklich bei 0 liegt.
+Wenn man 0.5 durch 0 ersetz kann man sehen das die Nullstelle wirklich
+bei 0/0 liegt.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+out:newton(f, x, 0, 0.000000000000001);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+f(x):=''f; ''f(out);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: subsect start ]
+Erläuterung
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(all);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Hier werde ich den Mathematischen hintergrund etwas näher erläutern.
+Da ich hierzu die Funktion newton auseinandernehme kann ich nicht mit 
+Blocks arbeiten, der Code wird folglich vollkommen anders ausschauen 
+als in der Funktion newton.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+newton(exp,var,x0,eps):=
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+exp:f:tan(x)/tan(x-1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+var:x;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+x0:0.5;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+An dieser Stelle würde ich eigendlich eps definieren. 
+Jedoch werde zu demonstrationszwecke die Rechnung komplett 
+ausschreiben und nicht mit Sprüngen arbeiten. Daher kann
+ich selber entscheiden wann weit genug angenähert wurde.
+Eine so kleine Epsilon umgebung wie bei der newton Funktion
+werde ich ohnehin nicht erreichen.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+block([xn,s,numer],
+	numer:true,
+	s:diff(exp,var),
+	xn:x0,
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+numer:true;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+s:diff(exp,var);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Statt xn zu verwenden werde ich jedes mal eine neue Variable 
+benutzen und durchnummerieren. Das hat den Vorteil das ich
+später noch auf die Werte zugreifen kann.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+x0:x0;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+hier würde "loop, if abs(subst(xn,var,exp))<eps then return(xn)," 
+kommen wird aber nicht gebraucht da ich weder eine loop noch
+eine ausstiegs bedingung verwende.
+
+Mit "subst(xn,var,exp)" werden alle var in exp durch xn ersetzt, 
+es wird also in die Funktion das Aktuelle x eingesetzt.
+abs() bildet den Betrag
+
+Mit "abs(subst(xn,var,exp))<eps" wird insgesamt geschaut ob die
+Funktion schon innerhalb der epsilon Umgebung liegt wenn man das
+aktuelle x einsetzt.
+
+Wenn das der Fall ist wird das aktuelle x zurück gegeben und die
+newton Funktion somit beendet.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+x1:''x0-subst(x0,var,exp)/subst(x0,var,s);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+x2:x1-''subst(x1,var,exp)/subst(x1,var,s);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+x3:x2-''subst(x2,var,exp)/subst(x2,var,s);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+x4:x3-''subst(x3,var,exp)/subst(x3,var,s);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+x5:''x4-subst(x4,var,exp)/subst(x4,var,s);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Wie zu sehen ist nähern sich die x immer näher an 0 an, wo wie wir 
+bereits festgestellt haben die Nullstelle zu finden ist.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Ergebnisse werden als Punkte in einer Liste abgelegt.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+f(x):=''f;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+points:[discrete,[  [''x0,''f(x0)],
+                    [''x1,''f(x1)],
+                    [''x2,''f(x2)],
+                    [''x3,''f(x3)],
+   [''x4,''f(x4)],
+                    [''x5,''f(x5)]
+]];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Hier noch eine Grafik in der alle diese Werte an der gegebenen 
+Funktion zu sehen sind.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+wxplot2d(
+    [f(x),
+    points],
+    [x, 0,x0],
+    [y, f(0.5),0],
+    [style,[], [points, 3, 5, 2]],
+    [legend, "f(x)", "N"]
+), wxplot_size=[500,600]$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: section start ]
+Intervallhalbierung
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: comment start ]
+Vorraussetzungen:
+Die Funktion muss stetig sein.
+Man muss 2 x Werte kennen, einer größer und einer kleiner als x auf welche zutrifft:
+    |f(x0)| != |f(x1)|
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Bei der Intervallhalbierung werden 2 Start x Werte angegeben, einer kleiner und einer
+größer als der x Wert der Nullstelle.
+
+Der _Intervall_ zwischen den beiden Werten wird in der Mitte _halbiert_ 
+^
+|   Jetzt kann die Nullstelle entweder am Mittelpunkt oder auf einen der Halbintervalle
+|   liegen. Im ersten Fall hat man Nullstelle gefunden, wenn das zweite der Fall ist muss
+|   heraus gefunden werden in welchen Halbintervall die Nullstelle liegt.
+|
++-- Die beiden enden des Halbintervalls sind die neuen x Werte.
+
+Dieser Vorgang wird so oft ausgeführt bis man ausreichend nah an die Nullstelle herangekommen ist.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: subsect start ]
+Berechnung Schritt für Schritt
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(all);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Funktion derer Nullstelle gefunden werden soll
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+f(x):=x^3+2*x-5;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Anhand der Grafik ist zu sehen das es zwischen 0 und 2 eine 
+Nullstelle gibt
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+x0:0; x1:2;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+/*
+ * _fv      die Funktion      Blau  
+ * _v1      erste Schranke    Rot
+ * _v2      zweite Schranke   Rot
+ */
+_fv:explicit(f(x),x,-5,5)$
+_v1:vector([x0,-7],[0,15])$
+_v2:vector([x1,-7],[0,15])$
+wxdraw2d(xrange=[-0.5,2.5],yrange=[-7,7],
+xaxis=true, yaxis=true,
+_fv,
+color=red,_v1,_v2)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Nun wird der Mittelwert zwischen x0 und x1 gebildet und als x2 
+gespeichert
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+x2:'(x0+x1)/2;
+x2:''x2;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Welches x soll weiter verwendet werden
+Wenn f(x1) und f(x2) das gleiche Vorzeichen haben sind die nächsten Werte
+x0 und x2
+ansonsten 
+x1 und x2
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+x1:(if (signum(f(x1)) = signum(f(''x2))) then x0 else x1);
+x0:x2;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Der Bereich in dem Sich die Nullstelle befinden kann wurde somit weiter eingeschränkt
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+/*
+ * _fv      die Funktion      Blau  
+ * _v1      erste Schranke    Rot
+ * _v2      zweite Schranke   Rot
+ */
+_fv:explicit(f(x),x,-5,5)$
+_v1:vector([x0,-7],[0,15])$
+_v2:vector([x1,-7],[0,15])$
+
+wxdraw2d(xrange=[-0.5,2.5],yrange=[-7,7],
+xaxis=true, yaxis=true,
+_fv,
+color=red,_v1,_v2)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Jetzt kann der Teil vom Mittelwert ab beliebig oft ausgeführt werden
+Jedes Mal werden die Schranken dabei näher zusammen wandern
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: subsect start ]
+Codeblock
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(all);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Die Funktion interhalb gibt EINE Nullstelle zurück, durch veränderung 
+von x0 und x1 lassen sich die Restlichen finden.
+Meistens gibt interhalb die nächstgelegene Nullstelle zurück, manchmal
+auch eine andere. Durch herumspiele an den x Werten lässt sich jede der
+Nullstellen finden.
+Erläuterung der Parameter:
+
+x0, x1  -   Die Startwerte von dem aus eine Nullstelle gesucht werden 
+            soll. Sollten so nah wie möglich am tatsächlichen Wert 
+            liegen. Der y Wert an der Stelle des einen x muss größer als 
+            0 sein der des anderen Kleiner.
+n       -   Maximale Anzahl an Iterationen.
+e       -   Die maximale Ungenauigkeit mit der nach der Nullstelle 
+            gesucht werden soll.
+
+Zusätzlich muss vor dem Codeblock eine Funktion f(x) definiert sein
+die Nullstelle dieser Funktion wird berechnet.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+interhalb(x0,x1,n,e):=block(
+    [x2],
+    for i:0 step 1 thru n do 
+    [
+        x2:(x0+x1)/2,
+        /* Überprüfen ob die Genauigkeit erreicht ist */
+        if abs(f(x2))<e then return(x2),
+        x1:(if signum(f(x1))=signum(f(x2)) then x0 else x1),
+        x0:x2
+    ],
+    /* Nach ablauf der maximalen Anzahl an Iterationen */
+    return(x2)
+)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Funktion
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+f(x):=x^3+2*x-5;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Startvariablen
+Abstand muss verdoppelt werden weil der erste Schritt
+nicht Visualisiert wird, eigentlich x0:0
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+x0:0;
+x1:2;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Aufruf des Codeblocks
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+''interhalb(x0, x1, 1000, 0.00000001);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Zum Test in f(x) einssetzen
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+f(%);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+10^-9 ist schon sehr nah an 0 dran, eben so nah wie 
+es mit dem 4. Parameter eingestellt ist
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: subsect start ]
+Visualisierung mit Slider
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(all)$
+load(draw)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Funktion
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+f(x):=x^3+2*x-5;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Startvariablen
+Abstand muss verdoppelt werden weil der erste Schritt
+nicht Visualisiert wird, eigentlich x0:0
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+x0:-2;
+x1:2;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Gibt den nächsten x0 zurück
+eine Leicht abgewandelte Form der bereits präsentierten 
+Funktion inthalb
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+ihx0(x0,x1,n):=block(
+    [x2],
+    for i:0 step 1 thru n do 
+    [
+         x2:(x0+x1)/2,
+         x1:(if signum(f(x1))=signum(f(x2)) then x0 else x1),
+         x0:x2
+    ],
+    return(x0)
+)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Gibt den nächsten x1 zurück
+eine Leicht abgewandelte Form der bereits präsentierten 
+Funktion inthalb
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+ihx1(x0,x1,n):=block(
+    [x2],
+    for i:0 step 1 thru n do 
+    [
+         x2:(x0+x1)/2,
+         x1:(if signum(f(x1))=signum(f(x2)) then x0 else x1),
+         x0:x2
+    ],
+    return(x1)
+)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Verwendung des Sliders und Zeichnen
+k ist die Variable die durch den Slider verändert wird
+makelist stellt die möglichen Werte bereit welche k annehmen kann, in diesen Fall die ganzen Zahlen von 0 bis 10
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+with_slider_draw(
+/*
+Sliden
+*/
+k, makelist(i,i,0,10),
+/*
+Zeichnen
+*/
+xrange=[-0.5,2.5],yrange=[-7,7],
+xaxis=true, yaxis=true,
+explicit(f(x),x,-5,5),
+color=red,
+vector([ihx0(x0,x1,k),-7],[0,15]),
+vector([ihx1(x0,x1,k),-7],[0,15])
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: section start ]
+Regula Falsi
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: comment start ]
+Vorraussetzungen:
+Die Funktion muss stetig sein.
+Man muss 2 x Werte kennen, einer größer und einer kleiner als x auf welche zutrifft:
+    |f(x0)| != |f(x1)|
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Bei Regula Falsi wird nun eine Gerade von (x0|f(x0)) nach (x1|f(x1)) gezogen.
+Diese sollte die  Nullstelle schneiden. Mit dem x Wert der Nullstelle 
+ersetzt man nun entweder x0 oder x1 so dass immer noch |f(x0)| != |f(x1)| 
+zutrifft.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: subsect start ]
+Berechnung Schritt für Schritt
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(all);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Funktion derer Nullstelle gefunden werden soll
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+f(x):=x^3+2*x-5;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Zwischen diesen x Werten wird nach einer Nullstelle gesucht.
+x0 sollte der kleinere Wert sein.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+x0:0; x1:2;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Einige Werte zum automatischen Skalieren der Grafiken
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+x0i:x0; x1i:x1;
+y0i_:f(x0i); y1i_:f(x1i);
+y0i:y1i:y0i_;
+if(y0i_<=0) then y1i:y1i_ else y0i:y1i_;
+xdist:(x1i-x0i)/8;
+ydist:(y1i-y0i)/8;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+In dieser Grafik sind (x0|f(x0)) und (x1|f(x1)) schon als
+gruene Punkte eingezeichnet.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+/*
+ * _fv      die Funktion      Blau  
+ * _v1      erste Schranke    Rot
+ * _v2      zweite Schranke   Rot
+ * _p1      erster Punkt      Gruen
+ * _p2      zweiter Punkt     Gruen
+ */
+_fv:explicit(f(x),x,x0i-xdist,x1i+xdist)$       /*x0i-xdist ist der linke Rand des Zeichenfeld x1i+xdist der rechte*/
+_v1:vector([x0,y0i-ydist],[0,y1i+10*ydist])$    /*y0i-ydist ist der untere Rand des Zeichenfeld*/
+_v2:vector([x1,y0i-ydist],[0,y1i+10*ydist])$    /*y1i+10*ydist ist ein gutes Stück über den oberen Rand weil der Kopf des Vectors nicht zu sehen sein soll*/
+_p1:points([x0],[f(x0)])$
+_p2:points([x1],[f(x1)])$
+wxdraw2d(xrange=[x0i-xdist,x1i+xdist],yrange=[y0i-ydist,y1i+ydist],
+xaxis=true, yaxis=true,
+color=green,point_size=2,point_type=filled_circle,_p1,_p2,
+color=blue,_fv,
+color=red,_v1,_v2)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Nun wird eine Gerade durch die beiden Punkte gezogen
+Die allgemeine Geraden Funktion ist:
+g(x)=k*x + d
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+k ist die Steigung 
+k = Delta y / Delta x 
+k = ( f(x1) - f(x0) )/( x1 - x0 )
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+k:(f(x1) - f(x0))/(x1 - x0);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+d ist der Wert der Gerade wenn x=0
+Das ergibt sich schon daraus g(0)=k*0 + d 
+Man erhält d wenn man einen Punkt und k in die Gerade einsetzt 
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+solve([f(x1)=x1*k + d], [d]);
+d:rhs(%[1]);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Die Gerade ist nun also:
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+g(x):=''k*x + ''d;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+/*
+ * _fv      die Funktion      Blau  
+ * _v1      erste Schranke    Rot
+ * _v2      zweite Schranke   Rot
+ * _p1      erster Punkt      Gruen
+ * _p2      zweiter Punkt     Gruen
+ * _g       Gerade            Gruen
+ * _xn      neuer x Wert      Orange
+ */
+_fv:explicit(f(x),x,x0i-xdist,x1i+xdist)$
+_v1:vector([x0,y0i-ydist],[0,y1i+10*ydist])$
+_v2:vector([x1,y0i-ydist],[0,y1i+10*ydist])$
+_p1:points([x0],[f(x0)])$
+_p2:points([x1],[f(x1)])$
+_g:explicit(g(x),x,x0i-xdist,x1i+xdist)$
+_xn:points([rhs(solve(g(x),x)[1])],[0])$
+wxdraw2d(xrange=[x0i-xdist,x1i+xdist],yrange=[y0i-ydist,y1i+ydist],
+xaxis=true, yaxis=true,
+color=green,point_size=2,point_type=filled_circle,_p1,_p2,
+color=green,_g,
+color=blue,_fv,
+color=red,_v1,_v2,
+color=orange,point_size=1,_xn)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Jetzt wird der neue x Wert gesucht, oben auf der Grafik ist er
+bereits als kleiner oranger Punkt eingezeichnet.
+
+Der Punkt befindet sich auf der Nullstelle der Geraden.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+solve(g(x),x);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Maxima packt die Lösung von solve in eine recht unpraktische Liste ein.
+So lässt sich der neue x Wert auspacken:
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+xn:rhs(%[1]) /*Das erste Element und davon nur die Rechte Seite*/;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Nun wird geschaut welcher der x Werte ersetzt werden soll.
+Man erkennt ihn daran das der f(x) des Wertes das gleiche Vorzeichen
+wie f(xn) hat.
+
+Als bedingte Zuweisung lässt sich das so Schreiben:
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+x1:(if (signum(f(x1)) = signum(f(''xn))) then x0 else x1);
+x0:xn;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Durch mehrmaliges durchlaufen des Codes ab i16 lässt sich das Ergebnis beliebig
+verfeinern.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: subsect start ]
+Codeblock
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(all);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Ein Codeblock zum berechnen einer Nullstelle mit hilfe des Numerischen
+Verfahrens Regula Falsi.
+
+x0, x1  Der bereich zwischen den beiden Schranken wird nach einer Nullstelle durchsucht.
+nmax    Maximale Anzahl an Iterationen, bei erreichen dieser Anzahl wird Unabhängig der 
+        erreichten genauigkeit abgebrochen und der aktuelle Wert zurück gegeben.
+e       Die angestrebte Genauigkeit. Wenn die Genauigkeit erreicht wurde wird die
+        Iteration abgebrochen.
+Vor dem Aufruf des Codeblocks muss eine Funktion f(x) definiert sein
+die Nullstelle dieser Funktion wird gesucht.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+regulafalsi(x0,x1,nmax,e):=block(
+    [x2],
+    /*Schleife mit Abbruchbedingung anzahl an Iterationen (nmax)*/
+    for i:0 step 1 thru nmax do
+        [/*Steigungsdreieck*/
+         x2: x0-(f(x0)*(x0-x1))/(f(x0)-f(x1)),
+         /*Abbruchbedingung Genauigkeit (e)*/
+         if abs(f(x2))<e then return(x2),
+         x1: x2
+        ],
+    return(x2)
+)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Funktion
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+f(x):=x^3+2*x-5;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Startvariablen
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+x0:0;
+x1:2;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Einsetzten in den Codeblock
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+regulafalsi(0,1,1000,0.00001),numer;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+f(%),numer;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Der Epsilonumgebung entsprechend ein erwartungsmäßig genaues Ergebnis
+   [wxMaxima: comment end   ] */
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$
