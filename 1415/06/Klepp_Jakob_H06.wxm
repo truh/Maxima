@@ -1,0 +1,329 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 14.09.0 ] */
+
+/* [wxMaxima: comment start ]
+wxMaxima 0.8.3 http://wxmaxima.sourceforge.net
+Maxima 5.19.2 http://maxima.sourceforge.net
+Using Lisp GNU Common Lisp (GCL) GCL 2.6.8 (aka GCL)
+Distributed under the GNU Public License. See the file COPYING.
+Dedicated to the memory of William Schelter.
+The function bug_report() provides bug reporting information.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: title   start ]
+Statistik und Wahrscheinlichkeitsrechnung
+   [wxMaxima: title   end   ] */
+
+/* [wxMaxima: section start ]
+Übungsbeispiele zur Statistik
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: comment start ]
+Beschreibende Statistik
+=======================
+hat zum Ziel, übersichtlich darzustellen und zu ordnen.
+Dies ist vor allem bei umfangreichem Datenmaterial sinnvoll,
+da dieses nicht leicht überblickt werden kann.
+Untersucht wird eine *Stichprobe*, bei den *Merkmalen*
+einer Stichprobe unterscheidet man zwischen *Qualitativen*
+und *Quantitativen* Merkmalen.
+Ein Beispiel für ein Qualitatives Merkmal ist etwa die Farbe
+für ein Quantitatives Merkmal die Anzahl.
+Grundgesamtheit
+~~~~~~~~~~~~~~~
+Ist die Menge der entsprechenden Objekten, die Stichprobe ist
+eine Untermenge der Grundgesamtheit.
+Kenngröße
+~~~~~~~~~
+Beim untersuchen der Stichprobe findet man Merkmalswerte.
+Der Stichprobe werden Kenngrößen zugeschrieben.
+Eine graphische darstellung der Kenngrößen ist üblich.
+Absolute Häufigkeit
+~~~~~~~~~~~~~~~~~~~
+Der Begriff absolute Häufigkeit ist gleichbedeutend mit dem
+umgangssprachlichen Begriff Anzahl. 
+Relative Häufigkeit
+~~~~~~~~~~~~~~~~~~~
+Die relative Häufigkeit ist ein Maß der deskriptiven Statistik.
+Sie gibt den Anteil der Elemente einer Menge wieder, bei denen
+eine bestimmte Merkmalsausprägung vorliegt. Sie wird berechnet,
+indem die absolute Häufigkeit eines Merkmals in einer
+zugrundeliegenden Menge durch die Anzahl der Objekte in dieser
+Menge geteilt wird. Die relative Häufigkeit ist also eine
+Bruchzahl und hat einen Wert zwischen 0 und 1.
+Kumulative Häufigkeit
+~~~~~~~~~~~~~~~~~~~~~
+Die kumulierte Häufigkeit wird berechnet als Summe der Häufigkeiten
+der Merkmalsausprägungen von der kleinsten Ausprägung bis hin zu der
+jeweils betrachteten Schranke.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: subsect start ]
+Beispiel Kondensatoren
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Einer Lieferung von Kondensatoren werden 20 Stück entnommen und ihre Kapazität gemessen. 
+Es ergeben sich folgende Werte (in nF) als Urliste:
+
+53  47  52  49  50  50  47  43  48  50  51  53  54  56  46  49  51  50  49 
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+In H05 gelöst
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: subsect start ]
+Beispiel Blechteile
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Bei der Produktion von Blechteilen sind bei der Qualitätskontrolle folgende Fehler aufgetreten:
+
+Fehler #    Fehlerart   Häufigkeit
+    1       Delle        8
+    2       Kratzer     26
+    3       Korrosion    4
+    4       Lackfehler  38
+    5       Verbogen     4
+    6       Gerissen     2
+    7       Maßfehler    2
+    8       Bohrfehler   3
+    9       Sonstige     3
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(all);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+load(draw);
+load(descriptive);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+urlist:
+/*Fehler #    Fehlerart   Häufigkeit*/
+[[    1,     "Delle"     ,  8],
+ [    2,     "Kratzer"    , 26],
+ [    3,     "Korrosion"  ,  4],
+ [    4,     "Lackfehler", 38],
+ [    5,     "Verbogen"  ,  4],
+ [    6,     "Gerissen"  ,  2],
+ [    7,     "Maßfehler" ,  2],
+ [    8,     "Bohrfehler",  3],
+ [    9,     "Sonstige"  ,  3]];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Paretodiagramm
+==============
+
+Beim Paretodiagramm werden Werte der größe nach sortiert in Balkenform
+wiedergegeben.
+
+In diesem Beispiel verbindet das Paretodiagramm qualitative Merkmale
+(Fehlerart) mit quantitativen Merkmalen (Häufigkeit).
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+/* sortieren der Liste 
+
+   Sortieren von komplexeren Listen ist in Maxima
+   einfach über den zweite Parameter der sort funktion
+   möglich. Über diesen lässt sich ein eigener
+   Vergleichsoperator festlegen. */
+sortiert: sort(urlist, lambda([a,b], a[3]>b[3]));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+/*
+Funktion zum erzeugen der Draw2d Objekte eines
+Paretodiagramms
+
+Param list: muss Elemente folgendes Formats haben
+            /*Fehler #    Fehlerart   Häufigkeit*/
+            Fehler #   --  wird ignoriert
+            Fehlerart  --  ein Name für den aktuellen Wert
+            Häufigkeit --  Größe des Werts, wird auch zur priorisierung verwendet
+*/
+pareto(list):=makelist([
+ fill_color=[red, green, blue, magenta, cyan, yellow, orange, violet, brown, gray, black][mod(i,11)],
+ rectangle(
+  [i-1, 0],
+  [i, sort(list, lambda([a,b], a[3]>b[3]))[i][3]]
+ ),
+ label([
+  sort(list, lambda([a,b], a[3]>b[3]))[i][2],
+  i-0.5,
+  sort(list, lambda([a,b], a[3]>b[3]))[i][3]
+ ])
+], i, length(list));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+pareto(urlist);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(
+color=black,
+pareto(urlist)
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Piechart
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+auspacken(list):=flatten(makelist(makelist(list[i][2], j, list[i][3]), i, length(list)));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+wxpiechart(
+    auspacken(urlist),
+    sector_colors=[red, green, blue, magenta, cyan, yellow, orange, violet, brown, gray, black],
+    xrange=[-1,3],
+    proportional_axes = xy,
+    axis_bottom=false,
+    axis_top=false,
+    axis_left=false,
+    axis_right=false,
+    xtics=false,
+    ytics=false
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: subsect start ]
+Beispiel Füllmengen
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Eine Messung des Füllgewichtes von 80 automatisch abgefüllten Marmeladegläsern ergab folgende Werte (in g):
+
+93.0  88.2  92.1  91.0  86.9  93.8  91.0  92.0  87.4  92.1
+92.7  93.3  88.8  91.5  90.4  88.1  89.7  88.9  92.7  91.4
+89.6  89.4  87.3  86.5  90.8  90.3  86.9  91.2  89.3  90.4
+94.2  90.4  90.8  91.9  90.8  92.4  88.3  92.0  87.3  93.8
+90.6  88.0  94.0  90.9  88.0  93.1  91.7  89.7  92.7  89.5
+90.7  89.3  89.3  86.5  88.9  87.5  88.2  88.7  90.2  86.3
+93.9  86.4  90.6  87.9  85.0  89.1  91.8  92.3  87.9  95.4
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+urlist:
+[93.0, 88.2, 92.1, 91.0, 86.9, 93.8, 91.0, 92.0, 87.4, 92.1,
+ 92.7, 93.3, 88.8, 91.5, 90.4, 88.1, 89.7, 88.9, 92.7, 91.4,
+ 89.6, 89.4, 87.3, 86.5, 90.8, 90.3, 86.9, 91.2, 89.3, 90.4,
+ 94.2, 90.4, 90.8, 91.9, 90.8, 92.4, 88.3, 92.0, 87.3, 93.8,
+ 90.6, 88.0, 94.0, 90.9, 88.0, 93.1, 91.7, 89.7, 92.7, 89.5,
+ 90.7, 89.3, 89.3, 86.5, 88.9, 87.5, 88.2, 88.7, 90.2, 86.3,
+ 93.9, 86.4, 90.6, 87.9, 85.0, 89.1, 91.8, 92.3, 87.9, 95.4];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Anzahl, Minimum und Maximum heraussuchen
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+length(urlist);
+Minimum=lreduce(min, urlist);
+Maximum=lreduce(max, urlist);
+Differenz=lreduce(max, urlist)-lreduce(min, urlist);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Nach gutem Teiler ausschau halten
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+makelist([i, (lreduce(max, urlist)-lreduce(min, urlist))/i], i, 10);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+9 (8+1) Segmente sind bei 70 Elementen eine Vernünftige Anzahl
+1.3 ist eine halbwegs schöne Schrittweite
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+Schrittweite:1.3;
+Segmente:9;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+makelist((i-1)*Schrittweite, i, Segmente);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+Klassen: [
+ [-1,  1.3],
+ [1.3, 2.6],
+ [2.6, 3.9],
+ [3.9, 5.2],
+ [5.2, 6.5],
+ [6.5, 7.8],
+ [7.8, 9.1],
+ [9.1, 11.4]
+]+lreduce(min, urlist);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+append(;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+klassifizierung(list, klassen):=makelist(
+ lreduce(lambda([a,b], (if b>klassen[i][1] and b<=klassen[i][2] then a+1 else a)), append([0],list)),
+ i, length(klassen)
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+klassifiziert:klassifizierung(urlist, Klassen);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+auspacken(klassifiziert, klassen):=
+makelist(
+    makelist(
+        klassen[i], 
+        j, 
+        klassifiziert[i]
+    ), 
+    i, 
+    length(klassifiziert)
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+ausgepackt:flatten(auspacken(klassifiziert, ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k"]));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Jetzt wo die Werte klassifiziert sind, können sie wie
+Häufigkeitswerte weiterbehandelt werden.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+wxbarsplot(ausgepackt,
+frequency = absolute);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: subsect start ]
+Beispiel Widerstände
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Aus einer Lieferung von elektrischen Widerständen gleicher Art werden einige Stück herausgegriffen und gemessen. 
+Dabei werden folgende Werte (in Ohm) gefunden:
+
+98.7  99.3  95.8  101.6  100.4  98.0  96.3
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Nicht Teil der Hausübung
+   [wxMaxima: comment end   ] */
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$

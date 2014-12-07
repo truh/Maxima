@@ -1,0 +1,716 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+ <HEAD>
+  <TITLE>Klepp_Jakob_H06</TITLE>
+  <META NAME="generator" CONTENT="wxMaxima">
+  <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+  <STYLE TYPE="text/css">
+body {
+  background-color: rgb(255,255,255);
+}
+.input {
+  color: rgb(0,0,255);
+}
+.comment {
+  color: rgb(0,0,0);
+  background-color: rgb(255,255,255);
+  padding: 2mm;
+}
+.image {
+  color: rgb(0,0,0);
+  padding: 2mm;
+}
+.section {
+  color: rgb(0,0,0);
+  font-size: 1.5em;
+  padding: 2mm;
+}
+.subsect {
+  color: rgb(0,0,0);
+  font-size: 1.2em;
+  padding: 2mm;
+}
+.title {
+  color: rgb(0,0,0);
+  font-size: 2em;
+  padding: 2mm;
+}
+.prompt {
+  color: rgb(255,0,0);
+}
+table {
+  border: 0px;
+}
+td {
+  vertical-align: top;
+  padding: 1mm;
+}
+  </STYLE>
+ </HEAD>
+ <BODY>
+
+<!---------------------------------------------------------->
+<!--          Created with wxMaxima version 14.09.0         -->
+<!---------------------------------------------------------->
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+wxMaxima 0.8.3 http://wxmaxima.sourceforge.net<BR>
+Maxima 5.19.2 http://maxima.sourceforge.net<BR>
+Using Lisp GNU Common Lisp (GCL) GCL 2.6.8 (aka GCL)<BR>
+Distributed under the GNU Public License. See the file COPYING.<BR>
+Dedicated to the memory of William Schelter.<BR>
+The function bug_report() provides bug reporting information.
+</P>
+
+
+<!-- Title cell -->
+
+
+<P CLASS="title">
+Statistik und Wahrscheinlichkeitsrechnung
+</P>
+
+
+<!-- Section cell -->
+
+
+<P CLASS="section">
+ 1 Übungsbeispiele zur Statistik
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Beschreibende Statistik<BR>
+=======================<BR>
+hat zum Ziel, übersichtlich darzustellen und zu ordnen.<BR>
+Dies ist vor allem bei umfangreichem Datenmaterial sinnvoll,<BR>
+da dieses nicht leicht überblickt werden kann.<BR>
+Untersucht wird eine *Stichprobe*, bei den *Merkmalen*<BR>
+einer Stichprobe unterscheidet man zwischen *Qualitativen*<BR>
+und *Quantitativen* Merkmalen.<BR>
+Ein Beispiel für ein Qualitatives Merkmal ist etwa die Farbe<BR>
+für ein Quantitatives Merkmal die Anzahl.<BR>
+Grundgesamtheit<BR>
+~~~~~~~~~~~~~~~<BR>
+Ist die Menge der entsprechenden Objekten, die Stichprobe ist<BR>
+eine Untermenge der Grundgesamtheit.<BR>
+Kenngröße<BR>
+~~~~~~~~~<BR>
+Beim untersuchen der Stichprobe findet man Merkmalswerte.<BR>
+Der Stichprobe werden Kenngrößen zugeschrieben.<BR>
+Eine graphische darstellung der Kenngrößen ist üblich.<BR>
+Absolute Häufigkeit<BR>
+~~~~~~~~~~~~~~~~~~~<BR>
+Der Begriff absolute Häufigkeit ist gleichbedeutend mit dem<BR>
+umgangssprachlichen Begriff Anzahl. <BR>
+Relative Häufigkeit<BR>
+~~~~~~~~~~~~~~~~~~~<BR>
+Die relative Häufigkeit ist ein Maß der deskriptiven Statistik.<BR>
+Sie gibt den Anteil der Elemente einer Menge wieder, bei denen<BR>
+eine bestimmte Merkmalsausprägung vorliegt. Sie wird berechnet,<BR>
+indem die absolute Häufigkeit eines Merkmals in einer<BR>
+zugrundeliegenden Menge durch die Anzahl der Objekte in dieser<BR>
+Menge geteilt wird. Die relative Häufigkeit ist also eine<BR>
+Bruchzahl und hat einen Wert zwischen 0 und 1.<BR>
+Kumulative Häufigkeit<BR>
+~~~~~~~~~~~~~~~~~~~~~<BR>
+Die kumulierte Häufigkeit wird berechnet als Summe der Häufigkeiten<BR>
+der Merkmalsausprägungen von der kleinsten Ausprägung bis hin zu der<BR>
+jeweils betrachteten Schranke.
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  1.1 Beispiel Kondensatoren
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Einer Lieferung von Kondensatoren werden 20 Stück entnommen und ihre Kapazität gemessen. <BR>
+Es ergeben sich folgende Werte (in nF) als Urliste:<BR>
+<BR>
+53  47  52  49  50  50  47  43  48  50  51  53  54  56  46  49  51  50  49 
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+In H05 gelöst
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  1.2 Beispiel Blechteile
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Bei der Produktion von Blechteilen sind bei der Qualitätskontrolle folgende Fehler aufgetreten:<BR>
+<BR>
+Fehler #    Fehlerart   Häufigkeit<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;1       Delle        8<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;2       Kratzer     26<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;3       Korrosion    4<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;4       Lackfehler  38<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;5       Verbogen     4<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;6       Gerissen     2<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;7       Maßfehler    2<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;8       Bohrfehler   3<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;9       Sonstige     3
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i25) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+kill(all);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H06_img/Klepp_Jakob_H06_0.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i1) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+load(draw);<BR>
+load(descriptive);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H06_img/Klepp_Jakob_H06_1.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i3) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+urlist:<BR>
+/*Fehler #    Fehlerart   Häufigkeit*/<BR>
+[[    1,     "Delle"     ,  8],<BR>
+&nbsp;[    2,     "Kratzer"    , 26],<BR>
+&nbsp;[    3,     "Korrosion"  ,  4],<BR>
+&nbsp;[    4,     "Lackfehler", 38],<BR>
+&nbsp;[    5,     "Verbogen"  ,  4],<BR>
+&nbsp;[    6,     "Gerissen"  ,  2],<BR>
+&nbsp;[    7,     "Maßfehler" ,  2],<BR>
+&nbsp;[    8,     "Bohrfehler",  3],<BR>
+&nbsp;[    9,     "Sonstige"  ,  3]];
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H06_img/Klepp_Jakob_H06_2.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Paretodiagramm<BR>
+==============<BR>
+<BR>
+Beim Paretodiagramm werden Werte der größe nach sortiert in Balkenform<BR>
+wiedergegeben.<BR>
+<BR>
+In diesem Beispiel verbindet das Paretodiagramm qualitative Merkmale<BR>
+(Fehlerart) mit quantitativen Merkmalen (Häufigkeit).
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i4) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/* sortieren der Liste <BR>
+<BR>
+&nbsp;&nbsp;&nbsp;Sortieren von komplexeren Listen ist in Maxima<BR>
+&nbsp;&nbsp;&nbsp;einfach über den zweite Parameter der sort funktion<BR>
+&nbsp;&nbsp;&nbsp;möglich. Über diesen lässt sich ein eigener<BR>
+&nbsp;&nbsp;&nbsp;Vergleichsoperator festlegen. */<BR>
+sortiert: sort(urlist, lambda([a,b], a[3]>b[3]));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H06_img/Klepp_Jakob_H06_3.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i5) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/*<BR>
+Funktion zum erzeugen der Draw2d Objekte eines<BR>
+Paretodiagramms<BR>
+<BR>
+Param list: muss Elemente folgendes Formats haben<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/*Fehler #    Fehlerart   Häufigkeit*/<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fehler #   --  wird ignoriert<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fehlerart  --  ein Name für den aktuellen Wert<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Häufigkeit --  Größe des Werts, wird auch zur priorisierung verwendet<BR>
+*/<BR>
+pareto(list):=makelist([<BR>
+&nbsp;fill_color=[red, green, blue, magenta, cyan, yellow, orange, violet, brown, gray, black][mod(i,11)],<BR>
+&nbsp;rectangle(<BR>
+&nbsp;&nbsp;[i-1, 0],<BR>
+&nbsp;&nbsp;[i, sort(list, lambda([a,b], a[3]>b[3]))[i][3]]<BR>
+&nbsp;),<BR>
+&nbsp;label([<BR>
+&nbsp;&nbsp;sort(list, lambda([a,b], a[3]>b[3]))[i][2],<BR>
+&nbsp;&nbsp;i-0.5,<BR>
+&nbsp;&nbsp;sort(list, lambda([a,b], a[3]>b[3]))[i][3]<BR>
+&nbsp;])<BR>
+], i, length(list));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H06_img/Klepp_Jakob_H06_4.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i6) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+pareto(urlist);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H06_img/Klepp_Jakob_H06_5.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i7) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxdraw2d(<BR>
+color=black,<BR>
+pareto(urlist)<BR>
+);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H06_img/Klepp_Jakob_H06_6.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Piechart
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i8) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+auspacken(list):=flatten(makelist(makelist(list[i][2], j, list[i][3]), i, length(list)));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H06_img/Klepp_Jakob_H06_7.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i9) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxpiechart(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;auspacken(urlist),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;sector_colors=[red, green, blue, magenta, cyan, yellow, orange, violet, brown, gray, black],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;xrange=[-1,3],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;proportional_axes = xy,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;axis_bottom=false,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;axis_top=false,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;axis_left=false,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;axis_right=false,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;xtics=false,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;ytics=false<BR>
+);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H06_img/Klepp_Jakob_H06_8.png">
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  1.3 Beispiel Füllmengen
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Eine Messung des Füllgewichtes von 80 automatisch abgefüllten Marmeladegläsern ergab folgende Werte (in g):<BR>
+<BR>
+93.0  88.2  92.1  91.0  86.9  93.8  91.0  92.0  87.4  92.1<BR>
+92.7  93.3  88.8  91.5  90.4  88.1  89.7  88.9  92.7  91.4<BR>
+89.6  89.4  87.3  86.5  90.8  90.3  86.9  91.2  89.3  90.4<BR>
+94.2  90.4  90.8  91.9  90.8  92.4  88.3  92.0  87.3  93.8<BR>
+90.6  88.0  94.0  90.9  88.0  93.1  91.7  89.7  92.7  89.5<BR>
+90.7  89.3  89.3  86.5  88.9  87.5  88.2  88.7  90.2  86.3<BR>
+93.9  86.4  90.6  87.9  85.0  89.1  91.8  92.3  87.9  95.4
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i10) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+urlist:<BR>
+[93.0, 88.2, 92.1, 91.0, 86.9, 93.8, 91.0, 92.0, 87.4, 92.1,<BR>
+&nbsp;92.7, 93.3, 88.8, 91.5, 90.4, 88.1, 89.7, 88.9, 92.7, 91.4,<BR>
+&nbsp;89.6, 89.4, 87.3, 86.5, 90.8, 90.3, 86.9, 91.2, 89.3, 90.4,<BR>
+&nbsp;94.2, 90.4, 90.8, 91.9, 90.8, 92.4, 88.3, 92.0, 87.3, 93.8,<BR>
+&nbsp;90.6, 88.0, 94.0, 90.9, 88.0, 93.1, 91.7, 89.7, 92.7, 89.5,<BR>
+&nbsp;90.7, 89.3, 89.3, 86.5, 88.9, 87.5, 88.2, 88.7, 90.2, 86.3,<BR>
+&nbsp;93.9, 86.4, 90.6, 87.9, 85.0, 89.1, 91.8, 92.3, 87.9, 95.4];
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H06_img/Klepp_Jakob_H06_9.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Anzahl, Minimum und Maximum heraussuchen
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i11) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+length(urlist);<BR>
+Minimum=lreduce(min, urlist);<BR>
+Maximum=lreduce(max, urlist);<BR>
+Differenz=lreduce(max, urlist)-lreduce(min, urlist);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H06_img/Klepp_Jakob_H06_10.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Nach gutem Teiler ausschau halten
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i15) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+makelist([i, (lreduce(max, urlist)-lreduce(min, urlist))/i], i, 10);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H06_img/Klepp_Jakob_H06_11.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+9 (8+1) Segmente sind bei 70 Elementen eine Vernünftige Anzahl<BR>
+1.3 ist eine halbwegs schöne Schrittweite
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i16) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+Schrittweite:1.3;<BR>
+Segmente:9;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H06_img/Klepp_Jakob_H06_12.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i18) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+makelist((i-1)*Schrittweite, i, Segmente);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H06_img/Klepp_Jakob_H06_13.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i19) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+Klassen: [<BR>
+&nbsp;[-1,  1.3],<BR>
+&nbsp;[1.3, 2.6],<BR>
+&nbsp;[2.6, 3.9],<BR>
+&nbsp;[3.9, 5.2],<BR>
+&nbsp;[5.2, 6.5],<BR>
+&nbsp;[6.5, 7.8],<BR>
+&nbsp;[7.8, 9.1],<BR>
+&nbsp;[9.1, 11.4]<BR>
+]+lreduce(min, urlist);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H06_img/Klepp_Jakob_H06_14.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i20) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+append(;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H06_img/Klepp_Jakob_H06_15.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i20) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+klassifizierung(list, klassen):=makelist(<BR>
+&nbsp;lreduce(lambda([a,b], (if b>klassen[i][1] and b<=klassen[i][2] then a+1 else a)), append([0],list)),<BR>
+&nbsp;i, length(klassen)<BR>
+);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H06_img/Klepp_Jakob_H06_16.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i21) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+klassifiziert:klassifizierung(urlist, Klassen);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H06_img/Klepp_Jakob_H06_17.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i22) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+auspacken(klassifiziert, klassen):=<BR>
+makelist(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;makelist(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;klassen[i], <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;j, <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;klassifiziert[i]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;), <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;i, <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;length(klassifiziert)<BR>
+);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H06_img/Klepp_Jakob_H06_18.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i23) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+ausgepackt:flatten(auspacken(klassifiziert, ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k"]));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H06_img/Klepp_Jakob_H06_19.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Jetzt wo die Werte klassifiziert sind, können sie wie<BR>
+Häufigkeitswerte weiterbehandelt werden.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i24) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxbarsplot(ausgepackt,<BR>
+frequency = absolute);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H06_img/Klepp_Jakob_H06_20.png">
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  1.4 Beispiel Widerstände
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Aus einer Lieferung von elektrischen Widerständen gleicher Art werden einige Stück herausgegriffen und gemessen. <BR>
+Dabei werden folgende Werte (in Ohm) gefunden:<BR>
+<BR>
+98.7  99.3  95.8  101.6  100.4  98.0  96.3
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Nicht Teil der Hausübung
+</P>
+
+ <HR>
+ <SMALL> Created with <A HREF="http://wxmaxima.sourceforge.net/">wxMaxima</A>.</SMALL>
+
+ </BODY>
+</HTML>
