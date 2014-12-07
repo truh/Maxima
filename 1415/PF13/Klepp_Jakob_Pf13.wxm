@@ -1,0 +1,861 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 14.09.0 ] */
+
+/* [wxMaxima: title   start ]
+       Portfolio 13       
+        Matrizen ℝ³       
+       Jakob  Klepp       
+        2014-09-23        
+   [wxMaxima: title   end   ] */
+
+/* [wxMaxima: input   start ] */
+numer:true;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: section start ]
+Maxima Befehle
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: comment start ]
+                                        |1  2  3|
+matrix([1,2,3], [4,5,6], [7,8,9])  -->  |4  5  6|
+                                        |7  8  9|
+
+matrix1.matrix2                    --> multiplizieren der Matrizen
+
+coefmatrix ([eqn_1, …, eqn_m],     --> Returns the coefficient matrix for the
+                [x_1, …, x_n])         variables x_1, …, x_n of the system
+                           of linear equations eqn_1, …, eqn_m.
+
+list_matrix_entries (M)            --> Returns a list containing the elements of the matrix M. 
+                                       Example: 
+                                       (%i1) list_matrix_entries(matrix([a,b],[c,d]));
+                                       (%o1)                     [a, b, c, d]
+
+diagmatrix (n, x)                  --> Returns a diagonal matrix of size n by n with the
+                                       diagonal elements all equal to x. diagmatrix (n, 1)
+                                       returns an identity matrix (same as ident (n)). 
+                                       n    must evaluate to an integer, otherwise diagmatrix
+                                            complains with an error message. 
+  x    can be any kind of expression, including another
+                                            matrix. If x is a matrix, it is not copied; all
+                                            diagonal elements refer to the same instance, x. 
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: section start ]
+Grundlagen und Rechenregeln
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: comment start ]
+ez: Matrix
+    Matrizen
+Eine Matrix vom Typ(m,n) (oder (m x n)-Matrix)
+hat m Zeilen und n Spalten
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+| a[1,1]  .   .  a[1,n] |
+| a[2,1]            .   |
+|   .               .   |
+|   .               .   |
+| a[m,1]         a[m,n] |
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Einträge einer Matrix heißen Elemente
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Quadratische Matrix:
+  Zeilenanzahl = Spaltenanzahl
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Einspaltige Matrix 
+  = Spaltenvektor
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Einzeilige Matrix
+  = Zeilenvektor
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Einspaltige, Einzeilige Matrix
+  = Skalar, Zahl
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+    |1 2 3|
+A = |4 5 6|     (2x3)-Matrix
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+    |4|
+C = |1|         (3x1)-Matrix
+    |3|
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+D = |5 2 4|     (1x3)-Matrix
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+TRANSPONIEREN einer Matrix
+--------------------------
+    T
+A -> A
+    |1 2 3|
+A = |4 5 6|
+ T  |1 4|                   T
+A = |2 5|       (2x3)-Matrix  = (3x2)-Matrix
+    |3 6|
+In Maxima
+---------> 
+transpose (M)
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Symmetrische Matrix
+-------------------
+     T
+S = S
+Matrix gleicht ihrer transponierten Form
+Nullmatrix
+----------
+alle Einträge 0
+Diagonalmatrix
+--------------
+Quadratische Matrix, bei der alle Einträge außerhalb
+der Hauptdiagonale 0 sind
+    a[i,j] = 0 wenn i!=0
+|1 0 0 0|
+|0 2 0 0|
+|0 0 3 0|
+|0 0 0 4|
+Einheitsmatrix
+--------------
+Diagonalmatrix bei der die Einträge 1 sind.
+    a[i,j] = 0 wenn i!=0
+    a[i,j] = 1 wenn i==0
+|1 0 0 0|
+|0 1 0 0|
+|0 0 1 0|
+|0 0 0 1|
+Determinante
+------------
+Eine Funktion bei der eine Matrix einer Zahl zugeordnet
+wird (im allgemeinen heißt sowas Metrik)
+Nur für Quadratische Matrixen definiert
+    |1 2|
+B = |3 4|
+| 1   2 |     | 1   2 |
+|   \   |  -  |   /   | = 1*4 - 3*2 = -2
+| 3   4 |     | 3   4 |
+   Produkte der Elemente der Hauptdiagonalen 
+ - Produkt3 der Elemente der Nebendiagonalen 
+| 2   4   1 |
+|           |
+| 1   1   7 |         = 106
+|           |
+| 4   0   1 |
+| 2   4   1 | 2   4       | 2   4   1 | 2   4
+|   \   \   \             |       /   /   /  
+| 1   1   7 | 1   1   -   | 1   1   7 | 1   1
+|       \   \   \         |   /   /   /      
+| 4   0   1 | 4   0       | 4   0   1 | 4   0
+2*1*1 + 4*7*4 + 1*1*0 - 4*1*1 - 0*7*2 - 1*1*4 = 106
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Rechnen mit Matrizen
+--------------------
+* Gleichheit von Matrizen
+  2 Matrizen sind gleich wenn sie in allen 
+  entsprechenden Elementen gleich sind
+* Addieren, Subdrahieren
+  2 Matrizen vom sleben Typ werden Addiert/Subdrahiert
+  indem man die entsprechenden Elemente Addiert/Subdrahiert
+      |1 2|       |5 6|
+  A = |3 4|,  B = |7 8|
+          | 6  8|
+  A + B = |10 12|
+  Kommunitativ:
+    A+B = B+A
+  N ... Nullelement
+  Matrizen bilden bezüglich der addition eine algebraische Struktur.
+  Die algebraische Struktur heißt kommunitative Gruppe mit Nullelementen.
+* Multiplikation einer Matrix mit einer
+  Eine Matrix wird mit einer Zahl multipliziert indem man jedes Element 
+  mit der Zahl multipliziert.
+      |1 2|
+  A = |3 4|, k=5
+        | 5 10|
+  k*A = |15 20|
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Drehen im ℝ³
+============
+
+Im ℝ³ muss um eine Achse gedreht werden. (x,y,z)-Achse
+Beim drehen um eine der Achsen bleibt der entsprechende
+Wert im Punkt gleich. z.B.
+
+P = [x,y,z] Drehung um x Achse P'=[x,y',z']
+
+Mit diesem Wissen lässt sich die Drehmatrix so erweitern
+dass zwei Werte wie schon im ℝ² verändert werden, der dritte
+aber gleich bleibt.
+
+Es ergeben sich die folgenden Drehmatrizen
+
+Drehung um x-Achse
+------------------
+
+     | 1   0         0      |
+Dx = | 0 cos(phi) -sin(phi) |
+     | 0 sin(phi)  cos(phi) |
+
+Drehung um y-Achse
+------------------
+
+     | cos(phi) 0 -sin(phi) |
+Dy = |   0      1    0      |
+     | sin(phi) 0  cos(phi) |
+
+Drehung um z-Achse
+------------------
+
+     | cos(phi) -sin(phi) 0 |
+Dx = | sin(phi)  cos(phi) 0 |
+     |   0         0      1 |
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: section start ]
+Anwendungen: Gleichungssysteme
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(all);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Bei der Cramerschen Regel bzw. Determinatenmethode
+werden lineare Gleichungssysteme mithilfe von
+Matrix Berechnungen durchgeführt.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+gl1:2*x +   y -   z = 2;
+gl2:  x + 3*y       = 5;
+gl3:        y + 2*z = 7;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Wir haben ein Gleichungssystem aus 3 Gleichungen mit 3 Variablen.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+_A: coefmatrix ([gl1,gl2,gl3],[x,y,z]);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Aus den Koeffizienten des Gleichungssystem wird die Koeffizienten matrix abgeleitet.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+_b:matrix([2],[5],[7]);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Auch die Zahlen der rechten Seite der Gleichungen werden in eine Matrix gepackt.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+_x:matrix([x],[y],[z]);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Determinantenvektor
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+A.x=b;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Gleichungssystem in Matrizenschreibweise
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+inv_A:invert(_A);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Invertierung der Koeffizientenmatrix
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+inv_A._b;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Durch multiplizieren der Invertierten Koeffizientenmatrix mit einem Vektor
+der Zahlen auf der rechten Seite erhalten wir den Lösungsvektor.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+_x=inv_A._b;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: section start ]
+Anwendungen: ℝ²
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: comment start ]
+Anwendung von R² Vollständige allgemeine Erklärung, Kommentierte durchführung des Beispiels. A(2|1), B(3|9), C (8|3) um B (60°)
+  Im idealfall Grafisch: 1. Zeichnung:  Ausgangsdreieck + Verschobenes Dreieck,
+                         2. Zeichnung:  Verschobenes Dreieck + Gedrehtes Dreieck
+                         3. Zeichnung:  Gedrehtes Dreieck + Zurückgeschobenes Dreieck =>
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(all);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+A_start:[2,1];
+B_start:[3,9];
+C_start:[8,3];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+phi:60;
+drehmatrix: matrix(
+    [cos(phi), -sin(phi)],
+    [sin(phi),  cos(phi)]);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(
+xrange=[-5,9],
+yrange=[-9,18],
+color=dark_red,
+fill_color=red,
+polygon([A_start[1],B_start[1],C_start[1],A_start[1]],
+        [A_start[2],B_start[2],C_start[2],A_start[2]]),
+label(["A", A_start[1],A_start[2]],
+      ["B", B_start[1],B_start[2]],
+      ["C", C_start[1],C_start[2]])
+)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Gegebenenes Dreieck
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Da um B Gedreht werden soll wird das Dreieck um -B verschoben
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+A_verschoben: A_start - B_start;
+B_verschoben: B_start - B_start;
+C_verschoben: C_start - B_start;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(
+xrange=[-5,9],
+yrange=[-9,18],
+color=red,
+fill_color=pink,
+polygon([A_start[1],B_start[1],C_start[1],A_start[1]],
+        [A_start[2],B_start[2],C_start[2],A_start[2]]),
+label(["A", A_start[1],A_start[2]],
+      ["B", B_start[1],B_start[2]],
+      ["C", C_start[1],C_start[2]]),
+/*verschobenes Dreieck*/
+color=dark_red,
+fill_color=red,
+polygon([A_verschoben[1],B_verschoben[1],C_verschoben[1],A_verschoben[1]],
+        [A_verschoben[2],B_verschoben[2],C_verschoben[2],A_verschoben[2]]),
+label(["A", A_verschoben[1],A_verschoben[2]],
+      ["B", B_verschoben[1],B_verschoben[2]],
+      ["C", C_verschoben[1],C_verschoben[2]])
+)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Im nächsten Schritt wird das Dreieck mit der Drehmatrix gedreht.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+A_gedreht: (matrix(A_verschoben)
+.drehmatrix)[1];
+B_gedreht: (matrix(B_verschoben)
+.drehmatrix)[1];
+C_gedreht: (matrix(C_verschoben)
+.drehmatrix)[1];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(
+xrange=[-5,9],
+yrange=[-9,18],
+/*verschobenes Dreieck*/
+color=red,
+fill_color=pink,
+polygon([A_verschoben[1],B_verschoben[1],C_verschoben[1],A_verschoben[1]],
+        [A_verschoben[2],B_verschoben[2],C_verschoben[2],A_verschoben[2]]),
+label(["A", A_verschoben[1],A_verschoben[2]],
+      ["B", B_verschoben[1],B_verschoben[2]],
+      ["C", C_verschoben[1],C_verschoben[2]]),
+/*gedrehtes Dreieck*/
+color=dark_red,
+fill_color=red,
+polygon([A_gedreht[1],B_gedreht[1],C_gedreht[1],A_gedreht[1]],
+        [A_gedreht[2],B_gedreht[2],C_gedreht[2],A_gedreht[2]]),
+label(["A", A_gedreht[1],A_gedreht[2]],
+      ["B", B_gedreht[1],B_gedreht[2]],
+      ["C", C_gedreht[1],C_gedreht[2]])
+)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Nun wird die Matrix noch zurückgeschoben
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+A_ende: A_gedreht + B_start;
+B_ende: B_gedreht + B_start;
+C_ende: C_gedreht + B_start;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(
+xrange=[-5,9],
+yrange=[-9,18],
+/*gedrehtes Dreieck*/
+color=red,
+fill_color=pink,
+polygon([A_gedreht[1],B_gedreht[1],C_gedreht[1],A_gedreht[1]],
+        [A_gedreht[2],B_gedreht[2],C_gedreht[2],A_gedreht[2]]),
+label(["A", A_gedreht[1],A_gedreht[2]],
+      ["B", B_gedreht[1],B_gedreht[2]],
+      ["C", C_gedreht[1],C_gedreht[2]]),
+/*Zurückgeschobenes Dreieck*/
+color=dark_red,
+fill_color=red,
+polygon([A_ende[1],B_ende[1],C_ende[1],A_ende[1]],
+        [A_ende[2],B_ende[2],C_ende[2],A_ende[2]]),
+label(["A", A_ende[1],A_ende[2]],
+      ["B", B_ende[1],B_ende[2]],
+      ["C", C_ende[1],C_ende[2]])
+)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Zum Abschluss noch das Start-Dreieck zusammen mit dem
+End-Dreieck
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(
+xrange=[-5,9],
+yrange=[-9,18],
+/*gedrehtes Dreieck*/
+color=red,
+fill_color=pink,
+polygon([A_start[1],B_start[1],C_start[1],A_start[1]],
+        [A_start[2],B_start[2],C_start[2],A_start[2]]),
+label(["A", A_start[1],A_start[2]],
+      ["B", B_start[1],B_start[2]],
+      ["C", C_start[1],C_start[2]]),
+/*Zurückgeschobenes Dreieck*/
+color=dark_red,
+fill_color=red,
+polygon([A_ende[1],B_ende[1],C_ende[1],A_ende[1]],
+        [A_ende[2],B_ende[2],C_ende[2],A_ende[2]]),
+label(["A", A_ende[1],A_ende[2]],
+      ["B", B_ende[1],B_ende[2]],
+      ["C", C_ende[1],C_ende[2]])
+)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: section start ]
+Anwendung im ℝ³
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(all);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Angabe
+======
+
+A (2|4|1|red)
+B (3|9|1|blue)
+C (8|7|1|green)
+S (4|6|4|?)
+
+Drehung um x-Achse um A um 45° im Urzeigersinn
+Drehung um y-Achse um S um 20° gegen Urzeigersinn
+Drehung um z-Achse um S um 60° im Urzeigersinn
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+A_start: matrix([2],[4],[1],[red]);
+B_start: matrix([3],[9],[1],[blue]);
+C_start: matrix([8],[7],[1],[green]);
+S_start: matrix([4],[6],[4],[cyan]);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+A_start_l:list_matrix_entries(A_start);
+B_start_l:list_matrix_entries(B_start);
+C_start_l:list_matrix_entries(C_start);
+S_start_l:list_matrix_entries(S_start);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+{x,y,z}range global setzten damit die Grafiken vergleichbar sind
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+_xrange:[2, 9];
+_yrange:[4, 9];
+_zrange:[-3, 4];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+ _          _                    __                  _   _                 
+| |__   ___| |_ __   ___ _ __   / _|_   _ _ __   ___| |_(_) ___  _ __  ___ 
+| '_ \ / _ \ | '_ \ / _ \ '__| | |_| | | | '_ \ / __| __| |/ _ \| '_ \/ __|
+| | | |  __/ | |_) |  __/ |    |  _| |_| | | | | (__| |_| | (_) | | | \__ \
+|_| |_|\___|_| .__/ \___|_|    |_|  \__,_|_| |_|\___|\__|_|\___/|_| |_|___/
+             |_|
+helper functions
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+/*
+*/
+generate3dTedraederFromMatrizes(A,B,C,S):=[
+point_size=0,
+/*draw the frame*/
+    points([list_matrix_entries(A),list_matrix_entries(B),
+            list_matrix_entries(C),list_matrix_entries(A),
+            list_matrix_entries(S),list_matrix_entries(C),
+            list_matrix_entries(S),list_matrix_entries(B)]),
+/*add labels*/
+    label(["A", A[1][1], A[2][1], A[3][1]-0.7],
+          ["B", B[1][1], B[2][1], B[3][1]-0.7],
+          ["C", C[1][1], C[2][1], C[3][1]-0.7],
+          ["S", S[1][1], S[2][1], S[3][1]-0.7]),
+/*colorize points*/
+    point_size=1,
+    color=A[4][1],
+    points([list_matrix_entries(A)]),
+    color=B[4][1],
+    points([list_matrix_entries(B)]),
+    color=C[4][1],
+    points([list_matrix_entries(C)]),
+    color=S[4][1],
+    points([list_matrix_entries(S)])
+];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+/*
+*/
+addColorfulMatrizes(m1,m2):=matrix(
+    m1[1]+m2[1],
+    m1[2]+m2[2],
+    m1[3]+m2[3],
+    m1[4]);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+/*
+Funktion zum erzeugen einer Drehmatrix
+
+alpha   ... um welches winkel (0-360°) gedreht werden soll
+rotated ... welche Koordinated gedreht werden sollen
+            z.B. [1,1,0,0] für eine Drehung um die z-Achse
+            und einer Farbe an 4. Stelle der Matrix.
+*/
+rotationMatrix(alpha, rotated):=block(
+[columns:[],
+ Dm:diagmatrix(length(rotated), 1),
+ terms:[cos(alpha * %pi/180), -sin(alpha * %pi/180),
+        sin(alpha * %pi/180),  cos(alpha * %pi/180)],
+ counter:1],
+    numer:true,
+    for i thru length(rotated)
+    do [   
+        for j thru length(rotated)
+        do [
+            if (is(rotated[i] = 1) and is(rotated[j] = 1)) then
+            block(
+            Dm[i][j]: terms[counter],
+                counter:counter+1
+            )
+        ]
+    ],
+    return(Dm)
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+# Tedraeder aus Angabe
+######################
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw3d(points_joined=true,
+    xrange=_xrange,
+    yrange=_yrange,
+    zrange=_zrange,
+    point_type=7,
+    color=black,
+    generate3dTedraederFromMatrizes(A_start, B_start, C_start, S_start)
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+# Drehung um x-Achse um A um 45° im Urzeigersinn
+################################################
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Verschieben
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+A_moved: addColorfulMatrizes(A_start, -A_start)$
+B_moved: addColorfulMatrizes(B_start, -A_start)$
+C_moved: addColorfulMatrizes(C_start, -A_start)$
+S_moved: addColorfulMatrizes(S_start, -A_start)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+/*                      x, y, z, color */
+D: rotationMatrix(-45, [0, 1, 1, 0]);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Rotieren
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+A_rotated_moved: D . A_moved$
+B_rotated_moved: D . B_moved$
+C_rotated_moved: D . C_moved$
+S_rotated_moved: D . S_moved$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+zurück Schieben
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+A_r1: addColorfulMatrizes(A_rotated_moved, A_start);
+B_r1: addColorfulMatrizes(B_rotated_moved, A_start);
+C_r1: addColorfulMatrizes(C_rotated_moved, A_start);
+S_r1: addColorfulMatrizes(S_rotated_moved, A_start);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+zeichnen
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw3d(points_joined=true,
+    xrange=_xrange,
+    yrange=_yrange,
+    zrange=_zrange,
+    point_type=6,
+    color=grey,
+    generate3dTedraederFromMatrizes(A_start, B_start, C_start, S_start),
+    point_type=7,
+    color=black,
+    generate3dTedraederFromMatrizes(A_r1, B_r1, C_r1, S_r1)
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+temporäre Variablen löschen
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(D,
+A_moved, B_moved, C_moved, S_moved,
+A_rotated_moved, B_rotated_moved, C_rotated_moved, D_rotated_moved);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+# Drehung um y-Achse um S um 20° gegen Urzeigersinn
+###################################################
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Verschieben
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+A_moved: addColorfulMatrizes(A_r1, -S_r1)$
+B_moved: addColorfulMatrizes(B_r1, -S_r1)$
+C_moved: addColorfulMatrizes(C_r1, -S_r1)$
+S_moved: addColorfulMatrizes(S_r1, -S_r1)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+/*                      x, y, z, color */
+D: rotationMatrix(20, [1, 0, 1, 0]);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Rotieren
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+A_rotated_moved: D . A_moved$
+B_rotated_moved: D . B_moved$
+C_rotated_moved: D . C_moved$
+S_rotated_moved: D . S_moved$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+zurück Schieben
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+A_r2: addColorfulMatrizes(A_rotated_moved, S_r1);
+B_r2: addColorfulMatrizes(B_rotated_moved, S_r1);
+C_r2: addColorfulMatrizes(C_rotated_moved, S_r1);
+S_r2: addColorfulMatrizes(S_rotated_moved, S_r1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+zeichnen
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw3d(points_joined=true,
+    xrange=_xrange,
+    yrange=_yrange,
+    zrange=_zrange,
+    point_type=6,
+    color=grey,
+    generate3dTedraederFromMatrizes(A_r1, B_r1, C_r1, S_r1),
+    point_type=7,
+    color=black,
+    generate3dTedraederFromMatrizes(A_r2, B_r2, C_r2, S_r2)
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+temporäre Variablen löschen
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(D,
+A_moved, B_moved, C_moved, S_moved,
+A_rotated_moved, B_rotated_moved, C_rotated_moved, D_rotated_moved);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+# Drehung um z-Achse um S um 60° im Urzeigersinn
+################################################
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Verschieben
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+A_moved: addColorfulMatrizes(A_r2, -S_r2)$
+B_moved: addColorfulMatrizes(B_r2, -S_r2)$
+C_moved: addColorfulMatrizes(C_r2, -S_r2)$
+S_moved: addColorfulMatrizes(S_r2, -S_r2)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+/*                      x, y, z, color */
+D: rotationMatrix(20, [1, 0, 1, 0]);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Rotieren
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+A_rotated_moved: D . A_moved$
+B_rotated_moved: D . B_moved$
+C_rotated_moved: D . C_moved$
+S_rotated_moved: D . S_moved$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+zurück Schieben
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+A_r3: addColorfulMatrizes(A_rotated_moved, S_r2);
+B_r3: addColorfulMatrizes(B_rotated_moved, S_r2);
+C_r3: addColorfulMatrizes(C_rotated_moved, S_r2);
+S_r3: addColorfulMatrizes(S_rotated_moved, S_r2);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+zeichnen
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw3d(points_joined=true,
+    xrange=_xrange,
+    yrange=_yrange,
+    zrange=_zrange,
+    point_type=6,
+    color=grey,
+    generate3dTedraederFromMatrizes(A_r2, B_r2, C_r2, S_r2),
+    point_type=7,
+    color=black,
+    generate3dTedraederFromMatrizes(A_r3, B_r3, C_r3, S_r3)
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+temporäre Variablen löschen
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(D,
+A_moved, B_moved, C_moved, S_moved,
+A_rotated_moved, B_rotated_moved, C_rotated_moved, D_rotated_moved);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Start und Endzustand vergleichen
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw3d(points_joined=true,
+    xrange=_xrange,
+    yrange=_yrange,
+    zrange=_zrange,
+    point_type=6,
+    color=grey,
+    generate3dTedraederFromMatrizes(A_start, B_start, C_start, S_start),
+    point_type=7,
+    color=black,
+    generate3dTedraederFromMatrizes(A_r3, B_r3, C_r3, S_r3)
+);
+/* [wxMaxima: input   end   ] */
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$

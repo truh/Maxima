@@ -1,0 +1,1718 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+ <HEAD>
+  <TITLE>Klepp_Jakob_Pf13</TITLE>
+  <META NAME="generator" CONTENT="wxMaxima">
+  <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+  <STYLE TYPE="text/css">
+body {
+  background-color: rgb(255,255,255);
+}
+.input {
+  color: rgb(0,0,255);
+}
+.comment {
+  color: rgb(0,0,0);
+  background-color: rgb(255,255,255);
+  padding: 2mm;
+}
+.image {
+  color: rgb(0,0,0);
+  padding: 2mm;
+}
+.section {
+  color: rgb(0,0,0);
+  font-size: 1.5em;
+  padding: 2mm;
+}
+.subsect {
+  color: rgb(0,0,0);
+  font-size: 1.2em;
+  padding: 2mm;
+}
+.title {
+  color: rgb(0,0,0);
+  font-size: 2em;
+  padding: 2mm;
+}
+.prompt {
+  color: rgb(255,0,0);
+}
+table {
+  border: 0px;
+}
+td {
+  vertical-align: top;
+  padding: 1mm;
+}
+  </STYLE>
+ </HEAD>
+ <BODY>
+
+<!---------------------------------------------------------->
+<!--          Created with wxMaxima version 14.09.0         -->
+<!---------------------------------------------------------->
+
+
+<!-- Title cell -->
+
+
+<P CLASS="title">
+       Portfolio 13       <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Matrizen ℝ³       <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Jakob  Klepp       <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2014-09-23        
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i1) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+numer:true;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf13_img/Klepp_Jakob_Pf13_0.png">
+</P>
+
+
+<!-- Section cell -->
+
+
+<P CLASS="section">
+ 1 Maxima Befehle
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+                                        |1  2  3|<BR>
+matrix([1,2,3], [4,5,6], [7,8,9])  -->  |4  5  6|<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|7  8  9|<BR>
+<BR>
+matrix1.matrix2                    --> multiplizieren der Matrizen<BR>
+<BR>
+coefmatrix ([eqn_1, …, eqn_m],     --> Returns the coefficient matrix for the<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[x_1, …, x_n])         variables x_1, …, x_n of the system<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;of linear equations eqn_1, …, eqn_m.<BR>
+<BR>
+list_matrix_entries (M)            --> Returns a list containing the elements of the matrix M. <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example: <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(%i1) list_matrix_entries(matrix([a,b],[c,d]));<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(%o1)                     [a, b, c, d]<BR>
+<BR>
+diagmatrix (n, x)                  --> Returns a diagonal matrix of size n by n with the<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;diagonal elements all equal to x. diagmatrix (n, 1)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;returns an identity matrix (same as ident (n)). <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;n    must evaluate to an integer, otherwise diagmatrix<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;complains with an error message. <BR>
+&nbsp;&nbsp;x    can be any kind of expression, including another<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;matrix. If x is a matrix, it is not copied; all<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;diagonal elements refer to the same instance, x. 
+</P>
+
+
+<!-- Section cell -->
+
+
+<P CLASS="section">
+ 2 Grundlagen und Rechenregeln
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+ez: Matrix<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Matrizen<BR>
+Eine Matrix vom Typ(m,n) (oder (m x n)-Matrix)<BR>
+hat m Zeilen und n Spalten
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+| a[1,1]  .   .  a[1,n] |<BR>
+| a[2,1]            .   |<BR>
+|   .               .   |<BR>
+|   .               .   |<BR>
+| a[m,1]         a[m,n] |
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Einträge einer Matrix heißen Elemente
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Quadratische Matrix:<BR>
+&nbsp;&nbsp;Zeilenanzahl = Spaltenanzahl
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Einspaltige Matrix <BR>
+&nbsp;&nbsp;= Spaltenvektor
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Einzeilige Matrix<BR>
+&nbsp;&nbsp;= Zeilenvektor
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Einspaltige, Einzeilige Matrix<BR>
+&nbsp;&nbsp;= Skalar, Zahl
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+    |1 2 3|<BR>
+A = |4 5 6|     (2x3)-Matrix
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+    |4|<BR>
+C = |1|         (3x1)-Matrix<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|3|
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+D = |5 2 4|     (1x3)-Matrix
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+TRANSPONIEREN einer Matrix<BR>
+--------------------------<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;T<BR>
+A -> A<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|1 2 3|<BR>
+A = |4 5 6|<BR>
+&nbsp;T  |1 4|                   T<BR>
+A = |2 5|       (2x3)-Matrix  = (3x2)-Matrix<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|3 6|<BR>
+In Maxima<BR>
+---------> <BR>
+transpose (M)
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Symmetrische Matrix<BR>
+-------------------<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T<BR>
+S = S<BR>
+Matrix gleicht ihrer transponierten Form<BR>
+Nullmatrix<BR>
+----------<BR>
+alle Einträge 0<BR>
+Diagonalmatrix<BR>
+--------------<BR>
+Quadratische Matrix, bei der alle Einträge außerhalb<BR>
+der Hauptdiagonale 0 sind<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;a[i,j] = 0 wenn i!=0<BR>
+|1 0 0 0|<BR>
+|0 2 0 0|<BR>
+|0 0 3 0|<BR>
+|0 0 0 4|<BR>
+Einheitsmatrix<BR>
+--------------<BR>
+Diagonalmatrix bei der die Einträge 1 sind.<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;a[i,j] = 0 wenn i!=0<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;a[i,j] = 1 wenn i==0<BR>
+|1 0 0 0|<BR>
+|0 1 0 0|<BR>
+|0 0 1 0|<BR>
+|0 0 0 1|<BR>
+Determinante<BR>
+------------<BR>
+Eine Funktion bei der eine Matrix einer Zahl zugeordnet<BR>
+wird (im allgemeinen heißt sowas Metrik)<BR>
+Nur für Quadratische Matrixen definiert<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|1 2|<BR>
+B = |3 4|<BR>
+| 1   2 |     | 1   2 |<BR>
+|   \   |  -  |   /   | = 1*4 - 3*2 = -2<BR>
+| 3   4 |     | 3   4 |<BR>
+&nbsp;&nbsp;&nbsp;Produkte der Elemente der Hauptdiagonalen <BR>
+&nbsp;- Produkt3 der Elemente der Nebendiagonalen <BR>
+| 2   4   1 |<BR>
+|           |<BR>
+| 1   1   7 |         = 106<BR>
+|           |<BR>
+| 4   0   1 |<BR>
+| 2   4   1 | 2   4       | 2   4   1 | 2   4<BR>
+|   \   \   \             |       /   /   /  <BR>
+| 1   1   7 | 1   1   -   | 1   1   7 | 1   1<BR>
+|       \   \   \         |   /   /   /      <BR>
+| 4   0   1 | 4   0       | 4   0   1 | 4   0<BR>
+2*1*1 + 4*7*4 + 1*1*0 - 4*1*1 - 0*7*2 - 1*1*4 = 106
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Rechnen mit Matrizen<BR>
+--------------------<BR>
+* Gleichheit von Matrizen<BR>
+&nbsp;&nbsp;2 Matrizen sind gleich wenn sie in allen <BR>
+&nbsp;&nbsp;entsprechenden Elementen gleich sind<BR>
+* Addieren, Subdrahieren<BR>
+&nbsp;&nbsp;2 Matrizen vom sleben Typ werden Addiert/Subdrahiert<BR>
+&nbsp;&nbsp;indem man die entsprechenden Elemente Addiert/Subdrahiert<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|1 2|       |5 6|<BR>
+&nbsp;&nbsp;A = |3 4|,  B = |7 8|<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 6  8|<BR>
+&nbsp;&nbsp;A + B = |10 12|<BR>
+&nbsp;&nbsp;Kommunitativ:<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;A+B = B+A<BR>
+&nbsp;&nbsp;N ... Nullelement<BR>
+&nbsp;&nbsp;Matrizen bilden bezüglich der addition eine algebraische Struktur.<BR>
+&nbsp;&nbsp;Die algebraische Struktur heißt kommunitative Gruppe mit Nullelementen.<BR>
+* Multiplikation einer Matrix mit einer<BR>
+&nbsp;&nbsp;Eine Matrix wird mit einer Zahl multipliziert indem man jedes Element <BR>
+&nbsp;&nbsp;mit der Zahl multipliziert.<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|1 2|<BR>
+&nbsp;&nbsp;A = |3 4|, k=5<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 5 10|<BR>
+&nbsp;&nbsp;k*A = |15 20|
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Drehen im ℝ³<BR>
+============<BR>
+<BR>
+Im ℝ³ muss um eine Achse gedreht werden. (x,y,z)-Achse<BR>
+Beim drehen um eine der Achsen bleibt der entsprechende<BR>
+Wert im Punkt gleich. z.B.<BR>
+<BR>
+P = [x,y,z] Drehung um x Achse P'=[x,y',z']<BR>
+<BR>
+Mit diesem Wissen lässt sich die Drehmatrix so erweitern<BR>
+dass zwei Werte wie schon im ℝ² verändert werden, der dritte<BR>
+aber gleich bleibt.<BR>
+<BR>
+Es ergeben sich die folgenden Drehmatrizen<BR>
+<BR>
+Drehung um x-Achse<BR>
+------------------<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 1   0         0      |<BR>
+Dx = | 0 cos(phi) -sin(phi) |<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 0 sin(phi)  cos(phi) |<BR>
+<BR>
+Drehung um y-Achse<BR>
+------------------<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| cos(phi) 0 -sin(phi) |<BR>
+Dy = |   0      1    0      |<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| sin(phi) 0  cos(phi) |<BR>
+<BR>
+Drehung um z-Achse<BR>
+------------------<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| cos(phi) -sin(phi) 0 |<BR>
+Dx = | sin(phi)  cos(phi) 0 |<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|   0         0      1 |<BR>
+
+</P>
+
+
+<!-- Section cell -->
+
+
+<P CLASS="section">
+ 3 Anwendungen: Gleichungssysteme
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i2) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+kill(all);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf13_img/Klepp_Jakob_Pf13_1.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Bei der Cramerschen Regel bzw. Determinatenmethode<BR>
+werden lineare Gleichungssysteme mithilfe von<BR>
+Matrix Berechnungen durchgeführt.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i1) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+gl1:2*x +   y -   z = 2;<BR>
+gl2:  x + 3*y       = 5;<BR>
+gl3:        y + 2*z = 7;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf13_img/Klepp_Jakob_Pf13_2.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Wir haben ein Gleichungssystem aus 3 Gleichungen mit 3 Variablen.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i4) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+_A: coefmatrix ([gl1,gl2,gl3],[x,y,z]);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf13_img/Klepp_Jakob_Pf13_3.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Aus den Koeffizienten des Gleichungssystem wird die Koeffizienten matrix abgeleitet.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i5) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+_b:matrix([2],[5],[7]);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf13_img/Klepp_Jakob_Pf13_4.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Auch die Zahlen der rechten Seite der Gleichungen werden in eine Matrix gepackt.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i6) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+_x:matrix([x],[y],[z]);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf13_img/Klepp_Jakob_Pf13_5.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Determinantenvektor
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i7) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+A.x=b;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf13_img/Klepp_Jakob_Pf13_6.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Gleichungssystem in Matrizenschreibweise
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i8) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+inv_A:invert(_A);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf13_img/Klepp_Jakob_Pf13_7.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Invertierung der Koeffizientenmatrix
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i9) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+inv_A._b;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf13_img/Klepp_Jakob_Pf13_8.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Durch multiplizieren der Invertierten Koeffizientenmatrix mit einem Vektor<BR>
+der Zahlen auf der rechten Seite erhalten wir den Lösungsvektor.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i10) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+_x=inv_A._b;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf13_img/Klepp_Jakob_Pf13_9.png">
+</P>
+
+
+<!-- Section cell -->
+
+
+<P CLASS="section">
+ 4 Anwendungen: ℝ²
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Anwendung von R² Vollständige allgemeine Erklärung, Kommentierte durchführung des Beispiels. A(2|1), B(3|9), C (8|3) um B (60°)<BR>
+&nbsp;&nbsp;Im idealfall Grafisch: 1. Zeichnung:  Ausgangsdreieck + Verschobenes Dreieck,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. Zeichnung:  Verschobenes Dreieck + Gedrehtes Dreieck<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3. Zeichnung:  Gedrehtes Dreieck + Zurückgeschobenes Dreieck =>
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i11) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+kill(all);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf13_img/Klepp_Jakob_Pf13_10.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i1) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+A_start:[2,1];<BR>
+B_start:[3,9];<BR>
+C_start:[8,3];
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf13_img/Klepp_Jakob_Pf13_11.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i4) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+phi:60;<BR>
+drehmatrix: matrix(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;[cos(phi), -sin(phi)],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;[sin(phi),  cos(phi)]);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf13_img/Klepp_Jakob_Pf13_12.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i6) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxdraw2d(<BR>
+xrange=[-5,9],<BR>
+yrange=[-9,18],<BR>
+color=dark_red,<BR>
+fill_color=red,<BR>
+polygon([A_start[1],B_start[1],C_start[1],A_start[1]],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[A_start[2],B_start[2],C_start[2],A_start[2]]),<BR>
+label(["A", A_start[1],A_start[2]],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;["B", B_start[1],B_start[2]],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;["C", C_start[1],C_start[2]])<BR>
+)$
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf13_img/Klepp_Jakob_Pf13_13.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Gegebenenes Dreieck
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Da um B Gedreht werden soll wird das Dreieck um -B verschoben
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i7) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+A_verschoben: A_start - B_start;<BR>
+B_verschoben: B_start - B_start;<BR>
+C_verschoben: C_start - B_start;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf13_img/Klepp_Jakob_Pf13_14.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i10) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxdraw2d(<BR>
+xrange=[-5,9],<BR>
+yrange=[-9,18],<BR>
+color=red,<BR>
+fill_color=pink,<BR>
+polygon([A_start[1],B_start[1],C_start[1],A_start[1]],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[A_start[2],B_start[2],C_start[2],A_start[2]]),<BR>
+label(["A", A_start[1],A_start[2]],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;["B", B_start[1],B_start[2]],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;["C", C_start[1],C_start[2]]),<BR>
+/*verschobenes Dreieck*/<BR>
+color=dark_red,<BR>
+fill_color=red,<BR>
+polygon([A_verschoben[1],B_verschoben[1],C_verschoben[1],A_verschoben[1]],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[A_verschoben[2],B_verschoben[2],C_verschoben[2],A_verschoben[2]]),<BR>
+label(["A", A_verschoben[1],A_verschoben[2]],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;["B", B_verschoben[1],B_verschoben[2]],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;["C", C_verschoben[1],C_verschoben[2]])<BR>
+)$
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf13_img/Klepp_Jakob_Pf13_15.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Im nächsten Schritt wird das Dreieck mit der Drehmatrix gedreht.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i11) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+A_gedreht: (matrix(A_verschoben)<BR>
+.drehmatrix)[1];<BR>
+B_gedreht: (matrix(B_verschoben)<BR>
+.drehmatrix)[1];<BR>
+C_gedreht: (matrix(C_verschoben)<BR>
+.drehmatrix)[1];
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf13_img/Klepp_Jakob_Pf13_16.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i14) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxdraw2d(<BR>
+xrange=[-5,9],<BR>
+yrange=[-9,18],<BR>
+/*verschobenes Dreieck*/<BR>
+color=red,<BR>
+fill_color=pink,<BR>
+polygon([A_verschoben[1],B_verschoben[1],C_verschoben[1],A_verschoben[1]],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[A_verschoben[2],B_verschoben[2],C_verschoben[2],A_verschoben[2]]),<BR>
+label(["A", A_verschoben[1],A_verschoben[2]],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;["B", B_verschoben[1],B_verschoben[2]],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;["C", C_verschoben[1],C_verschoben[2]]),<BR>
+/*gedrehtes Dreieck*/<BR>
+color=dark_red,<BR>
+fill_color=red,<BR>
+polygon([A_gedreht[1],B_gedreht[1],C_gedreht[1],A_gedreht[1]],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[A_gedreht[2],B_gedreht[2],C_gedreht[2],A_gedreht[2]]),<BR>
+label(["A", A_gedreht[1],A_gedreht[2]],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;["B", B_gedreht[1],B_gedreht[2]],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;["C", C_gedreht[1],C_gedreht[2]])<BR>
+)$
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf13_img/Klepp_Jakob_Pf13_17.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Nun wird die Matrix noch zurückgeschoben
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i15) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+A_ende: A_gedreht + B_start;<BR>
+B_ende: B_gedreht + B_start;<BR>
+C_ende: C_gedreht + B_start;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf13_img/Klepp_Jakob_Pf13_18.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i18) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxdraw2d(<BR>
+xrange=[-5,9],<BR>
+yrange=[-9,18],<BR>
+/*gedrehtes Dreieck*/<BR>
+color=red,<BR>
+fill_color=pink,<BR>
+polygon([A_gedreht[1],B_gedreht[1],C_gedreht[1],A_gedreht[1]],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[A_gedreht[2],B_gedreht[2],C_gedreht[2],A_gedreht[2]]),<BR>
+label(["A", A_gedreht[1],A_gedreht[2]],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;["B", B_gedreht[1],B_gedreht[2]],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;["C", C_gedreht[1],C_gedreht[2]]),<BR>
+/*Zurückgeschobenes Dreieck*/<BR>
+color=dark_red,<BR>
+fill_color=red,<BR>
+polygon([A_ende[1],B_ende[1],C_ende[1],A_ende[1]],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[A_ende[2],B_ende[2],C_ende[2],A_ende[2]]),<BR>
+label(["A", A_ende[1],A_ende[2]],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;["B", B_ende[1],B_ende[2]],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;["C", C_ende[1],C_ende[2]])<BR>
+)$
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf13_img/Klepp_Jakob_Pf13_19.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Zum Abschluss noch das Start-Dreieck zusammen mit dem<BR>
+End-Dreieck
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i19) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxdraw2d(<BR>
+xrange=[-5,9],<BR>
+yrange=[-9,18],<BR>
+/*gedrehtes Dreieck*/<BR>
+color=red,<BR>
+fill_color=pink,<BR>
+polygon([A_start[1],B_start[1],C_start[1],A_start[1]],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[A_start[2],B_start[2],C_start[2],A_start[2]]),<BR>
+label(["A", A_start[1],A_start[2]],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;["B", B_start[1],B_start[2]],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;["C", C_start[1],C_start[2]]),<BR>
+/*Zurückgeschobenes Dreieck*/<BR>
+color=dark_red,<BR>
+fill_color=red,<BR>
+polygon([A_ende[1],B_ende[1],C_ende[1],A_ende[1]],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[A_ende[2],B_ende[2],C_ende[2],A_ende[2]]),<BR>
+label(["A", A_ende[1],A_ende[2]],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;["B", B_ende[1],B_ende[2]],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;["C", C_ende[1],C_ende[2]])<BR>
+)$
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf13_img/Klepp_Jakob_Pf13_20.png">
+</P>
+
+
+<!-- Section cell -->
+
+
+<P CLASS="section">
+ 5 Anwendung im ℝ³
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i20) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+kill(all);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf13_img/Klepp_Jakob_Pf13_21.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Angabe<BR>
+======<BR>
+<BR>
+A (2|4|1|red)<BR>
+B (3|9|1|blue)<BR>
+C (8|7|1|green)<BR>
+S (4|6|4|?)<BR>
+<BR>
+Drehung um x-Achse um A um 45° im Urzeigersinn<BR>
+Drehung um y-Achse um S um 20° gegen Urzeigersinn<BR>
+Drehung um z-Achse um S um 60° im Urzeigersinn
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i1) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+A_start: matrix([2],[4],[1],[red]);<BR>
+B_start: matrix([3],[9],[1],[blue]);<BR>
+C_start: matrix([8],[7],[1],[green]);<BR>
+S_start: matrix([4],[6],[4],[cyan]);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf13_img/Klepp_Jakob_Pf13_22.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i5) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+A_start_l:list_matrix_entries(A_start);<BR>
+B_start_l:list_matrix_entries(B_start);<BR>
+C_start_l:list_matrix_entries(C_start);<BR>
+S_start_l:list_matrix_entries(S_start);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf13_img/Klepp_Jakob_Pf13_23.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+{x,y,z}range global setzten damit die Grafiken vergleichbar sind
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i9) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+_xrange:[2, 9];<BR>
+_yrange:[4, 9];<BR>
+_zrange:[-3, 4];
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf13_img/Klepp_Jakob_Pf13_24.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+ _          _                    __                  _   _                 <BR>
+| |__   ___| |_ __   ___ _ __   / _|_   _ _ __   ___| |_(_) ___  _ __  ___ <BR>
+| '_ \ / _ \ | '_ \ / _ \ '__| | |_| | | | '_ \ / __| __| |/ _ \| '_ \/ __|<BR>
+| | | |  __/ | |_) |  __/ |    |  _| |_| | | | | (__| |_| | (_) | | | \__ \<BR>
+|_| |_|\___|_| .__/ \___|_|    |_|  \__,_|_| |_|\___|\__|_|\___/|_| |_|___/<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|_|<BR>
+helper functions
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i12) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/*<BR>
+*/<BR>
+generate3dTedraederFromMatrizes(A,B,C,S):=[<BR>
+point_size=0,<BR>
+/*draw the frame*/<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;points([list_matrix_entries(A),list_matrix_entries(B),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;list_matrix_entries(C),list_matrix_entries(A),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;list_matrix_entries(S),list_matrix_entries(C),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;list_matrix_entries(S),list_matrix_entries(B)]),<BR>
+/*add labels*/<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;label(["A", A[1][1], A[2][1], A[3][1]-0.7],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;["B", B[1][1], B[2][1], B[3][1]-0.7],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;["C", C[1][1], C[2][1], C[3][1]-0.7],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;["S", S[1][1], S[2][1], S[3][1]-0.7]),<BR>
+/*colorize points*/<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;point_size=1,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;color=A[4][1],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;points([list_matrix_entries(A)]),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;color=B[4][1],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;points([list_matrix_entries(B)]),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;color=C[4][1],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;points([list_matrix_entries(C)]),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;color=S[4][1],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;points([list_matrix_entries(S)])<BR>
+];
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf13_img/Klepp_Jakob_Pf13_25.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i13) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/*<BR>
+*/<BR>
+addColorfulMatrizes(m1,m2):=matrix(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;m1[1]+m2[1],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;m1[2]+m2[2],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;m1[3]+m2[3],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;m1[4]);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf13_img/Klepp_Jakob_Pf13_26.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i14) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/*<BR>
+Funktion zum erzeugen einer Drehmatrix<BR>
+<BR>
+alpha   ... um welches winkel (0-360°) gedreht werden soll<BR>
+rotated ... welche Koordinated gedreht werden sollen<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;z.B. [1,1,0,0] für eine Drehung um die z-Achse<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;und einer Farbe an 4. Stelle der Matrix.<BR>
+*/<BR>
+rotationMatrix(alpha, rotated):=block(<BR>
+[columns:[],<BR>
+&nbsp;Dm:diagmatrix(length(rotated), 1),<BR>
+&nbsp;terms:[cos(alpha * %pi/180), -sin(alpha * %pi/180),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sin(alpha * %pi/180),  cos(alpha * %pi/180)],<BR>
+&nbsp;counter:1],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;numer:true,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;for i thru length(rotated)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;do [   <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for j thru length(rotated)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;do [<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (is(rotated[i] = 1) and is(rotated[j] = 1)) then<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;block(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dm[i][j]: terms[counter],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;counter:counter+1<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;return(Dm)<BR>
+);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf13_img/Klepp_Jakob_Pf13_27.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+# Tedraeder aus Angabe<BR>
+######################
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i15) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxdraw3d(points_joined=true,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;xrange=_xrange,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;yrange=_yrange,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;zrange=_zrange,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;point_type=7,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;color=black,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;generate3dTedraederFromMatrizes(A_start, B_start, C_start, S_start)<BR>
+);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf13_img/Klepp_Jakob_Pf13_28.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+# Drehung um x-Achse um A um 45° im Urzeigersinn<BR>
+################################################
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Verschieben
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i16) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+A_moved: addColorfulMatrizes(A_start, -A_start)$<BR>
+B_moved: addColorfulMatrizes(B_start, -A_start)$<BR>
+C_moved: addColorfulMatrizes(C_start, -A_start)$<BR>
+S_moved: addColorfulMatrizes(S_start, -A_start)$
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i20) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/*                      x, y, z, color */<BR>
+D: rotationMatrix(-45, [0, 1, 1, 0]);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf13_img/Klepp_Jakob_Pf13_29.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Rotieren
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i21) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+A_rotated_moved: D . A_moved$<BR>
+B_rotated_moved: D . B_moved$<BR>
+C_rotated_moved: D . C_moved$<BR>
+S_rotated_moved: D . S_moved$
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+zurück Schieben
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i25) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+A_r1: addColorfulMatrizes(A_rotated_moved, A_start);<BR>
+B_r1: addColorfulMatrizes(B_rotated_moved, A_start);<BR>
+C_r1: addColorfulMatrizes(C_rotated_moved, A_start);<BR>
+S_r1: addColorfulMatrizes(S_rotated_moved, A_start);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf13_img/Klepp_Jakob_Pf13_30.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+zeichnen
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i29) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxdraw3d(points_joined=true,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;xrange=_xrange,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;yrange=_yrange,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;zrange=_zrange,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;point_type=6,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;color=grey,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;generate3dTedraederFromMatrizes(A_start, B_start, C_start, S_start),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;point_type=7,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;color=black,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;generate3dTedraederFromMatrizes(A_r1, B_r1, C_r1, S_r1)<BR>
+);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf13_img/Klepp_Jakob_Pf13_31.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+temporäre Variablen löschen
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i30) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+kill(D,<BR>
+A_moved, B_moved, C_moved, S_moved,<BR>
+A_rotated_moved, B_rotated_moved, C_rotated_moved, D_rotated_moved);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf13_img/Klepp_Jakob_Pf13_32.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+# Drehung um y-Achse um S um 20° gegen Urzeigersinn<BR>
+###################################################
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Verschieben
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i31) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+A_moved: addColorfulMatrizes(A_r1, -S_r1)$<BR>
+B_moved: addColorfulMatrizes(B_r1, -S_r1)$<BR>
+C_moved: addColorfulMatrizes(C_r1, -S_r1)$<BR>
+S_moved: addColorfulMatrizes(S_r1, -S_r1)$
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i35) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/*                      x, y, z, color */<BR>
+D: rotationMatrix(20, [1, 0, 1, 0]);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf13_img/Klepp_Jakob_Pf13_33.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Rotieren
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i36) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+A_rotated_moved: D . A_moved$<BR>
+B_rotated_moved: D . B_moved$<BR>
+C_rotated_moved: D . C_moved$<BR>
+S_rotated_moved: D . S_moved$
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+zurück Schieben
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i40) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+A_r2: addColorfulMatrizes(A_rotated_moved, S_r1);<BR>
+B_r2: addColorfulMatrizes(B_rotated_moved, S_r1);<BR>
+C_r2: addColorfulMatrizes(C_rotated_moved, S_r1);<BR>
+S_r2: addColorfulMatrizes(S_rotated_moved, S_r1);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf13_img/Klepp_Jakob_Pf13_34.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+zeichnen
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i44) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxdraw3d(points_joined=true,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;xrange=_xrange,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;yrange=_yrange,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;zrange=_zrange,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;point_type=6,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;color=grey,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;generate3dTedraederFromMatrizes(A_r1, B_r1, C_r1, S_r1),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;point_type=7,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;color=black,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;generate3dTedraederFromMatrizes(A_r2, B_r2, C_r2, S_r2)<BR>
+);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf13_img/Klepp_Jakob_Pf13_35.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+temporäre Variablen löschen
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i45) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+kill(D,<BR>
+A_moved, B_moved, C_moved, S_moved,<BR>
+A_rotated_moved, B_rotated_moved, C_rotated_moved, D_rotated_moved);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf13_img/Klepp_Jakob_Pf13_36.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+# Drehung um z-Achse um S um 60° im Urzeigersinn<BR>
+################################################
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Verschieben
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i46) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+A_moved: addColorfulMatrizes(A_r2, -S_r2)$<BR>
+B_moved: addColorfulMatrizes(B_r2, -S_r2)$<BR>
+C_moved: addColorfulMatrizes(C_r2, -S_r2)$<BR>
+S_moved: addColorfulMatrizes(S_r2, -S_r2)$
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i50) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/*                      x, y, z, color */<BR>
+D: rotationMatrix(20, [1, 0, 1, 0]);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf13_img/Klepp_Jakob_Pf13_37.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Rotieren
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i51) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+A_rotated_moved: D . A_moved$<BR>
+B_rotated_moved: D . B_moved$<BR>
+C_rotated_moved: D . C_moved$<BR>
+S_rotated_moved: D . S_moved$
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+zurück Schieben
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i55) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+A_r3: addColorfulMatrizes(A_rotated_moved, S_r2);<BR>
+B_r3: addColorfulMatrizes(B_rotated_moved, S_r2);<BR>
+C_r3: addColorfulMatrizes(C_rotated_moved, S_r2);<BR>
+S_r3: addColorfulMatrizes(S_rotated_moved, S_r2);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf13_img/Klepp_Jakob_Pf13_38.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+zeichnen
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i59) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxdraw3d(points_joined=true,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;xrange=_xrange,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;yrange=_yrange,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;zrange=_zrange,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;point_type=6,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;color=grey,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;generate3dTedraederFromMatrizes(A_r2, B_r2, C_r2, S_r2),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;point_type=7,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;color=black,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;generate3dTedraederFromMatrizes(A_r3, B_r3, C_r3, S_r3)<BR>
+);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf13_img/Klepp_Jakob_Pf13_39.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+temporäre Variablen löschen
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i60) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+kill(D,<BR>
+A_moved, B_moved, C_moved, S_moved,<BR>
+A_rotated_moved, B_rotated_moved, C_rotated_moved, D_rotated_moved);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf13_img/Klepp_Jakob_Pf13_40.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Start und Endzustand vergleichen
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i61) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxdraw3d(points_joined=true,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;xrange=_xrange,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;yrange=_yrange,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;zrange=_zrange,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;point_type=6,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;color=grey,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;generate3dTedraederFromMatrizes(A_start, B_start, C_start, S_start),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;point_type=7,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;color=black,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;generate3dTedraederFromMatrizes(A_r3, B_r3, C_r3, S_r3)<BR>
+);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf13_img/Klepp_Jakob_Pf13_41.png">
+</P>
+
+ <HR>
+ <SMALL> Created with <A HREF="http://wxmaxima.sourceforge.net/">wxMaxima</A>.</SMALL>
+
+ </BODY>
+</HTML>
