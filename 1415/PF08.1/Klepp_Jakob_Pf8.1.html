@@ -1,0 +1,884 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+ <HEAD>
+  <TITLE>Klepp_Jakob_Pf8.1</TITLE>
+  <META NAME="generator" CONTENT="wxMaxima">
+  <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+  <STYLE TYPE="text/css">
+body {
+  background-color: rgb(255,255,255);
+}
+.input {
+  color: rgb(0,0,255);
+}
+.comment {
+  color: rgb(0,0,0);
+  background-color: rgb(255,255,255);
+  padding: 2mm;
+}
+.image {
+  color: rgb(0,0,0);
+  padding: 2mm;
+}
+.section {
+  color: rgb(0,0,0);
+  font-size: 1.5em;
+  padding: 2mm;
+}
+.subsect {
+  color: rgb(0,0,0);
+  font-size: 1.2em;
+  padding: 2mm;
+}
+.title {
+  color: rgb(0,0,0);
+  font-size: 2em;
+  padding: 2mm;
+}
+.prompt {
+  color: rgb(255,0,0);
+}
+table {
+  border: 0px;
+}
+td {
+  vertical-align: top;
+  padding: 1mm;
+}
+  </STYLE>
+ </HEAD>
+ <BODY>
+
+<!---------------------------------------------------------->
+<!--          Created with wxMaxima version 14.09.0         -->
+<!---------------------------------------------------------->
+
+
+<!-- Title cell -->
+
+
+<P CLASS="title">
+      Portfolio  8.1      <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Statistik         <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Jakob  Klepp       <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2014-10-14        
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Maxima<BR>
+======<BR>
+In Maxima werden statistische Berechnungen und visualisierungen <BR>
+durch das Pakte descriptive unterstützt. Laden des Paketes erfolgt<BR>
+durch den Befehle: <BR>
+load (descriptive);
+</P>
+
+
+<!-- Section cell -->
+
+
+<P CLASS="section">
+ 1 Beschreibende Statistik
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+=======================<BR>
+Beschreibende Statistik<BR>
+=======================<BR>
+hat zum Ziel, übersichtlich darzustellen und zu ordnen.<BR>
+Dies ist vor allem bei umfangreichem Datenmaterial sinnvoll,<BR>
+da dieses nicht leicht überblickt werden kann.<BR>
+Untersucht wird eine *Stichprobe*, bei den *Merkmalen*<BR>
+einer Stichprobe unterscheidet man zwischen *Qualitativen*<BR>
+und *Quantitativen* Merkmalen.<BR>
+Ein Beispiel für ein Qualitatives Merkmal ist etwa die Farbe<BR>
+für ein Quantitatives Merkmal die Anzahl.<BR>
+<BR>
+Grundgesamtheit<BR>
+~~~~~~~~~~~~~~~<BR>
+Ist die Menge der entsprechenden Objekten, die Stichprobe ist<BR>
+eine Untermenge der Grundgesamtheit.<BR>
+<BR>
+Kenngröße<BR>
+~~~~~~~~~<BR>
+Beim untersuchen der Stichprobe findet man Merkmalswerte.<BR>
+Der Stichprobe werden Kenngrößen zugeschrieben.<BR>
+Eine graphische darstellung der Kenngrößen ist üblich.<BR>
+<BR>
+Absolute Häufigkeit<BR>
+~~~~~~~~~~~~~~~~~~~<BR>
+Der Begriff absolute Häufigkeit ist gleichbedeutend mit dem<BR>
+umgangssprachlichen Begriff Anzahl. <BR>
+<BR>
+Relative Häufigkeit<BR>
+~~~~~~~~~~~~~~~~~~~<BR>
+Die relative Häufigkeit ist ein Maß der deskriptiven Statistik.<BR>
+Sie gibt den Anteil der Elemente einer Menge wieder, bei denen<BR>
+eine bestimmte Merkmalsausprägung vorliegt. Sie wird berechnet,<BR>
+indem die absolute Häufigkeit eines Merkmals in einer<BR>
+zugrundeliegenden Menge durch die Anzahl der Objekte in dieser<BR>
+Menge geteilt wird. Die relative Häufigkeit ist also eine<BR>
+Bruchzahl und hat einen Wert zwischen 0 und 1.<BR>
+<BR>
+Kumulative Häufigkeit<BR>
+~~~~~~~~~~~~~~~~~~~~~<BR>
+Die kumulierte Häufigkeit wird berechnet als Summe der Häufigkeiten<BR>
+der Merkmalsausprägungen von der kleinsten Ausprägung bis hin zu der<BR>
+jeweils betrachteten Schranke.<BR>
+<BR>
+Klassifizierung<BR>
+~~~~~~~~~~~~~~~<BR>
+Anstatt die Häugigkeit einzelner Werte zu zählen kann es im<BR>
+inbesonderen bei aus einer Analogen Welt kommenden Daten<BR>
+aussagekräftiger sein, zu Zählen wie viele Werte in bestimmte<BR>
+Klassen fallen.<BR>
+
+</P>
+
+
+<!-- Section cell -->
+
+
+<P CLASS="section">
+ 2 Kennzahlen
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+==========<BR>
+Kennzahlen<BR>
+==========
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i1) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+kill(all)$load(descriptive)$urlist:[98.7, 99.3, 95.8, 101.6, 100.4, 98.0, 96.3]$
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf8.1_img/Klepp_Jakob_Pf8.1_0.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Mittelwert<BR>
+~~~~~~~~~~<BR>
+auch Durchschnitt, Arithmetisches Mittel<BR>
+<BR>
+Summe/Anzahl
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i3) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+mean(urlist);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf8.1_img/Klepp_Jakob_Pf8.1_1.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Quantile<BR>
+~~~~~~~~<BR>
+Der Begriff Quantile beschreibt die relative Position eines<BR>
+Wertes in einer sortierten Liste.<BR>
+Die Quantile 0 ist der kleinste Wert, die Quantile 1 der größte.<BR>
+Wenn die Quatile keinene einzelnen Wert bezeichnet wird ein zwischenwert<BR>
+berechnet.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i4) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/* Quantile */<BR>
+position: 0.3;<BR>
+quantile(urlist, position);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf8.1_img/Klepp_Jakob_Pf8.1_2.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Quartile<BR>
+~~~~~~~~~<BR>
+Quartilen bezeichnen Quantilen an 3 besonderen Orten,<BR>
+nach einem, zwei und drei Viertel der Werte.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i6) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/* 1. Quartile  */<BR>
+quantile(urlist, 1/4);<BR>
+/* 2. Quartile  */<BR>
+quantile(urlist, 2/4);<BR>
+/* 3. Quartile  */<BR>
+quantile(urlist, 3/4);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf8.1_img/Klepp_Jakob_Pf8.1_3.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Median<BR>
+~~~~~~<BR>
+auch Zentralwert<BR>
+<BR>
+Mittleres Element einer sortierten Liste bzw. im Falle einer Liste<BR>
+mit einer geraden Anzahl an Elementen, Mittelwert der zwei<BR>
+mittleren Elemene.<BR>
+<BR>
+Bei einer gausschen Verteilung entsprechen sich Median und Mittelwert.<BR>
+<BR>
+Der Median ist die zweite Quartile oder die Quantile 0.5
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i9) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+median(urlist);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf8.1_img/Klepp_Jakob_Pf8.1_4.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Varianz<BR>
+~~~~~~~<BR>
+Beschreibt die Streuung von Werten um den Mittelwert.<BR>
+<BR>
+Wird berechnet als die Summe aller Quadrate der differenzen zum Mittelwert<BR>
+durch die Anzahl der Werte (bzw. Anzahl der Werte -1).
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i10) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+var(urlist);<BR>
+var1(urlist);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf8.1_img/Klepp_Jakob_Pf8.1_5.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Standardabweichung<BR>
+~~~~~~~~~~~~~~~~~~<BR>
+Beschreibt (in etwa) wie weit die Werte im durchschnitt vom Mittelwert abweichen.<BR>
+Die Standardabweichung wird als Quadratwurzel der Varianz berechnet.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i12) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+std(urlist);<BR>
+std1(urlist);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf8.1_img/Klepp_Jakob_Pf8.1_6.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Maximalwert<BR>
+~~~~~~~~~~~<BR>
+größter Wert
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i14) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/* Maximalwert */<BR>
+smax(urlist);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf8.1_img/Klepp_Jakob_Pf8.1_7.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Minimalwert<BR>
+~~~~~~~~~~~<BR>
+kleinster Wert
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i15) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/* Minimalwert */<BR>
+smin(urlist);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf8.1_img/Klepp_Jakob_Pf8.1_8.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Spannweite<BR>
+~~~~~~~~~~<BR>
+Unterschied zwischen Minimal und Maximalwert
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i16) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/* Spannweite */<BR>
+range(urlist);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf8.1_img/Klepp_Jakob_Pf8.1_9.png">
+</P>
+
+
+<!-- Section cell -->
+
+
+<P CLASS="section">
+ 3 Visualisierungen
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+================<BR>
+Visualisierungen<BR>
+================<BR>
+<BR>
+Scatter Plot<BR>
+~~~~~~~~~~~~<BR>
+Ein Scatter Plot (auch Streudiagramm) ist die graphische Darstellung<BR>
+von beobachteten Wertepaaren zweier statistischer Merkmale.<BR>
+Diese Wertepaare werden in ein kartesisches Koordinatensystem<BR>
+eingetragen, wodurch sich eine Punktwolke ergibt.<BR>
+<BR>
+Barplot<BR>
+~~~~~~~<BR>
+Ein Barplot (auch Säulendiagramm) Stellt durch senkrecht nebeinander<BR>
+stehenden Säulen die Häufigkeitsverteilung von Werten da.<BR>
+<BR>
+Paretodiagramm<BR>
+~~~~~~~~~~~~~~<BR>
+Eine Sonderform des Barplot bei dem die Werte nach Häufigkeit, links<BR>
+beginnend mit dem Häufigsten, sortiert sind.<BR>
+<BR>
+Piechart<BR>
+~~~~~~~~<BR>
+Ein Piechart (auch Kreis- oder Tortendiagramm) ist eine Darstellungsform<BR>
+für Teilwerte eines Ganzen als Teile eines Kreises. Das Piechart<BR>
+ist kreisförmig und in mehrere Kreissektoren eingeteilt, wobei jeder<BR>
+Kreissektor einen Teilwert und der Kreis somit die Summe der Teilwerte<BR>
+(das Ganze) darstellt. <BR>
+<BR>
+Boxplot<BR>
+~~~~~~~<BR>
+Fast Quartilen Extremwerte einer Stichprobe in einer Grafik zusammen,<BR>
+eignet sich dementsprechend um mehrere Stichproben zu vergleichen.<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#################<BR>
+|----#           #   #------------|<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#################<BR>
+^    ^           ^   ^            ^<BR>
+|    |           |   |            |<BR>
+|    |           |   |            Maximum<BR>
+|    |           |   3. Quartile<BR>
+|    |           Median<BR>
+|    1. Quartile<BR>
+|<BR>
+Minimum
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i17) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+kill(all);<BR>
+load(descriptive);<BR>
+load(draw);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf8.1_img/Klepp_Jakob_Pf8.1_10.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i3) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+kondensatoren: [53, 47, 52, 49, 50, 50, 47, 43, 48, 50, 51, 53, 54, 56, 46, 49, 51, 50, 49];
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf8.1_img/Klepp_Jakob_Pf8.1_11.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i4) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+blechteile:<BR>
+/*Fehler #    Fehlerart   Häufigkeit*/<BR>
+[[    1,     "Delle"     ,  8],<BR>
+&nbsp;[    2,     "Kratzer"    , 26],<BR>
+&nbsp;[    3,     "Korrosion"  ,  4],<BR>
+&nbsp;[    4,     "Lackfehler", 38],<BR>
+&nbsp;[    5,     "Verbogen"  ,  4],<BR>
+&nbsp;[    6,     "Gerissen"  ,  2],<BR>
+&nbsp;[    7,     "Maßfehler" ,  2],<BR>
+&nbsp;[    8,     "Bohrfehler",  3],<BR>
+&nbsp;[    9,     "Sonstige"  ,  3]];
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf8.1_img/Klepp_Jakob_Pf8.1_12.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i5) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+widerstande: [98.7,  99.3,  95.8,  101.6,  100.4,  98.0,  96.3];
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf8.1_img/Klepp_Jakob_Pf8.1_13.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Scatter Plot<BR>
+<BR>
+Größe, Listen Index
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i6) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxdraw2d(<BR>
+xrange=[0,20],<BR>
+yrange=[42,57],<BR>
+points(makelist (i, i, length(kondensatoren)), kondensatoren),<BR>
+xlabel="Index",<BR>
+ylabel="Kapazität in nF"<BR>
+);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf8.1_img/Klepp_Jakob_Pf8.1_14.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Barplot Absolute Häufigkeit
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i7) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxbarsplot(<BR>
+kondensatoren,<BR>
+title="Kondensatoren",<BR>
+box_width    = 1,<BR>
+fill_density = 0.1,<BR>
+bars_colors  = [cyan],<BR>
+frequency = absolute,<BR>
+ylabel = "Absolute Häufigkeiten",<BR>
+xlabel = "Kapazität in nF");
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf8.1_img/Klepp_Jakob_Pf8.1_15.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Barplot Relative Häufigkeit
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i8) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxbarsplot(<BR>
+kondensatoren,<BR>
+title="Kondensatoren",<BR>
+box_width    = 1,<BR>
+fill_density = 0.1,<BR>
+bars_colors  = [cyan],<BR>
+frequency = relative,<BR>
+ylabel = "Relative Häufigkeiten",<BR>
+xlabel = "Kapazität in nF");
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf8.1_img/Klepp_Jakob_Pf8.1_16.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Barplot Kumulative Häufigkeit
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i9) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/*<BR>
+Berechnet die kumulative Häufigkeit der Werte in list<BR>
+*/<BR>
+kumulative_haeufigkeit(list):=<BR>
+makelist(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;[i, length(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sublist(list[1],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lambda([x], x<=i)))], <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;i, smin(list[1]), smax(list[1])<BR>
+);<BR>
+<BR>
+/*anwendungsbeispiel*/<BR>
+testliste: [4,7,3,7];<BR>
+test_heaufigkeiten: discrete_freq(testliste);<BR>
+kumulative_haeufigkeit(test_heaufigkeiten);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf8.1_img/Klepp_Jakob_Pf8.1_17.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i13) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxbarsplot(<BR>
+build_sample(kumulative_haeufigkeit(discrete_freq(kondensatoren))),<BR>
+title="Kondensatoren",<BR>
+box_width    = 1,<BR>
+fill_density = 0.1,<BR>
+bars_colors  = [cyan],<BR>
+frequency = absolute,<BR>
+ylabel = "Kumulative Häufigkeiten",<BR>
+xlabel = "Kapazität in nF");
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf8.1_img/Klepp_Jakob_Pf8.1_18.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Paretodiagramm
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i14) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/*<BR>
+Funktion zum erzeugen der Draw2d Objekte eines<BR>
+Paretodiagramms<BR>
+Param list: muss Elemente folgendes Formats haben<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/*Fehlerart   Häufigkeit*/<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fehlerart  --  ein Name für den aktuellen Wert<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Häufigkeit --  Größe des Werts, wird auch zur priorisierung verwendet<BR>
+*/<BR>
+pareto(list):=makelist([<BR>
+&nbsp;fill_color=[red, green, blue, magenta, cyan, yellow, orange, violet, brown, gray, black][mod(i,11)],<BR>
+&nbsp;rectangle(<BR>
+&nbsp;&nbsp;[i-1, 0],<BR>
+&nbsp;&nbsp;[i, sort(list, lambda([a,b], a[2]>b[2]))[i][2]]<BR>
+&nbsp;),<BR>
+&nbsp;label([<BR>
+&nbsp;&nbsp;sort(list, lambda([a,b], a[2]>b[2]))[i][1],<BR>
+&nbsp;&nbsp;i-0.5,<BR>
+&nbsp;&nbsp;sort(list, lambda([a,b], a[2]>b[2]))[i][2]<BR>
+&nbsp;])<BR>
+], i, length(list));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf8.1_img/Klepp_Jakob_Pf8.1_19.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i15) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/* Liste auf die richtige Form für pareto bringen */<BR>
+p_liste: map(lambda([e], [e[2], e[3]]),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;blechteile);<BR>
+/* Zeichnen */<BR>
+wxdraw2d(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;color=black,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;pareto(p_liste)<BR>
+);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf8.1_img/Klepp_Jakob_Pf8.1_20.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Piechart
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i17) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/* Werte in richtige Form für build_sample bringen */<BR>
+p_liste: map(lambda([e], [e[2], e[3]]),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;blechteile)$<BR>
+<BR>
+/* Builds a sample from a table of absolute frequencies. */<BR>
+sample_list: build_sample(p_liste)$<BR>
+<BR>
+wxpiechart(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;sample_list,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;sector_colors=[red, green, blue, magenta, cyan, yellow, orange, violet, brown, gray, black],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;xrange=[-1,3],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;proportional_axes = xy,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;axis_bottom=false,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;axis_top=false,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;axis_left=false,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;axis_right=false,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;xtics=false,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;ytics=false<BR>
+);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf8.1_img/Klepp_Jakob_Pf8.1_21.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Boxplot
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i20) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/*<BR>
+Aus einer Lieferung von elektrischen Widerständen gleicher<BR>
+Art werden einige Stück herausgegriffen und gemessen. <BR>
+Dabei werden folgende Werte (in Ohm) gefunden:<BR>
+<BR>
+98.7  99.3  95.8  101.6  100.4  98.0  96.3<BR>
+<BR>
+Visualisierung als Boxplot<BR>
+*/<BR>
+wxboxplot(widerstande);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf8.1_img/Klepp_Jakob_Pf8.1_22.png">
+</P>
+
+ <HR>
+ <SMALL> Created with <A HREF="http://wxmaxima.sourceforge.net/">wxMaxima</A>.</SMALL>
+
+ </BODY>
+</HTML>
