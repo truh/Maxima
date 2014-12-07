@@ -2,42 +2,49 @@
 
 import re
 
-from jinja2 import Template
 from pathlib import Path
 
-TEMPLATE = """
+TEMPLATE_START = """
 <!DOCTYPE html>
 <html>
     <head>
     </head>
     <body>
-        <ol>
-        {% for mx in mxs %}
-            <li>
-                <a href="{{ mx }}">
-                    {{ mx }}
-                </a>
-            </li>
-        {% endfor %}
-    </ol>
+        <ul>
+"""
+
+TEMPLATE_END = """
+        </ul>
     </body>
 </html>
 """
 
 
 def sub_files(path):
+    if '.git' in str(path): return ''
     if path.is_dir():
+        html_dir = ''
         for new_file in path.iterdir():
-            for result in sub_files(new_file):
-                yield result
+            html_dir += sub_files(new_file) or ''
+        if len(html_dir) > 0:
+            return """
+            <li>
+            {name}
+            <ul>
+            {tree}
+            </ul>
+            </li>""".format(path=str(path), name=str(path.parts[-1:]), tree=html_dir)
+        return ''
     else:
-        yield path
+        if str(path)[-4:] in ('html', '.wxm'):
+            return """
+            <li>
+            <a href="{path}">
+            {name}
+            </a>
+            </li>""".format(path=str(path), name=str(path.parts[-1]))
 
 
 if __name__ == '__main__':
-    template = Template(TEMPLATE)
     path = Path('.')
-    files = sub_files(path)
-    mxs = (p for p in files if str(p)[-5:] == '.html')
-    template_stream = template.stream(mxs=mxs)
-    template_stream.dump('index.html')
+    print(TEMPLATE_START + sub_files(path) + TEMPLATE_END)
