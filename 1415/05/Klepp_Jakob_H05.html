@@ -1,0 +1,466 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+ <HEAD>
+  <TITLE>Klepp_Jakob_H05</TITLE>
+  <META NAME="generator" CONTENT="wxMaxima">
+  <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+  <STYLE TYPE="text/css">
+body {
+  background-color: rgb(255,255,255);
+}
+.input {
+  color: rgb(0,0,255);
+}
+.comment {
+  color: rgb(0,0,0);
+  background-color: rgb(255,255,255);
+  padding: 2mm;
+}
+.image {
+  color: rgb(0,0,0);
+  padding: 2mm;
+}
+.section {
+  color: rgb(0,0,0);
+  font-size: 1.5em;
+  padding: 2mm;
+}
+.subsect {
+  color: rgb(0,0,0);
+  font-size: 1.2em;
+  padding: 2mm;
+}
+.title {
+  color: rgb(0,0,0);
+  font-size: 2em;
+  padding: 2mm;
+}
+.prompt {
+  color: rgb(255,0,0);
+}
+table {
+  border: 0px;
+}
+td {
+  vertical-align: top;
+  padding: 1mm;
+}
+  </STYLE>
+ </HEAD>
+ <BODY>
+
+<!---------------------------------------------------------->
+<!--          Created with wxMaxima version 14.09.0         -->
+<!---------------------------------------------------------->
+
+
+<!-- Title cell -->
+
+
+<P CLASS="title">
+         Statistik        <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Jakob  Klepp       <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2014-09-30        
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+wxMaxima 0.8.3 http://wxmaxima.sourceforge.net<BR>
+Maxima 5.19.2 http://maxima.sourceforge.net<BR>
+Using Lisp GNU Common Lisp (GCL) GCL 2.6.8 (aka GCL)<BR>
+Distributed under the GNU Public License. See the file COPYING.<BR>
+Dedicated to the memory of William Schelter.<BR>
+The function bug_report() provides bug reporting information.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i1) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+numer:true;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H05_img/Klepp_Jakob_H05_0.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+# Glossar<BR>
+<BR>
+discrete_freq (list)    Counts absolute frequencies in discrete <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;samples, both numeric and categorical.<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Its unique argument is a list<BR>
+<BR>
+
+</P>
+
+
+<!-- Title cell -->
+
+
+<P CLASS="title">
+Statistik und Wahrscheinlichkeitsrechnung
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Beschreibende Statistik<BR>
+=======================<BR>
+<BR>
+hat zum Ziel, übersichtlich darzustellen und zu ordnen.<BR>
+Dies ist vor allem bei umfangreichem Datenmaterial sinnvoll,<BR>
+da dieses nicht leicht überblickt werden kann.<BR>
+<BR>
+Untersucht wird eine *Stichprobe*, bei den *Merkmalen*<BR>
+einer Stichprobe unterscheidet man zwischen *Qualitativen*<BR>
+und *Quantitativen* Merkmalen.<BR>
+<BR>
+Ein Beispiel für ein Qualitatives Merkmal ist etwa die Farbe<BR>
+für ein Quantitatives Merkmal die Anzahl.<BR>
+<BR>
+Grundgesamtheit<BR>
+~~~~~~~~~~~~~~~<BR>
+<BR>
+Ist die Menge der entsprechenden Objekten, die Stichprobe ist<BR>
+eine Untermenge der Grundgesamtheit.<BR>
+<BR>
+Kenngröße<BR>
+~~~~~~~~~<BR>
+<BR>
+Beim untersuchen der Stichprobe findet man Merkmalswerte.<BR>
+Der Stichprobe werden Kenngrößen zugeschrieben.<BR>
+Eine graphische darstellung der Kenngrößen ist üblich.<BR>
+<BR>
+Absolute Häufigkeit<BR>
+~~~~~~~~~~~~~~~~~~~<BR>
+<BR>
+Der Begriff absolute Häufigkeit ist gleichbedeutend mit dem<BR>
+umgangssprachlichen Begriff Anzahl. <BR>
+<BR>
+Relative Häufigkeit<BR>
+~~~~~~~~~~~~~~~~~~~<BR>
+<BR>
+Die relative Häufigkeit ist ein Maß der deskriptiven Statistik.<BR>
+Sie gibt den Anteil der Elemente einer Menge wieder, bei denen<BR>
+eine bestimmte Merkmalsausprägung vorliegt. Sie wird berechnet,<BR>
+indem die absolute Häufigkeit eines Merkmals in einer<BR>
+zugrundeliegenden Menge durch die Anzahl der Objekte in dieser<BR>
+Menge geteilt wird. Die relative Häufigkeit ist also eine<BR>
+Bruchzahl und hat einen Wert zwischen 0 und 1.<BR>
+<BR>
+Kumulative Häufigkeit<BR>
+~~~~~~~~~~~~~~~~~~~~~<BR>
+<BR>
+Die kumulierte Häufigkeit wird berechnet als Summe der Häufigkeiten<BR>
+der Merkmalsausprägungen von der kleinsten Ausprägung bis hin zu der<BR>
+jeweils betrachteten Schranke.<BR>
+
+</P>
+
+
+<!-- Section cell -->
+
+
+<P CLASS="section">
+ 1 Übungsbeispiele zur Statistik
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i2) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+kill(all);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H05_img/Klepp_Jakob_H05_1.png">
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  1.1 Beispiel Kondensatoren
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Einer Lieferung von Kondensatoren werden 20 Stück entnommen und ihre Kapazität gemessen. <BR>
+Es ergeben sich folgende Werte (in nF) als Urliste:<BR>
+<BR>
+53  47  52  49  50  50  47  43  48  50  51  53  54  56  46  49  51  50  49 
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i1) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+kill(all);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H05_img/Klepp_Jakob_H05_2.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i1) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+urlist:[53, 47, 52, 49, 50, 50, 47, 43, 48, 50, 51, 53, 54, 56, 46, 49, 51, 50, 49];
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H05_img/Klepp_Jakob_H05_3.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i2) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+length(urlist);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H05_img/Klepp_Jakob_H05_4.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Scatter Plot
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i3) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxdraw2d(<BR>
+xrange=[42,57],<BR>
+yrange=[0,20],<BR>
+points(urlist, makelist (i, i, length(urlist))),<BR>
+xlabel="Kapazität in nF",<BR>
+ylabel="Index"<BR>
+);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H05_img/Klepp_Jakob_H05_5.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Werte nach größe Sortiert
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i4) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxdraw2d(<BR>
+xrange=[42,57],<BR>
+yrange=[0,20],<BR>
+points(sort(urlist), makelist (i, i, length(urlist))),<BR>
+xlabel="Kapazität in nF",<BR>
+ylabel="sortierter Index"<BR>
+);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H05_img/Klepp_Jakob_H05_6.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Absolute Häufigkeit als barsplot
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i5) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+load (descriptive);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H05_img/Klepp_Jakob_H05_7.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i6) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxbarsplot(<BR>
+urlist,<BR>
+title="Kondensatoren",<BR>
+box_width    = 0.1,<BR>
+fill_density = 1,<BR>
+bars_colors  = [cyan],<BR>
+frequency = absolute,<BR>
+ylabel = "Häufigkeiten",<BR>
+xlabel = "Kapazität in nF");
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H05_img/Klepp_Jakob_H05_8.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+# Relative Häufigkeit
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+## Berechnung der Häufigkeit
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i7) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+haufen:discrete_freq(sort(urlist));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H05_img/Klepp_Jakob_H05_9.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+## Plotten der Häufigkeit
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i8) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxbarsplot(<BR>
+urlist,<BR>
+title="Kondensatoren",<BR>
+box_width    = 0.1,<BR>
+fill_density = 1,<BR>
+bars_colors  = [cyan],<BR>
+frequency = relative,<BR>
+ylabel = "Häufigkeiten",<BR>
+xlabel = "Kapazität in nF");
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H05_img/Klepp_Jakob_H05_10.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Kumulative Häufigkeit
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Kumulative Absolute Häufigkeit
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Kumulative Relative Häufigkeit
+</P>
+
+ <HR>
+ <SMALL> Created with <A HREF="http://wxmaxima.sourceforge.net/">wxMaxima</A>.</SMALL>
+
+ </BODY>
+</HTML>

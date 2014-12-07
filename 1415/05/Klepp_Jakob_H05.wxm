@@ -1,0 +1,211 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 14.09.0 ] */
+
+/* [wxMaxima: title   start ]
+         Statistik        
+       Jakob  Klepp       
+        2014-09-30        
+   [wxMaxima: title   end   ] */
+
+/* [wxMaxima: comment start ]
+wxMaxima 0.8.3 http://wxmaxima.sourceforge.net
+Maxima 5.19.2 http://maxima.sourceforge.net
+Using Lisp GNU Common Lisp (GCL) GCL 2.6.8 (aka GCL)
+Distributed under the GNU Public License. See the file COPYING.
+Dedicated to the memory of William Schelter.
+The function bug_report() provides bug reporting information.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+numer:true;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+# Glossar
+
+discrete_freq (list)    Counts absolute frequencies in discrete 
+                        samples, both numeric and categorical.
+                        Its unique argument is a list
+
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: title   start ]
+Statistik und Wahrscheinlichkeitsrechnung
+   [wxMaxima: title   end   ] */
+
+/* [wxMaxima: comment start ]
+Beschreibende Statistik
+=======================
+
+hat zum Ziel, übersichtlich darzustellen und zu ordnen.
+Dies ist vor allem bei umfangreichem Datenmaterial sinnvoll,
+da dieses nicht leicht überblickt werden kann.
+
+Untersucht wird eine *Stichprobe*, bei den *Merkmalen*
+einer Stichprobe unterscheidet man zwischen *Qualitativen*
+und *Quantitativen* Merkmalen.
+
+Ein Beispiel für ein Qualitatives Merkmal ist etwa die Farbe
+für ein Quantitatives Merkmal die Anzahl.
+
+Grundgesamtheit
+~~~~~~~~~~~~~~~
+
+Ist die Menge der entsprechenden Objekten, die Stichprobe ist
+eine Untermenge der Grundgesamtheit.
+
+Kenngröße
+~~~~~~~~~
+
+Beim untersuchen der Stichprobe findet man Merkmalswerte.
+Der Stichprobe werden Kenngrößen zugeschrieben.
+Eine graphische darstellung der Kenngrößen ist üblich.
+
+Absolute Häufigkeit
+~~~~~~~~~~~~~~~~~~~
+
+Der Begriff absolute Häufigkeit ist gleichbedeutend mit dem
+umgangssprachlichen Begriff Anzahl. 
+
+Relative Häufigkeit
+~~~~~~~~~~~~~~~~~~~
+
+Die relative Häufigkeit ist ein Maß der deskriptiven Statistik.
+Sie gibt den Anteil der Elemente einer Menge wieder, bei denen
+eine bestimmte Merkmalsausprägung vorliegt. Sie wird berechnet,
+indem die absolute Häufigkeit eines Merkmals in einer
+zugrundeliegenden Menge durch die Anzahl der Objekte in dieser
+Menge geteilt wird. Die relative Häufigkeit ist also eine
+Bruchzahl und hat einen Wert zwischen 0 und 1.
+
+Kumulative Häufigkeit
+~~~~~~~~~~~~~~~~~~~~~
+
+Die kumulierte Häufigkeit wird berechnet als Summe der Häufigkeiten
+der Merkmalsausprägungen von der kleinsten Ausprägung bis hin zu der
+jeweils betrachteten Schranke.
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: section start ]
+Übungsbeispiele zur Statistik
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(all);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: subsect start ]
+Beispiel Kondensatoren
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Einer Lieferung von Kondensatoren werden 20 Stück entnommen und ihre Kapazität gemessen. 
+Es ergeben sich folgende Werte (in nF) als Urliste:
+
+53  47  52  49  50  50  47  43  48  50  51  53  54  56  46  49  51  50  49 
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(all);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+urlist:[53, 47, 52, 49, 50, 50, 47, 43, 48, 50, 51, 53, 54, 56, 46, 49, 51, 50, 49];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+length(urlist);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Scatter Plot
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(
+xrange=[42,57],
+yrange=[0,20],
+points(urlist, makelist (i, i, length(urlist))),
+xlabel="Kapazität in nF",
+ylabel="Index"
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Werte nach größe Sortiert
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(
+xrange=[42,57],
+yrange=[0,20],
+points(sort(urlist), makelist (i, i, length(urlist))),
+xlabel="Kapazität in nF",
+ylabel="sortierter Index"
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Absolute Häufigkeit als barsplot
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+load (descriptive);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+wxbarsplot(
+urlist,
+title="Kondensatoren",
+box_width    = 0.1,
+fill_density = 1,
+bars_colors  = [cyan],
+frequency = absolute,
+ylabel = "Häufigkeiten",
+xlabel = "Kapazität in nF");
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+# Relative Häufigkeit
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+## Berechnung der Häufigkeit
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+haufen:discrete_freq(sort(urlist));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+## Plotten der Häufigkeit
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+wxbarsplot(
+urlist,
+title="Kondensatoren",
+box_width    = 0.1,
+fill_density = 1,
+bars_colors  = [cyan],
+frequency = relative,
+ylabel = "Häufigkeiten",
+xlabel = "Kapazität in nF");
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Kumulative Häufigkeit
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Kumulative Absolute Häufigkeit
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Kumulative Relative Häufigkeit
+   [wxMaxima: comment end   ] */
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$
