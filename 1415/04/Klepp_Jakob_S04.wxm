@@ -1,0 +1,171 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 14.09.0 ] */
+
+/* [wxMaxima: title   start ]
+        Matrizen ℝ³       
+       Jakob  Klepp       
+        2014-09-23        
+   [wxMaxima: title   end   ] */
+
+/* [wxMaxima: section start ]
+Maxima Befehle
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: comment start ]
+                                        |1  2  3|
+matrix([1,2,3], [4,5,6], [7,8,9])  -->  |4  5  6|
+                                        |7  8  9|
+
+matrix1.matrix2                    --> multiplizieren der Matrizen
+
+coefmatrix ([eqn_1, …, eqn_m],     --> Returns the coefficient matrix for the
+                [x_1, …, x_n])         variables x_1, …, x_n of the system
+                                       of linear equations eqn_1, …, eqn_m.
+
+list_matrix_entries (M)            --> Returns a list containing the elements of the matrix M. 
+                                       Example: 
+                                       (%i1) list_matrix_entries(matrix([a,b],[c,d]));
+                                       (%o1)                     [a, b, c, d]
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: section start ]
+Grundlagen und Rechenregeln
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: comment start ]
+S04 eintippseln
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: section start ]
+Anwendung im ℝ³
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(all);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Angabe
+======
+
+A (2|4|1|red)
+B (3|9|1|blue)
+C (8|7|1|green)
+S (4|6|4|?)
+
+Drehung um x-Achse um A um 45° im Urzeigersinn
+Drehung um y-Achse um S um 20° gegen Urzeigersinn
+Drehung um z-Achse um S um 60° im Urzeigersinn
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+A_start: matrix([2],[4],[1],[red]);
+B_start: matrix([3],[9],[1],[blue]);
+C_start: matrix([8],[7],[1],[green]);
+S_start: matrix([4],[6],[4],[cyan]);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+A_start_l:list_matrix_entries(A_start);
+B_start_l:list_matrix_entries(B_start);
+C_start_l:list_matrix_entries(C_start);
+S_start_l:list_matrix_entries(S_start);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+{x,y,z}range global setzten damit die Grafiken vergleichbar sind
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+_xrange:[2, 8];
+_yrange:[4, 9];
+_zrange:[1, 4];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+ _          _                    __                  _   _                 
+| |__   ___| |_ __   ___ _ __   / _|_   _ _ __   ___| |_(_) ___  _ __  ___ 
+| '_ \ / _ \ | '_ \ / _ \ '__| | |_| | | | '_ \ / __| __| |/ _ \| '_ \/ __|
+| | | |  __/ | |_) |  __/ |    |  _| |_| | | | | (__| |_| | (_) | | | \__ \
+|_| |_|\___|_| .__/ \___|_|    |_|  \__,_|_| |_|\___|\__|_|\___/|_| |_|___/
+             |_|
+helper functions
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+/*
+*/
+generate3dTedraederFromMatrizes(A,B,C,S):=[
+    point_size=0,
+/*draw the frame*/
+    points([list_matrix_entries(A),list_matrix_entries(B),
+            list_matrix_entries(C),list_matrix_entries(A),
+            list_matrix_entries(S),list_matrix_entries(C),
+            list_matrix_entries(S),list_matrix_entries(B)]),
+/*colorize points*/
+    point_size=2,
+    color=A[4][1],
+    points([list_matrix_entries(A)]),
+    color=B[4][1],
+    points([list_matrix_entries(B)]),
+    color=C[4][1],
+    points([list_matrix_entries(C)]),
+    color=S[4][1],
+    points([list_matrix_entries(S)]),
+/*add labels*/
+    color=black,
+    label(["A", A[1][1], A[2][1], A[3][1]-0.7],
+          ["B", B[1][1], B[2][1], B[3][1]-0.7],
+          ["C", C[1][1], C[2][1], C[3][1]-0.7],
+          ["S", S[1][1], S[2][1], S[3][1]-0.7])
+];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+/*
+*/
+addColorfulMatrizes(m1,m2):=matrix(
+    m1[1]+m2[1],
+    m1[2]+m2[2],
+    m1[3]+m2[3],
+    m1[4]);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+/*
+alpha ... um welches winkel gedreht werden soll
+rotated ... welche Koordinated gedreht werden sollen z.B. [1,1,0,0]
+*/
+rotationMatrix(alpha, rotated):=block(
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Tedraeder aus Angabe
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw3d(points_joined=true,
+    xrange=_xrange,
+    yrange=_yrange,
+    zrange=_zrange,
+    point_type=7,
+    color=black,
+    generate3dTedraederFromMatrizes(A_start, B_start, C_start, S_start)
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Drehung um x-Achse um A um 45° im Urzeigersinn
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Drehung um y-Achse um S um 20° gegen Urzeigersinn
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Drehung um z-Achse um S um 60° im Urzeigersinn
+   [wxMaxima: comment end   ] */
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$
