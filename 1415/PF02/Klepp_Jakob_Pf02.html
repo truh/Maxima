@@ -1,0 +1,2026 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+ <HEAD>
+  <TITLE>Klepp_Jakob_Pf02</TITLE>
+  <META NAME="generator" CONTENT="wxMaxima">
+  <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+  <STYLE TYPE="text/css">
+body {
+  background-color: rgb(255,255,255);
+}
+.input {
+  color: rgb(0,0,255);
+}
+.comment {
+  color: rgb(0,0,0);
+  background-color: rgb(255,255,255);
+  padding: 2mm;
+}
+.image {
+  color: rgb(0,0,0);
+  padding: 2mm;
+}
+.section {
+  color: rgb(0,0,0);
+  font-size: 1.5em;
+  padding: 2mm;
+}
+.subsect {
+  color: rgb(0,0,0);
+  font-size: 1.2em;
+  padding: 2mm;
+}
+.title {
+  color: rgb(0,0,0);
+  font-size: 2em;
+  padding: 2mm;
+}
+.prompt {
+  color: rgb(255,0,0);
+}
+table {
+  border: 0px;
+}
+td {
+  vertical-align: top;
+  padding: 1mm;
+}
+  </STYLE>
+ </HEAD>
+ <BODY>
+
+<!---------------------------------------------------------->
+<!--          Created with wxMaxima version 14.09.0         -->
+<!---------------------------------------------------------->
+
+
+<!-- Title cell -->
+
+
+<P CLASS="title">
+            2. Portfolio            <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Schulwoche  25           <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verbesserung            
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Themen:<BR>
+&nbsp;&nbsp;* Darstellung der zu Grunde liegenden Theorie (von der Sekante zur <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Tangente, Differenzenquotient -> Differentialquotient)<BR>
+&nbsp;&nbsp;* Ableitung elementarer Funktionen, Ableitungsregeln<BR>
+&nbsp;&nbsp;* Kurvendiskussion<BR>
+&nbsp;&nbsp;* Umgekehrte Kurvendiskussion<BR>
+&nbsp;&nbsp;* Extremwertaufgaben
+</P>
+
+
+<!-- Section cell -->
+
+
+<P CLASS="section">
+ 1 Darstellung der zu Grunde liegenden Theorie <BR>
+(von der Sekante zur Tangente, <BR>
+Differenzenquotient -> Differentialquotient)
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i1) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+kill(all);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_0.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i1) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+load(draw);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_1.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Der Differenzenquotient ist die Steigung einer Funktion anhand einer Sekante.<BR>
+Eine Sekante tritt an einer Stelle ein an einer anderen wieder aus.<BR>
+Daher ist es nicht möglich die Steigung an genau einen Punkt der Funktion zu finden.<BR>
+<BR>
+Der Differentialquotient ist ähnlich dem Differenquotient die Steigung einer Funktion,<BR>
+mit dem Unterschied das die Steigung an einer Tangente und somit nur an einen Punkt, <BR>
+betrachtet wird. Das ist es auch was wir erreichen wollen.<BR>
+Problematisch ist dabei nur das sich anhand eines einzelnen Punktes keine eindeutige <BR>
+Gerade finden lässt. Als Alternative nimmt man eine Sekante die durch 2 Punkte verläuft <BR>
+die im optimalfall unendlich nah beieinander sind. 
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Hier werde ich zeigen wie man die Steigung einer Funktion an einem<BR>
+Punkt bestimmt. Da Funktionen welche keine Gerade definieren keine<BR>
+Steigung haben, kann nur die Steigung der an einem Punkt liegenden<BR>
+Tangente bestimmt werden.<BR>
+<BR>
+Eine Gerade (also auch eine Tangente) lässt sich allerdings nicht über<BR>
+einen einzelnen Punkt definieren. Dass nächst beste zu einer Tangente<BR>
+ist eine Sekante. Wenn die Kurve keine alt zu starke Krümmung aufwirft<BR>
+und die beiden Schnittpunkte nah genug beieinander liegen kommt eine<BR>
+Sekante der gewünschten Tangente sehr nahe.<BR>
+<BR>
+Die beiden Punkte dürfen nicht identisch sein. Wenn man zwei mal den<BR>
+gleichen Punkt nimmt dividiert man durch 0, weil die Formel zu Steigungs<BR>
+Berechnng Delta y / Delta x ist
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Wählen der Funktion
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i2) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+f(x):=3*x^3;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_2.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i3) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/* Hier wird festgelegt an welche x Position die Steigung gefunden werden soll */<BR>
+x0:1;<BR>
+/* x wird in die Funktion eingesetzt um den y Wert zu erhalten.*/<BR>
+y0:f(x0);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_3.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i5) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/* Der zweite, beliebig gewählte Punkt. */<BR>
+x1:2;<BR>
+y1:f(x1);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_4.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Zeichnen der Funktion mit Sekante.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i7) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/*<BR>
+Erzeugen einer Geraden durch 2 Punkte<BR>
+*/<BR>
+gerade(x0, y0, x1, y1):=buildq(<BR>
+[x0, y0, x1, y1],<BR>
+lambda([x],<BR>
+/* x */ x * <BR>
+/* k */ (y1 - y0)/(x1 - x0) +<BR>
+/* d */ y0 - x0 * (y1 - y0)/(x1 - x0)<BR>
+));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_5.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i8) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+fI(x):=diff(f(x),x);<BR>
+f(1);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_6.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i10) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/*<BR>
+&nbsp;* erster Punkt      Gruen<BR>
+&nbsp;* zweiter Punkt     Orange<BR>
+&nbsp;* die Funktion      Blau  <BR>
+&nbsp;* Sekante           Rot<BR>
+&nbsp;*/<BR>
+xr:[0.8,2.2];<BR>
+yr:[-2,30];<BR>
+wxdraw2d(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;xrange=xr, yrange=yr,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;xaxis=true, yaxis=true,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;point_size=2, point_type=filled_circle,<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;color=green,  points([x0],[y0]), <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;color=orange, points([x1],[y1]),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;color=blue,   explicit(f(x),x,xr[1],xr[2]),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;color=red,    explicit(gerade(x0, y0, x1, y1), x, xr[1],xr[2]));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_7.png">
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  1.1 Konvergieren - Slider
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Hier kann die Auflösung des Sliders festgelegt werden. <BR>
+Mit 20 (= 19 Schritten) bekommt man schon ein passables Ergebnis <BR>
+und man muss trotzdem nicht ewig auf das Ergebnis warten. 
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i13) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+n:20;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_8.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Der 2. Punkt soll sich bewegen, hier werden Koordinaten<BR>
+Dynamisch erzeugt<BR>
+X1(ka) erzeugt den x Wert des Punkts<BR>
+Y1(ka) den y Wert
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i14) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+X1(ka):=''x1-''((x1-x0)*ka);<BR>
+Y1(ka):=f(X1(ka));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_9.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+k ist die Variable die sich durch den Slider ändert<BR>
+makelist(i/n,i,0,n-1) macht eine liste mit 19 Werten von 0 bis 1 z.B. (n=20) [0,1/20,1/10,3/20,...,19/20]<BR>
+Der höchste Wert soll NICHT 1 sein weil eben nur angenähert werden kann. Mit 1 hätte<BR>
+man wiederum nur einen Punkt und an einen Punkt kann man wie bereits erwähnt keine<BR>
+Sekante bilden. 
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i16) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+with_slider_draw(<BR>
+/*<BR>
+Sliden<BR>
+*/<BR>
+k, makelist(i/n,i,0,n-1),<BR>
+/*<BR>
+Zeichnen<BR>
+*/<BR>
+xrange=xr,yrange=yr,<BR>
+xaxis=true, yaxis=true,<BR>
+color=blue,<BR>
+explicit(f(x),x,xr[1],xr[2]),<BR>
+color=green, point_size=2, point_type=filled_circle, points([x0],[y0]),<BR>
+color=orange, points([X1(k)],[Y1(k)]),<BR>
+color=red,<BR>
+explicit(block([k_,d_], k_:(Y1(k) - y0)/(X1(k) - x0), d_:rhs(solve(Y1(k)=X1(k)*k_ + d_, [d_])[1]), return(''k_*x + ''d_)),x,xr[1],xr[2])<BR>
+);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_10.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Schön zu sehen, je näher sich die Punkte kommen, <BR>
+desto äher sieht die rote Sekante wie eine Tangente aus.<BR>
+Wenn der Slider auf den höchsten Wert gestellt ist, kann<BR>
+man die rote Sekante kaum noch von einer Tangente unterscheiden. 
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  1.2 Tabellarische Darstellung
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i17) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+X1(dx):=''x1-''((x1-x0)*dx);<BR>
+Y1(dx):=f(X1(dx));<BR>
+rows:makelist([[x0,y0], [X1(i), Y1(i)], (Y1(i) - y0)/(X1(i) - x0)], i, 0, 1, 0.05)$<BR>
+table:matrix(["P1 [x,y]","P2 [x,y]","k"])$<BR>
+makelist(table:addrow(table, rows[i]), i, 1, length(rows))$
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_11.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Diese Tabelle zeigt wie sich die näherung von P2 an P1 auf die Steigung k<BR>
+auswirkt. 
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i22) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+table;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_12.png">
+</P>
+
+
+<!-- Section cell -->
+
+
+<P CLASS="section">
+ 2 Ableitungsregeln
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  2.1 Ableitung elementarer Funktionen
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+x^n     ->  n*x^(n-1)<BR>
+ln(x)   ->  1/x <BR>
+sin(x)  ->  cos(x)<BR>
+cos(x)  ->  -sin(x)<BR>
+tan(x)  ->  1/cos²x<BR>
+e^x     ->  e^x
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  2.2 Ableitungsregeln
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Faktorregel : <BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;y = a * f(x)    -> y' = a*f'(x)<BR>
+<BR>
+wobei a eine Konstante ist.<BR>
+Ein konstanter Faktor z.B a bleibt beim Differenzieren erhalten<BR>
+<BR>
+Summenregel :  <BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;y = (u + v)'  -> y' = u' + v'<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;y = (u - v)'  -> y' = u' - v'<BR>
+<BR>
+Eine Summe oder Differenz von Funktionen kann gliedweise differenziert werden<BR>
+<BR>
+Produktregel : <BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;y = (u*v)'      -> y' = u'*v + u*v'<BR>
+<BR>
+Man leitet im Produkt stets nur einen Faktor ab und addiert dann<BR>
+<BR>
+Quotienten- oder Bruchregel:<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;y = (u/v)'      -> y' = (u'*v - u*v') / v²<BR>
+<BR>
+Kettenregel : <BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;y = f(g(x))     -> y' = f'(g(x)) * g(x)<BR>
+
+</P>
+
+
+<!-- Section cell -->
+
+
+<P CLASS="section">
+ 3 Kurvendiskussion
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Unter einer Kurvendiskussion versteht man in der Mathematik die Untersuchung einer<BR>
+Funktion auf ihre geometrische Eigenschaften.<BR>
+<BR>
+Die zu untersuchende Eigenschaften sind:<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Definitionsmenge<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Pole, Lücken, Nullstellen<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Asymptote<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Extremwert<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Wendepunkt & Wendetangente
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i23) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+kill(all);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_13.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i1) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+load(draw);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_14.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i2) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/* Funktion */<BR>
+f:x^3 / (x^2 - 4);<BR>
+f_fun(x):=''f;<BR>
+/* Zähler */<BR>
+z: num(f);<BR>
+z_fun(x):=''z;<BR>
+/* Nenner */<BR>
+n: denom(f);<BR>
+n_fun(x):=''n;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_15.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Zeichnen der Funktion um Überblick zu gewinnen
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i8) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxdraw2d(<BR>
+xrange=[-15,15],<BR>
+yrange=[-25,25],<BR>
+explicit(f,x,-150,15)<BR>
+);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_16.png">
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  3.1 Definitionsmenge
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Definiert sind alle Werte außer die welche den Nenner 0 setzen.<BR>
+Daher müssen alle Punkte gefunden an denen der Nenner 0 ist.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i9) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+solve(n,x)$<BR>
+ud:[rhs(%[1]),rhs(%[2])];
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_17.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Definiert sind alle Reelen Zahlen außer -2 und 2<BR>
+D = ℝ{-2,2}
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  3.2 Pole, Lücken, Nullstellen
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Pole sind Stellen an denen die Funktion aus dem Definierten bereich<BR>
+hinaus geht. Also über +/-unendlich hinausgeht. Am Graphen sieht man<BR>
+dann z.B. dass die Funktione Steil nach oben geht bis sie nicht mehr<BR>
+zu sehen ist und dann vom unteren Rand wieder ins Bild kommt. <BR>
+<BR>
+Rechnerisch erkennt man diese Besonderheit daran das der Nenner auf<BR>
+0 geht der Zähler aber nicht. 
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Bei Lücken gibt es einfach eine Lücke in der Funktion. Am Graph gibt<BR>
+es einen Sprung aber keinen Polsprung. <BR>
+<BR>
+Man erkennt eine Lücke daran das sowohl Nenner als auch Zähle auf<BR>
+0 sind.
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Bei Nullstellen schneidet die Funktion die x-Achse oder wird zumindest<BR>
+von ihr Tangiert. <BR>
+<BR>
+Man erkennt sie daran das der Zähler 0 ist der Nener aber nicht. 
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i11) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+solve(z,x)$<BR>
+z0:[rhs(%[1])];
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_18.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Alle gefundenen werte werden in eine Liste geworfen
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i13) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+list:append(z0,ud);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_19.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Werte werden mit einer Schleife<BR>
+&nbsp;nach Pole, Lücken und Nullstellen sortiert
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i14) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+p_:[]$/*Pole*/<BR>
+l_:[]$/*Lücken*/<BR>
+n_:[]$/*Nullstellen*/<BR>
+for i:1 step 1 thru length(list) do<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;if (''z_fun(list[i]) = 0) then <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (''n_fun(list[i]) = 0) then l_:append(l_,[list[i]])  /*Lücken*/<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else n_:append(n_,[list[i]])                        /*Nullstellen*/<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;else p_:append(p_,[list[i]])                            /*Pole*/$
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Ergebnise werden angezeigt
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i18) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+disp("Die Funktion enthält:","Pole",p_,"Lücken",l_,"Nullstellen",n_);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_20.png">
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  3.3 Asymptote
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Die Asymptote ist ein Graph welcher sich der Funktion<BR>
+beliebig annähert sie aber nicht berührt oder schneidet.
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Wie die Asymptote aussieht ist vor allem vom höchsten Grad von <BR>
+Zähler und Nenner abhängig. <BR>
+<BR>
+Fall 1 - der Grad des Nenners ist höher:<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Die Funktion ist eine echte gebrochen Rationale Funktion<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Die Asymptote ist die x Achse<BR>
+<BR>
+Fall 2 - der Grad des Nenners ist der gleiche wie der Grad des Zählers:<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;unecht gebrochene rationale Funktion<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Asymtote ist y=a/b    <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;a:Koeffizient des höchsten Grades im Zähler , 3*x²  Koeffizient = 3<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;b:Koeffizient des höchsten Grades im Nenner<BR>
+<BR>
+Fall 3 - der Grad des Zählers ist höher:<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;unecht gebrochen rationale Funktion<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Asymtote ist Ergebnis der Polynomdivision(z(x)/n(x)) ohne Rest
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i19) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/* Mit divide wird die division durchgeführt.<BR>
+&nbsp;&nbsp;&nbsp;Zurück bekommt man eine Liste, deren erstes Element ist das ergebnis,<BR>
+&nbsp;&nbsp;&nbsp;das zweite der Rest. */<BR>
+di: divide(z,n);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_21.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Auf die gegebenen Funktion triff Fall 3 zu.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i20) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+asymps: [di[1]];
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_22.png">
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  3.4 Extremwert (Minimum/Maximum/Sattelpunkt)
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Ein Extremwert einer Funktion ist entweder der höchste (Maximum) oder<BR>
+der niederste (Minimum) Punkt einer Funktion.
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Um den Extremwert zu finden muss zuerst die Funktion abgeleitet werden.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i21) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+fI(x):=''(diff(f,x,1));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_23.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Um später herauszufinden ob es sich bei dem Extremwert um ein Minimum<BR>
+oder ein Maximum handelt braucht man außerdem die 2. Ableitung
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i22) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+fII(x):=''(diff(f,x,2));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_24.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Denn x Wert des Extremwert bekommt man jetzt wenn man von der ersten Ableitung <BR>
+die Nullstelle sucht.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i23) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+extremX:solve(fI(x),x);<BR>
+/* entfernen der x= */<BR>
+extremX: makelist(rhs(extremX[i]), i, length(extremX));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_25.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Die Passenden y Werte bekommt man wenn man in die x Werte in<BR>
+die Grundfunktion einsetzt.<BR>
+<BR>
+Man kann der Funktion gleich eine Liste als Parameter geben,<BR>
+die Funktion wird dann auf jeden der Parameter angewandt.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i25) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+extremY: makelist(f_fun(extremX[i]), i, length(extremX));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_26.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Extremwerte in ein nutzbares Format bringen, <BR>
+und in die Variable exerg speichern.
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Überprüfen ob die Extremwerte Maxima, Minima oder Sattelpunkte sind<BR>
+<BR>
+2. Ableitung = 0 -> Sattelpunkt<BR>
+2. Ableitung < 0 -> Minimum<BR>
+2. Ableitung > 0 -> Maximum
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i26) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+mima:[];<BR>
+for i:1 step 1 thru length(extremX) do<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;if (fII(extremX[i])=0) then mima:append(mima,["Sattelpunkt"])<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;elseif (fII(extremX[i])>0) then mima:append(mima, ["Maximum"])<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;else mima:append(mima, ["Minimum"]);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_27.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i28) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+mima;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_28.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Extremwerte ausgeben:
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i29) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+extrem_erg: matrix(["Art", "Punkt [x,y]"])$<BR>
+for i:1 step 1 thru length(extremX) do<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;extrem_erg: addrow(extrem_erg, [mima[i], [extremX[i], extremY[i]]])$<BR>
+disp("Die Extremwerte sind:",extrem_erg)$
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_29.png">
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  3.5 Wendepunkt & Wendetangente
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Der Wendepunkt ist ein Punkt an dem die Funktion ihr Krümmungsverhalten<BR>
+ändert.<BR>
+<BR>
+Wendepunkte findet man wenn man die Nullstellen der 2. Ableitung (man bekommt den x Wert)<BR>
+in den Zähler der Funktion einsetzt. (man bekommt den y Wert)
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Nullstelle bilden, hier verwende ich realroots um keine<BR>
+imaginären Nullstellen zu bekommen
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i32) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+fII(x);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_30.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i33) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+rr:realroots(fII(x));<BR>
+wendeX:makelist(rhs(rr[i]), i, length(rr));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_31.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i35) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wendeY:makelist(f_fun(wendeX[i]), i, length(wendeX));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_32.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Der Wendepunkt liegt wie der Sattelpunkt auf dem Koordinaten ursprung,<BR>
+daher ist die Wendetangente die y Achse.<BR>
+Ansonsten wuerde der x-Wert des Wendepunkts in erste Ableitung eingesetzt<BR>
+&nbsp;-> man erhält die Steigung der Wendetangente<BR>
+Der x- und y- und k-Wert in allgemeine Geradengleichung(y=k*x+d) eingesetzt <BR>
+&nbsp;-> man bekommt d, wodurch man nun die Wendetangente hat
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i36) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wendeTang:makelist(fI(wendeX[i]) * x + wendeX[i], i, length(wendeX));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_33.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Ausgabe der Wendepunkte
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i37) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wende_erg: matrix(["Wendepunkt [x,y]", "Wendetangente"])$<BR>
+for i:1 step 1 thru length(wendeX) do<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;wende_erg: addrow(wende_erg, [[wendeX[i], wendeY[i]], wendeTang[i]])$<BR>
+disp("Die Wendepunkte sind:",wende_erg)$
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_34.png">
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  3.6 Zeichnen
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i40) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+disp("Undefinierte Stellen: ", ud)$<BR>
+disp("Pole:",p_,"Lücken:",l_,"Nullstellen:",n_)$<BR>
+disp("Asymptoten:", asymps)$<BR>
+disp("Extremwerte:", extrem_erg)$<BR>
+disp("Die Wendepunkte sind:",wende_erg)$
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_35.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i45) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+vertical_line(x):=polygon([x, x],[-9000, 9000]);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_36.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i46) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxdraw2d(<BR>
+xrange=[-7,7],<BR>
+yrange=[-25,25],<BR>
+<BR>
+/* Kurve */<BR>
+explicit(f,x,-150,150),<BR>
+<BR>
+/* Undefinierte Stellen */<BR>
+fill_color=yellow,<BR>
+makelist(vertical_line(ud[i]), i, length(ud)),<BR>
+<BR>
+/* Pole */<BR>
+fill_color=cyan,<BR>
+makelist(vertical_line(p_[i]), i, length(p_)),<BR>
+<BR>
+/* Lücken */<BR>
+makelist(vertical_line(l_[i]), i, length(l_)),<BR>
+<BR>
+/* Nullstellen */<BR>
+color=red, point_size=1.5,point_type=filled_circle,<BR>
+points(n_, makelist(0, i, length(n_))),<BR>
+<BR>
+/* Asymptoten */<BR>
+color=green, line_type=solid,<BR>
+makelist(explicit(asymps[i], x, -150, 150), i, length(asymps)),<BR>
+<BR>
+/* Extremwerte */<BR>
+color=black,<BR>
+point_type=asterisk,<BR>
+points(extremX, extremY),<BR>
+makelist(label([mima[i], extremX[i], extremY[i]-3]), i, length(extremX)),<BR>
+<BR>
+/* Wendepunkte & Tangenten */<BR>
+color=orange,<BR>
+point_type=circle, point_size=2.5,<BR>
+points(wendeX, wendeY),<BR>
+makelist(explicit(wendeTang[i], x, -7, 7), i, length(wendeTang))<BR>
+);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_37.png">
+</P>
+
+
+<!-- Section cell -->
+
+
+<P CLASS="section">
+ 4 Umgekehrte Kurvendiskussion
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i47) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+kill(all);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_38.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i1) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+load(draw);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_39.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Bei der umgekehrten Kurvendiskussion geht es darum, aus besonderen Werten<BR>
+wie man sie bei der Kurvendiskussion bekommt, eie Kurve zu rekonstruiren.
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+1.  Aufstellen der allgemeinen Form und deren Ableitungen<BR>
+<BR>
+2.  Überprüfung, wieviele Variablen die allgemeine Form beinhaltet<BR>
+<BR>
+3.  So viele Bedingungen aufstellen , wie Variable vorhanden sind<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;-> Variablen mit einem Gleichungssystem berechnen<BR>
+<BR>
+4.  Variable in die allgemeine Form einsetzen<BR>
+<BR>
+5.  Funktion und gegeben Eigenschaften in einer Grafik einzeichnen,anzeigen und überprüfen
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+allgemeine Form
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i2) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+f(x):=a*x^3+b*x^2+c*x+d;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_40.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Ableitungen
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i3) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+af1(x):=''(diff(f(x),x,1));<BR>
+af2(x):=''(diff(f(x),x,2));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_41.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Beispiel:<BR>
+Der Graph einer Funktion 3. Ordnung hat in<BR>
+P1(-1|16/3) einen relativen Extrempunkt<BR>
+und hat in<BR>
+W(1|y) einen Wendepunkt<BR>
+Der Graph schneidet die y-Achse bei 11/3
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i5) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+be:[0,0,0,0];
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_42.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Daraus ergibt sich: 
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+dass der Graph den Punkt -1|16/3 schneidet
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i6) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+be[1]:f(-1)=16/3;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_43.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+der Graph schneidet bei 11/3 die y-Achse daher<BR>
+Damit haben wir schon d bestimmt
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i7) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+be[2]:f(0)=11/3;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_44.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Da der Graph bei 1|y einen Wendepunkt hat 
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i8) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+be[3]:af1(-1)=0;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_45.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i9) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+be[4]:af2(1)=0;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_46.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Auflösen mit algsys
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i10) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+erg:algsys(be,[a,b,c,d])[1];
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_47.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Zuweisen von a,b,c,d
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i11) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+a:rhs(erg[1]);<BR>
+b:rhs(erg[2]);<BR>
+c:rhs(erg[3]);<BR>
+d:rhs(erg[4]);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_48.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+In die allgemeine Form einsetzen
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i15) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+f(x);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_49.png">
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  4.1 Zeichnen
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i16) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+xr:[-3/2,3/2]$<BR>
+yr:[-4/3,20/3]$
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i18) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/*<BR>
+&nbsp;* _fv      die Funktion        Blau  <BR>
+&nbsp;* _s1      Schnitt y-Achse     Rot<BR>
+&nbsp;* _ext     Extrempunkt         Gruen<BR>
+&nbsp;* _wp1     Wendepunkt          Orange<BR>
+&nbsp;*/<BR>
+_fv:explicit(f(x),x,xr[1],xr[2])$ <BR>
+_ext:points([-1],[16/3])$<BR>
+_s1:points([0],[11/3])$<BR>
+_wp1:points([1],[f(1)])$
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i22) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxdraw2d(xrange=xr, yrange=yr,<BR>
+xaxis=true, yaxis=true,<BR>
+color=blue,_fv,<BR>
+color=red,point_type=filled_circle,point_size=2,_s1,<BR>
+color=green,_ext,<BR>
+color=orange,_wp1);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_50.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Die Punkte aus der Angabe passen alle Perfekt auf die<BR>
+rekonstruirte Kurve. Daher würd ich sagen das es so stimmt. 
+</P>
+
+
+<!-- Section cell -->
+
+
+<P CLASS="section">
+ 5 Extremwertaufgabe
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i23) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+kill(all);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_51.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Extremwertprobleme sind Aufgaben, in denen eine Größe optimiert werden soll.<BR>
+Entweder ein Minimum(z.B Kosten) oder Maximum(z.B Gewinn)<BR>
+<BR>
+Vorgangsweise:<BR>
+<BR>
+1. Aufstellen der Hauptbedingung und der Zielfunktion<BR>
+<BR>
+2. Suchen der Nebenbedingungen<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;-> In die Hauptbedingung einsetzen<BR>
+<BR>
+3. Erste und zweite Ableitung bilden<BR>
+<BR>
+4. Nullstelle der ersten Ableitung suchen<BR>
+<BR>
+5. Errechneten Wert in die Nebenbedingun einsetzen <BR>
+<BR>
+6. Daraus resultierende Werte in die Zielfunktion einsetzen<BR>
+<BR>
+7. Antwort formulieren
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Aufgabe:<BR>
+Es soll ein rechteckiges Grundstueck mit einem 40m langen Zaun eingezaeunt werden.<BR>
+Auf einer Seite des Grundstücks ist eine Mauer, diese Seite erfordert keine Zaun.<BR>
+<BR>
+Ziel soll es sein mit dem vorhandenen Zaun eine möglichst große Flaeche ab zu stecken.
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Rechteck Flaeche<BR>
+Ist von der Laenge und der Breite abhaengig<BR>
+Das ist unsere Hauptfunktion
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i1) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+A1(l,b):=l*b;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_52.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Eine Seite wird von einer Mauer geschuetzt, die Summe der<BR>
+restlichen Seiten ist 40 m<BR>
+Die Nebenbedingung
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i2) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+l+2*b=40;<BR>
+/*Nach l aufloesen*/<BR>
+l:rhs(solve(%,l)[1]);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_53.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Länge in die Flaechenformel einsetzen
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i4) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+A2(b):=''(A1(''l,b));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_54.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Nun haben wir eine Flaechenformel welche nur noch von<BR>
+einen Parameter, der Breite abhängig ist. 
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Von diseser Formel wird nun die erste und zweite Ableitung gebildet
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i5) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+af1(b):=''(diff(A2(b),b,1));<BR>
+af2(b):=''(diff(A2(b),b,2));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_55.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Nullstelle der ersten Ableitung finden
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i7) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+solve(af1(b),b);<BR>
+b:rhs(%[1]);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_56.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Errechnete Breite in die modifizierte Flaechenformel einsetzen
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i9) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+loe:A2(b);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_57.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Antwort formulieren
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i10) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+disp("Die maximal einzaeunbare Flaeche betraegt:",loe*m^2)$
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_58.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Zeichnung des funktionalen zusammenhanges
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i11) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxdraw2d(<BR>
+explicit(A2(x), x, 0, 20));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf02_img/Klepp_Jakob_Pf02_59.png">
+</P>
+
+ <HR>
+ <SMALL> Created with <A HREF="http://wxmaxima.sourceforge.net/">wxMaxima</A>.</SMALL>
+
+ </BODY>
+</HTML>
