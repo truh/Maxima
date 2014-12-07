@@ -1,0 +1,411 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+ <HEAD>
+  <TITLE>Klepp_Jakob_H13</TITLE>
+  <META NAME="generator" CONTENT="wxMaxima">
+  <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+  <STYLE TYPE="text/css">
+body {
+  background-color: rgb(255,255,255);
+}
+.input {
+  color: rgb(0,0,255);
+}
+.comment {
+  color: rgb(0,0,0);
+  background-color: rgb(255,255,255);
+  padding: 2mm;
+}
+.image {
+  color: rgb(0,0,0);
+  padding: 2mm;
+}
+.section {
+  color: rgb(0,0,0);
+  font-size: 1.5em;
+  padding: 2mm;
+}
+.subsect {
+  color: rgb(0,0,0);
+  font-size: 1.2em;
+  padding: 2mm;
+}
+.title {
+  color: rgb(0,0,0);
+  font-size: 2em;
+  padding: 2mm;
+}
+.prompt {
+  color: rgb(255,0,0);
+}
+table {
+  border: 0px;
+}
+td {
+  vertical-align: top;
+  padding: 1mm;
+}
+  </STYLE>
+ </HEAD>
+ <BODY>
+
+<!---------------------------------------------------------->
+<!--          Created with wxMaxima version 14.09.0         -->
+<!---------------------------------------------------------->
+
+
+<!-- Title cell -->
+
+
+<P CLASS="title">
+      Abzähltechniken      <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Jakob  Klepp        <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2014-11-30         
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Abzählende Kombinatorik
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Permutation<BR>
+===========<BR>
+<BR>
+7 Personen: a,b,c,d,e,f,g<BR>
+<BR>
+In wie vielen Reihenfolgen kann man die Personen anordnen.<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4]       Auf den ersten Platz können noch 7 verschiedene.<BR>
+&nbsp;&nbsp;&nbsp;+-----+     Personen gesetzt werden. Nachdem sich eine Person<BR>
+&nbsp;&nbsp;&nbsp;|     |     gesetzt hat sind noch 6 Personen über. Somit<BR>
+[5]|     |[3]  kommen für den zweiten Platz 6 verschiedene über.<BR>
+&nbsp;&nbsp;&nbsp;|     |<BR>
+[6]|     |[2]  Die Anzahl der Kombinationen ergibt sich schlussendlich als:<BR>
+&nbsp;&nbsp;&nbsp;|     |<BR>
+[7]|     |[1]    7*6*5*4*3*2*1<BR>
+&nbsp;&nbsp;&nbsp;|     |     <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Also der Fakultät von 7.<BR>
+<BR>
+Ist aus n Elementen eine Auswahl aus n Elementen zu treffen (wobei<BR>
+Wiederholungen nicht möglich sind) spricht man von einer Permutation.<BR>
+Die Anzahl der Permutationen von n Elementen ist n Faktorielle.
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Kombination<BR>
+===========<BR>
+<BR>
+Aus 7 Personen werden 3 Personen benötigt.<BR>
+<BR>
+Die Reihenfolge der 3er Auswahl ist belanglos.<BR>
+<BR>
+Verschiedene Auswahlen 7*6*5 = 210<BR>
+Von diesen unterscheiden sich je 3! = 3*2*1 nur durch<BR>
+die Reihenfolge.<BR>
+<BR>
+7 * 6 * 5   210        <BR>
+--------- = --- = 35<BR>
+1 * 2 * 3    6<BR>
+<BR>
+Binominal Koeffizient:<BR>
+<BR>
+&nbsp;&nbsp;/n\   n * (n-1) * (n-2) * ... * (n-k)    n ∈ ℕ<BR>
+&nbsp;&nbsp;| | = -------------------------------    k ∈ ℕ<BR>
+&nbsp;&nbsp;\k/              k!                      k <= n<BR>
+<BR>
+"n über k"                            /n\<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| | = 1<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\0/<BR>
+<BR>
+Ist aus n Elementen eine Auswahl von k Elementen zu treffen, wobei<BR>
+die Reihenfolge ohne bedeutung ist, dann gibt es dafür n über k<BR>
+Möglichkeiten. Vorraussetzung ist dass ein Element nicht mehrfach<BR>
+ausgewählt werden kann. -> "Kombination ohne Wiederholung."
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Variation<BR>
+=========<BR>
+<BR>
+Aus den 7 Personen wählen wir wieder 3 aus. Diesmal ist die Reihenfolge<BR>
+sehrwohl von Bedeutung.<BR>
+<BR>
+n über k Verschiedene möglichkeiten an Personengruppen.<BR>
+Personengruppen können jeweils in 3! verschiedenen Arten gemischt sein.<BR>
+<BR>
+/n\        n * (n-1) * (n-2) * ... * (n-k)<BR>
+| | * k! = ------------------------------- * k! = n * (n-1) * (n-2) * ... * (n-k)<BR>
+\k/                    k!<BR>
+<BR>
+Ist aus n Elementen eine Auswahl von k Elementen zu treffen wobei die Reihenfolge<BR>
+von bedeutung istm dann gibt es (n über k) * (k!) Möglichkeiten.<BR>
+<BR>
+Eine Permutation ist ein Sonderfall einer Variation für k=n.
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Variation mit Wiederholung<BR>
+<BR>
+7 Bit jedes hat 2 Möglichkeiten.<BR>
+Wie viele Zeichen können encodiert werden?<BR>
+<BR>
+n^k<BR>
+<BR>
+128
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+1) In einem Gerät werden 5 Schalter stets gleichartig beansprucht.<BR>
+&nbsp;&nbsp;&nbsp;Die Ausfallswahrscheinlichkeit (während der Nutzungsdauer) liegt<BR>
+&nbsp;&nbsp;&nbsp;bei einem Schalter unabhängig von den anderen bei 4%. Wie groß<BR>
+&nbsp;&nbsp;&nbsp;ist die Wahrscheinlichkeit, dass<BR>
+<BR>
+Schalter: A,B,C,D,E<BR>
+<BR>
+Ausfallwahrscheindlichkeit<BR>
+P(A) = P(B) = P(C) = P(D) = P(E) = 0.04<BR>
+<BR>
+&nbsp;&nbsp;a) keiner<BR>
+<BR>
+!A & !B & !C & !D & !E<BR>
+<BR>
+P = 0.96^5 = 81.5%<BR>
+<BR>
+&nbsp;&nbsp;b) genau einer<BR>
+<BR>
+/5\   /5\<BR>
+| | * | |<BR>
+\1/   \4/;<BR>
+<BR>
+&nbsp;&nbsp;c) höchstens drei<BR>
+<BR>
+&nbsp;&nbsp;d) mindestens drei Schalter ausfallen?<BR>
+
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i1) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/* a) */<BR>
+(96/100)^5;<BR>
+%, float;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H13_img/Klepp_Jakob_H13_0.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i3) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/* b) */<BR>
+binomial(5, 1) * binomial(5, 4);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H13_img/Klepp_Jakob_H13_1.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+2) Eine Lieferung von 20 Elektrogeräten enthält 3 fehlerhafte Geräte.<BR>
+&nbsp;&nbsp;&nbsp;Man entnimmt dieser Lieferung eine Stichprobe vom Umfang 5.<BR>
+<BR>
+&nbsp;&nbsp;a) Auf wie viele Arten kann eine solche Stichprobe entnommen werden?<BR>
+<BR>
+/20\   20*19*...*16*15<BR>
+|  | = --------------- = 15504<BR>
+\ 5/          5!<BR>
+<BR>
+&nbsp;&nbsp;b) Wie viele dieser Arten enthalten genau ein fehlerhaftes Gerät?<BR>
+<BR>
+mögliche Stichproben(m): 15504 <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/3\   /17\<BR>
+günstige Stichproben(g): | | * |  | = 7140<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\1/   \ 4/<BR>
+g    7140 <BR>
+- = ----- = 46%<BR>
+m   15504
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i4) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/* a) */<BR>
+binomial(20, 5);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H13_img/Klepp_Jakob_H13_2.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i5) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/* b) */<BR>
+binomial(3,1);<BR>
+binomial(17,4);<BR>
+binomial(3,1) * binomial(17,4);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H13_img/Klepp_Jakob_H13_3.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i8) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+7140/15504, float;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H13_img/Klepp_Jakob_H13_4.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+3) Wie groß ist die Wahrscheinlichkeit, dass in einer Schulklasse mit<BR>
+&nbsp;&nbsp;&nbsp;10 Burschen und 5 Mädchen bei einer Zufallsauswahl von 3 Schülern<BR>
+<BR>
+&nbsp;&nbsp;a) kein Mädchen<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Lösung: 26.4%<BR>
+<BR>
+/5\   /10\<BR>
+| | * |  |<BR>
+\0/   \ 3/   24      .<BR>
+---------- = -- = 0.2637<BR>
+&nbsp;&nbsp;/15\       91<BR>
+&nbsp;&nbsp;|  |<BR>
+&nbsp;&nbsp;\ 3/<BR>
+<BR>
+&nbsp;&nbsp;b) mindestens ein Mädchen darunter ist?<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Lösung: 73.6%<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;24   67     .<BR>
+1 - -- = -- = 0.736263<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;91   91<BR>
+
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i9) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/* a) */<BR>
+binomial(5,0) * binomial(10,3) / binomial(15,3);<BR>
+%, float;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H13_img/Klepp_Jakob_H13_5.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+4) Ein Batterietestgerät kann gleichzeitig 4 Batterien prüfen. Unter<BR>
+&nbsp;&nbsp;&nbsp;20 Batterien sind 2 unbrauchbar. Wie groß ist die Wahrscheinlichkeit,<BR>
+&nbsp;&nbsp;&nbsp;dass diese gleich beim ersten Test entdeckt werden?<BR>
+<BR>
+&nbsp;&nbsp;Lösung: 3.16%<BR>
+<BR>
+/2\   /18\<BR>
+| | * |  |<BR>
+\2/   \ 2/   3<BR>
+--------- = -- = 0.03157894736842105<BR>
+&nbsp;&nbsp;/20\      95<BR>
+&nbsp;&nbsp;|  |<BR>
+&nbsp;&nbsp;\ 4/
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i11) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+binomial(2,2) * binomial(18,2) / binomial(20,4);<BR>
+% , float;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H13_img/Klepp_Jakob_H13_6.png">
+</P>
+
+ <HR>
+ <SMALL> Created with <A HREF="http://wxmaxima.sourceforge.net/">wxMaxima</A>.</SMALL>
+
+ </BODY>
+</HTML>
