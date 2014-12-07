@@ -1,0 +1,326 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 14.09.0 ] */
+
+/* [wxMaxima: title   start ]
+      Portfolio  7.1      
+        Statistik         
+       Jakob  Klepp       
+        2014-10-14        
+   [wxMaxima: title   end   ] */
+
+/* [wxMaxima: comment start ]
+Maxima
+======
+In Maxima werden statistische Berechnungen und visualisierungen 
+durch das Pakte descriptive unterstützt. Laden des Paketes erfolgt
+durch den Befehle: 
+load (descriptive);
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+=======================
+Beschreibende Statistik
+=======================
+hat zum Ziel, übersichtlich darzustellen und zu ordnen.
+Dies ist vor allem bei umfangreichem Datenmaterial sinnvoll,
+da dieses nicht leicht überblickt werden kann.
+Untersucht wird eine *Stichprobe*, bei den *Merkmalen*
+einer Stichprobe unterscheidet man zwischen *Qualitativen*
+und *Quantitativen* Merkmalen.
+Ein Beispiel für ein Qualitatives Merkmal ist etwa die Farbe
+für ein Quantitatives Merkmal die Anzahl.
+
+Grundgesamtheit
+~~~~~~~~~~~~~~~
+Ist die Menge der entsprechenden Objekten, die Stichprobe ist
+eine Untermenge der Grundgesamtheit.
+
+Kenngröße
+~~~~~~~~~
+Beim untersuchen der Stichprobe findet man Merkmalswerte.
+Der Stichprobe werden Kenngrößen zugeschrieben.
+Eine graphische darstellung der Kenngrößen ist üblich.
+
+Absolute Häufigkeit
+~~~~~~~~~~~~~~~~~~~
+Der Begriff absolute Häufigkeit ist gleichbedeutend mit dem
+umgangssprachlichen Begriff Anzahl. 
+
+Relative Häufigkeit
+~~~~~~~~~~~~~~~~~~~
+Die relative Häufigkeit ist ein Maß der deskriptiven Statistik.
+Sie gibt den Anteil der Elemente einer Menge wieder, bei denen
+eine bestimmte Merkmalsausprägung vorliegt. Sie wird berechnet,
+indem die absolute Häufigkeit eines Merkmals in einer
+zugrundeliegenden Menge durch die Anzahl der Objekte in dieser
+Menge geteilt wird. Die relative Häufigkeit ist also eine
+Bruchzahl und hat einen Wert zwischen 0 und 1.
+
+Kumulative Häufigkeit
+~~~~~~~~~~~~~~~~~~~~~
+Die kumulierte Häufigkeit wird berechnet als Summe der Häufigkeiten
+der Merkmalsausprägungen von der kleinsten Ausprägung bis hin zu der
+jeweils betrachteten Schranke.
+
+Klassifizierung
+~~~~~~~~~~~~~~~
+Anstatt die Häugigkeit einzelner Werte zu zählen kann es im
+inbesonderen bei aus einer Analogen Welt kommenden Daten
+aussagekräftiger sein, zu Zählen wie viele Werte in bestimmte
+Klassen fallen.
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+==========
+Kennzahlen
+==========
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(all)$load(descriptive)$urlist:[98.7, 99.3, 95.8, 101.6, 100.4, 98.0, 96.3]$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Mittelwert 
+auch Durchschnitt, Arithmetisches Mittel
+
+Summe/Anzahl
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+mean(urlist);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Quantile
+
+Der Begriff Quantile beschreibt die relative Position eines
+Wertes in einer sortierten Liste.
+Die Quantile 0 ist der kleinste Wert, die Quantile 1 der größte.
+Wenn die Quatile keinene einzelnen Wert bezeichnet wird ein zwischenwert
+berechnet.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+/* Quantile */
+position: 0.3;
+quantile(urlist, position);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Quartile
+
+Quartilen bezeichnen Quantilen an 3 besonderen Orten,
+nach einem, zwei und drei Viertel der Werte.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+/* 1. Quartile  */
+quantile(urlist, 1/4);
+/* 2. Quartile  */
+quantile(urlist, 2/4);
+/* 3. Quartile  */
+quantile(urlist, 3/4);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Median 
+auch Zentralwert
+
+Mittleres Element einer sortierten Liste bzw. im Falle einer Liste
+mit einer geraden Anzahl an Elementen, Mittelwert der zwei
+mittleren Elemene.
+
+Bei einer gausschen Verteilung entsprechen sich Median und Mittelwert.
+
+Der Median ist die zweite Quartile oder die Quantile 0.5
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+median(urlist);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Varianz
+
+Beschreibt die Streuung von Werten um den Mittelwert.
+
+Wird berechnet als die Summe aller Quadrate der differenzen zum Mittelwert
+durch die Anzahl der Werte (bzw. Anzahl der Werte -1).
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+var(urlist);
+var1(urlist);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Standardabweichung
+
+Beschreibt (in etwa) wie weit die Werte im durchschnitt vom Mittelwert abweichen.
+Die Standardabweichung wird als Quadratwurzel der Varianz berechnet.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+std(urlist);
+std1(urlist);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Maximalwert
+
+größter Wert
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+/* Maximalwert */
+smax(urlist);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Minimalwert
+
+kleinster Wert
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+/* Minimalwert */
+smin(urlist);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Spannweite
+
+Unterschied zwischen Minimal und Maximalwert
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+/* Spannweite */
+range(urlist);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+================
+Visualisierungen
+================
+
+Scatter Plot
+~~~~~~~~~~~~
+Ein Scatter Plot (auch Streudiagramm) ist die graphische Darstellung
+von beobachteten Wertepaaren zweier statistischer Merkmale.
+Diese Wertepaare werden in ein kartesisches Koordinatensystem
+eingetragen, wodurch sich eine Punktwolke ergibt.
+
+Barplot
+~~~~~~~
+Ein Barplot (auch Säulendiagramm) Stellt durch senkrecht nebeinander
+stehenden Säulen die Häufigkeitsverteilung von Werten da.
+
+Paretodiagramm
+~~~~~~~~~~~~~~
+Eine Sonderform des Barplot bei dem die Werte nach Häufigkeit, links
+beginnend mit dem Häufigsten, sortiert sind.
+
+Piechart
+~~~~~~~~
+Ein Piechart (auch Kreis- oder Tortendiagramm) ist eine Darstellungsform
+für Teilwerte eines Ganzen als Teile eines Kreises. Das Piechart
+ist kreisförmig und in mehrere Kreissektoren eingeteilt, wobei jeder
+Kreissektor einen Teilwert und der Kreis somit die Summe der Teilwerte
+(das Ganze) darstellt. 
+
+Boxplot
+~~~~~~~
+Fast Quartilen Extremwerte einer Stichprobe in einer Grafik zusammen,
+eignet sich dementsprechend um mehrere Stichproben zu vergleichen.
+
+     #################
+|----#           #   #------------|
+     #################
+^    ^           ^   ^            ^
+|    |           |   |            |
+|    |           |   |            Maximum
+|    |           |   3. Quartile
+|    |           Median
+|    1. Quartile
+|
+Minimum
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: subsect start ]
+Beispiel Kondensatoren
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Einer Lieferung von Kondensatoren werden 20 Stück entnommen und ihre Kapazität gemessen. 
+Es ergeben sich folgende Werte (in nF) als Urliste:
+
+53  47  52  49  50  50  47  43  48  50  51  53  54  56  46  49  51  50  49 
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+In H05 gelöst
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: subsect start ]
+Beispiel Blechteile
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Bei der Produktion von Blechteilen sind bei der Qualitätskontrolle folgende Fehler aufgetreten:
+
+Fehler #    Fehlerart   Häufigkeit
+    1       Delle        8
+    2       Kratzer     26
+    3       Korrosion    4
+    4       Lackfehler  38
+    5       Verbogen     4
+    6       Gerissen     2
+    7       Maßfehler    2
+    8       Bohrfehler   3
+    9       Sonstige     3
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+H06
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: subsect start ]
+Beispiel Füllmengen
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Eine Messung des Füllgewichtes von 80 automatisch abgefüllten Marmeladegläsern ergab folgende Werte (in g):
+
+93.0  88.2  92.1  91.0  86.9  93.8  91.0  92.0  87.4  92.1
+92.7  93.3  88.8  91.5  90.4  88.1  89.7  88.9  92.7  91.4
+89.6  89.4  87.3  86.5  90.8  90.3  86.9  91.2  89.3  90.4
+94.2  90.4  90.8  91.9  90.8  92.4  88.3  92.0  87.3  93.8
+90.6  88.0  94.0  90.9  88.0  93.1  91.7  89.7  92.7  89.5
+90.7  89.3  89.3  86.5  88.9  87.5  88.2  88.7  90.2  86.3
+93.9  86.4  90.6  87.9  85.0  89.1  91.8  92.3  87.9  95.4
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+H06
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: subsect start ]
+Beispiel Widerstände
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Aus einer Lieferung von elektrischen Widerständen gleicher Art werden einige Stück herausgegriffen und gemessen. 
+Dabei werden folgende Werte (in Ohm) gefunden:
+
+98.7  99.3  95.8  101.6  100.4  98.0  96.3
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+wxboxplot(
+[urlist]);
+/* [wxMaxima: input   end   ] */
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$

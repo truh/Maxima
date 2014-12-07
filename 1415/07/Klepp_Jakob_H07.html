@@ -1,0 +1,613 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+ <HEAD>
+  <TITLE>Klepp_Jakob_H07</TITLE>
+  <META NAME="generator" CONTENT="wxMaxima">
+  <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+  <STYLE TYPE="text/css">
+body {
+  background-color: rgb(255,255,255);
+}
+.input {
+  color: rgb(0,0,255);
+}
+.comment {
+  color: rgb(0,0,0);
+  background-color: rgb(255,255,255);
+  padding: 2mm;
+}
+.image {
+  color: rgb(0,0,0);
+  padding: 2mm;
+}
+.section {
+  color: rgb(0,0,0);
+  font-size: 1.5em;
+  padding: 2mm;
+}
+.subsect {
+  color: rgb(0,0,0);
+  font-size: 1.2em;
+  padding: 2mm;
+}
+.title {
+  color: rgb(0,0,0);
+  font-size: 2em;
+  padding: 2mm;
+}
+.prompt {
+  color: rgb(255,0,0);
+}
+table {
+  border: 0px;
+}
+td {
+  vertical-align: top;
+  padding: 1mm;
+}
+  </STYLE>
+ </HEAD>
+ <BODY>
+
+<!---------------------------------------------------------->
+<!--          Created with wxMaxima version 14.09.0         -->
+<!---------------------------------------------------------->
+
+
+<!-- Title cell -->
+
+
+<P CLASS="title">
+      Portfolio  7.1      <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Statistik         <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Jakob  Klepp       <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2014-10-14        
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Maxima<BR>
+======<BR>
+In Maxima werden statistische Berechnungen und visualisierungen <BR>
+durch das Pakte descriptive unterstützt. Laden des Paketes erfolgt<BR>
+durch den Befehle: <BR>
+load (descriptive);
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+=======================<BR>
+Beschreibende Statistik<BR>
+=======================<BR>
+hat zum Ziel, übersichtlich darzustellen und zu ordnen.<BR>
+Dies ist vor allem bei umfangreichem Datenmaterial sinnvoll,<BR>
+da dieses nicht leicht überblickt werden kann.<BR>
+Untersucht wird eine *Stichprobe*, bei den *Merkmalen*<BR>
+einer Stichprobe unterscheidet man zwischen *Qualitativen*<BR>
+und *Quantitativen* Merkmalen.<BR>
+Ein Beispiel für ein Qualitatives Merkmal ist etwa die Farbe<BR>
+für ein Quantitatives Merkmal die Anzahl.<BR>
+<BR>
+Grundgesamtheit<BR>
+~~~~~~~~~~~~~~~<BR>
+Ist die Menge der entsprechenden Objekten, die Stichprobe ist<BR>
+eine Untermenge der Grundgesamtheit.<BR>
+<BR>
+Kenngröße<BR>
+~~~~~~~~~<BR>
+Beim untersuchen der Stichprobe findet man Merkmalswerte.<BR>
+Der Stichprobe werden Kenngrößen zugeschrieben.<BR>
+Eine graphische darstellung der Kenngrößen ist üblich.<BR>
+<BR>
+Absolute Häufigkeit<BR>
+~~~~~~~~~~~~~~~~~~~<BR>
+Der Begriff absolute Häufigkeit ist gleichbedeutend mit dem<BR>
+umgangssprachlichen Begriff Anzahl. <BR>
+<BR>
+Relative Häufigkeit<BR>
+~~~~~~~~~~~~~~~~~~~<BR>
+Die relative Häufigkeit ist ein Maß der deskriptiven Statistik.<BR>
+Sie gibt den Anteil der Elemente einer Menge wieder, bei denen<BR>
+eine bestimmte Merkmalsausprägung vorliegt. Sie wird berechnet,<BR>
+indem die absolute Häufigkeit eines Merkmals in einer<BR>
+zugrundeliegenden Menge durch die Anzahl der Objekte in dieser<BR>
+Menge geteilt wird. Die relative Häufigkeit ist also eine<BR>
+Bruchzahl und hat einen Wert zwischen 0 und 1.<BR>
+<BR>
+Kumulative Häufigkeit<BR>
+~~~~~~~~~~~~~~~~~~~~~<BR>
+Die kumulierte Häufigkeit wird berechnet als Summe der Häufigkeiten<BR>
+der Merkmalsausprägungen von der kleinsten Ausprägung bis hin zu der<BR>
+jeweils betrachteten Schranke.<BR>
+<BR>
+Klassifizierung<BR>
+~~~~~~~~~~~~~~~<BR>
+Anstatt die Häugigkeit einzelner Werte zu zählen kann es im<BR>
+inbesonderen bei aus einer Analogen Welt kommenden Daten<BR>
+aussagekräftiger sein, zu Zählen wie viele Werte in bestimmte<BR>
+Klassen fallen.<BR>
+
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+==========<BR>
+Kennzahlen<BR>
+==========
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i1) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+kill(all)$load(descriptive)$urlist:[98.7, 99.3, 95.8, 101.6, 100.4, 98.0, 96.3]$
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H07_img/Klepp_Jakob_H07_0.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Mittelwert <BR>
+auch Durchschnitt, Arithmetisches Mittel<BR>
+<BR>
+Summe/Anzahl
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i3) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+mean(urlist);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H07_img/Klepp_Jakob_H07_1.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Quantile<BR>
+<BR>
+Der Begriff Quantile beschreibt die relative Position eines<BR>
+Wertes in einer sortierten Liste.<BR>
+Die Quantile 0 ist der kleinste Wert, die Quantile 1 der größte.<BR>
+Wenn die Quatile keinene einzelnen Wert bezeichnet wird ein zwischenwert<BR>
+berechnet.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i4) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/* Quantile */<BR>
+position: 0.3;<BR>
+quantile(urlist, position);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H07_img/Klepp_Jakob_H07_2.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Quartile<BR>
+<BR>
+Quartilen bezeichnen Quantilen an 3 besonderen Orten,<BR>
+nach einem, zwei und drei Viertel der Werte.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i6) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/* 1. Quartile  */<BR>
+quantile(urlist, 1/4);<BR>
+/* 2. Quartile  */<BR>
+quantile(urlist, 2/4);<BR>
+/* 3. Quartile  */<BR>
+quantile(urlist, 3/4);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H07_img/Klepp_Jakob_H07_3.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Median <BR>
+auch Zentralwert<BR>
+<BR>
+Mittleres Element einer sortierten Liste bzw. im Falle einer Liste<BR>
+mit einer geraden Anzahl an Elementen, Mittelwert der zwei<BR>
+mittleren Elemene.<BR>
+<BR>
+Bei einer gausschen Verteilung entsprechen sich Median und Mittelwert.<BR>
+<BR>
+Der Median ist die zweite Quartile oder die Quantile 0.5
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i9) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+median(urlist);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H07_img/Klepp_Jakob_H07_4.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Varianz<BR>
+<BR>
+Beschreibt die Streuung von Werten um den Mittelwert.<BR>
+<BR>
+Wird berechnet als die Summe aller Quadrate der differenzen zum Mittelwert<BR>
+durch die Anzahl der Werte (bzw. Anzahl der Werte -1).
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i10) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+var(urlist);<BR>
+var1(urlist);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H07_img/Klepp_Jakob_H07_5.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Standardabweichung<BR>
+<BR>
+Beschreibt (in etwa) wie weit die Werte im durchschnitt vom Mittelwert abweichen.<BR>
+Die Standardabweichung wird als Quadratwurzel der Varianz berechnet.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i12) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+std(urlist);<BR>
+std1(urlist);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H07_img/Klepp_Jakob_H07_6.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Maximalwert<BR>
+<BR>
+größter Wert
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i14) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/* Maximalwert */<BR>
+smax(urlist);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H07_img/Klepp_Jakob_H07_7.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Minimalwert<BR>
+<BR>
+kleinster Wert
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i15) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/* Minimalwert */<BR>
+smin(urlist);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H07_img/Klepp_Jakob_H07_8.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Spannweite<BR>
+<BR>
+Unterschied zwischen Minimal und Maximalwert
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i16) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/* Spannweite */<BR>
+range(urlist);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H07_img/Klepp_Jakob_H07_9.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+================<BR>
+Visualisierungen<BR>
+================<BR>
+<BR>
+Scatter Plot<BR>
+~~~~~~~~~~~~<BR>
+Ein Scatter Plot (auch Streudiagramm) ist die graphische Darstellung<BR>
+von beobachteten Wertepaaren zweier statistischer Merkmale.<BR>
+Diese Wertepaare werden in ein kartesisches Koordinatensystem<BR>
+eingetragen, wodurch sich eine Punktwolke ergibt.<BR>
+<BR>
+Barplot<BR>
+~~~~~~~<BR>
+Ein Barplot (auch Säulendiagramm) Stellt durch senkrecht nebeinander<BR>
+stehenden Säulen die Häufigkeitsverteilung von Werten da.<BR>
+<BR>
+Paretodiagramm<BR>
+~~~~~~~~~~~~~~<BR>
+Eine Sonderform des Barplot bei dem die Werte nach Häufigkeit, links<BR>
+beginnend mit dem Häufigsten, sortiert sind.<BR>
+<BR>
+Piechart<BR>
+~~~~~~~~<BR>
+Ein Piechart (auch Kreis- oder Tortendiagramm) ist eine Darstellungsform<BR>
+für Teilwerte eines Ganzen als Teile eines Kreises. Das Piechart<BR>
+ist kreisförmig und in mehrere Kreissektoren eingeteilt, wobei jeder<BR>
+Kreissektor einen Teilwert und der Kreis somit die Summe der Teilwerte<BR>
+(das Ganze) darstellt. <BR>
+<BR>
+Boxplot<BR>
+~~~~~~~<BR>
+Fast Quartilen Extremwerte einer Stichprobe in einer Grafik zusammen,<BR>
+eignet sich dementsprechend um mehrere Stichproben zu vergleichen.<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#################<BR>
+|----#           #   #------------|<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#################<BR>
+^    ^           ^   ^            ^<BR>
+|    |           |   |            |<BR>
+|    |           |   |            Maximum<BR>
+|    |           |   3. Quartile<BR>
+|    |           Median<BR>
+|    1. Quartile<BR>
+|<BR>
+Minimum
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  0.1 Beispiel Kondensatoren
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Einer Lieferung von Kondensatoren werden 20 Stück entnommen und ihre Kapazität gemessen. <BR>
+Es ergeben sich folgende Werte (in nF) als Urliste:<BR>
+<BR>
+53  47  52  49  50  50  47  43  48  50  51  53  54  56  46  49  51  50  49 
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+In H05 gelöst
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  0.2 Beispiel Blechteile
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Bei der Produktion von Blechteilen sind bei der Qualitätskontrolle folgende Fehler aufgetreten:<BR>
+<BR>
+Fehler #    Fehlerart   Häufigkeit<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;1       Delle        8<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;2       Kratzer     26<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;3       Korrosion    4<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;4       Lackfehler  38<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;5       Verbogen     4<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;6       Gerissen     2<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;7       Maßfehler    2<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;8       Bohrfehler   3<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;9       Sonstige     3
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+H06
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  0.3 Beispiel Füllmengen
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Eine Messung des Füllgewichtes von 80 automatisch abgefüllten Marmeladegläsern ergab folgende Werte (in g):<BR>
+<BR>
+93.0  88.2  92.1  91.0  86.9  93.8  91.0  92.0  87.4  92.1<BR>
+92.7  93.3  88.8  91.5  90.4  88.1  89.7  88.9  92.7  91.4<BR>
+89.6  89.4  87.3  86.5  90.8  90.3  86.9  91.2  89.3  90.4<BR>
+94.2  90.4  90.8  91.9  90.8  92.4  88.3  92.0  87.3  93.8<BR>
+90.6  88.0  94.0  90.9  88.0  93.1  91.7  89.7  92.7  89.5<BR>
+90.7  89.3  89.3  86.5  88.9  87.5  88.2  88.7  90.2  86.3<BR>
+93.9  86.4  90.6  87.9  85.0  89.1  91.8  92.3  87.9  95.4
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+H06
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  0.4 Beispiel Widerstände
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Aus einer Lieferung von elektrischen Widerständen gleicher Art werden einige Stück herausgegriffen und gemessen. <BR>
+Dabei werden folgende Werte (in Ohm) gefunden:<BR>
+<BR>
+98.7  99.3  95.8  101.6  100.4  98.0  96.3
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i17) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxboxplot(<BR>
+[urlist]);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H07_img/Klepp_Jakob_H07_10.png">
+</P>
+
+ <HR>
+ <SMALL> Created with <A HREF="http://wxmaxima.sourceforge.net/">wxMaxima</A>.</SMALL>
+
+ </BODY>
+</HTML>
