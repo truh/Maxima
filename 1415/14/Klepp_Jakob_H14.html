@@ -1,0 +1,1345 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+ <HEAD>
+  <TITLE>Klepp_Jakob_H14</TITLE>
+  <META NAME="generator" CONTENT="wxMaxima">
+  <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+  <STYLE TYPE="text/css">
+body {
+  background-color: rgb(255,255,255);
+}
+.input {
+  color: rgb(0,0,255);
+}
+.comment {
+  color: rgb(0,0,0);
+  background-color: rgb(255,255,255);
+  padding: 2mm;
+}
+.image {
+  color: rgb(0,0,0);
+  padding: 2mm;
+}
+.section {
+  color: rgb(0,0,0);
+  font-size: 1.5em;
+  padding: 2mm;
+}
+.subsect {
+  color: rgb(0,0,0);
+  font-size: 1.2em;
+  padding: 2mm;
+}
+.title {
+  color: rgb(0,0,0);
+  font-size: 2em;
+  padding: 2mm;
+}
+.prompt {
+  color: rgb(255,0,0);
+}
+table {
+  border: 0px;
+}
+td {
+  vertical-align: top;
+  padding: 1mm;
+}
+  </STYLE>
+ </HEAD>
+ <BODY>
+
+<!---------------------------------------------------------->
+<!--          Created with wxMaxima version 14.09.0         -->
+<!---------------------------------------------------------->
+
+
+<!-- Title cell -->
+
+
+<P CLASS="title">
+   Diskrete Verteilung     <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Jakob  Klepp        <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2014-12-02         
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Glossar<BR>
+-------<BR>
+<BR>
+N           Größe der Grundgesamtheit<BR>
+<BR>
+D           Merkmalsträger (/defekte Einheiten) in der Grundgesamtheit<BR>
+<BR>
+n           Größe der Stichprobe<BR>
+<BR>
+x           Anzahl der Merkmalsträger in der Stichprobe<BR>
+<BR>
+µ           Erwartungswert<BR>
+<BR>
+g(x)        Wahrscheindlichkeitsdichte<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bei stetigen Verteilungen lassen sich Wahrscheinlichkeiten nicht als<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Summen von Einzelwahrscheinlichkeiten berechnen, da für stetige<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Zufallsvariablen X stets P(X=x) = 0 gilt. Sie lassen sich jedoch oft<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;als Integrale über eine Dichtefunktion (oder Wahrscheinlichkeitsdichte)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f(x) darstellen<BR>
+<BR>
+G(x)        Wahrscheindlichkeitsfunktion<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verteilungen auf den reellen Zahlen können allgemein durch die<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(kumulative) Verteilungsfunktion (engl. cumulative distribution function,cdf)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;F(x) beschrieben werden. Sie gibt an, mit welcher Wahrscheinlichkeit die<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Zufallsvariable einen Wert kleiner oder gleich x annimmt<BR>
+
+</P>
+
+
+<!-- Section cell -->
+
+
+<P CLASS="section">
+ 1 Hypergeometrische Verteilung
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Ist eine von 3 sogennanten diskreten Verteilngen.<BR>
+Diskrete Verteilung heißt dass die Merkmale nur in ganzen Zahlen<BR>
+vorkommen.<BR>
+<BR>
+In einer Grundgesamtheit (Prüflos) befinden sich N Einheiten.<BR>
+Von diesen N Einheiten sind D defekt. Aus der Grundgesamtheit<BR>
+wird eine Stichprobe mit dem Umfang n gezogen. Wie groß ist die<BR>
+Wahrscheindlichkeit dass es x Merkmalsträger (defekte Einheiten)<BR>
+in der Stichprobe gibt.<BR>
+<BR>
+&nbsp;&nbsp;N=15  n=3<BR>
+&nbsp;&nbsp;D=4   x=2<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/4\ /11\<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;g   \2/ \ 1/<BR>
+&nbsp;&nbsp;P(x=2) = - = --------<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;m     /15\<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\ 3/<BR>
+<BR>
+Im Allgemeinen: Man bezeichnet mit g(x; N; D; n) die Wahrscheindlichkeit genau<BR>
+x Fehlerhafte Einheiten zu ziehen. Wenn N,D,n gegeben sind:<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/D\ /N - D\<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\x/ \n - x/<BR>
+&nbsp;&nbsp;g(x; N; D; n) = g(x) = -----------<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/N\<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n/<BR>
+&nbsp;&nbsp;mit x=0,1,2,..., min(n,D)<BR>
+&nbsp;&nbsp;-> x kannnicht größer als die Stichprobe sein<BR>
+<BR>
+&nbsp;&nbsp;*Wahrscheindlichkeitsdichte der Hypergeometrischen Verteilung*<BR>
+<BR>
+(1) N; D; n<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Parameter der Hypergeometrischen Verteilung<BR>
+(2) D<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Merkmalsträger in der Grundgesamtheit<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;x<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Zahl der Merkmalsträger in der Stichprobe<BR>
+(3) x<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;x kann nicht vorrausgesagt werden<BR>
+"zufallgröße", "Zufallsvariable"<BR>
+<BR>
+Die verwendung der Hypergeometrischen Verteilung im Qualitätsmanagment<BR>
+legt nahe dass die Stichprobe nicht in die Grundgesamtheit zurückgelegt wird<BR>
+&nbsp;&nbsp;*ziehen ohne zurücklegen*
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i1) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+kill(all);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H14_img/Klepp_Jakob_H14_0.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+     g(x;  N; D; n)<BR>
+Bsp: g(x, 15, 4, 3)<BR>
+<BR>
+x= 0,1,2 ... min(n, D)
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i1) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+_N: 15;<BR>
+_D: 4;<BR>
+_n: 3;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H14_img/Klepp_Jakob_H14_1.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i4) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+binomial;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H14_img/Klepp_Jakob_H14_2.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+buildq erlaubt das definieren von Closures in Maxima<BR>
+Closures sind ein sehr praktisches Pattern in der funktionalen Programmierung<BR>
+Meiner Erfahrung nach ist der funktionale Weg der einzige<BR>
+mit dem man in Maxima halbwegs gut weiter kommt.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i5) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+Hypergeometric(N,D,n):=buildq(<BR>
+[N,D,n],<BR>
+lambda([x],<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;binomial(D, x) * binomial(N - D, n-x)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;/*---------------------------------*/<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/ binomial(N, n)<BR>
+<BR>
+));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H14_img/Klepp_Jakob_H14_3.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i6) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+makelist(Hypergeometric(15, 4, 3)(i), i, 0, 3);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H14_img/Klepp_Jakob_H14_4.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+load(distrib);<BR>
+<BR>
+pdf_hypergeometric(x,n1,n2,n)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;x ... Gewünschte Anzahl der Objekte der Art A<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;n1... the number of objects of class A<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;n2... the number of objects of class B<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;n ... Größe der Stichprobe
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Wahrscheindlichlkeitsdichte
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i7) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+barplot(_list):=makelist([<BR>
+&nbsp;fill_color=[red, green, blue, magenta, cyan, yellow, orange, violet, brown, gray, black][mod(i,11)+1],<BR>
+&nbsp;rectangle(<BR>
+&nbsp;&nbsp;[i*1-1, 0],<BR>
+&nbsp;&nbsp;[i*1-0.25, _list[i]]<BR>
+&nbsp;)<BR>
+], i, length(_list));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H14_img/Klepp_Jakob_H14_5.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i8) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/* Zeichnen */<BR>
+wxdraw2d(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;color=black,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;barplot(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;makelist(Hypergeometric(15, 4, 3)(i), i, 0, 3)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;)<BR>
+);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H14_img/Klepp_Jakob_H14_6.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Verteilungsfunktion
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i9) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+G(x):=lreduce("+", <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;makelist(Hypergeometric(15, 4, 3)(i), i, 0, x)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H14_img/Klepp_Jakob_H14_7.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i10) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+verteilung: makelist(G(i), i, 0, 3);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H14_img/Klepp_Jakob_H14_8.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i11) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/* Zeichnen */<BR>
+wxdraw2d(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;color=black,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;barplot(verteilung)<BR>
+);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H14_img/Klepp_Jakob_H14_9.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+P(genau x)<BR>
+P(mindestens x)<BR>
+P(höchstens x)
+</P>
+
+
+<!-- Section cell -->
+
+
+<P CLASS="section">
+ 2 Binomialverteilung
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Die wichtigste diskrete Verteilung. Diese entspricht dem ziehen<BR>
+einer Stichprobe mit zurücklegen.<BR>
+<BR>
+Beispiel: Ein idealer Würfel wird n=8 mal geworfen. Jedes mal ist<BR>
+&nbsp;&nbsp;die Wahrscheindlichkeit:<BR>
+&nbsp;&nbsp;p("6") = 1/6<BR>
+&nbsp;&nbsp;Wie groß ist die Wahrscheindlichkeit dass bei den 8 mal genau<BR>
+&nbsp;&nbsp;2 mal "6" vorkommt.<BR>
+<BR>
+Erfolgreiche Wurffolge<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# |     1     |     2     |     3     |     4     |     5     |     6     |     7     |     8<BR>
+-------------------------------------------------------------------------------------------------------------<BR>
+&nbsp;&nbsp;&nbsp;Augenzahl |     1     |     6     |     3     |     4     |     2     |     5     |     6     |     2<BR>
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -<BR>
+&nbsp;&nbsp;&nbsp;Reduziert |     N     |     6     |     N     |     N     |     N     |     N     |     6     |     N<BR>
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -<BR>
+p Einzelwert | (1 - 1/6) |    1/6    | (1 - 1/6) | (1 - 1/6) | (1 - 1/6) | (1 - 1/6) |    1/6    | (1 - 1/6)<BR>
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -<BR>
+&nbsp;p(N6NNNN6N) |   (1-p)   |     p     |   (1-p)   |   (1-p)   |   (1-p)   |   (1-p)   |     p     |   (1-p)<BR>
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/8\<BR>
+Es gibt \2/ unterschiedliche anordnungen für 2 * "6" und 6 * ¬"6"<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/8\<BR>
+-> p(2 * "6") = \2/ * p² * (1-p)<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/8\<BR>
+&nbsp;&nbsp;&nbsp;p(2 * "6") = \2/ * 1/6 * (1 - 1/6)^6 = 0.265<BR>
+<BR>
+Ein Zufallsvorgang wird n-mal durchgeführt. Die Wahrscheindlichkeit dass ein<BR>
+bestimmtes Ereignis A eintritt sei immer gleich und habe den Wert p. Für die<BR>
+Wahrscheindlichekti dass das Ereignis A genau eintritt gilt:<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/n\<BR>
+&nbsp;&nbsp;g(p; n; x) = g(x) = \x/ * p^x * (1-p)^(n-x)<BR>
+<BR>
+Erwartungswert:<BR>
+<BR>
+&nbsp;&nbsp;µ = n*p<BR>
+<BR>
+(1) p,n ... Parameter der Binomialverteilung<BR>
+(2) Erwartungswert bedeutet wieder:<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Mittelwert der Anzahl des eintretens von bei<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;oftmaliger Durchführung<BR>
+(3) ziehen mit zurücklegen:<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Durch die Versuchsanordnung wird die Grundgesamtheit nicht verändert<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;(Trotzdem wird in der Praxis die Stichprobe nicht in die Grundgesamtheit<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;zurückgelegt)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Wenn die Grundgesamtheit mehr als 10-mal so groß wie die Stichprobe ist,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;kann man zurücklegen/nicht zurücklegen vernachlässigen und die Berechnung<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;mit der Binomialverteilung durchführen.
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Beispiel:<BR>
+<BR>
+In einem Prüflos sind 2000 Einheiten, davon 80 Fehlerhafte.<BR>
+Man entnimmt eine Zufallsstichprobe vom Unfang n=50. <BR>
+<BR>
+Berechne über Binomialverteilung wie groß die Wahrscheindlichkeit<BR>
+<BR>
+a) P(genau 0)<BR>
+b) P(genau 2)<BR>
+c) P(höchstens 2)<BR>
+d) P(mindestens 2)<BR>
+<BR>
+&nbsp;&nbsp;fehlerhafte Einheiten vorzufinden<BR>
+<BR>
+e) berechne µ<BR>
+f) Diagramm Wahrscheindlichkeitsdichte<BR>
+g) Diagramm Wahrscheindlichkeitsfunktion
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+N = 2000            D    80<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}  ->  p = - = ----       n=50<BR>
+D = 80              N   2000
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i12) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+kill(all);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H14_img/Klepp_Jakob_H14_10.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i1) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+Binomialverteilung(n,p):=buildq(<BR>
+[n,p],<BR>
+lambda([x],<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;binomial(n, x) * p^x * (1-p) ^ (n-x)<BR>
+<BR>
+));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H14_img/Klepp_Jakob_H14_11.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i2) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+barplot(_list):=makelist([<BR>
+&nbsp;fill_color=[red, green, blue, magenta, cyan, yellow, orange, violet, brown, gray, black][mod(i,11)+1],<BR>
+&nbsp;rectangle(<BR>
+&nbsp;&nbsp;[i*1-1, 0],<BR>
+&nbsp;&nbsp;[i*1-0.25, _list[i]]<BR>
+&nbsp;)<BR>
+], i, length(_list));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H14_img/Klepp_Jakob_H14_12.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i3) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+p: 80/2000;<BR>
+n: 50;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H14_img/Klepp_Jakob_H14_13.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+a) P(genau 0)
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i5) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+Binomialverteilung(n,p)(0), float;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H14_img/Klepp_Jakob_H14_14.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+b) P(genau 2)
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i6) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+Binomialverteilung(n,p)(2), float;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H14_img/Klepp_Jakob_H14_15.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+c) P(höchstens 2)
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i7) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+lreduce("+", makelist(Binomialverteilung(n,p)(i), i, 0, 2)), float;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H14_img/Klepp_Jakob_H14_16.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+d) P(mindestens 2)
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i8) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+lreduce("+", makelist(Binomialverteilung(n,p)(i), i, 2, 50)), float;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H14_img/Klepp_Jakob_H14_17.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+e) berechne µ
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i9) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+n*p;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H14_img/Klepp_Jakob_H14_18.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+f) Diagramm Wahrscheindlichkeitsdichte
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i10) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxdraw2d(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;color=black,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;barplot(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;makelist(Binomialverteilung(n,p)(i), i, 0, 8))<BR>
+);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H14_img/Klepp_Jakob_H14_19.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+g) Diagramm Wahrscheindlichkeitsfunktion
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i11) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxdraw2d(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;color=black,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;barplot(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;makelist(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lreduce("+",<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;makelist(Binomialverteilung(n,p)(j), j, 0, i)),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i, 0, 8))<BR>
+);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H14_img/Klepp_Jakob_H14_20.png">
+</P>
+
+
+<!-- Section cell -->
+
+
+<P CLASS="section">
+ 3 Poissonverteilung
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Die Poissonverteilung wird im Qualitätsmanagment bevorzugt zur angabe<BR>
+von Fehlern auf gleichartige Einheiten herangezogen. Notwendig ist nur<BR>
+die kenntniss eines Mittelwerts von Merkmalsträger pro Einheit um die<BR>
+Wahrscheindlichkeit einer bestimmten Fehlerart anzugeben.<BR>
+<BR>
+Ist µ die mittlere Fehleranzahl pro Einheit (der arithmetische<BR>
+Mittelwert der Fehleranzahl sehr vieler Einheiten) dann gilt für<BR>
+die Wahrscheindlichkeit g(x)  auf einer Beliebiger Einheit genau x<BR>
+Fehler vorzufinden.<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;µ^x<BR>
+g(x; µ) = g(x) = --- * e^(-µ)      x=0,1,2,...<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x!<BR>
+<BR>
+(1) Poisson beschreibt die Verteilung der Anzahl irgendwelcher<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;vorkommnisse auf einem Zählabschnitt<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;* "pro" ... meist Poissonverteilung<BR>
+<BR>
+(2) µ  Einziger Parameter der Poissonverteilung<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gleichzeitig Erwartungswert der Verteilung<BR>
+<BR>
+(3) Entspricht eine Verteilung von Ereignissen der Poissonverteilung<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;dann treten die Ereignisse zufällig auf
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Beispiel: Die Lackfehler pro Blechteil seien Poissonverteit, mit einer<BR>
+&nbsp;&nbsp;mittleren Anzahl von µ=1.4<BR>
+<BR>
+a) P(genau 0)<BR>
+b) P(genau 2)<BR>
+c) P(höchstens 2)<BR>
+d) P(mindestens 2)<BR>
+e) g(x)  -  Wahrscheindlichkeitsdichte<BR>
+f) G(x)  -  Wahrscheindlichkeitsfunktion
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i12) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+kill(all);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H14_img/Klepp_Jakob_H14_21.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i1) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+Poissonverteilung(µ):=buildq(<BR>
+[µ],<BR>
+lambda([x],<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;µ^x / x! * %e^(-µ)<BR>
+<BR>
+));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H14_img/Klepp_Jakob_H14_22.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i2) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+barplot(_list):=makelist([<BR>
+&nbsp;fill_color=[red, green, blue, magenta, cyan, yellow, orange, violet, brown, gray, black][mod(i,11)+1],<BR>
+&nbsp;rectangle(<BR>
+&nbsp;&nbsp;[i*1-1, 0],<BR>
+&nbsp;&nbsp;[i*1-0.25, _list[i]]<BR>
+&nbsp;)<BR>
+], i, length(_list));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H14_img/Klepp_Jakob_H14_23.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+a) P(genau 0)
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i3) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+Poissonverteilung(1.4)(0);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H14_img/Klepp_Jakob_H14_24.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+b) P(genau 2)
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i4) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+Poissonverteilung(1.4)(2);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H14_img/Klepp_Jakob_H14_25.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+c) P(höchstens 2)
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i5) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+lreduce("+", makelist(Poissonverteilung(1.4)(i), i, 0, 2));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H14_img/Klepp_Jakob_H14_26.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+d) P(mindestens 2)<BR>
+<BR>
+666, als Ersatz für Unendlich
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i6) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+lreduce("+", makelist(Poissonverteilung(1.4)(i), i, 2, 666));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H14_img/Klepp_Jakob_H14_27.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+e) g(x)  -  Wahrscheindlichkeitsdichte
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i7) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxdraw2d(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;color=black,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;barplot(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;makelist(Poissonverteilung(1.4)(i), i, 0, 6))<BR>
+);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H14_img/Klepp_Jakob_H14_28.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+f) G(x)  -  Wahrscheindlichkeitsfunktion
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i8) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxdraw2d(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;color=black,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;barplot(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;makelist(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lreduce("+",<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;makelist(Poissonverteilung(1.4)(j), j, 0, i)),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i, 0, 6))<BR>
+);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H14_img/Klepp_Jakob_H14_29.png">
+</P>
+
+
+<!-- Section cell -->
+
+
+<P CLASS="section">
+ 4 WahrschRechnung3
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+1) Wie groß ist die Wahrscheinlichkeit, dass in einer Schulklasse<BR>
+&nbsp;&nbsp;&nbsp;mit 10 Burschen und 5 Mädchen bei einer Zufallsauswahl von 3<BR>
+&nbsp;&nbsp;&nbsp;Schülern<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;a) kein Mädchen<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lösung: 26.4%<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;b) mindestens ein Mädchen darunter ist?<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lösung: 73.6%
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i9) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+kill(all);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H14_img/Klepp_Jakob_H14_30.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+kleine Grundgesamteit, ziehen ohne zurücklegen<BR>
+-> Hypergeometrische Verteilung<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/D\ /N - D\<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\x/ \n - x/<BR>
+&nbsp;&nbsp;g(x; N; D; n) = g(x) = -----------<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/N\<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n/
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i1) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+Hypergeometric(N,D,n):=buildq(<BR>
+[N,D,n],<BR>
+lambda([x],<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;binomial(D, x) * binomial(N - D, n-x)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;/*---------------------------------*/<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/ binomial(N, n)<BR>
+<BR>
+));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H14_img/Klepp_Jakob_H14_31.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i2) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+hg(x):=Hypergeometric(15, 5, 3);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H14_img/Klepp_Jakob_H14_32.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i3) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/* a) kein Mädchen */<BR>
+hg(_)(0), float;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H14_img/Klepp_Jakob_H14_33.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i4) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/* b) mindestens ein Mädchen darunter ist? */<BR>
+lreduce("+", makelist(hg(_)(i), i, 1, 15)), float;<BR>
+1 - hg(_)(0), float;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H14_img/Klepp_Jakob_H14_34.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+2) Ein Multiple Choice Test besteht aus 30 Fragen mit je<BR>
+&nbsp;&nbsp;&nbsp;4 Antwortmöglichkeiten, von denen jeweils nur eine richtig ist.<BR>
+&nbsp;&nbsp;&nbsp;Angenommen, ein Student rät bei jeder Frage. Wie groß ist die<BR>
+&nbsp;&nbsp;&nbsp;Wahrscheinlichkeit, dass der Student<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;a) mehr als 15 Fragen,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lösung: 0.08%<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;b) weniger als 8 Fragen korrekt beantwortet?<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lösung: 51.4%
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i6) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+kill(all);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H14_img/Klepp_Jakob_H14_35.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i1) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+Binomialverteilung(n,p):=buildq(<BR>
+[n,p],<BR>
+lambda([x],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;binomial(n, x) * p^x * (1-p) ^ (n-x)<BR>
+));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H14_img/Klepp_Jakob_H14_36.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i2) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/* a) mehr als 15 Fragen, */<BR>
+lreduce("+", makelist(Binomialverteilung(30, 1/4)(i), i, 16, 30)), numer;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H14_img/Klepp_Jakob_H14_37.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i3) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/* b) weniger als 8 Fragen korrekt beantwortet? */<BR>
+lreduce("+", makelist(Binomialverteilung(30, 1/4)(i), i, 0, 7)), numer;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H14_img/Klepp_Jakob_H14_38.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+3) Zu einem Kundenschalter kommen pro Stunde durchschnittlich<BR>
+&nbsp;&nbsp;&nbsp;8 Kunden. Es kann angenommen werden, dass die Anzahl der<BR>
+&nbsp;&nbsp;&nbsp;Kundenvorsprachen an diesem Schalter poissonverteilt ist. Wie groß<BR>
+&nbsp;&nbsp;&nbsp;ist die Wahrscheinlichkeit, dass<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;a) in einer Stunde genau 4 Kunden,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lösung: 5.7%<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;b) in 2 Stunden mehr als 25 Kunden kommen?<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lösung: 1.3%
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i4) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+kill(all);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H14_img/Klepp_Jakob_H14_39.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i1) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+Poissonverteilung(µ):=buildq(<BR>
+[µ],<BR>
+lambda([x],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;µ^x / x! * %e^(-µ)<BR>
+));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H14_img/Klepp_Jakob_H14_40.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i2) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/* a) in einer Stunde genau 4 Kunden */<BR>
+Poissonverteilung(8)(4), numer=true;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H14_img/Klepp_Jakob_H14_41.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i3) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/* b) in 2 Stunden mehr als 25 Kunden kommen? <BR>
+&nbsp;∞ => 1000 */<BR>
+lreduce("+", makelist(Poissonverteilung(16)(i), i, 26, 1000)), numer=true;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H14_img/Klepp_Jakob_H14_42.png">
+</P>
+
+ <HR>
+ <SMALL> Created with <A HREF="http://wxmaxima.sourceforge.net/">wxMaxima</A>.</SMALL>
+
+ </BODY>
+</HTML>
