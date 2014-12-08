@@ -4,8 +4,7 @@ import re
 
 from pathlib import Path
 
-TEMPLATE_START = """
-<!DOCTYPE html>
+TEMPLATE_START = """<!DOCTYPE html>
 <html>
     <head>
     </head>
@@ -20,31 +19,45 @@ TEMPLATE_END = """
 """
 
 
-def sub_files(path):
-    if '.git' in str(path): return ''
-    if path.is_dir():
-        html_dir = ''
-        for new_file in path.iterdir():
-            html_dir += sub_files(new_file) or ''
-        if len(html_dir) > 0:
-            return """
-            <li>
-            {name}
-            <ul>
-            {tree}
-            </ul>
-            </li>""".format(path=str(path), name=str(path.parts[-1:]), tree=html_dir)
-        return ''
-    else:
-        if str(path)[-4:] in ('html', '.wxm'):
-            return """
-            <li>
-            <a href="{path}">
-            {name}
-            </a>
-            </li>""".format(path=str(path), name=str(path.parts[-1]))
+def sub_dirs(path):
+    paths = []
+    for subs in path.iterdir():
+        if subs.is_dir():
+            paths.append(subs)
+            for subsub in sub_dirs(subs):
+                paths.append(subsub)
+    return paths
+
+
+def sub_files(paths):
+    html = ''
+    for path in paths:
+        relevant = []
+        for f in path.iterdir():
+            if f.is_file() and str(f)[-4:] in ('html', '.wxm'):
+                relevant.append(f)
+        if len(relevant) > 0:
+            html += '            <li>\n'
+            html += '                ' + str(path)
+            html += '\n                <ul>'
+            for r in relevant:
+                html += """
+                    <li>
+                        <a href="{f}">
+                            {f}
+                        </a>
+                    </li>
+                """.format(f=str(r))
+            html += '</ul>\n'
+            html += '            </li>\n'
+    return html
 
 
 if __name__ == '__main__':
     path = Path('.')
-    print(TEMPLATE_START + sub_files(path) + TEMPLATE_END)
+    paths = sub_dirs(path)
+    #print(paths)
+    paths = sorted(paths)
+    #print(paths)
+    tree = sub_files(paths)
+    print(TEMPLATE_START + tree + TEMPLATE_END)
