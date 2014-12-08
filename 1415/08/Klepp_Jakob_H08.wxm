@@ -1,0 +1,58 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 14.09.0 ] */
+
+/* [wxMaxima: title   start ]
+Stochastik
+Jakob Klepp
+2014-10-21
+   [wxMaxima: title   end   ] */
+
+/* [wxMaxima: comment start ]
+
+    P(A)~= k/n
+
+    P ... probability
+
+LAPLACE-Experiment Zufallsexperiment folgenden Eigenschaften:
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Bsp: 2 ideale Würfel werden geworfen
+
+Wie groß ist die Wahrscheindlichkeit:
+
+a) wenigstens einmal eine 6 zu würfeln
+
+ 11  12  13  14  15 [16]
+
+ 21  22  23  24  25 [26]
+
+ 31  32  33  34  35 [36]
+
+ 41  42  43  44  45 [46]
+
+ 51  52  53  54  55 [56]
+
+[61][62][63][64][65][66]
+
+P(wenigstens 1x"6") = 11/36
+
+b) Augensumme von 8
+
+ 11  12  13  14  15  16
+
+ 21  22  23  24  25 [26]
+
+ 31  32  33  34 [35] 36
+
+ 41  42  43 [44] 45  46
+
+ 51  52 [53] 54  55  56
+
+ 61 [62] 63  64  65  66
+
+P(Augensumme 8) = 5/36
+   [wxMaxima: comment end   ] */
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$
