@@ -93,7 +93,7 @@ Differenzenquotient -> Differentialquotient)
 
 <P><TABLE><TR><TD>
   <SPAN CLASS="prompt">
-(%i1) 
+(%i12) 
   </SPAN></TD>
   <TD><SPAN CLASS="input">
 kill(all);
@@ -677,7 +677,7 @@ Daher müssen alle Punkte gefunden an denen der Nenner 0 ist.
   </SPAN></TD>
   <TD><SPAN CLASS="input">
 solve(n,x)$<BR>
-ud:[rhs(%[1]),rhs(%[2])];
+ud:ud:makelist(rhs(%[i]), i, length(%));
   </SPAN></TD>
 </TR></TABLE>
   <BR>
@@ -748,7 +748,7 @@ Man erkennt sie daran das der Zähler 0 ist der Nener aber nicht.
   </SPAN></TD>
   <TD><SPAN CLASS="input">
 solve(z,x)$<BR>
-z0:[rhs(%[1])];
+z0:ud:makelist(rhs(%[i]), i, length(%));
   </SPAN></TD>
 </TR></TABLE>
   <BR>
@@ -1071,7 +1071,7 @@ und in die Variable exerg speichern.
 mima:[];<BR>
 for i:1 step 1 thru length(extremX) do<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;if (fII(extremX[i])=0) then mima:append(mima,["Sattelpunkt"])<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;elseif (fII(extremX[i])>0) then mima:append(mima, ["Maximum"])<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;elseif (fII(extremX[i])<0) then mima:append(mima, ["Maximum"])<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;else mima:append(mima, ["Minimum"]);
   </SPAN></TD>
 </TR></TABLE>
@@ -1148,7 +1148,9 @@ in den Zähler der Funktion einsetzt. (man bekommt den y Wert)
 
 <P CLASS="comment">
 Nullstelle bilden, hier verwende ich realroots um keine<BR>
-imaginären Nullstellen zu bekommen
+imaginären Nullstellen zu bekommen<BR>
+<BR>
+Wenn realroots Probleme bereitet kann auch solve(fII(x), x) verwendet werden
 </P>
 
 
@@ -1222,7 +1224,23 @@ Der x- und y- und k-Wert in allgemeine Geradengleichung(y=k*x+d) eingesetzt <BR>
 (%i36) 
   </SPAN></TD>
   <TD><SPAN CLASS="input">
-wendeTang:makelist(fI(wendeX[i]) * x + wendeX[i], i, length(wendeX));
+ks:makelist(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;fI(wendeX[i]), <BR>
+i, length(wendeX));<BR>
+ds:makelist(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;rhs(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;solve(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;subst([k=ks[i], x=wendeX[i], y=wendeY[i]], y=k*x+d), d<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)[1]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;),<BR>
+i, length(wendeX));<BR>
+wendeTang:makelist(<BR>
+subst([<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;k=ks[i],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;d=ds[i]<BR>
+],<BR>
+k*x + d<BR>
+), i, length(wendeX));
   </SPAN></TD>
 </TR></TABLE>
   <BR>
@@ -1243,7 +1261,7 @@ Ausgabe der Wendepunkte
 
 <P><TABLE><TR><TD>
   <SPAN CLASS="prompt">
-(%i37) 
+(%i39) 
   </SPAN></TD>
   <TD><SPAN CLASS="input">
 wende_erg: matrix(["Wendepunkt [x,y]", "Wendetangente"])$<BR>
@@ -1270,7 +1288,7 @@ disp("Die Wendepunkte sind:",wende_erg)$
 
 <P><TABLE><TR><TD>
   <SPAN CLASS="prompt">
-(%i40) 
+(%i42) 
   </SPAN></TD>
   <TD><SPAN CLASS="input">
 disp("Undefinierte Stellen: ", ud)$<BR>
@@ -1290,7 +1308,7 @@ disp("Die Wendepunkte sind:",wende_erg)$
 
 <P><TABLE><TR><TD>
   <SPAN CLASS="prompt">
-(%i45) 
+(%i47) 
   </SPAN></TD>
   <TD><SPAN CLASS="input">
 vertical_line(x):=polygon([x, x],[-9000, 9000]);
@@ -1306,7 +1324,7 @@ vertical_line(x):=polygon([x, x],[-9000, 9000]);
 
 <P><TABLE><TR><TD>
   <SPAN CLASS="prompt">
-(%i46) 
+(%i48) 
   </SPAN></TD>
   <TD><SPAN CLASS="input">
 wxdraw2d(<BR>
@@ -1367,7 +1385,7 @@ makelist(explicit(wendeTang[i], x, -7, 7), i, length(wendeTang))<BR>
 
 <P><TABLE><TR><TD>
   <SPAN CLASS="prompt">
-(%i47) 
+(%i49) 
   </SPAN></TD>
   <TD><SPAN CLASS="input">
 kill(all);

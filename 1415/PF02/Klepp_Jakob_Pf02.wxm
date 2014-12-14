@@ -317,7 +317,7 @@ Daher müssen alle Punkte gefunden an denen der Nenner 0 ist.
 
 /* [wxMaxima: input   start ] */
 solve(n,x)$
-ud:[rhs(%[1]),rhs(%[2])];
+ud:ud:makelist(rhs(%[i]), i, length(%));
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: comment start ]
@@ -356,7 +356,7 @@ Man erkennt sie daran das der Zähler 0 ist der Nener aber nicht.
 
 /* [wxMaxima: input   start ] */
 solve(z,x)$
-z0:[rhs(%[1])];
+z0:ud:makelist(rhs(%[i]), i, length(%));
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: comment start ]
@@ -500,7 +500,7 @@ und in die Variable exerg speichern.
 mima:[];
 for i:1 step 1 thru length(extremX) do
     if (fII(extremX[i])=0) then mima:append(mima,["Sattelpunkt"])
-    elseif (fII(extremX[i])>0) then mima:append(mima, ["Maximum"])
+    elseif (fII(extremX[i])<0) then mima:append(mima, ["Maximum"])
     else mima:append(mima, ["Minimum"]);
 /* [wxMaxima: input   end   ] */
 
@@ -534,6 +534,8 @@ in den Zähler der Funktion einsetzt. (man bekommt den y Wert)
 /* [wxMaxima: comment start ]
 Nullstelle bilden, hier verwende ich realroots um keine
 imaginären Nullstellen zu bekommen
+
+Wenn realroots Probleme bereitet kann auch solve(fII(x), x) verwendet werden
    [wxMaxima: comment end   ] */
 
 /* [wxMaxima: input   start ] */
@@ -559,7 +561,23 @@ Der x- und y- und k-Wert in allgemeine Geradengleichung(y=k*x+d) eingesetzt
    [wxMaxima: comment end   ] */
 
 /* [wxMaxima: input   start ] */
-wendeTang:makelist(fI(wendeX[i]) * x + wendeX[i], i, length(wendeX));
+ks:makelist(
+    fI(wendeX[i]), 
+i, length(wendeX));
+ds:makelist(
+    rhs(
+        solve(
+            subst([k=ks[i], x=wendeX[i], y=wendeY[i]], y=k*x+d), d
+        )[1]
+    ),
+i, length(wendeX));
+wendeTang:makelist(
+subst([
+    k=ks[i],
+    d=ds[i]
+],
+k*x + d
+), i, length(wendeX));
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: comment start ]

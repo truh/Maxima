@@ -9,14 +9,28 @@ TEMPLATE_START = """<!DOCTYPE html>
     <head>
     </head>
     <body>
-        <ul>
-"""
+        <ol>"""
+
+DIR_START = """
+            <li>
+                {path}
+                <ul>"""
+
+FILE = """
+                    <li>
+                        <a href="{f}">
+                            {f}
+                        </a>
+                    </li>"""
+
+DIR_END = """
+                </ul>
+            </li>"""
 
 TEMPLATE_END = """
-        </ul>
+        </ol>
     </body>
-</html>
-"""
+</html>"""
 
 
 def sub_dirs(path):
@@ -37,27 +51,16 @@ def sub_files(paths):
             if f.is_file() and str(f)[-4:] in ('html', '.wxm'):
                 relevant.append(f)
         if len(relevant) > 0:
-            html += '            <li>\n'
-            html += '                ' + str(path)
-            html += '\n                <ul>'
+            html += DIR_START.format(path=path)
             for r in relevant:
-                html += """
-                    <li>
-                        <a href="{f}">
-                            {f}
-                        </a>
-                    </li>
-                """.format(f=str(r))
-            html += '</ul>\n'
-            html += '            </li>\n'
+                html += FILE.format(f=str(r))
+            html += DIR_END
     return html
 
 
 if __name__ == '__main__':
     path = Path('.')
     paths = sub_dirs(path)
-    #print(paths)
     paths = sorted(paths)
-    #print(paths)
     tree = sub_files(paths)
     print(TEMPLATE_START + tree + TEMPLATE_END)
