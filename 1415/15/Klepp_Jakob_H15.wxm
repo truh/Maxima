@@ -1,0 +1,889 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 14.09.0 ] */
+
+/* [wxMaxima: title   start ]
+Normalverteilung
+   [wxMaxima: title   end   ] */
+
+/* [wxMaxima: section start ]
+Analyse
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(all);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+load(draw);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+load (descriptive);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+Poissonverteilung(µ):=buildq(
+[µ],
+lambda([x],
+    µ^x / x! * %e^(-µ)
+));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+barplot(_list):=makelist([
+ fill_color=[red, green, blue, magenta, cyan, yellow, orange, violet, brown, gray, black][mod(i,11)+1],
+ rectangle(
+  [i*1-1, 0],
+  [i*1-0.25, _list[i]]
+ )
+], i, length(_list));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+freqplot(_list):=makelist([
+ fill_color=[red, green, blue, magenta, cyan, yellow, orange, violet, brown, gray, black][mod(i,11)+1],
+ rectangle(
+  [i*1-1, 0],
+  [i*1-0.25, _list[i]]
+ )
+], i, length(_list));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+freq_bars(_freq):=makelist([
+ fill_color=[red, green, blue, magenta, cyan, yellow, orange, violet, brown, gray, black][mod(i,11)+1],
+ rectangle(
+  [_freq[1][i] - 0.25, 0],
+  [_freq[1][i] + 0.25, _freq[2][i]]
+ )
+], i, length(_freq[1]));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+rel_freq_bars(_freq):=makelist([
+ fill_color=[red, green, blue, magenta, cyan, yellow, orange, violet, brown, gray, black][mod(i,11)+1],
+ rectangle(
+  [_freq[1][i] - 0.25, 0],
+  [_freq[1][i] + 0.25, _freq[2][i]/lreduce("+", _freq[2])]
+ )
+], i, length(_freq[1]));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+v: [
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+0,0,1,0,
+0,0,0,0,
+0,0,0,0,
+0,0,0,0,
+1,0,1,1,
+0,1,0,0,
+0,0,1,3,
+0,0,0,0,
+0,1,0,1,
+3,1,4,6,
+3,0,0,0,
+0,0,0,0,
+0,0,0,0,
+1,0,0,0,
+0,0,0,0];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Das nachfolgende Diagramm ist das Eventdiagramm
+eines Festplattenspeichers am TGM. Ermittle, ob
+die Events zufällig auftreten.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(
+    color=black,
+    yrange=[0,10],
+    barplot(v)
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Im Unterricht haben wir pro Stunde die Viertelstunde mit den meisten Events herausgesucht
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+events:makelist(lreduce(max, [v[i*4-3], v[i*4-2], v[i*4-1], v[i*4-0]]),  i, 24);
+
+freq:discrete_freq (events);
+sum:lreduce("+", events);
+average:sum/length(events), float;
+
+wxdraw2d(
+xrange=[-1, lreduce(max, freq[1])+1],
+color=black,
+rel_freq_bars(freq),
+
+color=orange,
+line_width=2,
+explicit(Poissonverteilung(average)(x), x, 0, 100)
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Man könnte auch in betracht ziehen dass die Daten nicht sonderlich
+kumulativ aussehen und man lieber eine Summe pro Stunde bilden sollte
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+events:makelist(lreduce("+", [v[i*4-3], v[i*4-2], v[i*4-1], v[i*4-0]]),  i, 24);
+
+freq:discrete_freq (events);
+sum:lreduce("+", events);
+average:sum/length(events), float;
+
+wxdraw2d(
+xrange=[-1, lreduce(max, freq[1])+1],
+color=black,
+rel_freq_bars(freq),
+
+color=orange,
+line_width=2,
+explicit(Poissonverteilung(average)(x), x, 0, 100)
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Vermutlich funktioniert es aber am besten jede Viertelstunde für sich zu betrachen
+Events pro Viertelstunde
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+events:v;
+
+freq:discrete_freq (events);
+sum:lreduce("+", events);
+average:sum/length(events), float;
+
+wxdraw2d(
+xrange=[-1, lreduce(max, freq[1])+1],
+color=black,
+rel_freq_bars(freq),
+
+color=orange,
+line_width=2,
+explicit(Poissonverteilung(average)(x), x, 0, 100)
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Die Balken stellen jeweils den Zusammenhang da wie oft wie häufig
+ein Fehler in einem Zeitbereich vorgekommen ist.
+Die Balken sind Relativ dargestellt so dass die Summe aller Balken 1 ist.
+
+Der Orangene Graph ist die Poisson Wahrscheindlichkeitsdichtefunktion
+
+In allen 3 Fällen haben die Balken ähnlichkeiten mit dem Graphen
+Die Events sind daher vermutlich Normal/Zufällig
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: section start ]
+Normalverteilung
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: comment start ]
+Normalverteilung
+Die Zufallsgröße kann innerhalb eines Intervalls einen beliebigen Wert annehmen.
+Trifft auf wenn mehrere oder nicht eindeutige Einflüsse verantwortlich sind.
+Eine stetige Zufallsgröße, die sich als Summe sehr vieler unabhängiger Einflussgrößen
+ergibt, von denen keine dominiert ist näherunsweise Normalverteilt.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+verteilt nach Dichtefunktion der Normalverteilung:
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+norm(x, µ, sigma):=1/(sigma*sqrt(2*%pi)) * %e^-((x-µ)^2/(2*sigma^2));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+µ     = 2
+sigma = 0.5
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(
+    yrange=[0,1],
+    explicit(norm(x, 2, 0.5), x, 0, 4)
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+(1)
+µ ... Erwartungswert
+      Mittelwert
+      Maximum der Dichtefunktion
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(
+    yrange=[0,1],
+    explicit(norm(x, 2, 0.5), x, 0, 6),
+    color=red,
+    explicit(norm(x, 4, 0.5), x, 0, 6)
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+(1) Analyse,
+    durch die variation von µ ändert sich nur die Positon
+    an der x-Achse. An der Form der Kurve ändert sich nichts
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+(2) Dichtefunktion symmetrisch zu µ
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+(3) Glockenförmiger verlauf
+    -> ("Gaussche Glockenkurve")
+
+    Wendepunkt an µ-sigma, µ+sigma
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+(4)
+sigma ... Standardabweichung
+          maß für die Abweichung vom Maximum
+          breite der Kurve
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(
+    yrange=[0,1],
+    explicit(norm(x, 2, 0.5), x, 0, 6),
+    color=red,
+    explicit(norm(x, 2, 1.9), x, -4, 8)
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+(4) Analyse,
+Durch Variation von sigma ändert sich die Breite der Kurve,
+sowie die Höhe.
+Die position der Kurve an der x-Achse bleibt gleich.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+(5) negative Exponentialfunktion
+
+    lim g(x) = 0
+    x->∞
+
+    lim g(x) = 0
+    x->-∞
+
+    nähert sich asymtotisch der x-Achse an
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+(6) Man kann zeigen dass der Flächeninhalt unter jedet
+    Glockenkurve 1 ist
+
+   -> Eine schmale Glockenkurve muss höher als eine breite sein.
+
+µ legt die Lage fest
+   sigma die Form
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+(7) Wahrscheindlichkeit und Fläche unter der Glockenkurve
+
+    Die Wahrscheindlichkeit dass ein Merkmalswert höchstens
+    gleich x0 ist, ist gleich dem Inhalt der Fläche unter der
+    Glockenkurve von -∞ bis x0.
+
+                      x0
+                      /
+    G(x0, µ, sigma) = \ g(x) dx
+                      /
+                      -∞
+
+    Die Wahrscheindlichkeit dass ein Merkmalswert zwischen a 
+    und b liegt, ist gleich dem Inhalt der Fläche zwischen a
+    und b.
+
+                      b
+                      /
+    G(x0, µ, sigma) = \ g(x) dx
+                      /
+                      a
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Um konkrete Wahrscheindlichkeiten für die Normalverteilung zu
+berechnen zu können ist eine Integratuon der
+Wahrscheindlichkeitsdichte g(x) notwendig.
+
+g(x) ist aber nicht elementar integrierbar. (keine Stammfunktion)
+
+-> Integration mittels numerischer Integrationsverfahren.
+
+Zusätzlich zur numerischen Integration gibt es die Möglichkeit durch
+eine variablen Transformation zu einer standardisierten Normalverteilung
+zu kommen deren Integral in Tabellen gelistet ist.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: section start ]
+Kurvendiskusion
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(all);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+load(draw);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+load (descriptive);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+norm(x, µ, sigma):=1/(sigma*sqrt(2*%pi)) * %e^-((x-µ)^2/(2*sigma^2));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Für g(x, 2, 0.5)
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+g(x):=norm(x, 2, 0.5);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+/* Funktion */
+f:g(x);
+f_fun(x):=''f;
+/* Zähler */
+z: num(f);
+z_fun(x):=''z;
+/* Nenner */
+n: denom(f);
+n_fun(x):=''n;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Zeichnen der Funktion um Überblick zu gewinnen
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(
+xrange=[-1,5],
+explicit(f,x,-2,6)
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: subsect start ]
+Definitionsmenge
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Definiert sind alle Werte außer die welche den Nenner 0 setzen.
+Daher müssen alle Punkte gefunden an denen der Nenner 0 ist.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+solve(n,x);
+ud:makelist(rhs(%[i]), i, length(%));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: subsect start ]
+Pole, Lücken, Nullstellen
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Pole sind Stellen an denen die Funktion aus dem Definierten bereich
+hinaus geht. Also über +/-unendlich hinausgeht. Am Graphen sieht man
+dann z.B. dass die Funktione Steil nach oben geht bis sie nicht mehr
+zu sehen ist und dann vom unteren Rand wieder ins Bild kommt. 
+Rechnerisch erkennt man diese Besonderheit daran das der Nenner auf
+0 geht der Zähler aber nicht. 
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Bei Lücken gibt es einfach eine Lücke in der Funktion. Am Graph gibt
+es einen Sprung aber keinen Polsprung. 
+Man erkennt eine Lücke daran das sowohl Nenner als auch Zähle auf
+0 sind.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Bei Nullstellen schneidet die Funktion die x-Achse oder wird zumindest
+von ihr Tangiert. 
+Man erkennt sie daran das der Zähler 0 ist der Nener aber nicht. 
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+solve(z,x)$
+z0:makelist(rhs(%[i]), i, length(%));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Alle gefundenen werte werden in eine Liste geworfen
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+list:append(z0,ud);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Werte werden mit einer Schleife
+ nach Pole, Lücken und Nullstellen sortiert
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+p_:[]$/*Pole*/
+l_:[]$/*Lücken*/
+n_:[]$/*Nullstellen*/
+for i:1 step 1 thru length(list) do
+    if (''z_fun(list[i]) = 0) then 
+        if (''n_fun(list[i]) = 0) then l_:append(l_,[list[i]])  /*Lücken*/
+        else n_:append(n_,[list[i]])                        /*Nullstellen*/
+    else p_:append(p_,[list[i]])                            /*Pole*/$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Ergebnise werden angezeigt
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+disp("Die Funktion enthält:","Pole",p_,"Lücken",l_,"Nullstellen",n_);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: subsect start ]
+Asymptote
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Die Asymptote ist ein Graph welcher sich der Funktion
+beliebig annähert sie aber nicht berührt oder schneidet.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Wie die Asymptote aussieht ist vor allem vom höchsten Grad von 
+Zähler und Nenner abhängig. 
+Fall 1 - der Grad des Nenners ist höher:
+    Die Funktion ist eine echte gebrochen Rationale Funktion
+    Die Asymptote ist die x Achse
+Fall 2 - der Grad des Nenners ist der gleiche wie der Grad des Zählers:
+    unecht gebrochene rationale Funktion
+    Asymtote ist y=a/b    
+    a:Koeffizient des höchsten Grades im Zähler , 3*x²  Koeffizient = 3
+    b:Koeffizient des höchsten Grades im Nenner
+Fall 3 - der Grad des Zählers ist höher:
+    unecht gebrochen rationale Funktion
+    Asymtote ist Ergebnis der Polynomdivision(z(x)/n(x)) ohne Rest
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+/* Mit divide wird die division durchgeführt.
+   Zurück bekommt man eine Liste, deren erstes Element ist das ergebnis,
+   das zweite der Rest. */
+di: divide(z,n);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Auf die gegebenen Funktion triff Fall 3 zu.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+asymps: [di[1]];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: subsect start ]
+Extremwert (Minimum/Maximum/Sattelpunkt)
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Ein Extremwert einer Funktion ist entweder der höchste (Maximum) oder
+der niederste (Minimum) Punkt einer Funktion.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Um den Extremwert zu finden muss zuerst die Funktion abgeleitet werden.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+fI(x):=''(diff(f,x,1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Um später herauszufinden ob es sich bei dem Extremwert um ein Minimum
+oder ein Maximum handelt braucht man außerdem die 2. Ableitung
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+fII(x):=''(diff(f,x,2));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Denn x Wert des Extremwert bekommt man jetzt wenn man von der ersten Ableitung 
+die Nullstelle sucht.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+extremX:solve(fI(x),x);
+/* entfernen der x= */
+extremX: makelist(rhs(extremX[i]), i, length(extremX));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Die Passenden y Werte bekommt man wenn man in die x Werte in
+die Grundfunktion einsetzt.
+Man kann der Funktion gleich eine Liste als Parameter geben,
+die Funktion wird dann auf jeden der Parameter angewandt.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+extremY: makelist(f_fun(extremX[i]), i, length(extremX));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Extremwerte in ein nutzbares Format bringen, 
+und in die Variable exerg speichern.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Überprüfen ob die Extremwerte Maxima, Minima oder Sattelpunkte sind
+2. Ableitung = 0 -> Sattelpunkt
+2. Ableitung < 0 -> Minimum
+2. Ableitung > 0 -> Maximum
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+mima:[];
+for i:1 step 1 thru length(extremX) do
+    if (fII(extremX[i])=0) then mima:append(mima,["Sattelpunkt"])
+    elseif (fII(extremX[i])<0) then mima:append(mima, ["Maximum"])
+    else mima:append(mima, ["Minimum"]);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+mima;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Extremwerte ausgeben:
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+extrem_erg: matrix(["Art", "Punkt [x,y]"])$
+for i:1 step 1 thru length(extremX) do
+    extrem_erg: addrow(extrem_erg, [mima[i], [extremX[i], extremY[i]]])$
+disp("Die Extremwerte sind:",extrem_erg)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: subsect start ]
+Wendepunkt & Wendetangente
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Der Wendepunkt ist ein Punkt an dem die Funktion ihr Krümmungsverhalten
+ändert.
+Wendepunkte findet man wenn man die Nullstellen der 2. Ableitung (man bekommt den x Wert)
+in den Zähler der Funktion einsetzt. (man bekommt den y Wert)
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+fII(x);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+rr:solve(fII(x), x);
+wendeX:makelist(rhs(rr[i]), i, length(rr));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+wendeY:makelist(f_fun(wendeX[i]), i, length(wendeX));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Der Wendepunkt liegt wie der Sattelpunkt auf dem Koordinaten ursprung,
+daher ist die Wendetangente die y Achse.
+Ansonsten wuerde der x-Wert des Wendepunkts in erste Ableitung eingesetzt
+ -> man erhält die Steigung der Wendetangente
+Der x- und y- und k-Wert in allgemeine Geradengleichung(y=k*x+d) eingesetzt 
+ -> man bekommt d, wodurch man nun die Wendetangente hat
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+ks:makelist(
+    fI(wendeX[i]), 
+i, length(wendeX));
+
+ds:makelist(
+    rhs(
+        solve(
+            subst([k=ks[i], x=wendeX[i], y=wendeY[i]], y=k*x+d), d
+        )[1]
+    ),
+i, length(wendeX));
+
+wendeTang:makelist(
+subst([
+
+    k=ks[i],
+
+    d=ds[i]
+
+],
+
+k*x + d
+
+), i, length(wendeX));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Ausgabe der Wendepunkte
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+wende_erg: matrix(["Wendepunkt [x,y]", "Wendetangente"])$
+for i:1 step 1 thru length(wendeX) do
+    wende_erg: addrow(wende_erg, [[wendeX[i], wendeY[i]], wendeTang[i]])$
+disp("Die Wendepunkte sind:",wende_erg)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: subsect start ]
+Zeichnen
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: input   start ] */
+disp("Undefinierte Stellen: ", ud)$
+disp("Pole:",p_,"Lücken:",l_,"Nullstellen:",n_)$
+disp("Asymptoten:", asymps)$
+disp("Extremwerte:", extrem_erg)$
+disp("Die Wendepunkte sind:",wende_erg)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+vertical_line(x):=polygon([x, x],[-9000, 9000]);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(
+xrange=[-0,4],
+yrange=[-0.1, 1],
+/* Kurve */
+explicit(f,x,-150,150),
+/* Undefinierte Stellen */
+fill_color=yellow,
+makelist(vertical_line(ud[i]), i, length(ud)),
+/* Pole */
+fill_color=cyan,
+makelist(vertical_line(p_[i]), i, length(p_)),
+/* Lücken */
+makelist(vertical_line(l_[i]), i, length(l_)),
+/* Nullstellen 
+color=red, point_size=1.5,point_type=filled_circle,
+points(n_, makelist(0, i, length(n_))), */
+/* Asymptoten */
+color=green, line_type=solid,
+makelist(explicit(asymps[i], x, -0,4), i, length(asymps)),
+/* Extremwerte */
+color=black,
+point_type=asterisk,
+points(extremX, extremY),
+makelist(label([mima[i], extremX[i], extremY[i]-3]), i, length(extremX)),
+/* Wendepunkte & Tangenten */
+color=orange,
+point_type=circle, point_size=2.5,
+points(wendeX, wendeY),
+makelist(explicit(wendeTang[i], x, -7, 7), i, length(wendeTang))
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: section start ]
+Berechnung Wahrscheindlichkeitsfunktion
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(all);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+load(draw);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+load (descriptive);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+norm(x, µ, sigma):=1/(sigma*sqrt(2*%pi)) * %e^-((x-µ)^2/(2*sigma^2));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+2
+/
+\ g(x, 2, 0.5)        Mit Integrationsverfahren aus Pf03
+/                     * Obersumme
+1                     * Untersumme
+                      * Kepler
+                      * Simpson
+
+                      + Visualisierung (Fläche Einfärben)
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+g(x):=norm(x, 2, 0.5);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Obersumme
+
+
+
+Anders als bei der Untersumme ragen beid der Obersumme die Rechtecke über die Fläche
+der Funktion hinaus. Die Gesamtfläche der Rechtecke ist dem zu folge in der Regel auch
+größer als die eigentliche Fläche der Funktion.
+Wie bei der Untersumme auch wird das Ergebnis genauer je mehr Rechecke man verwendet. 
+Um den Block ausführen zu können ist erforderlich eine zu integrierende Funktion 
+f(x) zu definieren. 
+Außerdem wird ein Parameter mit der gewünschten Anzahl an Rechtecken übergeben und
+die beiden Schranken a und b.
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+/*
+Summieren von n Rechtecken welche zwischen a und b über der Funktion f liegen.
+Folgende Felder müssen definiert sein um zu einen Ergebnis zu kommen:
+f(x)    Funktion
+a       untere Schranke
+b       obere Schranke
+n       Anzahl der Rechtecke
+*/
+obersumme(f, a, b, n):= (b-a)/n * sum(f(a + (b-a)/n * i), i, 1, n);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+obersumme(g, 1, 2, 100), numer;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Untersumme
+
+
+Bei der Untersumme wird die Fläche unter der Funktion mit Rechtecken aufgefüllt.
+Die Gesamtfläche der Rechtecke näher sich mit zunehmender Anzahl immer weiter an 
+die tatsächliche Fläche der Funktion an. 
+Um den Block ausführen zu können ist erforderlich eine zu integrierende Funktion 
+f(x) zu definieren. 
+Außerdem wird ein Parameter mit der gewünschten Anzahl an Rechtecken übergeben und
+die beiden Schranken a und b.
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+/*
+Allgemeine Formel zum Summieren von n Rechtecken unter einer Funktion f(x)
+Folgende Felder müssen definiert sein um zu einen Ergebnis zu kommen:
+f(x)    Funktion
+a       untere Schranke
+b       obere Schranke
+n       Anzahl der Rechtecke
+*/
+untersumme(f, a, b, n):=(b-a)/n * sum(f(a + (b-a)/n * i), i, 0, n-1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+untersumme(g, 1, 2, 100), numer;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Kepler
+
+
+
+Bei der Kepler'schen Fassregel wird eine Parabel gesucht welche
+im bestimmten Abschnitt eine ähnliche Fläche hat wie die Funktion.
+p(x) = ux² + vx + w
+p(x) := u*x^2 + v*x + w
+Diese Parabel schneidet die Funktion in den 3 Punkten P,Q,R
+P = (a|f(a))
+Q = ((a+b)/2|f((a+b)/2))
+R = (b|f(b))
+Anhand dieser 3 Punkte werden u,v und w gesucht.
+Dafür wird ein System aus 3 Gleichungen gebildet.
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+/*
+Bereitstellen der ein zu setzenden Werte
+f(x) --> Funktion welche integriert werden soll.
+a, b --> Die beiden Schranken.
+*/
+kepler(f, a, b):=((4*b-4*a)*f((b+a)/2)+(b-a)*f(b)+f(a)*b-a*f(a))/6;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+kepler(g, 1, 2), numer;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Simpson
+
+
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+/*
+Simpson'sches Verfahren, Codeblock
+Parameter:
+f(x)    Funktion
+n       Anzahl der Iterationen, wenn die Zahl höher ist wird das ergebnis genauer, die berechnung dauert aber länger.
+a       Untere Schranke
+b       Obere Schranke
+*/
+simpson(f,a,b,n):=(
+    (b-a) / (3*n) * (f(a)+f(b)
+                     + 4 *
+                           sum(f(a+(2*j-1)*((b-a)/n)),j,1,n/2)
+                     + 2 *
+                           sum(f(a+2*j*((b-a)/n)),j,1,n/2)
+                    )
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+simpson(g, 1, 2, 100), numer;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Visualisierung (Fläche Einfärben)
+
+
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(
+filled_func=true,
+explicit(g(x), x, 1, 2),
+filled_func=false,
+line_width=2,
+explicit(g(x), x, 0, 4)
+);
+/* [wxMaxima: input   end   ] */
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$
