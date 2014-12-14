@@ -1,0 +1,693 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 14.09.0 ] */
+
+/* [wxMaxima: title   start ]
+Jakob Klepp
+2014-12-15
+Portfolio 3
+   [wxMaxima: title   end   ] */
+
+/* [wxMaxima: section start ]
+*Bestimmtes und unbestimmtes Integral
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(all);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: section start ]
+Numerische Integrationsverfahren
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(all);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+load(draw);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: subsect start ]
+Obersumme
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Bei der Obersumme wird das Integrationsintervall in kleinere Stücke
+zerlegt. Für jedes Stück wird das kleinste Rechteck gebildet welches
+den Intervall von der x-Achse aus komplett umfast.
+
+Die Summe der Flächen dieser Rechtecke entspricht näherungsweise
+der Fläche des Intervalls.
+
+In umso mehr Rechtecke der Intervall zerlegt wird, umso genauer ist die Näherung.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+/*
+Summieren von n Rechtecken welche zwischen a und b über der Funktion f liegen.
+f(x)    Funktion
+a       untere Schranke
+b       obere Schranke
+n       Anzahl der Rechtecke
+*/
+obersumme(f, a, b, n):= (b-a)/n * sum(subst(['x=a + (b-a)/n * i], f), i, 1, n);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Anwendung bereich 2-10 der Funktion log(x) annäherung durch 100 Rechtecke
+f(x):=log(x);
+a:2;
+b:10;
+n:10;
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+obersumme(log(x), 2, 10, 100), float;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+/* im vergleich, integrate Funktion von maxima */
+integrate(log(x), x, 2, 10), numer;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+
+Visualisierung
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+/*
+Rechtecken welche zwischen a und b über der Funktion f liegen.
+f(x)    Funktion
+a       untere Schranke
+b       obere Schranke
+n       Anzahl der Rechtecke
+*/
+draw_obersumme(f, a, b, n):= makelist(
+    rectangle(
+        /*             x                           y */
+        [a+(i-1)*(b-a)/n,                          0], 
+        [    a+i*(b-a)/n, subst(['x=a+i*(b-a)/n], f)]),
+i, n
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(
+xrange=[0,12],
+yrange=[0,3],
+
+color=red,
+fill_color=pink,
+draw_obersumme(log(x), 2, 10, 5),
+
+color=blue,
+explicit(log(x), x, 0, 12)
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Man kann sehen wie die Rechtecke die zur annäherung
+an die Fläche unter der Kurve genutz werden überstehen.
+Durch eine erhöhung der Anzahl der Rechtecke lässt sich
+die Auswirkung dieses Problems minimieren.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(
+xrange=[0,12],
+yrange=[0,3],
+color=red,
+fill_color=pink,
+draw_obersumme(log(x), 2, 10, 30),
+color=blue,
+explicit(log(x), x, 0, 12)
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: subsect start ]
+Untersumme
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Bei der Obersumme wird das Integrationsintervall in kleinere Stücke
+zerlegt. Für jedes Stück wird das größte Rechteck gebildet welches
+den Graphen nicht schneidet.
+Die Summe der Flächen dieser Rechtecke entspricht näherungsweise
+der Fläche des Intervalls.
+In umso mehr Rechtecke der Intervall zerlegt wird, umso genauer ist die Näherung.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+/*
+Allgemeine Formel zum Summieren von n Rechtecken unter einer Funktion f(x)
+Folgende Felder müssen definiert sein um zu einen Ergebnis zu kommen:
+f(x)    Funktion
+a       untere Schranke
+b       obere Schranke
+n       Anzahl der Rechtecke
+*/
+untersumme(f, a, b, n):=(b-a)/n * sum(subst(['x=a + (b-a)/n * i], f), i, 0, n-1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Anwendung bereich 2-10 der Funktion log(x) annäherung durch 100 Rechtecke
+f(x):=log(x);
+a:2;
+b:10;
+n:10;
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+untersumme(log(x), 2, 10, 100), numer;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+/* im vergleich, integrate Funktion von maxima */
+integrate(log(x), x, 2, 10), numer;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Gar nicht so weit entfernt
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+
+Visualisierung
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+/*
+Rechtecken welche zwischen a und b über der Funktion f liegen.
+f(x)    Funktion
+a       untere Schranke
+b       obere Schranke
+n       Anzahl der Rechtecke
+*/
+draw_untersumme(f, a, b, n):= makelist(
+    rectangle(
+        /*             x                           y */
+        [a+(i-1)*(b-a)/n, subst(['x=a+(i-1)*(b-a)/n], f)], 
+        [    a+i*(b-a)/n,                             0]),
+i, n
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(
+xrange=[0,12],
+yrange=[0,3],
+color=red,
+fill_color=pink,
+draw_untersumme(log(x), 2, 10, 5),
+color=blue,
+explicit(log(x), x, 0, 12)
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Man kann sehen wie die Rechtecke die zur annäherung
+an die Fläche unter der Kurve genutz werden diese Fläche
+nicht komplett ausfüllen.
+Durch eine erhöhung der Anzahl der Rechtecke lässt sich
+die Auswirkung dieses Problems minimieren.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(
+xrange=[0,12],
+yrange=[0,3],
+color=red,
+fill_color=pink,
+draw_untersumme(log(x), 2, 10, 30),
+color=blue,
+explicit(log(x), x, 0, 12)
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: subsect start ]
+Kepler'sche Fassregel
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: input   start ] */
+/*
+Bereitstellen der ein zu setzenden Werte
+f(x) --> Funktion welche integriert werden soll.
+a, b --> Die beiden Schranken.
+*/
+kepler(f, a, b):=(b-a)/6*(subst(['x=a], f)+4*subst(['x=(a+b)/2], f)+subst(['x=b], f));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Anwendung bereich 2-10 der Funktion log(x)
+f(x):=log(x);
+a:2;
+b:10;
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+kepler(log(x), 2,10), numer;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+integrate(log(x), x, 2, 10), numer;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+
+Herleitung
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Bei der Kepler'schen Fassregel wird eine Parabel gesucht welche
+im bestimmten Abschnitt eine ähnliche Fläche hat wie die Funktion.
+p(x) = ux² + vx + w
+p(x) := u*x^2 + v*x + w
+Diese Parabel schneidet die Funktion in den 3 Punkten P,Q,R
+            x            y
+P = (       a |       f(a) )
+Q = ( (a+b)/2 | f((a+b)/2) )
+R = (       b |       f(b) )
+Anhand dieser 3 Punkte werden u,v und w gesucht.
+Dafür wird ein System aus 3 Gleichungen gebildet.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+g1: f(a) = u*a^2 + v*a + w;
+g2: f((a+b)/2) = u*((a+b)/2)^2 + v*((a+b)/2) + w;
+g3: f(b) = u*b^2 + v*b + w;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Dieses Gleichungssystem wird mit linsolve nach u,v und w aufgelöst.
+Diese u,v,w werter sorgen in den nächsten Schritten dafür das die Parabel unsere 
+Funktion in 3 Punkten schneidet.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+uvw:linsolve([g1, g2, g3], [u,v,w]);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Die allgemeine Parabel Formel wird in noch nicht festgelegten Schranken integriert
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+res_int:integrate(u*x^2+v*x+w,x, a, b);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Indem wir die erschaffenen u,v und w einsetzen erschaffen wir eine integrierte 
+Parabel welche von einer anderen Funktion f() und den Schranken a und b abhängt. 
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+erg:ratsimp(subst(uvw,res_int));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+
+Visualisierung
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+draw_kepler(f, a, b):=[
+    filled_func=true,
+    explicit(
+        subst(
+            linsolve([
+                subst(['x=a], f) = u*a^2 + v*a + w, 
+                subst(['x=(a+b)/2], f) = u*((a+b)/2)^2 + v*((a+b)/2) + w, 
+                subst(['x=b], f) = u*b^2 + v*b + w],
+                [u,v,w]),
+            u*x^2 + v*x + w),
+    x, a, b
+    ),
+    filled_func=false,
+    explicit(
+        subst(
+            linsolve([
+                subst(['x=a], f) = u*a^2 + v*a + w, 
+                subst(['x=(a+b)/2], f) = u*((a+b)/2)^2 + v*((a+b)/2) + w, 
+                subst(['x=b], f) = u*b^2 + v*b + w],
+                [u,v,w]),
+            u*x^2 + v*x + w),
+    x, a-10, b+10
+    )
+];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(
+xrange=[0,12],
+yrange=[0,3],
+
+color=red,
+fill_color=pink,
+draw_kepler(log(x), 2, 10),
+
+color=blue,
+filled_func=false,
+explicit(log(x), x, 0, 12)
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Die Ergebnisse des Keplerverfahrens sind oft genauer als
+Ober/Untersummen mit wenigen Rechtecken. Dass verfahren
+bietet aber keinen weiteren Parameter zum ändern der
+Genauigkeit an.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: subsect start ]
+Simpson'sche Verfahren
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Summierte simpsonsche Formel
+Um das Integral noch besser annähern zu können unterteilt man das
+Intervall [a,b] in nebeneinanderliegende, gleich große Teilintervalle. 
+In jedem Teilintervall wendet man die simpsonsche Formel für die 
+einzelnen Teilflächen an und addiert danach die entstandenen Näherungen. 
+Damit erhält man die summierte oder zusammengesetzte Simpsonregel. 
+Es gibt unterschiedliche Notationen für die Unterteilung in Teilintervalle 
+die zu verschiedenen Formulierungen der Summierten simpsonschen Formel führen.
+Hier unterteilt man das Intervall [a,b] in N nebeneinanderliegende, 
+gleich große Teilintervalle [x_i,x_{i+1}] der Länge h. In jedem 
+Teilintervall wendet man die simpsonsche Formel:
+  h                     x_i + x_{i+1} 
+  - * ( f(x_i) + 4 * f( ------------- ) + f(x_{i+1}) )
+  6                           2
+an und addiert danach die entstandenen Näherungen. Mit
+      b-a
+  h = ---
+       N
+und
+  x_k=a + k*h 
+erhält man:
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+/*
+Simpson'sches Verfahren, Codeblock
+Parameter:
+f(x)    Funktion
+n       Anzahl der Iterationen, wenn die Zahl höher ist wird das ergebnis genauer, die berechnung dauert aber länger.
+a       Untere Schranke
+b       Obere Schranke
+*/
+simpson(f,a,b,n):=(
+    (b-a) / (3*n) * ( subst(['x=a], f) + subst(['x=b], f)
+                     + 4 *
+                           sum(subst(['x=a+(2*j-1)*((b-a)/n)], f),j,1,n/2)
+                     + 2 *
+                           sum(subst(['x=a+2*j*((b-a)/n)], f),j,1,n/2)
+                    )
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Anwendung bereich 2-10 der Funktion log(x) annäherung durch 100 Iterationen
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+simpson(log(x), 2, 10, 1000), numer;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+
+Visualisierung
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+draw_kepler(f, a, b):=[
+    filled_func=false,
+    explicit(
+        subst(
+            linsolve([
+                subst(['x=a], f) = u*a^2 + v*a + w, 
+                subst(['x=(a+b)/2], f) = u*((a+b)/2)^2 + v*((a+b)/2) + w, 
+                subst(['x=b], f) = u*b^2 + v*b + w],
+                [u,v,w]),
+            u*x^2 + v*x + w),
+    x, a-10, b+10
+    )
+];
+fill_kepler(f, a, b):=[
+    filled_func=true,
+    explicit(
+        subst(
+            linsolve([
+                subst(['x=a], f) = u*a^2 + v*a + w, 
+                subst(['x=(a+b)/2], f) = u*((a+b)/2)^2 + v*((a+b)/2) + w, 
+                subst(['x=b], f) = u*b^2 + v*b + w],
+                [u,v,w]),
+            u*x^2 + v*x + w),
+    x, a, b
+    )
+];
+draw_simpson(f,a,b,n):=[
+    makelist(
+    [
+        fill_color=["#0000FF", "#80FF80", "#80FFFF", "#FF8080", "#FF80FF", "#FFFF80"][mod(i, 6)+1],
+        fill_kepler(f, a+(i-1)*(b-a)/n, a+i*(b-a)/n)
+    ],
+        i, n
+    ),
+    makelist(
+    [
+        color=     ["#0000FF", "#00FF00", "#00FFFF", "#FF0000", "#FF00FF", "#FFFF00"][mod(i, 6)+1],
+        draw_kepler(f, a+(i-1)*(b-a)/n, a+i*(b-a)/n)
+    ],
+        i, n
+    )
+];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(
+xrange=[0,12],
+yrange=[0,3],
+
+draw_simpson(log(x), 2, 10, 6),
+
+color=black,
+line_width=2,
+explicit(log(x), x, 0, 12)
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: section start ]
+Grundintegrale und die Integration in Maxima
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(all);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+S x^n dx = 1/(n+1) * x^(n+1) + C        
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+S 1/x dx = ln x + C                     
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+S e^x dx = e^x +C
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+S sin x dx = -cos x +C
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+S cos x dx = sin x +C
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+ In Maxima kann man am einfachsten mit der Funktion integrate integrieren.
+ Die Funktion integrate nimmt bis zu 4 Parameter entgegen, 2 davon optional. 
+
+ 1. Die Ausgangsfunktion
+ 2. die Variable mit der integriert werden soll
+ 3. untere Schranke
+ 4. obere Schranke
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+integrate(sin(x), x, 0, 1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Neben integrate bietet Maxima noch den romberg und den quad_qags algorithmus.
+Die Parametrisierung ist identisch. 
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+romberg(sin(x), x, 0, 1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+quad_qags(sin(x), x, 0, 1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: section start ]
+Integrationsverfahren: Substitution
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(all);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Das Substitutionsverfahren kann immer dann zum einsatz kommen wenn bei 2 
+heraushebbaren Funktionsteilen die Ableitung vom einen den anderen entspricht.
+Denn nur in diesen Fall lässt sich dann auch etwas weg kürzen.
+
+Ein Beispiel:
+S 5 * (x^2 + 3)^4 * 2*x * dx
+x^2 + 3 lässt sich heraus heben, die erste Ableitung ist 2*x, ein Fragment welches
+noch im Rest der Funktion zu finden ist.
+
+Nun kommt das ersetzen, also das Substituieren.
+x^2 + 3 wird durch u ersetz. --> u = x^2 + 3
+5 * (u)^4 * 2*x * dx
+Und u wird Abgeleitet:
+u' = (x^2 + 3)' = du/dx = 2*x
+du/dx = 2*x wird nach dx umgeformt
+dx = du/2x
+Und ebenfalls eingesetzt
+5 * (u)^4 * 2*x * du/2x
+Wie durch ein Wunder lässt sich 2x weg kürzen 
+5 * u^4 * du
+Jetzt ist nur noch ein Grundintergral übrig, dieses kann problemlos integriert werden.
+Der 5 am anfang bleibt unverändert, der rest entspricht den ersten Grundintegral.
+5 * u^5/5 + C
+5 lässt sich wegkürzen
+u^5 + C
+Jetzt kann zurück substituiert werden
+(x^2 + 3)^5 + C
+Fertig!
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: section start ]
+Integrationsverfahren: Partielle Integration
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(all);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Bei der partiellen Integration wird die Ursprüngliche Funktion in 2 Faktoren zerlegt.
+Einer der Faktoren wird als u' der andere als v angenommen. 
+u' wird zu u integriert.
+v wird zu v' differenziert.
+Damit wird nun in dieses Schema eingesetz:
+S u'v = uv - S uv'
+ 1      2      3
+Um es besser erklären zu können hab ich die Gleichung in 3 Teile eingeteilt. 
+1 repräsentiert die Ursprüngliche Funktion
+Eine der möglichen Lösungswege beim partiellen integrieren ist wenn der Dritte
+Teil abgesehen um vorzeichen dem ersten Teil gleicht.
+Dann kann man den 3. Teil auf die andere Seite bringen.
+Wenn man jetzt die ganze gleichung durch 2 Teilt ist auf der linken Seite wieder die 
+ursprüngliche Funktion und auf der Rechten die Lösung.
+
+Beispiel:
+S x*sin x dx
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+'integrate(x*sin(x), x);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Hier wähle ich für u' = sin(x) weil sich sin(x) schöner intigrieren lässt als x
+v bekommt damit x
+u' ist kein gültiger Variablenname also nehm ich stattesen ui
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+ui :sin(x);
+v :x;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+u@ wird integriert
+v wird differenziert
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+u : integrate(ui, x);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+vi : diff(v,x,1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+In S u'v = uv - S uv' einsetzen
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+'integrate(ui*v,x) = u*v -  'integrate(u*vi, x);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+cos x ist ein Grundintegral und wird zu sin x
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+'integrate(ui*v,x) = u*v -  integrate(u*vi, x);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Fertig!
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: section start ]
+*Integrationsverfahren: Partialbruchzerlegung
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(all);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: section start ]
+*Integrationsverfahren: Uneigentliche Integrale
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(all);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Ein bestimmtes Integral bei dem mindestens eine der beiden Integrationsgrenzen 
+Unendlich ist, heißt uneigentliches Integral der ersten Art.
+Es wird als Grenzwert erklärt:
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+'integrate(f(x), x, a, inf) = limit('integrate(f(x), x, a, z), z, inf);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Bedingungen:
+Grenzwert existiert [konvergent]
+f(x) muss in dem Intervall integrierbar sein.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Wenn keib Grenzwert existiert ist die Funktion divergent.
+   [wxMaxima: comment end   ] */
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$
