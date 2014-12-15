@@ -8,16 +8,62 @@ Portfolio 3
    [wxMaxima: title   end   ] */
 
 /* [wxMaxima: section start ]
-*Bestimmtes und unbestimmtes Integral
+Bestimmtes und unbestimmtes Integral
    [wxMaxima: section end   ] */
 
-/* [wxMaxima: input   start ] */
-kill(all);
-/* [wxMaxima: input   end   ] */
+/* [wxMaxima: fold    start ] */
+
+/* [wxMaxima: comment start ]
+Bestimmtes Integral
+
+  Die geometrische Interpretation eines bestimmten Integral
+  ist die Fläche unter einem Funktionsgraphen f(x). Bei einem
+  bestimmten Integral sind die Grenzen bekannt, deswegen fällt
+  auch die Integrationskonstante C weg. Um die Fläche zu
+  erhalten, wird zuerst die Funktion integriert, danach werden
+  in den enthaltenen  Funktionswert die Grenzen b (größere)
+  und a (kleinere) eingesetzt. Der größere Funktionwert b [F(b)]
+  wird mit dem kleiner F(a) subtrahiert, das Erhaltene
+  Ergebnis ist die Fläche.
+
+  Das Bestimmte Integral von f(x) dx von a bis b, also "zwischen
+  den Grenzen a und b", enspricht der Fläche zwischen der Funktion,
+  den Ordinaten von a und b, sowie der X Achse. 
+
+            b               b
+    Integral f(x) dx = F(x)| = F(b) - F(a)
+            a               a
+    Integral b,a f(x) dx = F(x) |b,a = F(b) - F(a)
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Unbestimmtes Integral
+
+  Im Allgemeinen ist das Integral einer Funktion f(x) nur bis
+  auf eine Konstante C eindeutig, weil beim Integrieren konstante
+  Summanten wegfallen. Dieses Integral nennt man das Unbestimmte
+  Integral.
+
+  Integral f(x) dx = F(x) + C
+      f(x)    ... Der Integrant
+      dx      ... Integrationsvariable
+      C       ... Integrationskonstante
+      F(x)+C  ... Stammfunktion
+
+  Die Stammfunktion als Ergebnis eines Unbestimmten Integrals hat
+  unendlich vielen Lösungen, die sich nur um einen Summanten
+  unterscheiden.
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: fold    end   ] */
 
 /* [wxMaxima: section start ]
 Numerische Integrationsverfahren
    [wxMaxima: section end   ] */
+
+/* [wxMaxima: fold    start ] */
 
 /* [wxMaxima: input   start ] */
 kill(all);
@@ -71,7 +117,6 @@ integrate(log(x), x, 2, 10), numer;
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: comment start ]
-
 Visualisierung
 
    [wxMaxima: comment end   ] */
@@ -173,7 +218,6 @@ Gar nicht so weit entfernt
    [wxMaxima: comment end   ] */
 
 /* [wxMaxima: comment start ]
-
 Visualisierung
 
    [wxMaxima: comment end   ] */
@@ -256,7 +300,6 @@ integrate(log(x), x, 2, 10), numer;
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: comment start ]
-
 Herleitung
 
    [wxMaxima: comment end   ] */
@@ -309,7 +352,6 @@ erg:ratsimp(subst(uvw,res_int));
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: comment start ]
-
 Visualisierung
 
    [wxMaxima: comment end   ] */
@@ -419,7 +461,6 @@ simpson(log(x), 2, 10, 1000), numer;
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: comment start ]
-
 Visualisierung
 
    [wxMaxima: comment end   ] */
@@ -482,104 +523,142 @@ explicit(log(x), x, 0, 12)
 );
 /* [wxMaxima: input   end   ] */
 
+/* [wxMaxima: fold    end   ] */
+
 /* [wxMaxima: section start ]
-Grundintegrale und die Integration in Maxima
+Grundintegrale
    [wxMaxima: section end   ] */
 
+/* [wxMaxima: fold    start ] */
+
+/* [wxMaxima: comment start ]
+Die Grundintegrale
+
+  Potenzen
+    x^n          =>  (x^n+1)/n+1           + C
+    x^-1         =>         ln x           + C
+
+  Exponentialfunktion
+    e^x          =>          e^x           + C
+
+  Trigonometrie
+    sin(x)       =>      -cos(x)           + C
+    cos(x)       =>       sin(x)           + C
+    1/cos^2(x)   =>       tan(x)           + C
+    sin^2(x)     => 1/2 * (x-sin(x)*cos(x) + C
+    cos^2(x)     => 1/2 * (x+sin(x)*cos(x) + C
+    tan(x)       => -ln |cos(x)|           + C
+    cot(x)       =>  ln |sin(x)|           + C
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Neben den Grundintegralen gibt es zudem auch die
+Faktor- und Summenregel:
+
+  Faktorregel:
+    Der konstante Faktor in einem Integral kann
+    vor dieser heruasgehoben werde.
+
+  Summenregel:
+    Integrale, welche aus 2 Summanden  bzw einem
+    Minuend und Subtrahend, können in 2 Einzelne
+    Integrale getrennt werden.
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: fold    end   ] */
+
+/* [wxMaxima: section start ]
+Integration in Maxima
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: fold    start ] */
+
+/* [wxMaxima: comment start ]
+In Maxima wird mit der Funktion integrate integriert.
+
+Die Funktion nimmt 4 Parameter an, wobei die Letzten beiden
+optional sind.
+
+  expr  Der Ausdruck welche integriert werden soll
+  x     Die Integrationsvariable
+  a, b  Die Schranken (nur bei einem bestimmten Integral nötig.)
+   [wxMaxima: comment end   ] */
+
 /* [wxMaxima: input   start ] */
-kill(all);
+/* Bestimmtes Integral */
+integrate(log(x), x, 0, 1);
 /* [wxMaxima: input   end   ] */
 
-/* [wxMaxima: comment start ]
-S x^n dx = 1/(n+1) * x^(n+1) + C        
-   [wxMaxima: comment end   ] */
-
-/* [wxMaxima: comment start ]
-S 1/x dx = ln x + C                     
-   [wxMaxima: comment end   ] */
-
-/* [wxMaxima: comment start ]
-S e^x dx = e^x +C
-   [wxMaxima: comment end   ] */
-
-/* [wxMaxima: comment start ]
-S sin x dx = -cos x +C
-   [wxMaxima: comment end   ] */
-
-/* [wxMaxima: comment start ]
-S cos x dx = sin x +C
-   [wxMaxima: comment end   ] */
-
-/* [wxMaxima: comment start ]
- In Maxima kann man am einfachsten mit der Funktion integrate integrieren.
- Die Funktion integrate nimmt bis zu 4 Parameter entgegen, 2 davon optional. 
-
- 1. Die Ausgangsfunktion
- 2. die Variable mit der integriert werden soll
- 3. untere Schranke
- 4. obere Schranke
-
-   [wxMaxima: comment end   ] */
-
 /* [wxMaxima: input   start ] */
-integrate(sin(x), x, 0, 1);
+/* Unbestimmtes Integral */
+integrate(log(x), x);
 /* [wxMaxima: input   end   ] */
 
-/* [wxMaxima: comment start ]
-Neben integrate bietet Maxima noch den romberg und den quad_qags algorithmus.
-Die Parametrisierung ist identisch. 
-   [wxMaxima: comment end   ] */
-
-/* [wxMaxima: input   start ] */
-romberg(sin(x), x, 0, 1);
-/* [wxMaxima: input   end   ] */
-
-/* [wxMaxima: input   start ] */
-quad_qags(sin(x), x, 0, 1);
-/* [wxMaxima: input   end   ] */
+/* [wxMaxima: fold    end   ] */
 
 /* [wxMaxima: section start ]
 Integrationsverfahren: Substitution
    [wxMaxima: section end   ] */
 
+/* [wxMaxima: fold    start ] */
+
 /* [wxMaxima: input   start ] */
 kill(all);
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: comment start ]
-Das Substitutionsverfahren kann immer dann zum einsatz kommen wenn bei 2 
-heraushebbaren Funktionsteilen die Ableitung vom einen den anderen entspricht.
-Denn nur in diesen Fall lässt sich dann auch etwas weg kürzen.
-
-Ein Beispiel:
-S 5 * (x^2 + 3)^4 * 2*x * dx
-x^2 + 3 lässt sich heraus heben, die erste Ableitung ist 2*x, ein Fragment welches
-noch im Rest der Funktion zu finden ist.
-
-Nun kommt das ersetzen, also das Substituieren.
-x^2 + 3 wird durch u ersetz. --> u = x^2 + 3
-5 * (u)^4 * 2*x * dx
-Und u wird Abgeleitet:
-u' = (x^2 + 3)' = du/dx = 2*x
-du/dx = 2*x wird nach dx umgeformt
-dx = du/2x
-Und ebenfalls eingesetzt
-5 * (u)^4 * 2*x * du/2x
-Wie durch ein Wunder lässt sich 2x weg kürzen 
-5 * u^4 * du
-Jetzt ist nur noch ein Grundintergral übrig, dieses kann problemlos integriert werden.
-Der 5 am anfang bleibt unverändert, der rest entspricht den ersten Grundintegral.
-5 * u^5/5 + C
-5 lässt sich wegkürzen
-u^5 + C
-Jetzt kann zurück substituiert werden
-(x^2 + 3)^5 + C
-Fertig!
+Zuerst legt man einen Wert fest der nicht integrierbar ist und wählt dafür u
    [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+f(x):=(2-x)^3;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Für u wählen wir 4+5x
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+u(x)=2-x;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Danach leiten wir u ab
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+define(f2(x),diff(u(x),x));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Danach die Substitation durchführen
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+f(x):=u^3;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Integration in u durchführen
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+integrate(f(x),x);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Danach zurück substiurieren
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: fold    end   ] */
 
 /* [wxMaxima: section start ]
 Integrationsverfahren: Partielle Integration
    [wxMaxima: section end   ] */
+
+/* [wxMaxima: fold    start ] */
 
 /* [wxMaxima: input   start ] */
 kill(all);
@@ -600,7 +679,6 @@ Teil abgesehen um vorzeichen dem ersten Teil gleicht.
 Dann kann man den 3. Teil auf die andere Seite bringen.
 Wenn man jetzt die ganze gleichung durch 2 Teilt ist auf der linken Seite wieder die 
 ursprüngliche Funktion und auf der Rechten die Lösung.
-
 Beispiel:
 S x*sin x dx
    [wxMaxima: comment end   ] */
@@ -653,12 +731,124 @@ cos x ist ein Grundintegral und wird zu sin x
 Fertig!
    [wxMaxima: comment end   ] */
 
+/* [wxMaxima: fold    end   ] */
+
 /* [wxMaxima: section start ]
-*Integrationsverfahren: Partialbruchzerlegung
+Integrationsverfahren: Partialbruchzerlegung
    [wxMaxima: section end   ] */
 
 /* [wxMaxima: input   start ] */
 kill(all);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+1) Nullstellen des Nenners herausfinden
+2) Die Nullstellen so umformen, dass auf einer Seite 0 steht
+    bspw. x=1 -> x-1=0
+3) Die umgeformten Nullstellen, sehen wir ab jetzt als Nenner
+   von unbekannten Summanden an. Da uns die Zähler unbekannt
+   sind, setzen wir für diese A,B,... ein
+4) Die Gleichung multiplizieren wir mit den Nullstellen
+5) Unsere Gleichung teilen wir nun in 2 weitere:
+    1. Gleichung besteht aus de Faktoren von x 
+    2. Gleichung besteht aus den restlichen Ausdrücken
+6) Gleichungssystem wird aufgelöst
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+f(x) :=(3*x+4)/(x^2+x-6);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+(1) Nullstellen des Nenners herausfinden
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+nenner: denom(f(x));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+nullstellen: float(solve(num(nenner)=0, x));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+(2) Die Nullstellen so umformen, dass auf einer Seite 0 steht
+    bspw. x=1 -> x-1=0
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+nullstellen: makelist((rhs(nullstellen[i]) -x)*(-1), i, length(nullstellen));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+(3) Die umgeformten Nullstellen, sehen wir ab jetzt als Nenner
+    von unbekannten Summanden an. Da uns die Zähler unbekannt
+    sind, setzen wir für diese A,B,... ein
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+letters:['A, 'B, 'C, 'D, 'E, 'F, 'G, 'H, 'I, 'J, 'K, 'L, 'M, 'N, 'O, 'P, 'Q, 'R, 'S, 'T, 'U, 'V, 'W, 'X, 'Y, 'Z];
+letters_used: makelist(letters[i], i, length(nullstellen));
+makelist(letters[i]/nullstellen[i], i, length(nullstellen));
+lreduce("+", %);
+gl1: f(x) = %;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+(4) Die Gleichung multiplizieren wir mit den Nullstellen
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+3*x+4 = A*(x-2) + B*(x+3);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+gl2: ratsimp(gl1 * lreduce("*", nullstellen));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+(5) Unsere Gleichung teilen wir nun in 2 weitere:
+    1. Gleichung besteht aus de Faktoren von x 
+    2. Gleichung besteht aus den restlichen Ausdrücken
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+3*x+4 = A*x-2*A + B*x+ 3*B;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+solve(gl2, x);
+%[1];
+bruch:rhs(%);
+fac_x: denom(%);
+rest: bruch*fac_x;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+(6) Gleichungssystem wird aufgelöst
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+solutions: solve([fac_x, rest], letters_used);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+7)
+    (3*x+4)/(x^2+x-6) -> A/(x+3) + B(x-2)
+    A und B einsetzen
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+rhs(subst(solutions[1], gl1));
+integrate(%, x);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Die Integrationskonstante C wird mit integrate() nicht berechnet, deswegen füge ich sie hinzu
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+% + C;
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: section start ]
