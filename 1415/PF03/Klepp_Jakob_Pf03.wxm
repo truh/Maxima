@@ -11,8 +11,6 @@ Portfolio 3
 Bestimmtes und unbestimmtes Integral
    [wxMaxima: section end   ] */
 
-/* [wxMaxima: fold    start ] */
-
 /* [wxMaxima: comment start ]
 Bestimmtes Integral
 
@@ -57,13 +55,9 @@ Unbestimmtes Integral
 
    [wxMaxima: comment end   ] */
 
-/* [wxMaxima: fold    end   ] */
-
 /* [wxMaxima: section start ]
 Numerische Integrationsverfahren
    [wxMaxima: section end   ] */
-
-/* [wxMaxima: fold    start ] */
 
 /* [wxMaxima: input   start ] */
 kill(all);
@@ -523,13 +517,9 @@ explicit(log(x), x, 0, 12)
 );
 /* [wxMaxima: input   end   ] */
 
-/* [wxMaxima: fold    end   ] */
-
 /* [wxMaxima: section start ]
 Grundintegrale
    [wxMaxima: section end   ] */
-
-/* [wxMaxima: fold    start ] */
 
 /* [wxMaxima: comment start ]
 Die Grundintegrale
@@ -567,13 +557,9 @@ Faktor- und Summenregel:
 
    [wxMaxima: comment end   ] */
 
-/* [wxMaxima: fold    end   ] */
-
 /* [wxMaxima: section start ]
 Integration in Maxima
    [wxMaxima: section end   ] */
-
-/* [wxMaxima: fold    start ] */
 
 /* [wxMaxima: comment start ]
 In Maxima wird mit der Funktion integrate integriert.
@@ -596,13 +582,9 @@ integrate(log(x), x, 0, 1);
 integrate(log(x), x);
 /* [wxMaxima: input   end   ] */
 
-/* [wxMaxima: fold    end   ] */
-
 /* [wxMaxima: section start ]
 Integrationsverfahren: Substitution
    [wxMaxima: section end   ] */
-
-/* [wxMaxima: fold    start ] */
 
 /* [wxMaxima: input   start ] */
 kill(all);
@@ -652,13 +634,9 @@ integrate(f(x),x);
 Danach zurück substiurieren
    [wxMaxima: comment end   ] */
 
-/* [wxMaxima: fold    end   ] */
-
 /* [wxMaxima: section start ]
 Integrationsverfahren: Partielle Integration
    [wxMaxima: section end   ] */
-
-/* [wxMaxima: fold    start ] */
 
 /* [wxMaxima: input   start ] */
 kill(all);
@@ -730,8 +708,6 @@ cos x ist ein Grundintegral und wird zu sin x
 /* [wxMaxima: comment start ]
 Fertig!
    [wxMaxima: comment end   ] */
-
-/* [wxMaxima: fold    end   ] */
 
 /* [wxMaxima: section start ]
 Integrationsverfahren: Partialbruchzerlegung
@@ -852,32 +828,37 @@ Die Integrationskonstante C wird mit integrate() nicht berechnet, deswegen füge
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: section start ]
-*Integrationsverfahren: Uneigentliche Integrale
+Integrationsverfahren: Uneigentliche Integrale
    [wxMaxima: section end   ] */
 
-/* [wxMaxima: input   start ] */
-kill(all);
-/* [wxMaxima: input   end   ] */
-
 /* [wxMaxima: comment start ]
-Ein bestimmtes Integral bei dem mindestens eine der beiden Integrationsgrenzen 
-Unendlich ist, heißt uneigentliches Integral der ersten Art.
-Es wird als Grenzwert erklärt:
+Es gibt 2 unterschiedliche Arten von uneigentlichen Integralen:
+1) Uneigentliches Integral 1. Grades
+    ist ein bestimmtes Integral bei dem mindestens eine der Integrationsgrenzen
+    unendlich ist. 
+2) Uneigentliches Integral 2. Grades
+    ist ein bestimmtes Integral bei dem der Integrand an mindestens einer der Grenzen
+    unendlich ist.
+Uneigentliche Integrale können in wxmaxima mit einer Kombination aus dem limit-Befehl und 
+dem integrate()-Befehl berechnet werden.
+Beispiel:
+ 1/(x*(1+x^2)), Grenzen a -> unendlich
+        1
    [wxMaxima: comment end   ] */
 
 /* [wxMaxima: input   start ] */
-'integrate(f(x), x, a, inf) = limit('integrate(f(x), x, a, z), z, inf);
+f(x) := 1/(x*(1+x^2));
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: comment start ]
-Bedingungen:
-Grenzwert existiert [konvergent]
-f(x) muss in dem Intervall integrierbar sein.
+Durch Limit können die Grenzwerte definiert werden
+Bei dem integrate Befehl geben wir wie gewohnt beide Grenzen ein, anstatt unendlich allerdings
+eine Variable, welcher wir durch den Limit Befehl gegen unendlich gehen lassen.
    [wxMaxima: comment end   ] */
 
-/* [wxMaxima: comment start ]
-Wenn keib Grenzwert existiert ist die Funktion divergent.
-   [wxMaxima: comment end   ] */
+/* [wxMaxima: input   start ] */
+limit(integrate (f(x),x,1,z),z,inf);
+/* [wxMaxima: input   end   ] */
 
 /* Maxima can't load/batch files which end with a comment! */
 "Created with wxMaxima"$

@@ -1,0 +1,1847 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+ <HEAD>
+  <TITLE>Klepp_Jakob_Pf03</TITLE>
+  <META NAME="generator" CONTENT="wxMaxima">
+  <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+  <STYLE TYPE="text/css">
+body {
+  background-color: rgb(255,255,255);
+}
+.input {
+  color: rgb(0,0,255);
+}
+.comment {
+  color: rgb(0,0,0);
+  background-color: rgb(255,255,255);
+  padding: 2mm;
+}
+.image {
+  color: rgb(0,0,0);
+  padding: 2mm;
+}
+.section {
+  color: rgb(0,0,0);
+  font-size: 1.5em;
+  padding: 2mm;
+}
+.subsect {
+  color: rgb(0,0,0);
+  font-size: 1.2em;
+  padding: 2mm;
+}
+.title {
+  color: rgb(0,0,0);
+  font-size: 2em;
+  padding: 2mm;
+}
+.prompt {
+  color: rgb(255,0,0);
+}
+table {
+  border: 0px;
+}
+td {
+  vertical-align: top;
+  padding: 1mm;
+}
+  </STYLE>
+ </HEAD>
+ <BODY>
+
+<!---------------------------------------------------------->
+<!--          Created with wxMaxima version 14.09.0         -->
+<!---------------------------------------------------------->
+
+
+<!-- Title cell -->
+
+
+<P CLASS="title">
+Jakob Klepp<BR>
+2014-12-15<BR>
+Portfolio 3
+</P>
+
+
+<!-- Section cell -->
+
+
+<P CLASS="section">
+ 1 Bestimmtes und unbestimmtes Integral
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Bestimmtes Integral<BR>
+<BR>
+&nbsp;&nbsp;Die geometrische Interpretation eines bestimmten Integral<BR>
+&nbsp;&nbsp;ist die Fläche unter einem Funktionsgraphen f(x). Bei einem<BR>
+&nbsp;&nbsp;bestimmten Integral sind die Grenzen bekannt, deswegen fällt<BR>
+&nbsp;&nbsp;auch die Integrationskonstante C weg. Um die Fläche zu<BR>
+&nbsp;&nbsp;erhalten, wird zuerst die Funktion integriert, danach werden<BR>
+&nbsp;&nbsp;in den enthaltenen  Funktionswert die Grenzen b (größere)<BR>
+&nbsp;&nbsp;und a (kleinere) eingesetzt. Der größere Funktionwert b [F(b)]<BR>
+&nbsp;&nbsp;wird mit dem kleiner F(a) subtrahiert, das Erhaltene<BR>
+&nbsp;&nbsp;Ergebnis ist die Fläche.<BR>
+<BR>
+&nbsp;&nbsp;Das Bestimmte Integral von f(x) dx von a bis b, also "zwischen<BR>
+&nbsp;&nbsp;den Grenzen a und b", enspricht der Fläche zwischen der Funktion,<BR>
+&nbsp;&nbsp;den Ordinaten von a und b, sowie der X Achse. <BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b               b<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Integral f(x) dx = F(x)| = F(b) - F(a)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a               a<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Integral b,a f(x) dx = F(x) |b,a = F(b) - F(a)<BR>
+
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Unbestimmtes Integral<BR>
+<BR>
+&nbsp;&nbsp;Im Allgemeinen ist das Integral einer Funktion f(x) nur bis<BR>
+&nbsp;&nbsp;auf eine Konstante C eindeutig, weil beim Integrieren konstante<BR>
+&nbsp;&nbsp;Summanten wegfallen. Dieses Integral nennt man das Unbestimmte<BR>
+&nbsp;&nbsp;Integral.<BR>
+<BR>
+&nbsp;&nbsp;Integral f(x) dx = F(x) + C<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f(x)    ... Der Integrant<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dx      ... Integrationsvariable<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C       ... Integrationskonstante<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;F(x)+C  ... Stammfunktion<BR>
+<BR>
+&nbsp;&nbsp;Die Stammfunktion als Ergebnis eines Unbestimmten Integrals hat<BR>
+&nbsp;&nbsp;unendlich vielen Lösungen, die sich nur um einen Summanten<BR>
+&nbsp;&nbsp;unterscheiden.<BR>
+
+</P>
+
+
+<!-- Section cell -->
+
+
+<P CLASS="section">
+ 2 Numerische Integrationsverfahren
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i1) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+kill(all);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf03_img/Klepp_Jakob_Pf03_0.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i1) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+load(draw);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf03_img/Klepp_Jakob_Pf03_1.png">
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  2.1 Obersumme
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Bei der Obersumme wird das Integrationsintervall in kleinere Stücke<BR>
+zerlegt. Für jedes Stück wird das kleinste Rechteck gebildet welches<BR>
+den Intervall von der x-Achse aus komplett umfast.<BR>
+<BR>
+Die Summe der Flächen dieser Rechtecke entspricht näherungsweise<BR>
+der Fläche des Intervalls.<BR>
+<BR>
+In umso mehr Rechtecke der Intervall zerlegt wird, umso genauer ist die Näherung.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i2) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/*<BR>
+Summieren von n Rechtecken welche zwischen a und b über der Funktion f liegen.<BR>
+f(x)    Funktion<BR>
+a       untere Schranke<BR>
+b       obere Schranke<BR>
+n       Anzahl der Rechtecke<BR>
+*/<BR>
+obersumme(f, a, b, n):= (b-a)/n * sum(subst(['x=a + (b-a)/n * i], f), i, 1, n);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf03_img/Klepp_Jakob_Pf03_2.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Anwendung bereich 2-10 der Funktion log(x) annäherung durch 100 Rechtecke<BR>
+f(x):=log(x);<BR>
+a:2;<BR>
+b:10;<BR>
+n:10;
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i3) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+obersumme(log(x), 2, 10, 100), float;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf03_img/Klepp_Jakob_Pf03_3.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i4) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/* im vergleich, integrate Funktion von maxima */<BR>
+integrate(log(x), x, 2, 10), numer;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf03_img/Klepp_Jakob_Pf03_4.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Visualisierung<BR>
+
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i5) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/*<BR>
+Rechtecken welche zwischen a und b über der Funktion f liegen.<BR>
+f(x)    Funktion<BR>
+a       untere Schranke<BR>
+b       obere Schranke<BR>
+n       Anzahl der Rechtecke<BR>
+*/<BR>
+draw_obersumme(f, a, b, n):= makelist(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;rectangle(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/*             x                           y */<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[a+(i-1)*(b-a)/n,                          0], <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[    a+i*(b-a)/n, subst(['x=a+i*(b-a)/n], f)]),<BR>
+i, n<BR>
+);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf03_img/Klepp_Jakob_Pf03_5.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i6) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxdraw2d(<BR>
+xrange=[0,12],<BR>
+yrange=[0,3],<BR>
+<BR>
+color=red,<BR>
+fill_color=pink,<BR>
+draw_obersumme(log(x), 2, 10, 5),<BR>
+<BR>
+color=blue,<BR>
+explicit(log(x), x, 0, 12)<BR>
+);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf03_img/Klepp_Jakob_Pf03_6.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Man kann sehen wie die Rechtecke die zur annäherung<BR>
+an die Fläche unter der Kurve genutz werden überstehen.<BR>
+Durch eine erhöhung der Anzahl der Rechtecke lässt sich<BR>
+die Auswirkung dieses Problems minimieren.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i7) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxdraw2d(<BR>
+xrange=[0,12],<BR>
+yrange=[0,3],<BR>
+color=red,<BR>
+fill_color=pink,<BR>
+draw_obersumme(log(x), 2, 10, 30),<BR>
+color=blue,<BR>
+explicit(log(x), x, 0, 12)<BR>
+);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf03_img/Klepp_Jakob_Pf03_7.png">
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  2.2 Untersumme
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Bei der Obersumme wird das Integrationsintervall in kleinere Stücke<BR>
+zerlegt. Für jedes Stück wird das größte Rechteck gebildet welches<BR>
+den Graphen nicht schneidet.<BR>
+Die Summe der Flächen dieser Rechtecke entspricht näherungsweise<BR>
+der Fläche des Intervalls.<BR>
+In umso mehr Rechtecke der Intervall zerlegt wird, umso genauer ist die Näherung.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i8) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/*<BR>
+Allgemeine Formel zum Summieren von n Rechtecken unter einer Funktion f(x)<BR>
+Folgende Felder müssen definiert sein um zu einen Ergebnis zu kommen:<BR>
+f(x)    Funktion<BR>
+a       untere Schranke<BR>
+b       obere Schranke<BR>
+n       Anzahl der Rechtecke<BR>
+*/<BR>
+untersumme(f, a, b, n):=(b-a)/n * sum(subst(['x=a + (b-a)/n * i], f), i, 0, n-1);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf03_img/Klepp_Jakob_Pf03_8.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Anwendung bereich 2-10 der Funktion log(x) annäherung durch 100 Rechtecke<BR>
+f(x):=log(x);<BR>
+a:2;<BR>
+b:10;<BR>
+n:10;
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i9) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+untersumme(log(x), 2, 10, 100), numer;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf03_img/Klepp_Jakob_Pf03_9.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i10) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/* im vergleich, integrate Funktion von maxima */<BR>
+integrate(log(x), x, 2, 10), numer;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf03_img/Klepp_Jakob_Pf03_10.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Gar nicht so weit entfernt
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Visualisierung<BR>
+
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i11) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/*<BR>
+Rechtecken welche zwischen a und b über der Funktion f liegen.<BR>
+f(x)    Funktion<BR>
+a       untere Schranke<BR>
+b       obere Schranke<BR>
+n       Anzahl der Rechtecke<BR>
+*/<BR>
+draw_untersumme(f, a, b, n):= makelist(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;rectangle(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/*             x                           y */<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[a+(i-1)*(b-a)/n, subst(['x=a+(i-1)*(b-a)/n], f)], <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[    a+i*(b-a)/n,                             0]),<BR>
+i, n<BR>
+);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf03_img/Klepp_Jakob_Pf03_11.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i12) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxdraw2d(<BR>
+xrange=[0,12],<BR>
+yrange=[0,3],<BR>
+color=red,<BR>
+fill_color=pink,<BR>
+draw_untersumme(log(x), 2, 10, 5),<BR>
+color=blue,<BR>
+explicit(log(x), x, 0, 12)<BR>
+);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf03_img/Klepp_Jakob_Pf03_12.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Man kann sehen wie die Rechtecke die zur annäherung<BR>
+an die Fläche unter der Kurve genutz werden diese Fläche<BR>
+nicht komplett ausfüllen.<BR>
+Durch eine erhöhung der Anzahl der Rechtecke lässt sich<BR>
+die Auswirkung dieses Problems minimieren.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i13) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxdraw2d(<BR>
+xrange=[0,12],<BR>
+yrange=[0,3],<BR>
+color=red,<BR>
+fill_color=pink,<BR>
+draw_untersumme(log(x), 2, 10, 30),<BR>
+color=blue,<BR>
+explicit(log(x), x, 0, 12)<BR>
+);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf03_img/Klepp_Jakob_Pf03_13.png">
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  2.3 Kepler'sche Fassregel
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i14) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/*<BR>
+Bereitstellen der ein zu setzenden Werte<BR>
+f(x) --> Funktion welche integriert werden soll.<BR>
+a, b --> Die beiden Schranken.<BR>
+*/<BR>
+kepler(f, a, b):=(b-a)/6*(subst(['x=a], f)+4*subst(['x=(a+b)/2], f)+subst(['x=b], f));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf03_img/Klepp_Jakob_Pf03_14.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Anwendung bereich 2-10 der Funktion log(x)<BR>
+f(x):=log(x);<BR>
+a:2;<BR>
+b:10;
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i15) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+kepler(log(x), 2,10), numer;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf03_img/Klepp_Jakob_Pf03_15.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i16) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+integrate(log(x), x, 2, 10), numer;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf03_img/Klepp_Jakob_Pf03_16.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Herleitung<BR>
+
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Bei der Kepler'schen Fassregel wird eine Parabel gesucht welche<BR>
+im bestimmten Abschnitt eine ähnliche Fläche hat wie die Funktion.<BR>
+p(x) = ux² + vx + w<BR>
+p(x) := u*x^2 + v*x + w<BR>
+Diese Parabel schneidet die Funktion in den 3 Punkten P,Q,R<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x            y<BR>
+P = (       a |       f(a) )<BR>
+Q = ( (a+b)/2 | f((a+b)/2) )<BR>
+R = (       b |       f(b) )<BR>
+Anhand dieser 3 Punkte werden u,v und w gesucht.<BR>
+Dafür wird ein System aus 3 Gleichungen gebildet.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i17) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+g1: f(a) = u*a^2 + v*a + w;<BR>
+g2: f((a+b)/2) = u*((a+b)/2)^2 + v*((a+b)/2) + w;<BR>
+g3: f(b) = u*b^2 + v*b + w;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf03_img/Klepp_Jakob_Pf03_17.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Dieses Gleichungssystem wird mit linsolve nach u,v und w aufgelöst.<BR>
+Diese u,v,w werter sorgen in den nächsten Schritten dafür das die Parabel unsere <BR>
+Funktion in 3 Punkten schneidet.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i20) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+uvw:linsolve([g1, g2, g3], [u,v,w]);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf03_img/Klepp_Jakob_Pf03_18.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Die allgemeine Parabel Formel wird in noch nicht festgelegten Schranken integriert
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i21) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+res_int:integrate(u*x^2+v*x+w,x, a, b);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf03_img/Klepp_Jakob_Pf03_19.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Indem wir die erschaffenen u,v und w einsetzen erschaffen wir eine integrierte <BR>
+Parabel welche von einer anderen Funktion f() und den Schranken a und b abhängt. 
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i22) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+erg:ratsimp(subst(uvw,res_int));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf03_img/Klepp_Jakob_Pf03_20.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Visualisierung<BR>
+
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i23) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+draw_kepler(f, a, b):=[<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;filled_func=true,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;explicit(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;subst(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;linsolve([<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;subst(['x=a], f) = u*a^2 + v*a + w, <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;subst(['x=(a+b)/2], f) = u*((a+b)/2)^2 + v*((a+b)/2) + w, <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;subst(['x=b], f) = u*b^2 + v*b + w],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[u,v,w]),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u*x^2 + v*x + w),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;x, a, b<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;filled_func=false,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;explicit(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;subst(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;linsolve([<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;subst(['x=a], f) = u*a^2 + v*a + w, <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;subst(['x=(a+b)/2], f) = u*((a+b)/2)^2 + v*((a+b)/2) + w, <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;subst(['x=b], f) = u*b^2 + v*b + w],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[u,v,w]),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u*x^2 + v*x + w),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;x, a-10, b+10<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;)<BR>
+];
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf03_img/Klepp_Jakob_Pf03_21.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i24) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxdraw2d(<BR>
+xrange=[0,12],<BR>
+yrange=[0,3],<BR>
+<BR>
+color=red,<BR>
+fill_color=pink,<BR>
+draw_kepler(log(x), 2, 10),<BR>
+<BR>
+color=blue,<BR>
+filled_func=false,<BR>
+explicit(log(x), x, 0, 12)<BR>
+);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf03_img/Klepp_Jakob_Pf03_22.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Die Ergebnisse des Keplerverfahrens sind oft genauer als<BR>
+Ober/Untersummen mit wenigen Rechtecken. Dass verfahren<BR>
+bietet aber keinen weiteren Parameter zum ändern der<BR>
+Genauigkeit an.
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  2.4 Simpson'sche Verfahren
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Summierte simpsonsche Formel<BR>
+Um das Integral noch besser annähern zu können unterteilt man das<BR>
+Intervall [a,b] in nebeneinanderliegende, gleich große Teilintervalle. <BR>
+In jedem Teilintervall wendet man die simpsonsche Formel für die <BR>
+einzelnen Teilflächen an und addiert danach die entstandenen Näherungen. <BR>
+Damit erhält man die summierte oder zusammengesetzte Simpsonregel. <BR>
+Es gibt unterschiedliche Notationen für die Unterteilung in Teilintervalle <BR>
+die zu verschiedenen Formulierungen der Summierten simpsonschen Formel führen.<BR>
+Hier unterteilt man das Intervall [a,b] in N nebeneinanderliegende, <BR>
+gleich große Teilintervalle [x_i,x_{i+1}] der Länge h. In jedem <BR>
+Teilintervall wendet man die simpsonsche Formel:<BR>
+&nbsp;&nbsp;h                     x_i + x_{i+1} <BR>
+&nbsp;&nbsp;- * ( f(x_i) + 4 * f( ------------- ) + f(x_{i+1}) )<BR>
+&nbsp;&nbsp;6                           2<BR>
+an und addiert danach die entstandenen Näherungen. Mit<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b-a<BR>
+&nbsp;&nbsp;h = ---<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;N<BR>
+und<BR>
+&nbsp;&nbsp;x_k=a + k*h <BR>
+erhält man:
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i25) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/*<BR>
+Simpson'sches Verfahren, Codeblock<BR>
+Parameter:<BR>
+f(x)    Funktion<BR>
+n       Anzahl der Iterationen, wenn die Zahl höher ist wird das ergebnis genauer, die berechnung dauert aber länger.<BR>
+a       Untere Schranke<BR>
+b       Obere Schranke<BR>
+*/<BR>
+simpson(f,a,b,n):=(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;(b-a) / (3*n) * ( subst(['x=a], f) + subst(['x=b], f)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ 4 *<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sum(subst(['x=a+(2*j-1)*((b-a)/n)], f),j,1,n/2)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ 2 *<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sum(subst(['x=a+2*j*((b-a)/n)], f),j,1,n/2)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<BR>
+);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf03_img/Klepp_Jakob_Pf03_23.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Anwendung bereich 2-10 der Funktion log(x) annäherung durch 100 Iterationen
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i26) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+simpson(log(x), 2, 10, 1000), numer;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf03_img/Klepp_Jakob_Pf03_24.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Visualisierung<BR>
+
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i27) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+draw_kepler(f, a, b):=[<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;filled_func=false,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;explicit(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;subst(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;linsolve([<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;subst(['x=a], f) = u*a^2 + v*a + w, <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;subst(['x=(a+b)/2], f) = u*((a+b)/2)^2 + v*((a+b)/2) + w, <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;subst(['x=b], f) = u*b^2 + v*b + w],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[u,v,w]),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u*x^2 + v*x + w),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;x, a-10, b+10<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;)<BR>
+];<BR>
+fill_kepler(f, a, b):=[<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;filled_func=true,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;explicit(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;subst(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;linsolve([<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;subst(['x=a], f) = u*a^2 + v*a + w, <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;subst(['x=(a+b)/2], f) = u*((a+b)/2)^2 + v*((a+b)/2) + w, <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;subst(['x=b], f) = u*b^2 + v*b + w],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[u,v,w]),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u*x^2 + v*x + w),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;x, a, b<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;)<BR>
+];<BR>
+draw_simpson(f,a,b,n):=[<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;makelist(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;[<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fill_color=["#0000FF", "#80FF80", "#80FFFF", "#FF8080", "#FF80FF", "#FFFF80"][mod(i, 6)+1],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fill_kepler(f, a+(i-1)*(b-a)/n, a+i*(b-a)/n)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i, n<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;makelist(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;[<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;color=     ["#0000FF", "#00FF00", "#00FFFF", "#FF0000", "#FF00FF", "#FFFF00"][mod(i, 6)+1],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;draw_kepler(f, a+(i-1)*(b-a)/n, a+i*(b-a)/n)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i, n<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;)<BR>
+];
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf03_img/Klepp_Jakob_Pf03_25.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i30) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxdraw2d(<BR>
+xrange=[0,12],<BR>
+yrange=[0,3],<BR>
+<BR>
+draw_simpson(log(x), 2, 10, 6),<BR>
+<BR>
+color=black,<BR>
+line_width=2,<BR>
+explicit(log(x), x, 0, 12)<BR>
+);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf03_img/Klepp_Jakob_Pf03_26.png">
+</P>
+
+
+<!-- Section cell -->
+
+
+<P CLASS="section">
+ 3 Grundintegrale
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Die Grundintegrale<BR>
+<BR>
+&nbsp;&nbsp;Potenzen<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;x^n          =>  (x^n+1)/n+1           + C<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;x^-1         =>         ln x           + C<BR>
+<BR>
+&nbsp;&nbsp;Exponentialfunktion<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;e^x          =>          e^x           + C<BR>
+<BR>
+&nbsp;&nbsp;Trigonometrie<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;sin(x)       =>      -cos(x)           + C<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;cos(x)       =>       sin(x)           + C<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;1/cos^2(x)   =>       tan(x)           + C<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;sin^2(x)     => 1/2 * (x-sin(x)*cos(x) + C<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;cos^2(x)     => 1/2 * (x+sin(x)*cos(x) + C<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;tan(x)       => -ln |cos(x)|           + C<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;cot(x)       =>  ln |sin(x)|           + C<BR>
+
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Neben den Grundintegralen gibt es zudem auch die<BR>
+Faktor- und Summenregel:<BR>
+<BR>
+&nbsp;&nbsp;Faktorregel:<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Der konstante Faktor in einem Integral kann<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;vor dieser heruasgehoben werde.<BR>
+<BR>
+&nbsp;&nbsp;Summenregel:<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Integrale, welche aus 2 Summanden  bzw einem<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Minuend und Subtrahend, können in 2 Einzelne<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Integrale getrennt werden.<BR>
+
+</P>
+
+
+<!-- Section cell -->
+
+
+<P CLASS="section">
+ 4 Integration in Maxima
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+In Maxima wird mit der Funktion integrate integriert.<BR>
+<BR>
+Die Funktion nimmt 4 Parameter an, wobei die Letzten beiden<BR>
+optional sind.<BR>
+<BR>
+&nbsp;&nbsp;expr  Der Ausdruck welche integriert werden soll<BR>
+&nbsp;&nbsp;x     Die Integrationsvariable<BR>
+&nbsp;&nbsp;a, b  Die Schranken (nur bei einem bestimmten Integral nötig.)
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i31) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/* Bestimmtes Integral */<BR>
+integrate(log(x), x, 0, 1);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf03_img/Klepp_Jakob_Pf03_27.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i32) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/* Unbestimmtes Integral */<BR>
+integrate(log(x), x);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf03_img/Klepp_Jakob_Pf03_28.png">
+</P>
+
+
+<!-- Section cell -->
+
+
+<P CLASS="section">
+ 5 Integrationsverfahren: Substitution
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i33) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+kill(all);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf03_img/Klepp_Jakob_Pf03_29.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Zuerst legt man einen Wert fest der nicht integrierbar ist und wählt dafür u
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i1) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+f(x):=(2-x)^3;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf03_img/Klepp_Jakob_Pf03_30.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Für u wählen wir 4+5x
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i2) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+u(x)=2-x;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf03_img/Klepp_Jakob_Pf03_31.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Danach leiten wir u ab
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i3) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+define(f2(x),diff(u(x),x));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf03_img/Klepp_Jakob_Pf03_32.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Danach die Substitation durchführen
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i4) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+f(x):=u^3;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf03_img/Klepp_Jakob_Pf03_33.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Integration in u durchführen
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i5) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+integrate(f(x),x);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf03_img/Klepp_Jakob_Pf03_34.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Danach zurück substiurieren
+</P>
+
+
+<!-- Section cell -->
+
+
+<P CLASS="section">
+ 6 Integrationsverfahren: Partielle Integration
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i6) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+kill(all);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf03_img/Klepp_Jakob_Pf03_35.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Bei der partiellen Integration wird die Ursprüngliche Funktion in 2 Faktoren zerlegt.<BR>
+Einer der Faktoren wird als u' der andere als v angenommen. <BR>
+u' wird zu u integriert.<BR>
+v wird zu v' differenziert.<BR>
+Damit wird nun in dieses Schema eingesetz:<BR>
+S u'v = uv - S uv'<BR>
+&nbsp;1      2      3<BR>
+Um es besser erklären zu können hab ich die Gleichung in 3 Teile eingeteilt. <BR>
+1 repräsentiert die Ursprüngliche Funktion<BR>
+Eine der möglichen Lösungswege beim partiellen integrieren ist wenn der Dritte<BR>
+Teil abgesehen um vorzeichen dem ersten Teil gleicht.<BR>
+Dann kann man den 3. Teil auf die andere Seite bringen.<BR>
+Wenn man jetzt die ganze gleichung durch 2 Teilt ist auf der linken Seite wieder die <BR>
+ursprüngliche Funktion und auf der Rechten die Lösung.<BR>
+Beispiel:<BR>
+S x*sin x dx
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i1) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+'integrate(x*sin(x), x);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf03_img/Klepp_Jakob_Pf03_36.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Hier wähle ich für u' = sin(x) weil sich sin(x) schöner intigrieren lässt als x<BR>
+v bekommt damit x<BR>
+u' ist kein gültiger Variablenname also nehm ich stattesen ui
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i2) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+ui :sin(x);<BR>
+v :x;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf03_img/Klepp_Jakob_Pf03_37.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+u@ wird integriert<BR>
+v wird differenziert
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i4) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+u : integrate(ui, x);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf03_img/Klepp_Jakob_Pf03_38.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i5) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+vi : diff(v,x,1);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf03_img/Klepp_Jakob_Pf03_39.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+In S u'v = uv - S uv' einsetzen
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i6) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+'integrate(ui*v,x) = u*v -  'integrate(u*vi, x);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf03_img/Klepp_Jakob_Pf03_40.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+cos x ist ein Grundintegral und wird zu sin x
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i7) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+'integrate(ui*v,x) = u*v -  integrate(u*vi, x);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf03_img/Klepp_Jakob_Pf03_41.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Fertig!
+</P>
+
+
+<!-- Section cell -->
+
+
+<P CLASS="section">
+ 7 Integrationsverfahren: Partialbruchzerlegung
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i8) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+kill(all);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf03_img/Klepp_Jakob_Pf03_42.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+1) Nullstellen des Nenners herausfinden<BR>
+2) Die Nullstellen so umformen, dass auf einer Seite 0 steht<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;bspw. x=1 -> x-1=0<BR>
+3) Die umgeformten Nullstellen, sehen wir ab jetzt als Nenner<BR>
+&nbsp;&nbsp;&nbsp;von unbekannten Summanden an. Da uns die Zähler unbekannt<BR>
+&nbsp;&nbsp;&nbsp;sind, setzen wir für diese A,B,... ein<BR>
+4) Die Gleichung multiplizieren wir mit den Nullstellen<BR>
+5) Unsere Gleichung teilen wir nun in 2 weitere:<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;1. Gleichung besteht aus de Faktoren von x <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;2. Gleichung besteht aus den restlichen Ausdrücken<BR>
+6) Gleichungssystem wird aufgelöst
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i1) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+f(x) :=(3*x+4)/(x^2+x-6);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf03_img/Klepp_Jakob_Pf03_43.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+(1) Nullstellen des Nenners herausfinden
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i2) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+nenner: denom(f(x));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf03_img/Klepp_Jakob_Pf03_44.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i3) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+nullstellen: float(solve(num(nenner)=0, x));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf03_img/Klepp_Jakob_Pf03_45.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+(2) Die Nullstellen so umformen, dass auf einer Seite 0 steht<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;bspw. x=1 -> x-1=0
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i4) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+nullstellen: makelist((rhs(nullstellen[i]) -x)*(-1), i, length(nullstellen));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf03_img/Klepp_Jakob_Pf03_46.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+(3) Die umgeformten Nullstellen, sehen wir ab jetzt als Nenner<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;von unbekannten Summanden an. Da uns die Zähler unbekannt<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;sind, setzen wir für diese A,B,... ein
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i5) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+letters:['A, 'B, 'C, 'D, 'E, 'F, 'G, 'H, 'I, 'J, 'K, 'L, 'M, 'N, 'O, 'P, 'Q, 'R, 'S, 'T, 'U, 'V, 'W, 'X, 'Y, 'Z];<BR>
+letters_used: makelist(letters[i], i, length(nullstellen));<BR>
+makelist(letters[i]/nullstellen[i], i, length(nullstellen));<BR>
+lreduce("+", %);<BR>
+gl1: f(x) = %;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf03_img/Klepp_Jakob_Pf03_47.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+(4) Die Gleichung multiplizieren wir mit den Nullstellen
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i10) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+3*x+4 = A*(x-2) + B*(x+3);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf03_img/Klepp_Jakob_Pf03_48.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i11) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+gl2: ratsimp(gl1 * lreduce("*", nullstellen));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf03_img/Klepp_Jakob_Pf03_49.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+(5) Unsere Gleichung teilen wir nun in 2 weitere:<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;1. Gleichung besteht aus de Faktoren von x <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;2. Gleichung besteht aus den restlichen Ausdrücken
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i12) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+3*x+4 = A*x-2*A + B*x+ 3*B;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf03_img/Klepp_Jakob_Pf03_50.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i13) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+solve(gl2, x);<BR>
+%[1];<BR>
+bruch:rhs(%);<BR>
+fac_x: denom(%);<BR>
+rest: bruch*fac_x;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf03_img/Klepp_Jakob_Pf03_51.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+(6) Gleichungssystem wird aufgelöst
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i18) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+solutions: solve([fac_x, rest], letters_used);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf03_img/Klepp_Jakob_Pf03_52.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+7)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;(3*x+4)/(x^2+x-6) -> A/(x+3) + B(x-2)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;A und B einsetzen
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i19) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+rhs(subst(solutions[1], gl1));<BR>
+integrate(%, x);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf03_img/Klepp_Jakob_Pf03_53.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Die Integrationskonstante C wird mit integrate() nicht berechnet, deswegen füge ich sie hinzu
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i21) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+% + C;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf03_img/Klepp_Jakob_Pf03_54.png">
+</P>
+
+
+<!-- Section cell -->
+
+
+<P CLASS="section">
+ 8 Integrationsverfahren: Uneigentliche Integrale
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Es gibt 2 unterschiedliche Arten von uneigentlichen Integralen:<BR>
+1) Uneigentliches Integral 1. Grades<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;ist ein bestimmtes Integral bei dem mindestens eine der Integrationsgrenzen<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;unendlich ist. <BR>
+2) Uneigentliches Integral 2. Grades<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;ist ein bestimmtes Integral bei dem der Integrand an mindestens einer der Grenzen<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;unendlich ist.<BR>
+Uneigentliche Integrale können in wxmaxima mit einer Kombination aus dem limit-Befehl und <BR>
+dem integrate()-Befehl berechnet werden.<BR>
+Beispiel:<BR>
+&nbsp;1/(x*(1+x^2)), Grenzen a -> unendlich<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i22) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+f(x) := 1/(x*(1+x^2));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf03_img/Klepp_Jakob_Pf03_55.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Durch Limit können die Grenzwerte definiert werden<BR>
+Bei dem integrate Befehl geben wir wie gewohnt beide Grenzen ein, anstatt unendlich allerdings<BR>
+eine Variable, welcher wir durch den Limit Befehl gegen unendlich gehen lassen.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i23) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+limit(integrate (f(x),x,1,z),z,inf);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf03_img/Klepp_Jakob_Pf03_56.png">
+</P>
+
+ <HR>
+ <SMALL> Created with <A HREF="http://wxmaxima.sourceforge.net/">wxMaxima</A>.</SMALL>
+
+ </BODY>
+</HTML>
