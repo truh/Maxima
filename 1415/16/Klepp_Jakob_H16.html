@@ -64,6 +64,39 @@ td {
 </P>
 
 
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i15) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+kill(all);<BR>
+load(draw);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H16_img/Klepp_Jakob_H16_0.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i2) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+norm(x, µ, sigma):=1/(sigma*sqrt(2*%pi)) * %e^-((x-µ)^2/(2*sigma^2));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H16_img/Klepp_Jakob_H16_1.png">
+</P>
+
+
 <!-- Text cell -->
 
 
@@ -91,7 +124,7 @@ Standardnormalverteilung auch u-Verteilung genannt<BR>
 
 <P><TABLE><TR><TD>
   <SPAN CLASS="prompt">
-(%i1) 
+(%i3) 
   </SPAN></TD>
   <TD><SPAN CLASS="input">
 stnv_table: [<BR>
@@ -151,7 +184,7 @@ sdnv_G(u):=block(<BR>
   </SPAN></TD>
 </TR></TABLE>
   <BR>
-  <IMG ALT="Result" SRC="Klepp_Jakob_H16_img/Klepp_Jakob_H16_0.png">
+  <IMG ALT="Result" SRC="Klepp_Jakob_H16_img/Klepp_Jakob_H16_2.png">
 </P>
 
 
@@ -159,7 +192,7 @@ sdnv_G(u):=block(<BR>
 
 
 <P CLASS="comment">
-Stndadisierung<BR>
+Standadisierung<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x - µ<BR>
 &nbsp;&nbsp;Mit hilfe des Zusammenhangs u = ----- lässt sich<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sigma<BR>
@@ -173,14 +206,14 @@ Stndadisierung<BR>
 
 <P><TABLE><TR><TD>
   <SPAN CLASS="prompt">
-(%i3) 
+(%i5) 
   </SPAN></TD>
   <TD><SPAN CLASS="input">
 nv_G(x, µ, sigma):=sdnv_G((x-µ)/sigma);
   </SPAN></TD>
 </TR></TABLE>
   <BR>
-  <IMG ALT="Result" SRC="Klepp_Jakob_H16_img/Klepp_Jakob_H16_1.png">
+  <IMG ALT="Result" SRC="Klepp_Jakob_H16_img/Klepp_Jakob_H16_3.png">
 </P>
 
 
@@ -192,6 +225,123 @@ Eigenschaften der Standadisiertennormalverteilung<BR>
 <BR>
 (1) Symmetrisch der y-Achse<BR>
 (2) G(-u) = 1-G(u)
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Beispiel, normalisierung einer gaussschen Verteilung<BR>
+<BR>
+Normalverteilung µ=6, sigma=2<BR>
+P(x höchstens 7)
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i6) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+µ:6;<BR>
+sigma:2;<BR>
+x_hoechstens: 7;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H16_img/Klepp_Jakob_H16_4.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i9) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxdraw2d(<BR>
+xrange=[-4, 12],<BR>
+yrange=[0, 0.5],<BR>
+filled_func=true,<BR>
+explicit(norm('x, µ, sigma), x, -4, x_hoechstens), /* x höchstens 7 */<BR>
+filled_func=false,<BR>
+line_width=2,<BR>
+explicit(norm('x, µ, sigma), x, -4, 12)<BR>
+);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H16_img/Klepp_Jakob_H16_5.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Die Wahrscheindlichkeit "x höchstens 7" ist die Fläche<BR>
+unter der Kurve bis 7.<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x - µ<BR>
+Mit hilfe des Zusammenhangs u = ----- lässt sich<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sigma<BR>
+jede beliebige Normalverteilung in Standardnormalverteilung<BR>
+überführen.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i10) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+u: (x-µ)/sigma;<BR>
+u_hoechstens: subst(['x=x_hoechstens], u);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H16_img/Klepp_Jakob_H16_6.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i12) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxdraw2d(<BR>
+xrange=[-4, 12],<BR>
+yrange=[0, 0.5],<BR>
+filled_func=true,<BR>
+explicit(norm('x, 0, 1), x, -4, u_hoechstens),<BR>
+filled_func=false,<BR>
+line_width=2,<BR>
+explicit(norm('x, 0, 1), x, -4, 12)<BR>
+);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H16_img/Klepp_Jakob_H16_7.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Die Normalverteilung wurde in die standadisierte Form überführt.<BR>
+Die roten Flächen sind in beiden Grafiken gleich groß.
 </P>
 
  <HR>

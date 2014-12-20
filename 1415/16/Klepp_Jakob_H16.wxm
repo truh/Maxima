@@ -7,6 +7,15 @@
         2014-12-16         
    [wxMaxima: title   end   ] */
 
+/* [wxMaxima: input   start ] */
+kill(all);
+load(draw);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+norm(x, µ, sigma):=1/(sigma*sqrt(2*%pi)) * %e^-((x-µ)^2/(2*sigma^2));
+/* [wxMaxima: input   end   ] */
+
 /* [wxMaxima: comment start ]
 Standardnormalverteilung auch u-Verteilung genannt
 
@@ -83,7 +92,7 @@ sdnv_G(u):=block(
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: comment start ]
-Stndadisierung
+Standadisierung
                                   x - µ
   Mit hilfe des Zusammenhangs u = ----- lässt sich
                                   sigma
@@ -100,6 +109,63 @@ Eigenschaften der Standadisiertennormalverteilung
 
 (1) Symmetrisch der y-Achse
 (2) G(-u) = 1-G(u)
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Beispiel, normalisierung einer gaussschen Verteilung
+
+Normalverteilung µ=6, sigma=2
+P(x höchstens 7)
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+µ:6;
+sigma:2;
+x_hoechstens: 7;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(
+xrange=[-4, 12],
+yrange=[0, 0.5],
+filled_func=true,
+explicit(norm('x, µ, sigma), x, -4, x_hoechstens), /* x höchstens 7 */
+filled_func=false,
+line_width=2,
+explicit(norm('x, µ, sigma), x, -4, 12)
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Die Wahrscheindlichkeit "x höchstens 7" ist die Fläche
+unter der Kurve bis 7.
+                                x - µ
+Mit hilfe des Zusammenhangs u = ----- lässt sich
+                                sigma
+jede beliebige Normalverteilung in Standardnormalverteilung
+überführen.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+u: (x-µ)/sigma;
+u_hoechstens: subst(['x=x_hoechstens], u);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(
+xrange=[-4, 12],
+yrange=[0, 0.5],
+filled_func=true,
+explicit(norm('x, 0, 1), x, -4, u_hoechstens),
+filled_func=false,
+line_width=2,
+explicit(norm('x, 0, 1), x, -4, 12)
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Die Normalverteilung wurde in die standadisierte Form überführt.
+Die roten Flächen sind in beiden Grafiken gleich groß.
    [wxMaxima: comment end   ] */
 
 /* Maxima can't load/batch files which end with a comment! */
