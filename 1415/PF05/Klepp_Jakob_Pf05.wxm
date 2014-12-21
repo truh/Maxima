@@ -12,8 +12,6 @@ Funktionen in mehreren Variablen
 Funktionen in mehreren Variablen
    [wxMaxima: section end   ] */
 
-/* [wxMaxima: fold    start ] */
-
 /* [wxMaxima: comment start ]
 Unter einer Funktion  z = f(x, y)  einer Funktion x,y versteht
 man eine zuordnung die jedem geordneten Paar [x, y] genau einen
@@ -76,13 +74,9 @@ Statt f'' entsprechend ... fxx
 
    [wxMaxima: comment end   ] */
 
-/* [wxMaxima: fold    end   ] */
-
 /* [wxMaxima: section start ]
 Extremwerte von Funktionen in mehreren Variablen
    [wxMaxima: section end   ] */
-
-/* [wxMaxima: fold    start ] */
 
 /* [wxMaxima: input   start ] */
 kill(all);
@@ -218,8 +212,6 @@ Zeichnung
 /* [wxMaxima: input   start ] */
 wxplot3d(f(x,y), [x,-4,1], [y,-4,1], [z,-40,10]);
 /* [wxMaxima: input   end   ] */
-
-/* [wxMaxima: fold    end   ] */
 
 /* [wxMaxima: section start ]
 Anwendung [von Extremwerten] in der Fehlerrechnung
@@ -565,8 +557,6 @@ Der relative Fehler für die Dauer(T) des Pendels liegt bei ~ +-3,5 %
 Lineare, quadratische und kubische Regression
    [wxMaxima: section end   ] */
 
-/* [wxMaxima: fold    start ] */
-
 /* [wxMaxima: comment start ]
 Regression: Methode der kleinsten Quadrate
 
@@ -608,6 +598,10 @@ II(punkte):= k*sum(punkte[i][1],i,1,length(punkte))
   + d*length(punkte) 
   = sum(punkte[i][2],i,1,length(punkte));
 /* beide Gleichungen als Gleichungssystem lösen */
+/*
+Regression: Methode der kleinsten Quadrate
+punkte: [[x0,y0], [x1,y1], [x2, y2], ...] 
+*/
 regr_lin(punkte):=solve([I(punkte), II(punkte)],[k,d])[1];
 /* [wxMaxima: input   end   ] */
 
@@ -865,8 +859,6 @@ linie: explicit(y,x,0,9);
 /* [wxMaxima: input   start ] */
 wxdraw2d(xrange=[0,9], yrange=[0,8],color=blue, linie, color=red, punkte);
 /* [wxMaxima: input   end   ] */
-
-/* [wxMaxima: fold    end   ] */
 
 /* Maxima can't load/batch files which end with a comment! */
 "Created with wxMaxima"$

@@ -1,0 +1,1987 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+ <HEAD>
+  <TITLE>Klepp_Jakob_Pf05</TITLE>
+  <META NAME="generator" CONTENT="wxMaxima">
+  <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+  <STYLE TYPE="text/css">
+body {
+  background-color: rgb(255,255,255);
+}
+.input {
+  color: rgb(0,0,255);
+}
+.comment {
+  color: rgb(0,0,0);
+  background-color: rgb(255,255,255);
+  padding: 2mm;
+}
+.image {
+  color: rgb(0,0,0);
+  padding: 2mm;
+}
+.section {
+  color: rgb(0,0,0);
+  font-size: 1.5em;
+  padding: 2mm;
+}
+.subsect {
+  color: rgb(0,0,0);
+  font-size: 1.2em;
+  padding: 2mm;
+}
+.title {
+  color: rgb(0,0,0);
+  font-size: 2em;
+  padding: 2mm;
+}
+.prompt {
+  color: rgb(255,0,0);
+}
+table {
+  border: 0px;
+}
+td {
+  vertical-align: top;
+  padding: 1mm;
+}
+  </STYLE>
+ </HEAD>
+ <BODY>
+
+<!---------------------------------------------------------->
+<!--          Created with wxMaxima version 14.09.0         -->
+<!---------------------------------------------------------->
+
+
+<!-- Title cell -->
+
+
+<P CLASS="title">
+          Portfolio 5           <BR>
+Funktionen in mehreren Variablen<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Jakob Klepp           <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;23.10.2013 - 30.10.2013     
+</P>
+
+
+<!-- Section cell -->
+
+
+<P CLASS="section">
+ 1 Funktionen in mehreren Variablen
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Unter einer Funktion  z = f(x, y)  einer Funktion x,y versteht<BR>
+man eine zuordnung die jedem geordneten Paar [x, y] genau einen<BR>
+Wert [z = f(x, y)] zuordnet.<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;z<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;^<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.- - - -.<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;.|      .<BR>
+&nbsp;&nbsp;&nbsp;. |     .<BR>
+&nbsp;&nbsp;.  |    .<BR>
+&nbsp;- - - - o (x,y,z)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+---:---.------> y<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;/    :  .<BR>
+&nbsp;&nbsp;&nbsp;/     : .<BR>
+&nbsp;&nbsp;/      :.<BR>
+&nbsp;/- - - - (x,y)<BR>
+v<BR>
+x<BR>
+
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Partielle Ableitung<BR>
+<BR>
+Bei einer Partiellen Ableitung einer Funktion f(x,y) wird nach<BR>
+EINER Variable (x oder y) differenziert, wobei man die andere<BR>
+Variable vorrübergehend als Konstante betrachtet.<BR>
+<BR>
+f'(x,y) keine sinnvolle Schreibweise für eine Ableitung einer<BR>
+Funktion in mehreren Variablen da hierbei die Variable nach der<BR>
+abegeleitet werden soll nciht deklariert wird.<BR>
+<BR>
+Stattdessen fx(x,y) oder fy(x,y)<BR>
+<BR>
+Statt f'' entsprechend ... fxx<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fxy<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fyx<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fyy<BR>
+<BR>
+1. Ableitung nach x:<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;δ          δf<BR>
+&nbsp;&nbsp;fx(x,y) = -- f(x,y) = --(x,y)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;δx          δx<BR>
+<BR>
+1. Ableitung nach y:<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;δ          δf<BR>
+&nbsp;&nbsp;fy(x,y) = -- f(x,y) = --(x,y)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;δy          δy<BR>
+<BR>
+2. Ableitungen:<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;δ            δf<BR>
+&nbsp;&nbsp;fxx(x,y)= -- fx(x,y) = ----<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;δx           δxδx<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;δ            δf<BR>
+&nbsp;&nbsp;fxy(x,y)= -- fx(x,y) = ----<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;δy           δxδy<BR>
+
+</P>
+
+
+<!-- Section cell -->
+
+
+<P CLASS="section">
+ 2 Extremwerte von Funktionen in mehreren Variablen
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i14) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+kill(all);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_0.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i1) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+load(draw);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_1.png">
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  2.1 Erklärung
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Quadratische Gleichungen:<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Bei Funktionen einer Variable wird ein Extremwert gefunden<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;indem man die erste Ableitung nullsetzt. <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Extremwerte sind an den Stellen mit einer Waagrechten<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Tangente zu finden.
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Gleichungen höheren Grades:<BR>
+&nbsp;&nbsp;Bei mehrdimensionalen Funktionen genügt es nicht <BR>
+&nbsp;&nbsp;festzustellen das die erste Ableitung Null ist um einen <BR>
+&nbsp;&nbsp;Extremwert zu identifizieren.<BR>
+&nbsp;&nbsp;Eine zur xy-Ebene parallele Tangentialebene karakterisiert<BR>
+&nbsp;&nbsp;zwar eine "Senke" (lokales Minimum) oder eine "Quelle"<BR>
+&nbsp;&nbsp;(lokales Maximum), aber auch einen Sattelpunkt<BR>
+<BR>
+&nbsp;&nbsp;Notwendidige Bedingungen:<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;fx = 0<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;fy = 0<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Mit hilfe dieser Bedingungen findet man alle Orte die<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Senke, Quellen oder Sattelpunkte sein können.<BR>
+<BR>
+&nbsp;&nbsp;Hinreichende Bedingungen:<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;fxx * fyy - (fxy)² > 0: Extremwert<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fxx < 0: Maximum<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fxx > 0: Minimum<BR>
+
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  2.2 Beispiel
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Angabe
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i2) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+f(x,y):= x³ + y³ + 6*x*y;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_2.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Ableitungen
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i3) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+fx: diff(f(x,y), x, 1);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_3.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i4) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+fy: diff(f(x,y), y, 1);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_4.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i5) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+fxx: diff(f(x,y), x, 2);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_5.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i6) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+fxy: diff(fx, y, 1);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_6.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i7) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+fyy: diff(f(x,y), y, 2);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_7.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Notwendige Bedingungen<BR>
+Erste Ableitungen = 0
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i8) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+nb:solve([fx=0, fy=0], [x,y]);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_8.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Hinreichende Bedingungen
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i9) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+hb:fxx*fyy - (fxy²) > 0;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_9.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i10) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+hb_max: fxx<0;<BR>
+hb_min: fxx>0;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_10.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Lösungen der Notwenidigen Bedingung in die Hinreichende<BR>
+Bedingung einsetzen
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i12) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+minima : []$<BR>
+maxima : []$<BR>
+for pair in nb do<BR>
+(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;if ( subst(pair, hb) and subst(pair, hb_max) ) then<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maxima:append(maxima,[pair])<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;else<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;if ( subst(pair, hb) and subst(pair, hb_min) ) then<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;minima:append(minima,[pair])<BR>
+)$<BR>
+"Diese Maxima wurden gefunden:";<BR>
+maxima;<BR>
+"Diese Minima wurden gefunden:";<BR>
+minima;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_11.png">
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  2.3 Zeichnung
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i19) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxplot3d(f(x,y), [x,-4,1], [y,-4,1], [z,-40,10]);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_12.png">
+</P>
+
+
+<!-- Section cell -->
+
+
+<P CLASS="section">
+ 3 Anwendung [von Extremwerten] in der Fehlerrechnung
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  3.1 Erklärung
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i20) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+kill(all);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_13.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Jede Physikalische/Technische Messung ist prinzipiell mit einem Fehler<BR>
+behaftet. Dieser Fahler basiert darauf, dass jedes Meßgerät nur endliche<BR>
+Genauigkeit hat.<BR>
+Verschiedene Teilergebnisse werden über einen funktionalen Zusammenhang<BR>
+zu einem Gesamtresultat zusammengesetzt. <BR>
+Die Gauss'sche Fehlerrechnung untersucht, die Größe des Fehlers im<BR>
+Gesamtresultat, sowohl Absolut als auch Relativ, und die Gewichtung<BR>
+der Fehler aus dem Teilmeßung, die dann zum Fehler im Gesamtresultat <BR>
+führen.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i1) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/*<BR>
+kleiner Meßfehler<BR>
+*/<BR>
+f(x):=log(1.5*x-0.5)+2$ "f(x)"=f(x);<BR>
+X: 1$ "x"=X;<BR>
+ΔX: 0.25$ "Δx"=ΔX;<BR>
+wxdraw2d(<BR>
+xrange=[-0.3,1.8], yrange=[-0.6,3], xaxis=true, yaxis=true,<BR>
+color = black, explicit(log(1.5*x-0.5)+2,x,0.3,3),<BR>
+color=royalblue, points_joined=true, line_type=solid,<BR>
+points([[X, 0],[1, f(X)], [0, f(X)]]),<BR>
+color = light-green,<BR>
+points([[X - ΔX, 0],[X - ΔX, f(X - ΔX)], [0, f(X - ΔX)]]),<BR>
+color = light-red,<BR>
+points([[X + ΔX, 0],[X + ΔX, f(X + ΔX)], [0, f(X + ΔX)]]),<BR>
+color = magenta, label(["Δx", X, -0.3]), label(["Δy", -0.1, f(X)]),<BR>
+points([[X - ΔX, 0],[X + ΔX, 0]]),<BR>
+points([[0, f(X - ΔX)],[0, f(X + ΔX)]])<BR>
+);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_14.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i8) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/*<BR>
+<BR>
+großer Meßfehler<BR>
+<BR>
+*/<BR>
+f(x):=log(1.5*x-0.5)+2$ "f(x)"=f(x);<BR>
+X: 1$ "x"=X;<BR>
+ΔX: 0.5$ "Δx"=ΔX;<BR>
+wxdraw2d(<BR>
+xrange=[-0.3,1.8], yrange=[-0.6,3], xaxis=true, yaxis=true,<BR>
+color = black, explicit(log(1.5*x-0.5)+2,x,0.3,3),<BR>
+color=royalblue, points_joined=true, line_type=solid,<BR>
+points([[X, 0],[1, f(X)], [0, f(X)]]),<BR>
+color = light-green,<BR>
+points([[X - ΔX, 0],[X - ΔX, f(X - ΔX)], [0, f(X - ΔX)]]),<BR>
+color = light-red,<BR>
+points([[X + ΔX, 0],[X + ΔX, f(X + ΔX)], [0, f(X + ΔX)]]),<BR>
+color = magenta, label(["Δx", X, -0.3]), label(["Δy", -0.1, f(X)]),<BR>
+points([[X - ΔX, 0],[X + ΔX, 0]]),<BR>
+points([[0, f(X - ΔX)],[0, f(X + ΔX)]])<BR>
+);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_15.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+x ... Meßwert ± Ungenauigkeit: x ± Δx<BR>
+y ... Resultat<BR>
+<BR>
+Analyse:<BR>
+<BR>
+&nbsp;&nbsp;Auf dem Fehler im Gesamtergebnis hat jeder Fehler im<BR>
+&nbsp;&nbsp;Teilergebnis eine direkt proportionale Auswirkung<BR>
+<BR>
+&nbsp;&nbsp;je größer Δx desto größer Δy
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i15) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/*<BR>
+<BR>
+geringe Steigung<BR>
+<BR>
+*/<BR>
+f(x):=log(1.5*x-0.5)/2+2$ "f(x)"=f(x);<BR>
+X: 1$ "x"=X;<BR>
+ΔX: 0.25$ "Δx"=ΔX;<BR>
+wxdraw2d(<BR>
+xrange=[-0.3,1.8], yrange=[-0.6,3], xaxis=true, yaxis=true,<BR>
+color = black, explicit(log(1.5*x-0.5)+2,x,0.3,3),<BR>
+color=royalblue, points_joined=true, line_type=solid,<BR>
+points([[X, 0],[1, f(X)], [0, f(X)]]),<BR>
+color = light-green,<BR>
+points([[X - ΔX, 0],[X - ΔX, f(X - ΔX)], [0, f(X - ΔX)]]),<BR>
+color = light-red,<BR>
+points([[X + ΔX, 0],[X + ΔX, f(X + ΔX)], [0, f(X + ΔX)]]),<BR>
+color = magenta, label(["Δx", X, -0.3]), label(["Δy", -0.1, f(X)]),<BR>
+points([[X - ΔX, 0],[X + ΔX, 0]]),<BR>
+points([[0, f(X - ΔX)],[0, f(X + ΔX)]])<BR>
+);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_16.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i22) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/*<BR>
+<BR>
+hohe Steigung<BR>
+<BR>
+*/<BR>
+f(x):=2*log(1.5*x-0.5)+2$ "f(x)"=f(x);<BR>
+X: 1$ "x"=X;<BR>
+ΔX: 0.25$ "Δx"=ΔX;<BR>
+wxdraw2d(<BR>
+xrange=[-0.3,1.8], yrange=[-0.6,3], xaxis=true, yaxis=true,<BR>
+color = black, explicit(log(1.5*x-0.5)+2,x,0.3,3),<BR>
+color=royalblue, points_joined=true, line_type=solid,<BR>
+points([[X, 0],[1, f(X)], [0, f(X)]]),<BR>
+color = light-green,<BR>
+points([[X - ΔX, 0],[X - ΔX, f(X - ΔX)], [0, f(X - ΔX)]]),<BR>
+color = light-red,<BR>
+points([[X + ΔX, 0],[X + ΔX, f(X + ΔX)], [0, f(X + ΔX)]]),<BR>
+color = magenta, label(["Δx", X, -0.3]), label(["Δy", -0.1, f(X)]),<BR>
+points([[X - ΔX, 0],[X + ΔX, 0]]),<BR>
+points([[0, f(X - ΔX)],[0, f(X + ΔX)]])<BR>
+);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_17.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Analyse:<BR>
+<BR>
+&nbsp;&nbsp;Bei gleicher größe des Einzelfehlers ergibt sich ein<BR>
+&nbsp;&nbsp;größerer Fehler im Resultat, wenn die Abhängigkeit des<BR>
+&nbsp;&nbsp;Resultats vom Teilergebnis größer ist.<BR>
+<BR>
+&nbsp;&nbsp;Das heißt wenn die Steigung vom Funktionalen Zusammenhang größer ist.<BR>
+<BR>
+&nbsp;&nbsp;Das heißt wenn die erste Ableitung größer ist.
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Bevor man den Fehler berechnet sollte man alles in SI-Einheiten umwandeln.<BR>
+<BR>
+Man rechnet immer mit den positiven Werten der Fehlerangabe.<BR>
+Bsp: Höhe +- 5%, Höhe +- 0.05m<BR>
+<BR>
+R = R(x,y,z)<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|δR     |   |δR     |   |δR     |<BR>
+ΔR = |-- * Δx| + |-- * Δy| + |-- + Δz|<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|δx     |   |δy     |   |δz     |<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;___<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\   | δR        |<BR>
+ΔR =  >  |---- * Δx_i|<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/__ |δx_i       |<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/          \<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/            \<BR>
+&nbsp;&nbsp;Partielle        Unsicherheit/Fehler<BR>
+&nbsp;&nbsp;Ableitung        von x_i<BR>
+&nbsp;&nbsp;von R(x_i)<BR>
+&nbsp;&nbsp;Auswertung<BR>
+&nbsp;&nbsp;an der<BR>
+&nbsp;&nbsp;Meßstelle
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  3.2 Beispiel
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i29) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+kill(all);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_18.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Die Schwingdauer eines mathematische Pendels der Lange l ist T = 2*%pi*sqrt(l/g)<BR>
+Welcher absolute Fehler ergibt sich in T wenn l = 1 m und g = 10 m/s^2 ?<BR>
+Welchen prozentuellen Fehler hat man für T höchstens zu erwarten ?<BR>
+Wenn l höchstens auf +- 0.02m und g höchstens auf +- 5% genau gemessen wurden.
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Als erstes speichere ich die Funktion aus der Angabe in eine Variable,<BR>
+und forme diese dann nach h um.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i1) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+f: T = 2*%pi*sqrt(l/g);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_19.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Hier speichere ich die Werte aus der Angabe und deren Fehler.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i2) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wertL:1;<BR>
+wertG:10;<BR>
+fehlerL: 0.02;<BR>
+fehlerG: wertG*0.05;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_20.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Nun setze ich die Werte aus der Angabe ein, um T zu berechnen.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i6) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wertT: rhs(subst([l=wertL+fehlerL, g=wertG+fehlerG],f)), numer;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_21.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Das ist das Ergebnis für T, mit den Fehlern in den Einzelmessungen.
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Hier Bilde ich die 1.Ableitungen von T nach l und g, da die Steigung<BR>
+der Funktion einen wesentlichen Beitrag beim Berechnen des Fehlers leistet.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i7) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+fTl: diff(rhs(f), l, 1);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_22.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i8) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+fTg: diff(rhs(f), g, 1);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_23.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Hier werden die Werte der jeweiligen Variablen in ihre 1.Ableitungen<BR>
+eingesetzt und dem Delat(Fehler) der jeweiligen Variable multipliziert.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i9) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+deltaL: subst([l=wertL,g=wertG],abs(fTl * fehlerL)), numer;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_24.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i10) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+deltaG: subst([l=wertL,g=wertG],abs(fTg * fehlerG)), numer;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_25.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i11) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+deltaT: deltaL + deltaG, numer;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_26.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Nun stelle ich die Einzelfehler als Barchart dar.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i12) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxdraw2d(<BR>
+xrange = [0.5,1.5],<BR>
+yrange = [0,0.07],<BR>
+key = "Länge",<BR>
+fill_color = blue,<BR>
+fill_density = 0.4,<BR>
+line_width = 2,<BR>
+bars([0.8,deltaL,0.4]),<BR>
+key = "Beschleunigung",<BR>
+fill_color = red,<BR>
+fill_density = 0.4,<BR>
+line_width = 2,<BR>
+bars([1.2,deltaG,0.4]),<BR>
+xaxis = true);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_27.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Nun stelle ich die Einzelfehler als Piechart dar.
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Umrechnen der Einzelfehler, in Prozent von einem Kreis, also Grad.<BR>
+Das Minus muss davor gesetz werden um es richtig Zeichnen zu können.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i13) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+lkreis: deltaL/deltaT * 360 * (-1);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_28.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i14) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+gkreis: deltaG/deltaT * 360 * (-1);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_29.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i15) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxdraw2d(<BR>
+xrange = [-5.5,9.5],<BR>
+yrange = [3,9],<BR>
+key = "Länge",<BR>
+fill_color = royalblue,<BR>
+fill_density = 0.4,<BR>
+color = navy,<BR>
+line_width  = 2,<BR>
+ellipse(0,6,3,2,-90,lkreis),<BR>
+key = "Beschleunigung",<BR>
+fill_color = light-red,<BR>
+fill_density = 0.4,<BR>
+color = dark-red,<BR>
+line_width  = 2,<BR>
+ellipse(0,6,3,2,270,gkreis*(-1)));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_30.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+In den Zeichnungen(darüber) und auch an den Werten (darunter ausgegeben) ist <BR>
+klar und deutlich zu erkennen das der größere <BR>
+Fehler von der Beschleunigung komm, da auch DeltaBeschleunigung größer ist als DeltaLänge.<BR>
+Der Einzelfehler des Volumens trägt ~ 67 % zum Gesamtfehler bei.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i16) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+deltaL;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_31.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i17) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+deltaG;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_32.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Hier die Berechung des relativen Fehlers.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i18) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wertT;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_33.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i19) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+deltaT;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_34.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Hier sieht man wie groß der absolute Fehler im gegensatz zum Ergebnis ist.<BR>
+Nun werde ich den Relativen wert berechenen.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i20) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+relativT: deltaT/wertT;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_35.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Der relative Fehler für die Dauer(T) des Pendels liegt bei ~ +-3,5 %
+</P>
+
+
+<!-- Section cell -->
+
+
+<P CLASS="section">
+ 4 Lineare, quadratische und kubische Regression
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Regression: Methode der kleinsten Quadrate<BR>
+<BR>
+Bei einer Regression wird die Funktion gesucht welche am "besten"<BR>
+zu einer Menge an Punkten passt.<BR>
+<BR>
+Die Anzahl der Punkte muss mindestens um 1 höher sein als der<BR>
+Grad der Regression. Wenn der Grad gleich groß wie die Anzahl an<BR>
+Punkten ist kann die richtige Funktion einfach aufgestellt werden<BR>
+(x - x1)(x - x2) ...<BR>
+Bei weniger Punkten gibt es unendlich viele Lösungen.<BR>
+<BR>
+Bei der Methode der kleinsten Quadrate wird (im Falle der Linearen <BR>
+regression) die Optimale Funktion gesucht indem der Abstand der <BR>
+Punkte zu dem Punkt auf der Funktion mit dem gleichen x-Wert<BR>
+quadriert wird. Die Summe dieser Quadrate wird in Form einer<BR>
+Extremwertaufgabe minimiert. 
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  4.1 Lineare Regression
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i21) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+kill(all);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_36.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i1) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+load(draw);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_37.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i2) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/* erste Gleichung als Funktion */<BR>
+I (punkte):= k*sum((punkte[i][1])^2,i,1,length(punkte))<BR>
+&nbsp;&nbsp;+ d*sum(punkte[i][1],i,1,length(punkte)) <BR>
+&nbsp;&nbsp;= sum((punkte[i][1])*(punkte[i][2]),i,1,length(punkte));<BR>
+/* zweite Gleichung als Funktion */<BR>
+II(punkte):= k*sum(punkte[i][1],i,1,length(punkte)) <BR>
+&nbsp;&nbsp;+ d*length(punkte) <BR>
+&nbsp;&nbsp;= sum(punkte[i][2],i,1,length(punkte));<BR>
+/* beide Gleichungen als Gleichungssystem lösen */<BR>
+/*<BR>
+Regression: Methode der kleinsten Quadrate<BR>
+punkte: [[x0,y0], [x1,y1], [x2, y2], ...] <BR>
+*/<BR>
+regr_lin(punkte):=solve([I(punkte), II(punkte)],[k,d])[1];
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_38.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+=========================<BR>
+&nbsp;&nbsp;Anwendung + Zeichnung<BR>
+=========================
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Punkte aus der Schulübung
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i5) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+p: [[2,1],[3,3],[5,4]];
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_39.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+einsetzen der Punkte in die regr_lin Funktion
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i6) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+loe:regr_lin(p);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_40.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Linieare Funktion aus k, d bilden
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i7) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+subst(loe, k*x+d)$<BR>
+y(x):=''%;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_41.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Linie + Punkte zeichnen
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i9) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+punkte:points(p);<BR>
+linie: explicit(y(x),x,0,6);<BR>
+wxdraw2d(xrange=[0,6],yrange=[0,6],color=blue, linie, color=red, punkte);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_42.png">
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  4.2 Quadratische Regression
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i12) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+kill(all);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_43.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i1) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+load(draw);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_44.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+erste Gleichung als Funktion
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i2) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+I  (punkte):= <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;a * sum((punkte[i][1])^4,i,1,length(punkte))<BR>
+&nbsp;&nbsp;+ b * sum((punkte[i][1])^3,i,1,length(punkte)) <BR>
+&nbsp;&nbsp;+ c * sum((punkte[i][1])^2,i,1,length(punkte))<BR>
+= sum((punkte[i][1])^2*(punkte[i][2]),i,1,length(punkte));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_45.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+zweite Gleichung als Funktion
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i3) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+II  (punkte):= <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;a * sum((punkte[i][1])^3,i,1,length(punkte))<BR>
+&nbsp;&nbsp;+ b * sum((punkte[i][1])^2,i,1,length(punkte)) <BR>
+&nbsp;&nbsp;+ c * sum((punkte[i][1])  ,i,1,length(punkte))<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= sum((punkte[i][1])  *(punkte[i][2]),i,1,length(punkte));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_46.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+dritte Gleichung als Funktion
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i4) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+III  (punkte):= <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;a * sum((punkte[i][1])^2,i,1,length(punkte))<BR>
+&nbsp;&nbsp;+ b * sum((punkte[i][1])  ,i,1,length(punkte)) <BR>
+&nbsp;&nbsp;+ c * length(punkte)<BR>
+&nbsp;= sum((punkte[i][2]),i,1,length(punkte));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_47.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+die Gleichungen als Gleichungssystem lösen
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i5) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+regr_2(punkte):=solve([I(punkte), II(punkte), III(punkte)],[a,b,c])[1];
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_48.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+=========================<BR>
+&nbsp;&nbsp;Anwendung + Zeichnung<BR>
+=========================
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i6) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+load(draw);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_49.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Punkte aus Angabe
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i7) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+p:[[1,1],[2,2],[4,3],[6,5]];
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_50.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+In selbst definierte Funktion einsetzen
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i8) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+loe:regr_2(p);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_51.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Parabell erzeugen
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i9) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+y:subst(loe, a*x^2 + b*x + c);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_52.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i10) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+punkte:points(p);<BR>
+linie: explicit(y,x,0,7);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_53.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i12) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxdraw2d(xrange=[0,7],color=blue, linie, color=red, punkte);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_54.png">
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  4.3 Kubische Regression
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i13) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+kill(all);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_55.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i1) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+load(draw);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_56.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+erste Gleichung als Funktion
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i2) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+I  (punkte):= <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;a * sum((punkte[i][1])^6,i,1,length(punkte))<BR>
+&nbsp;&nbsp;+ b * sum((punkte[i][1])^5,i,1,length(punkte)) <BR>
+&nbsp;&nbsp;+ c * sum((punkte[i][1])^4,i,1,length(punkte))<BR>
+&nbsp;&nbsp;+ d * sum((punkte[i][1])^3,i,1,length(punkte))<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= sum((punkte[i][1])^3*(punkte[i][2]),i,1,length(punkte));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_57.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+zweite Gleichung als Funktion
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i3) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+II  (punkte):= <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;a * sum((punkte[i][1])^5,i,1,length(punkte))<BR>
+&nbsp;&nbsp;+ b * sum((punkte[i][1])^4,i,1,length(punkte)) <BR>
+&nbsp;&nbsp;+ c * sum((punkte[i][1])^3,i,1,length(punkte))<BR>
+&nbsp;&nbsp;+ d * sum((punkte[i][1])^2,i,1,length(punkte))<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= sum((punkte[i][1])^2*(punkte[i][2]),i,1,length(punkte));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_58.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+dritte Gleichung als Funktion
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i4) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+III  (punkte):= <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;a * sum((punkte[i][1])^4,i,1,length(punkte))<BR>
+&nbsp;&nbsp;+ b * sum((punkte[i][1])^3,i,1,length(punkte)) <BR>
+&nbsp;&nbsp;+ c * sum((punkte[i][1])^2,i,1,length(punkte))<BR>
+&nbsp;&nbsp;+ d * sum((punkte[i][1])^1,i,1,length(punkte))<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= sum((punkte[i][1])^1*(punkte[i][2]),i,1,length(punkte));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_59.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+vierte Gleichung als Funktion
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i5) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+IV  (punkte):= <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;a * sum((punkte[i][1])^3,i,1,length(punkte))<BR>
+&nbsp;&nbsp;+ b * sum((punkte[i][1])^2,i,1,length(punkte)) <BR>
+&nbsp;&nbsp;+ c * sum((punkte[i][1])^1,i,1,length(punkte))<BR>
+&nbsp;&nbsp;+ d * length(punkte)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= sum((punkte[i][2]),i,1,length(punkte));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_60.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+die Gleichungen als Gleichungssystem lösen
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i6) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+regr_3(punkte):=solve([I(punkte), II(punkte), III(punkte), IV(punkte)],[a,b,c,d])[1];
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_61.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+=========================<BR>
+&nbsp;&nbsp;Anwendung + Zeichnung<BR>
+=========================
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i7) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+load(draw);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_62.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Punkte aus Angabe
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i8) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+p:[[1,1],[2,2],[4,3],[6,5],[8,7]];
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_63.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+In selbst definierte Funktion einsetzen
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i9) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+loe:regr_3(p);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_64.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Parabell erzeugen
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i10) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+y:subst(loe, a*x^3 + b*x^2 + c*x + d);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_65.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i11) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+punkte:points(p);<BR>
+linie: explicit(y,x,0,9);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_66.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i13) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxdraw2d(xrange=[0,9], yrange=[0,8],color=blue, linie, color=red, punkte);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf05_img/Klepp_Jakob_Pf05_67.png">
+</P>
+
+ <HR>
+ <SMALL> Created with <A HREF="http://wxmaxima.sourceforge.net/">wxMaxima</A>.</SMALL>
+
+ </BODY>
+</HTML>
