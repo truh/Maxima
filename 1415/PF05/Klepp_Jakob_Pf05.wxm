@@ -12,6 +12,8 @@ Funktionen in mehreren Variablen
 Funktionen in mehreren Variablen
    [wxMaxima: section end   ] */
 
+/* [wxMaxima: fold    start ] */
+
 /* [wxMaxima: comment start ]
 Unter einer Funktion  z = f(x, y)  einer Funktion x,y versteht
 man eine zuordnung die jedem geordneten Paar [x, y] genau einen
@@ -36,6 +38,8 @@ x
    [wxMaxima: comment end   ] */
 
 /* [wxMaxima: comment start ]
+Partielle Ableitung
+
 Bei einer Partiellen Ableitung einer Funktion f(x,y) wird nach
 EINER Variable (x oder y) differenziert, wobei man die andere
 Variable vorrübergehend als Konstante betrachtet.
@@ -50,15 +54,35 @@ Statt f'' entsprechend ... fxx
                            fxy
                            fyx
                            fyy
+
+1. Ableitung nach x:
+             δ          δf
+  fx(x,y) = -- f(x,y) = --(x,y)
+            δx          δx
+
+1. Ableitung nach y:
+             δ          δf
+  fy(x,y) = -- f(x,y) = --(x,y)
+            δy          δy
+
+2. Ableitungen:
+             δ            δf
+  fxx(x,y)= -- fx(x,y) = ----
+            δx           δxδx
+
+             δ            δf
+  fxy(x,y)= -- fx(x,y) = ----
+            δy           δxδy
+
    [wxMaxima: comment end   ] */
 
-/* [wxMaxima: comment start ]
-Partielle Ableitung
-   [wxMaxima: comment end   ] */
+/* [wxMaxima: fold    end   ] */
 
 /* [wxMaxima: section start ]
 Extremwerte von Funktionen in mehreren Variablen
    [wxMaxima: section end   ] */
+
+/* [wxMaxima: fold    start ] */
 
 /* [wxMaxima: input   start ] */
 kill(all);
@@ -82,12 +106,29 @@ Quadratische Gleichungen:
 
 /* [wxMaxima: comment start ]
 Gleichungen höheren Grades:
-    Bei mehrdimensionalen Funktionen genügt es nicht 
-    festzustellen das die erste Ableitung Null ist um einen 
-    Extremwert zu identifizieren.
-    Eine zur xy-Ebene parallele Tangentialebene karakterisiert
-    zwar eine "Senke" (lokales Minimum) oder eine "Quelle"
-    (lokales Maximum), aber auch einen Sattelpunkt
+  Bei mehrdimensionalen Funktionen genügt es nicht 
+  festzustellen das die erste Ableitung Null ist um einen 
+  Extremwert zu identifizieren.
+  Eine zur xy-Ebene parallele Tangentialebene karakterisiert
+  zwar eine "Senke" (lokales Minimum) oder eine "Quelle"
+  (lokales Maximum), aber auch einen Sattelpunkt
+
+  Notwendidige Bedingungen:
+
+    fx = 0
+    fy = 0
+
+    Mit hilfe dieser Bedingungen findet man alle Orte die
+    Senke, Quellen oder Sattelpunkte sein können.
+
+  Hinreichende Bedingungen:
+
+    fxx * fyy - (fxy)² > 0: Extremwert
+              
+                           fxx < 0: Maximum
+
+                           fxx > 0: Minimum
+
    [wxMaxima: comment end   ] */
 
 /* [wxMaxima: subsect start ]
@@ -178,6 +219,8 @@ Zeichnung
 wxplot3d(f(x,y), [x,-4,1], [y,-4,1], [z,-40,10]);
 /* [wxMaxima: input   end   ] */
 
+/* [wxMaxima: fold    end   ] */
+
 /* [wxMaxima: section start ]
 Anwendung [von Extremwerten] in der Fehlerrechnung
    [wxMaxima: section end   ] */
@@ -185,6 +228,10 @@ Anwendung [von Extremwerten] in der Fehlerrechnung
 /* [wxMaxima: subsect start ]
 Erklärung
    [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(all);
+/* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: comment start ]
 Jede Physikalische/Technische Messung ist prinzipiell mit einem Fehler
@@ -198,22 +245,151 @@ der Fehler aus dem Teilmeßung, die dann zum Fehler im Gesamtresultat
 führen.
    [wxMaxima: comment end   ] */
 
+/* [wxMaxima: input   start ] */
+/*
+kleiner Meßfehler
+*/
+f(x):=log(1.5*x-0.5)+2$ "f(x)"=f(x);
+X: 1$ "x"=X;
+ΔX: 0.25$ "Δx"=ΔX;
+wxdraw2d(
+xrange=[-0.3,1.8], yrange=[-0.6,3], xaxis=true, yaxis=true,
+color = black, explicit(log(1.5*x-0.5)+2,x,0.3,3),
+color=royalblue, points_joined=true, line_type=solid,
+points([[X, 0],[1, f(X)], [0, f(X)]]),
+color = light-green,
+points([[X - ΔX, 0],[X - ΔX, f(X - ΔX)], [0, f(X - ΔX)]]),
+color = light-red,
+points([[X + ΔX, 0],[X + ΔX, f(X + ΔX)], [0, f(X + ΔX)]]),
+color = magenta, label(["Δx", X, -0.3]), label(["Δy", -0.1, f(X)]),
+points([[X - ΔX, 0],[X + ΔX, 0]]),
+points([[0, f(X - ΔX)],[0, f(X + ΔX)]])
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+/*
+
+großer Meßfehler
+
+*/
+f(x):=log(1.5*x-0.5)+2$ "f(x)"=f(x);
+X: 1$ "x"=X;
+ΔX: 0.5$ "Δx"=ΔX;
+wxdraw2d(
+xrange=[-0.3,1.8], yrange=[-0.6,3], xaxis=true, yaxis=true,
+color = black, explicit(log(1.5*x-0.5)+2,x,0.3,3),
+color=royalblue, points_joined=true, line_type=solid,
+points([[X, 0],[1, f(X)], [0, f(X)]]),
+color = light-green,
+points([[X - ΔX, 0],[X - ΔX, f(X - ΔX)], [0, f(X - ΔX)]]),
+color = light-red,
+points([[X + ΔX, 0],[X + ΔX, f(X + ΔX)], [0, f(X + ΔX)]]),
+color = magenta, label(["Δx", X, -0.3]), label(["Δy", -0.1, f(X)]),
+points([[X - ΔX, 0],[X + ΔX, 0]]),
+points([[0, f(X - ΔX)],[0, f(X + ΔX)]])
+);
+/* [wxMaxima: input   end   ] */
+
 /* [wxMaxima: comment start ]
-Auf dem Fehler im Gesamtergebnis hat jeder Fehler im Teilergibnis eine
-direkt propotionale Auswirkung.
-Je größer Δx desto größer Δy
+x ... Meßwert ± Ungenauigkeit: x ± Δx
+y ... Resultat
+
+Analyse:
+
+  Auf dem Fehler im Gesamtergebnis hat jeder Fehler im
+  Teilergebnis eine direkt proportionale Auswirkung
+
+  je größer Δx desto größer Δy
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+/*
+
+geringe Steigung
+
+*/
+f(x):=log(1.5*x-0.5)/2+2$ "f(x)"=f(x);
+X: 1$ "x"=X;
+ΔX: 0.25$ "Δx"=ΔX;
+wxdraw2d(
+xrange=[-0.3,1.8], yrange=[-0.6,3], xaxis=true, yaxis=true,
+color = black, explicit(log(1.5*x-0.5)+2,x,0.3,3),
+color=royalblue, points_joined=true, line_type=solid,
+points([[X, 0],[1, f(X)], [0, f(X)]]),
+color = light-green,
+points([[X - ΔX, 0],[X - ΔX, f(X - ΔX)], [0, f(X - ΔX)]]),
+color = light-red,
+points([[X + ΔX, 0],[X + ΔX, f(X + ΔX)], [0, f(X + ΔX)]]),
+color = magenta, label(["Δx", X, -0.3]), label(["Δy", -0.1, f(X)]),
+points([[X - ΔX, 0],[X + ΔX, 0]]),
+points([[0, f(X - ΔX)],[0, f(X + ΔX)]])
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+/*
+
+hohe Steigung
+
+*/
+f(x):=2*log(1.5*x-0.5)+2$ "f(x)"=f(x);
+X: 1$ "x"=X;
+ΔX: 0.25$ "Δx"=ΔX;
+wxdraw2d(
+xrange=[-0.3,1.8], yrange=[-0.6,3], xaxis=true, yaxis=true,
+color = black, explicit(log(1.5*x-0.5)+2,x,0.3,3),
+color=royalblue, points_joined=true, line_type=solid,
+points([[X, 0],[1, f(X)], [0, f(X)]]),
+color = light-green,
+points([[X - ΔX, 0],[X - ΔX, f(X - ΔX)], [0, f(X - ΔX)]]),
+color = light-red,
+points([[X + ΔX, 0],[X + ΔX, f(X + ΔX)], [0, f(X + ΔX)]]),
+color = magenta, label(["Δx", X, -0.3]), label(["Δy", -0.1, f(X)]),
+points([[X - ΔX, 0],[X + ΔX, 0]]),
+points([[0, f(X - ΔX)],[0, f(X + ΔX)]])
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Analyse:
+
+  Bei gleicher größe des Einzelfehlers ergibt sich ein
+  größerer Fehler im Resultat, wenn die Abhängigkeit des
+  Resultats vom Teilergebnis größer ist.
+
+  Das heißt wenn die Steigung vom Funktionalen Zusammenhang größer ist.
+
+  Das heißt wenn die erste Ableitung größer ist.
    [wxMaxima: comment end   ] */
 
 /* [wxMaxima: comment start ]
-Bei gleicher größe des Einzelfehlers ergibt sich ein größerer Fehler
-im Resultat, wenn die Abhängigkeit des Resultats vom Teilergebnis größer
-ist. 
-Das heißt wenn die Steigung vom Funktionalen Zusammenhang größer ist.
-Das heißt wenn die erste Ableitung größer ist.
+Bevor man den Fehler berechnet sollte man alles in SI-Einheiten umwandeln.
+
+Man rechnet immer mit den positiven Werten der Fehlerangabe.
+Bsp: Höhe +- 5%, Höhe +- 0.05m
+
+R = R(x,y,z)
+
+     |δR     |   |δR     |   |δR     |
+ΔR = |-- * Δx| + |-- * Δy| + |-- + Δz|
+     |δx     |   |δy     |   |δz     |
+     ___
+     \   | δR        |
+ΔR =  >  |---- * Δx_i|
+     /__ |δx_i       |
+          /          \
+         /            \
+  Partielle        Unsicherheit/Fehler
+  Ableitung        von x_i
+  von R(x_i)
+  Auswertung
+  an der
+  Meßstelle
    [wxMaxima: comment end   ] */
 
 /* [wxMaxima: subsect start ]
-Angabe
+Beispiel
    [wxMaxima: subsect end   ] */
 
 /* [wxMaxima: input   start ] */
@@ -221,125 +397,175 @@ kill(all);
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: comment start ]
-Gegeben ist das Volumen und der Durchmesser eines Drehkegels
-Volumen in cm³ => in m³ umgerechnet
-Durmesser in mm in m umgerechnet
+Die Schwingdauer eines mathematische Pendels der Lange l ist T = 2*%pi*sqrt(l/g)
+Welcher absolute Fehler ergibt sich in T wenn l = 1 m und g = 10 m/s^2 ?
+Welchen prozentuellen Fehler hat man für T höchstens zu erwarten ?
+Wenn l höchstens auf +- 0.02m und g höchstens auf +- 5% genau gemessen wurden.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Als erstes speichere ich die Funktion aus der Angabe in eine Variable,
+und forme diese dann nach h um.
    [wxMaxima: comment end   ] */
 
 /* [wxMaxima: input   start ] */
-V: 8.5 * 10^(-6);
-d: 15 * 10^(-3);
+f: T = 2*%pi*sqrt(l/g);
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: comment start ]
-Ungenauigkeit der Angaben
-/\Volumen in % => in m³ umgerechnet
-/\d in mm => in m umgerechnet
+Hier speichere ich die Werte aus der Angabe und deren Fehler.
    [wxMaxima: comment end   ] */
 
 /* [wxMaxima: input   start ] */
-D_V: 0.05 * V;
-D_d: 0.1 * 10^(-3);
+wertL:1;
+wertG:10;
+fehlerL: 0.02;
+fehlerG: wertG*0.05;
 /* [wxMaxima: input   end   ] */
 
-/* [wxMaxima: subsect start ]
-Höhe berechnen
-   [wxMaxima: subsect end   ] */
-
 /* [wxMaxima: comment start ]
-Gesucht wird die Höhe des Kegels
+Nun setze ich die Werte aus der Angabe ein, um T zu berechnen.
    [wxMaxima: comment end   ] */
 
 /* [wxMaxima: input   start ] */
-h(V, d):= (12 * V)/(%pi * d^2);
+wertT: rhs(subst([l=wertL+fehlerL, g=wertG+fehlerG],f)), numer;
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: comment start ]
-Einsetzen der Werte
+Das ist das Ergebnis für T, mit den Fehlern in den Einzelmessungen.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Hier Bilde ich die 1.Ableitungen von T nach l und g, da die Steigung
+der Funktion einen wesentlichen Beitrag beim Berechnen des Fehlers leistet.
    [wxMaxima: comment end   ] */
 
 /* [wxMaxima: input   start ] */
-h(V, d), numer;
+fTl: diff(rhs(f), l, 1);
 /* [wxMaxima: input   end   ] */
 
-/* [wxMaxima: subsect start ]
-Unschärfe der Höhe
-   [wxMaxima: subsect end   ] */
+/* [wxMaxima: input   start ] */
+fTg: diff(rhs(f), g, 1);
+/* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: comment start ]
-Formel zum berechnen der Gesamtunschärfe
+Hier werden die Werte der jeweiligen Variablen in ihre 1.Ableitungen
+eingesetzt und dem Delat(Fehler) der jeweiligen Variable multipliziert.
    [wxMaxima: comment end   ] */
 
 /* [wxMaxima: input   start ] */
-D_h_: abs(diff(h(V_, d_), V_, 1) * D_V) + abs(diff(h(V_, d_), d_, 1) * D_d);
+deltaL: subst([l=wertL,g=wertG],abs(fTl * fehlerL)), numer;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+deltaG: subst([l=wertL,g=wertG],abs(fTg * fehlerG)), numer;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+deltaT: deltaL + deltaG, numer;
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: comment start ]
-Werte einsetzten
-   [wxMaxima: comment end   ] */
-
-/* [wxMaxima: input   start ] */
-subst([V_=V, d_=d], D_h_)$
-D_h: float(%);
-/* [wxMaxima: input   end   ] */
-
-/* [wxMaxima: subsect start ]
-Visualisierung der Einzelfehler
-   [wxMaxima: subsect end   ] */
-
-/* [wxMaxima: input   start ] */
-load(draw);
-/* [wxMaxima: input   end   ] */
-
-/* [wxMaxima: comment start ]
-Auswirkung von der Abweichung in Volumen und Durchmesser auf h
-Zeichnet Balken welche jeweil das Ideale h (grau, ohne Abweichung)
-Und vergleicht es mit durch Abweichungen in Durchmesser (Pink/Rot)
-und Volumen (Cyan/Blau) veränderten Werten.
+Nun stelle ich die Einzelfehler als Barchart dar.
    [wxMaxima: comment end   ] */
 
 /* [wxMaxima: input   start ] */
 wxdraw2d(
-    xrange          = [0, 11], 
-    yrange          = [0, 0.35],
-    key             = "h(V - Delta V, d)",
-    fill_color      = cyan,
-    fill_density    = 1,
-    line_width      = 2,
-    bars([2, h(V - D_V, d), 2]), 
-    key             = "h(V, d + Delta d)",
-    fill_color      = pink,
-    bars([7, h(V, d + D_d), 2]),
-    key             = "h ohne Abweichung",
-    fill_color      = grey,
-    line_width      = 1,
-    bars([3, h(V, d), 2]),
-    key             = "",
-    bars([8, h(V, d), 2]),
-    key             = "h(V + Delta V, d)", 
-    fill_color      = blue, 
-    line_width      = 2,
-    bars([4, h(V + D_V, d), 2]), 
-    key             = "h(V, d - Delta d)", 
-    fill_color      = red, 
-    line_width      = 2,
-    bars([9, h(V, d - D_d), 2])
-);
+xrange = [0.5,1.5],
+yrange = [0,0.07],
+key = "Länge",
+fill_color = blue,
+fill_density = 0.4,
+line_width = 2,
+bars([0.8,deltaL,0.4]),
+key = "Beschleunigung",
+fill_color = red,
+fill_density = 0.4,
+line_width = 2,
+bars([1.2,deltaG,0.4]),
+xaxis = true);
 /* [wxMaxima: input   end   ] */
 
-/* [wxMaxima: subsect start ]
-Bewertung
-   [wxMaxima: subsect end   ] */
+/* [wxMaxima: comment start ]
+Nun stelle ich die Einzelfehler als Piechart dar.
+   [wxMaxima: comment end   ] */
 
 /* [wxMaxima: comment start ]
-Wie in der Grafik zu sehen hat die Unschärfe im Volumen
-eine deutlich größere Auswirkung aufs Volumen im vergleich
-zur Unschärfe im Durchmesser.
+Umrechnen der Einzelfehler, in Prozent von einem Kreis, also Grad.
+Das Minus muss davor gesetz werden um es richtig Zeichnen zu können.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+lkreis: deltaL/deltaT * 360 * (-1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+gkreis: deltaG/deltaT * 360 * (-1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(
+xrange = [-5.5,9.5],
+yrange = [3,9],
+key = "Länge",
+fill_color = royalblue,
+fill_density = 0.4,
+color = navy,
+line_width  = 2,
+ellipse(0,6,3,2,-90,lkreis),
+key = "Beschleunigung",
+fill_color = light-red,
+fill_density = 0.4,
+color = dark-red,
+line_width  = 2,
+ellipse(0,6,3,2,270,gkreis*(-1)));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+In den Zeichnungen(darüber) und auch an den Werten (darunter ausgegeben) ist 
+klar und deutlich zu erkennen das der größere 
+Fehler von der Beschleunigung komm, da auch DeltaBeschleunigung größer ist als DeltaLänge.
+Der Einzelfehler des Volumens trägt ~ 67 % zum Gesamtfehler bei.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+deltaL;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+deltaG;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Hier die Berechung des relativen Fehlers.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+wertT;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+deltaT;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Hier sieht man wie groß der absolute Fehler im gegensatz zum Ergebnis ist.
+Nun werde ich den Relativen wert berechenen.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+relativT: deltaT/wertT;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Der relative Fehler für die Dauer(T) des Pendels liegt bei ~ +-3,5 %
    [wxMaxima: comment end   ] */
 
 /* [wxMaxima: section start ]
 Lineare, quadratische und kubische Regression
    [wxMaxima: section end   ] */
+
+/* [wxMaxima: fold    start ] */
 
 /* [wxMaxima: comment start ]
 Regression: Methode der kleinsten Quadrate
@@ -372,31 +598,16 @@ kill(all);
 load(draw);
 /* [wxMaxima: input   end   ] */
 
-/* [wxMaxima: comment start ]
-erste Gleichung als Funktion
-   [wxMaxima: comment end   ] */
-
 /* [wxMaxima: input   start ] */
+/* erste Gleichung als Funktion */
 I (punkte):= k*sum((punkte[i][1])^2,i,1,length(punkte))
   + d*sum(punkte[i][1],i,1,length(punkte)) 
   = sum((punkte[i][1])*(punkte[i][2]),i,1,length(punkte));
-/* [wxMaxima: input   end   ] */
-
-/* [wxMaxima: comment start ]
-zweite Gleichung als Funktion
-   [wxMaxima: comment end   ] */
-
-/* [wxMaxima: input   start ] */
+/* zweite Gleichung als Funktion */
 II(punkte):= k*sum(punkte[i][1],i,1,length(punkte)) 
   + d*length(punkte) 
   = sum(punkte[i][2],i,1,length(punkte));
-/* [wxMaxima: input   end   ] */
-
-/* [wxMaxima: comment start ]
-beide Gleichungen als Gleichungssystem lösen
-   [wxMaxima: comment end   ] */
-
-/* [wxMaxima: input   start ] */
+/* beide Gleichungen als Gleichungssystem lösen */
 regr_lin(punkte):=solve([I(punkte), II(punkte)],[k,d])[1];
 /* [wxMaxima: input   end   ] */
 
@@ -654,6 +865,8 @@ linie: explicit(y,x,0,9);
 /* [wxMaxima: input   start ] */
 wxdraw2d(xrange=[0,9], yrange=[0,8],color=blue, linie, color=red, punkte);
 /* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: fold    end   ] */
 
 /* Maxima can't load/batch files which end with a comment! */
 "Created with wxMaxima"$
