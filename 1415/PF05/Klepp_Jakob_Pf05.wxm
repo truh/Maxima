@@ -9,6 +9,54 @@ Funktionen in mehreren Variablen
    [wxMaxima: title   end   ] */
 
 /* [wxMaxima: section start ]
+Funktionen in mehreren Variablen
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: comment start ]
+Unter einer Funktion  z = f(x, y)  einer Funktion x,y versteht
+man eine zuordnung die jedem geordneten Paar [x, y] genau einen
+Wert [z = f(x, y)] zuordnet.
+
+     z
+     ^
+     |
+     .- - - -.
+    .|      .
+   . |     .
+  .  |    .
+ - - - - o (x,y,z)
+     +---:---.------> y
+    /    :  .
+   /     : .
+  /      :.
+ /- - - - (x,y)
+v
+x
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Bei einer Partiellen Ableitung einer Funktion f(x,y) wird nach
+EINER Variable (x oder y) differenziert, wobei man die andere
+Variable vorrübergehend als Konstante betrachtet.
+
+f'(x,y) keine sinnvolle Schreibweise für eine Ableitung einer
+Funktion in mehreren Variablen da hierbei die Variable nach der
+abegeleitet werden soll nciht deklariert wird.
+
+Stattdessen fx(x,y) oder fy(x,y)
+
+Statt f'' entsprechend ... fxx
+                           fxy
+                           fyx
+                           fyy
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Partielle Ableitung
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: section start ]
 Extremwerte von Funktionen in mehreren Variablen
    [wxMaxima: section end   ] */
 
