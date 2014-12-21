@@ -1,0 +1,611 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 14.09.0 ] */
+
+/* [wxMaxima: title   start ]
+          Portfolio 5           
+Funktionen in mehreren Variablen
+          Jakob Klepp           
+    23.10.2013 - 30.10.2013     
+   [wxMaxima: title   end   ] */
+
+/* [wxMaxima: section start ]
+Extremwerte von Funktionen in mehreren Variablen
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(all);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+load(draw);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: subsect start ]
+Erklärung
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Quadratische Gleichungen:
+    Bei Funktionen einer Variable wird ein Extremwert gefunden
+    indem man die erste Ableitung nullsetzt. 
+    Extremwerte sind an den Stellen mit einer Waagrechten
+    Tangente zu finden.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Gleichungen höheren Grades:
+    Bei mehrdimensionalen Funktionen genügt es nicht 
+    festzustellen das die erste Ableitung Null ist um einen 
+    Extremwert zu identifizieren.
+    Eine zur xy-Ebene parallele Tangentialebene karakterisiert
+    zwar eine "Senke" (lokales Minimum) oder eine "Quelle"
+    (lokales Maximum), aber auch einen Sattelpunkt
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: subsect start ]
+Beispiel
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Angabe
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+f(x,y):= x³ + y³ + 6*x*y;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Ableitungen
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+fx: diff(f(x,y), x, 1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+fy: diff(f(x,y), y, 1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+fxx: diff(f(x,y), x, 2);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+fxy: diff(fx, y, 1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+fyy: diff(f(x,y), y, 2);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Notwendige Bedingungen
+Erste Ableitungen = 0
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+nb:solve([fx=0, fy=0], [x,y]);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Hinreichende Bedingungen
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+hb:fxx*fyy - (fxy²) > 0;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+hb_max: fxx<0;
+hb_min: fxx>0;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Lösungen der Notwenidigen Bedingung in die Hinreichende
+Bedingung einsetzen
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+minima : []$
+maxima : []$
+for pair in nb do
+(
+    if ( subst(pair, hb) and subst(pair, hb_max) ) then
+        maxima:append(maxima,[pair])
+    else
+    if ( subst(pair, hb) and subst(pair, hb_min) ) then
+        minima:append(minima,[pair])
+)$
+"Diese Maxima wurden gefunden:";
+maxima;
+"Diese Minima wurden gefunden:";
+minima;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: subsect start ]
+Zeichnung
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: input   start ] */
+wxplot3d(f(x,y), [x,-4,1], [y,-4,1], [z,-40,10]);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: section start ]
+Anwendung [von Extremwerten] in der Fehlerrechnung
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: subsect start ]
+Erklärung
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Jede Physikalische/Technische Messung ist prinzipiell mit einem Fehler
+behaftet. Dieser Fahler basiert darauf, dass jedes Meßgerät nur endliche
+Genauigkeit hat.
+Verschiedene Teilergebnisse werden über einen funktionalen Zusammenhang
+zu einem Gesamtresultat zusammengesetzt. 
+Die Gauss'sche Fehlerrechnung untersucht, die Größe des Fehlers im
+Gesamtresultat, sowohl Absolut als auch Relativ, und die Gewichtung
+der Fehler aus dem Teilmeßung, die dann zum Fehler im Gesamtresultat 
+führen.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Auf dem Fehler im Gesamtergebnis hat jeder Fehler im Teilergibnis eine
+direkt propotionale Auswirkung.
+Je größer Δx desto größer Δy
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Bei gleicher größe des Einzelfehlers ergibt sich ein größerer Fehler
+im Resultat, wenn die Abhängigkeit des Resultats vom Teilergebnis größer
+ist. 
+Das heißt wenn die Steigung vom Funktionalen Zusammenhang größer ist.
+Das heißt wenn die erste Ableitung größer ist.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: subsect start ]
+Angabe
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(all);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Gegeben ist das Volumen und der Durchmesser eines Drehkegels
+Volumen in cm³ => in m³ umgerechnet
+Durmesser in mm in m umgerechnet
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+V: 8.5 * 10^(-6);
+d: 15 * 10^(-3);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Ungenauigkeit der Angaben
+/\Volumen in % => in m³ umgerechnet
+/\d in mm => in m umgerechnet
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+D_V: 0.05 * V;
+D_d: 0.1 * 10^(-3);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: subsect start ]
+Höhe berechnen
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Gesucht wird die Höhe des Kegels
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+h(V, d):= (12 * V)/(%pi * d^2);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Einsetzen der Werte
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+h(V, d), numer;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: subsect start ]
+Unschärfe der Höhe
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Formel zum berechnen der Gesamtunschärfe
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+D_h_: abs(diff(h(V_, d_), V_, 1) * D_V) + abs(diff(h(V_, d_), d_, 1) * D_d);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Werte einsetzten
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+subst([V_=V, d_=d], D_h_)$
+D_h: float(%);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: subsect start ]
+Visualisierung der Einzelfehler
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: input   start ] */
+load(draw);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Auswirkung von der Abweichung in Volumen und Durchmesser auf h
+Zeichnet Balken welche jeweil das Ideale h (grau, ohne Abweichung)
+Und vergleicht es mit durch Abweichungen in Durchmesser (Pink/Rot)
+und Volumen (Cyan/Blau) veränderten Werten.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(
+    xrange          = [0, 11], 
+    yrange          = [0, 0.35],
+    key             = "h(V - Delta V, d)",
+    fill_color      = cyan,
+    fill_density    = 1,
+    line_width      = 2,
+    bars([2, h(V - D_V, d), 2]), 
+    key             = "h(V, d + Delta d)",
+    fill_color      = pink,
+    bars([7, h(V, d + D_d), 2]),
+    key             = "h ohne Abweichung",
+    fill_color      = grey,
+    line_width      = 1,
+    bars([3, h(V, d), 2]),
+    key             = "",
+    bars([8, h(V, d), 2]),
+    key             = "h(V + Delta V, d)", 
+    fill_color      = blue, 
+    line_width      = 2,
+    bars([4, h(V + D_V, d), 2]), 
+    key             = "h(V, d - Delta d)", 
+    fill_color      = red, 
+    line_width      = 2,
+    bars([9, h(V, d - D_d), 2])
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: subsect start ]
+Bewertung
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Wie in der Grafik zu sehen hat die Unschärfe im Volumen
+eine deutlich größere Auswirkung aufs Volumen im vergleich
+zur Unschärfe im Durchmesser.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: section start ]
+Lineare, quadratische und kubische Regression
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: comment start ]
+Regression: Methode der kleinsten Quadrate
+
+Bei einer Regression wird die Funktion gesucht welche am "besten"
+zu einer Menge an Punkten passt.
+
+Die Anzahl der Punkte muss mindestens um 1 höher sein als der
+Grad der Regression. Wenn der Grad gleich groß wie die Anzahl an
+Punkten ist kann die richtige Funktion einfach aufgestellt werden
+(x - x1)(x - x2) ...
+Bei weniger Punkten gibt es unendlich viele Lösungen.
+
+Bei der Methode der kleinsten Quadrate wird (im Falle der Linearen 
+regression) die Optimale Funktion gesucht indem der Abstand der 
+Punkte zu dem Punkt auf der Funktion mit dem gleichen x-Wert
+quadriert wird. Die Summe dieser Quadrate wird in Form einer
+Extremwertaufgabe minimiert. 
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: subsect start ]
+Lineare Regression
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(all);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+load(draw);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+erste Gleichung als Funktion
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+I (punkte):= k*sum((punkte[i][1])^2,i,1,length(punkte))
+  + d*sum(punkte[i][1],i,1,length(punkte)) 
+  = sum((punkte[i][1])*(punkte[i][2]),i,1,length(punkte));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+zweite Gleichung als Funktion
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+II(punkte):= k*sum(punkte[i][1],i,1,length(punkte)) 
+  + d*length(punkte) 
+  = sum(punkte[i][2],i,1,length(punkte));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+beide Gleichungen als Gleichungssystem lösen
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+regr_lin(punkte):=solve([I(punkte), II(punkte)],[k,d])[1];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+=========================
+  Anwendung + Zeichnung
+=========================
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Punkte aus der Schulübung
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+p: [[2,1],[3,3],[5,4]];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+einsetzen der Punkte in die regr_lin Funktion
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+loe:regr_lin(p);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Linieare Funktion aus k, d bilden
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+subst(loe, k*x+d)$
+y(x):=''%;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Linie + Punkte zeichnen
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+punkte:points(p);
+linie: explicit(y(x),x,0,6);
+wxdraw2d(xrange=[0,6],yrange=[0,6],color=blue, linie, color=red, punkte);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: subsect start ]
+Quadratische Regression
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(all);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+load(draw);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+erste Gleichung als Funktion
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+I  (punkte):= 
+    a * sum((punkte[i][1])^4,i,1,length(punkte))
+  + b * sum((punkte[i][1])^3,i,1,length(punkte)) 
+  + c * sum((punkte[i][1])^2,i,1,length(punkte))
+= sum((punkte[i][1])^2*(punkte[i][2]),i,1,length(punkte));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+zweite Gleichung als Funktion
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+II  (punkte):= 
+    a * sum((punkte[i][1])^3,i,1,length(punkte))
+  + b * sum((punkte[i][1])^2,i,1,length(punkte)) 
+  + c * sum((punkte[i][1])  ,i,1,length(punkte))
+      = sum((punkte[i][1])  *(punkte[i][2]),i,1,length(punkte));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+dritte Gleichung als Funktion
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+III  (punkte):= 
+    a * sum((punkte[i][1])^2,i,1,length(punkte))
+  + b * sum((punkte[i][1])  ,i,1,length(punkte)) 
+  + c * length(punkte)
+ = sum((punkte[i][2]),i,1,length(punkte));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+die Gleichungen als Gleichungssystem lösen
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+regr_2(punkte):=solve([I(punkte), II(punkte), III(punkte)],[a,b,c])[1];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+=========================
+  Anwendung + Zeichnung
+=========================
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+load(draw);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Punkte aus Angabe
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+p:[[1,1],[2,2],[4,3],[6,5]];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+In selbst definierte Funktion einsetzen
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+loe:regr_2(p);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Parabell erzeugen
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+y:subst(loe, a*x^2 + b*x + c);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+punkte:points(p);
+linie: explicit(y,x,0,7);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(xrange=[0,7],color=blue, linie, color=red, punkte);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: subsect start ]
+Kubische Regression
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(all);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+load(draw);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+erste Gleichung als Funktion
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+I  (punkte):= 
+    a * sum((punkte[i][1])^6,i,1,length(punkte))
+  + b * sum((punkte[i][1])^5,i,1,length(punkte)) 
+  + c * sum((punkte[i][1])^4,i,1,length(punkte))
+  + d * sum((punkte[i][1])^3,i,1,length(punkte))
+      = sum((punkte[i][1])^3*(punkte[i][2]),i,1,length(punkte));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+zweite Gleichung als Funktion
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+II  (punkte):= 
+    a * sum((punkte[i][1])^5,i,1,length(punkte))
+  + b * sum((punkte[i][1])^4,i,1,length(punkte)) 
+  + c * sum((punkte[i][1])^3,i,1,length(punkte))
+  + d * sum((punkte[i][1])^2,i,1,length(punkte))
+      = sum((punkte[i][1])^2*(punkte[i][2]),i,1,length(punkte));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+dritte Gleichung als Funktion
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+III  (punkte):= 
+    a * sum((punkte[i][1])^4,i,1,length(punkte))
+  + b * sum((punkte[i][1])^3,i,1,length(punkte)) 
+  + c * sum((punkte[i][1])^2,i,1,length(punkte))
+  + d * sum((punkte[i][1])^1,i,1,length(punkte))
+      = sum((punkte[i][1])^1*(punkte[i][2]),i,1,length(punkte));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+vierte Gleichung als Funktion
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+IV  (punkte):= 
+    a * sum((punkte[i][1])^3,i,1,length(punkte))
+  + b * sum((punkte[i][1])^2,i,1,length(punkte)) 
+  + c * sum((punkte[i][1])^1,i,1,length(punkte))
+  + d * length(punkte)
+      = sum((punkte[i][2]),i,1,length(punkte));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+die Gleichungen als Gleichungssystem lösen
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+regr_3(punkte):=solve([I(punkte), II(punkte), III(punkte), IV(punkte)],[a,b,c,d])[1];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+=========================
+  Anwendung + Zeichnung
+=========================
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+load(draw);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Punkte aus Angabe
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+p:[[1,1],[2,2],[4,3],[6,5],[8,7]];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+In selbst definierte Funktion einsetzen
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+loe:regr_3(p);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Parabell erzeugen
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+y:subst(loe, a*x^3 + b*x^2 + c*x + d);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+punkte:points(p);
+linie: explicit(y,x,0,9);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(xrange=[0,9], yrange=[0,8],color=blue, linie, color=red, punkte);
+/* [wxMaxima: input   end   ] */
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$
