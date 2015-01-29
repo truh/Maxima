@@ -1,0 +1,42 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 14.09.0 ] */
+
+/* [wxMaxima: title   start ]
+    lineare Korrelation    
+       Jakob  Klepp        
+        2014-12-16         
+   [wxMaxima: title   end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(all);
+load(draw);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Zusammenhangsanalysen
+
+Lineare Korellation
+
+  Wenn man in der selben Probe mehrere Merkmale vermißt dann kann man
+  sich die Frage stellen ob ein Zusammenhang zwischen diesen Merkmalen
+  besteht.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+groesse:[171,163,172,179,176,164,170,174,161,168,172,163,180,171,174,169];
+gewicht:[ 75, 62, 69, 82, 74, 63, 72, 74, 60, 70, 74, 66, 77, 76, 72, 73];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(
+point_type=7,
+points(groesse, gewicht));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Man kann beobachten dass Personen mit einer ähnlichen Körpergröße
+auch ein ähnliches gewicht haben.
+   [wxMaxima: comment end   ] */
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$
