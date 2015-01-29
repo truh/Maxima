@@ -782,8 +782,8 @@ n
    [wxMaxima: comment end   ] */
 
 /* [wxMaxima: input   start ] */
-fd(x,y):=(3 * cos(4*x) - 3*y) /4;
-P0: [1,3];
+fd(x,y):=8 * sin(x) + 6*cos(x) - y;
+P0: [0,3];
 h: 0.5;
 n: 20;
 /* [wxMaxima: input   end   ] */
@@ -830,10 +830,39 @@ fd('x,'y);
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: input   start ] */
-wxdrawdf([fd('x,'y)],['x,1,11.5], ['y, -0.5, 3], 
+wxdrawdf([fd('x,'y)],['x,0,10], ['y, -8, 9], 
 color=red,
 ps);
 /* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Die werte aus dem runge kutta Modul folgen wie zu erwarten
+dem ensprechenden Richtungsfeld.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+y(x) := 7*sin(x)-cos(x)+%e^(-x);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(
+xrange=[0, 10],
+yrange=[-8, 9],
+explicit(y('x), 'x, 0, 10),
+color=red,
+point_type=7,
+ps
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Die Punkte nähern sich nach anfänglicher ungenauigkeit schnell an
+die erwartete Funktion an.
+   [wxMaxima: comment end   ] */
 
 /* Maxima can't load/batch files which end with a comment! */
 "Created with wxMaxima"$
