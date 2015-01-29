@@ -1,0 +1,839 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 14.09.0 ] */
+
+/* [wxMaxima: title   start ]
+      Pf6.1 22.01.2014       
+   Differentialgleichungen   
+         Jakob Klepp         
+   [wxMaxima: title   end   ] */
+
+/* [wxMaxima: section start ]
+DGL 1. Ordnung analytisch
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: subsect start ]
+Theorie
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Übersicht
+---------
+
+* Definition
+
+* Grad & Ordnung
+
+* Lineare DGL 1. Ordnung
+
+* Allgemeine Lösung
+
+* Partikuläre Lösung
+
+* Störfunktion
+
+* Homogene Lösung
+
+* Inhomogene Lösung
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Definition
+----------
+
+Unter einer DGL versteht man eine Gleichung in der neben einer Funktion
+y=f(x) auch noch Ableitungen dieser Funktion vorkommen.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Grad & Ordnung
+--------------
+
+Man unterscheidet zwischen dem Grad einer DGL und der Ordnung 
+einer DGL,
+Grad ...
+    Die höchste vorkommende Potenz von y oder einer Ableitung
+Ordnung ...
+    Die höchste vorkommende Ableitng (von y)
+Beispiel
+y''' + [y']² + y = x
+ ---       -
+  |        |
+  |        v
+  v        Grad: 2
+Ordnung: 3
+(y'')⁵ + (y')⁷ = e^x * (sin x)⁸
+  --         -                -
+   |         |                |
+   |         |                v
+   |         v                Nicht grad der Gleichung
+   v         Grad: 7          weil nicht grad der Funktion
+   Ordnung: 2
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Lineare DGL 1. Ordnung
+----------------------
+
+Eine DGL 1. Ordnung heißt Linear wenn sie in der Form:
+
+    y' + p*y = s(x)
+
+geschrieben werden kann.
+
+    p ... koeffizient
+    s(x) ... Störfunktion
+
+Die Lösung erfolgt analytisch wie folgt:
+
+1. y[H]: bestimmung der Allgemeinen Lösung der Homogenen DGL
+         -> mit Trennung der Variablen
+         -> ode2 in maxima (könnte mehr als das)
+
+2. y[p]: bestimmung einer Partikulären Lösung der Inhomogenen DGL
+        -> Variation der Konstanten
+        -> Lösung mit Lösungsansatz
+
+4. y:    Die allgemeine Lösung y der Inhomogenen DGL findet man als
+         y = y[H] * y[p]
+
+5. c:    Wenn notwending: bestimmen der Integrationskonstante in
+         durch einsetzen in die Nebenbedingung.
+
+6.       Probe durch einsetzen des Ergebniss von 5. in die Inhomogene DGL
+
+7.       Grafik der Lösung 5., der Nebenbedingung und der Störfunktion
+
+8.       Interpretation der Grafik
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Allgemeine Lösung
+-----------------
+
+Die Lösung einer Differenzialgleichung ist wegen der vieldeutigkeit
+(unbestimmtheit) des Integrals immer eine Funktionen Schar, dass
+heißt unendlich vile Funktionen die sich durch eine Konstante unterscheiden.
+
+Funktionen Schar heißt auch die >>allgemeine Lösung<< der DGL.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Partikuläre Lösung
+------------------
+
+Gibt man der Integrationskonstanten (direkt oder durch eine Nebenbedingung)
+einen speziellen Wert, dann wählt man aus der Allgemeinen Lösung eine
+Partikuläre Lösung aus.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Störfunktion
+------------
+
+Bei einer DGL
+y'(x) = ???
+ist die Störfunktion s(x) der Term welcher kein y aber möglicherweise x enthält. 
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Homogene DGL
+------------
+
+s(x) == 0
+
+Die Homogene DGL ist eine DGL ohne Störfunktion.
+Durch das 0-setzen der Störfunktion kann aus der Inhomogenen
+DGL die Homogene DGL gewonnen werden.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Inhomogene DGL
+--------------
+
+s(x) != 0
+
+Inhomogene DGL ist eine DGL welche eine Störfunktion beinhaltet.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: subsect start ]
+Richtungsfeld
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Eine DGL kann zumeist so umgeformt werde dass:
+
+    y' = ???
+
+Durch die DGL wird somit die Steigung der allgemeinen Lösung
+bestimmt. 
+
+Da die allgemeine Lösung aus unendlich vielen Funktionen besteht
+wird ihre Steigung auch als Richtungsfeld dargestellt.
+
+Durch eine Nebenbedingung kann eine partikuläre Lösung ausgezeichnet werden.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+@M
+In Maxima lässt sich ein Richtungsfeld mit `plotdf` oder `wxdrawdf`
+zeichnen.
+
+- plotdf öffnet ein Fenster mit einer interaktive Ansicht des Richtungsfeldes 
+  in der sich die partikuläre Lösungen mit einem Mausklick auszeichnen lassen.
+
+- wxdrawdf wird direkt in wxmaxima eingebunden, außerdem lässt sich die Zeichnung
+  um weitere Objekte erweitern.
+
+Zur Verwendung von wxdrawdf muss drawdf mit load(drawdf) geladen werden.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+@M
+wxdrawdf(dydx, p)
+dydx:
+    allgemeine Lösung
+p:
+    Punkt den die partikuläre Lösung durchquert
+    Entspricht der Nebenbedingung mit der Form:
+        y(x)=?
+          -  -
+          |  |
+          v  v
+  soln_at(x, ?)
+
+Weitere Parameter entsprechen wxdraw2d
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(all);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+load(drawdf)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Angabe
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+nb:['x=2, 'y=0];
+angabe: 'yI + x^2 = x + 1;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Nach y'=??? umformen
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+solve(angabe, 'yI)[1];
+fI:rhs(%);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Nebenbedingung -> Variable
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+nb_x: rhs(nb[1]); nb_y: rhs(nb[2]);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Zeichnen
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdrawdf(
+fI,                         /* DGL */
+[x, nb_x - 5, nb_x + 5],    /* x - Wertebereich */
+[y, nb_y - 5, nb_y + 5],    /* y - Wertebereich */
+soln_at(nb_x, nb_y),        /* Nenbenbedingung */
+color=blue,                 /* Punkt Farbe */
+point_size=3,               /* Punkt Größe */
+point_type=7,               /* Punkt Typ = Kreis */
+points([[nb_x, nb_y]])      /* draw2d Graphic Object point */
+)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: subsect start ]
+Trennung der Variablen
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Lineare DGL 1. Ordnung lassen sich immer mithilfe der Trennung der Variablen lösen.
+
+1. Freistellen von y'
+
+2. Ersetzung y' -> dy/dx
+
+3. Auffassung von dy/dx als Bruch und Trennung der Variablen
+
+4. Integrieren
+
+5. y berechnen
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Bsp:
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(all);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+s:yI+ 2*y =1;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Freistellen von y'
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+s1:solve(s, yI)[1];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Ersetzen von y' -> dy/dx
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+s2:subst([yI = diff('y(x),'x)],s1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Trennung der Variablen (hab ich nur manuell geschaft)
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+s3: dy/(-2*y + 1) = dx;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Integration
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+s4:integrate(1/(1-2*y), y) = integrate(1, x) +%c;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Berechnung von y
+
+Wenn manuell in der regel durch e^rhs=e^lhs
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+s5:solve(s4, y)[1];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: subsect start ]
+Tabelle mit Lösungsansätzen
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Art              s(x)                                           ya
+================ ============================================== ==============================================
+
+Polynom          A[n]*x^(n) + A[n-1]*x^(n-1) + ... + A[0]*x^(0) a[n]*x^(n) + a[n-1]*x^(n-1) + ... + a[0]*x^(0)
+
+                 A*sin(w*x)
+Trigonometrisch  B*cos(w*x)                                     a*sin(w*x) + b*cos(w*x)      //w=kleines Omega
+                 A*sin(w*x) + B*cos(w*x)
+
+                                                                a * e^(b*x)     //wenn b != -p
+Exponential      A*e^(b*x)                                      a*x*e^(b*x)     //wenn b ==  p
+                                                                                // p in DGL 1. Ordnung:
+                                                                                // y' + py = s(x)
+                                                                                //     -^-
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Bsp:
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+dgl1: 4*diff(y(x),x) - 3*y(x) = 3*cos(4*x);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Man findet den Lösungsansatz laut Tabelle 
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+ya:a*sin(4*x) + b*cos(4*x);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+yaI:diff(ya, x);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+... und setzt den Ansatz (inklusive Ableitung) in die inhomogene DGL ein
+um die noch umbestimmten Koeffizienten des Ansatzes zu berechnen.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+unKoAnsatz:subst([diff(y(x),x) = yaI, y(x) = ya], dgl1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Koeffizientenvergleich
+Die berechnung der Koeffizienten:
+
+Man setzt die Koeffizienten der entsprechenden trigonometrischen(bzw. Potenz) -Funktion auf der linken
+und rechten Seite gleich und erhält so ein lineares Gleichungssystem.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+@M
+Durch `expand` und `ratsimp` wird die Gleichung in eine für den Koeffizientenvergleich brauchbarere 
+Form bringen.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+unKoAnsatz:expand(unKoAnsatz);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+unKoAnsatz:ratsimp(unKoAnsatz);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Das Gleichungssystem wird manuell aufgestellt.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+gls1:[
+-3*a - 16*b = 0, /* sin */
+16*a -  3*b = 3  /* cos */
+];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+@M
+Gleichungssystem lässt sich mit solve lösen
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+solve(gls1, [a,b]);
+sol:%[1];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Durch einsetzen der berechneten Koeffizienten in den Lösungsansatz erhält man die partikuläre Lösung
+der DGL.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+ya, sol;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: subsect start ]
+Variation der Konstanten
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(all);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+dgl1: 4*'diff('y,'x) - 3*'y - 3*cos(4*'x);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Störfunktion freistellen. (manuell)
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+dgl1: 4*'diff('y,'x) - 3*'y = 3*cos(4*'x);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Bilden der Homogenen DGL
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+hom: lhs(dgl1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Berechnung der Homogenen DGL
+
+@M
+ode2 (eqn, dvar, ivar)
+
+eqn     (homogene) DGL
+dvar    abhängige Variable ... Funktion ... meist y
+ivar    unabhängige Variable ... meist x oder t
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+ode2(hom,y,x);
+yH: rhs(%) /* wir brauchen nur die rechte Seite */;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Eigentlicher beginn der Variation der Konstanten
+
+Auffassen der Integrationkonstanten als Funktion
+-> Ansatz
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+ya: yH, %c=C(x);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Ableiten von ya
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+yaI: diff(ya, x, 1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Einsetzen des Ansatz in die DGL (Angabe)
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+h:dgl1, 'diff('y,'x)=yaI, y=ya;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Nach C'(x) umformen
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+solve(h, C(x))$
+%[1];
+CIx:rhs(%)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+C'(x) integrieren
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+Cx: integrate(CIx, x, 1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+"Konstante" Cx in den Ansatz einsetzen um eine partikuläre Lösung
+der inhomogenen DGL zu erhalten.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+yp: ya, C(x)=Cx;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Durch addieren dieser partikulären Lösung und der homogenen DGL 
+erhalten wir die allgemeine Lösung der DGL.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+y(x):= ''yH + ''yp;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Probe:
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+probe:dgl1,'diff(y,x)=diff(y(x),x),y=y(x);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+ratsimp(lhs(probe));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Ist die Probe erfolgreich?
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+is(%=rhs(dgl1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: subsect start ]
+Bestimmung der Integrationskonstanten
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Nebenbedingung
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+nb: [1,3];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Allgemeine Lösung der DGL
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+y(x);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Gleichung aufstellen
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+glc: y(nb[1])=nb[2];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Lösen um die Konstante c zu finden
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+solve(glc, %c)$
+%[1];
+c:rhs(%)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Anzeigen der gefundenen Konstante
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+c;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+in allgemeine Lösung einsetzen um Partikuläre Lösung zu finden
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+yP: y(x), %c=c;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: subsect start ]
+Grafik
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Eine Zeichnung mit der Partikulären Lösung sowie
+der Nebenbedingung als Punkt.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Paket laden
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+load(draw);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Nebenbedingung und Partikuläre Lösung
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+nb;
+yP;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Grafikobjekte erzeugen
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+obj_nb: points([nb]);
+obj_yP: explicit(yP, x, -3, 2);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Zeichnen
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(
+key="partikuläre Lösung",
+obj_yP,
+key="Nebenbedingung",
+color="red",
+obj_nb
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: section start ]
+DGL 1. Ordnung numerisch
+       Runge Kutta
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: subsect start ]
+Erklärung
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Ist die Differentialgleichung
+    y'=f(x,y)
+mit der Anfangsbedingung P[0](x[0],y[0]) zu integrieren, so berechnet man der Reihe nach die Werte
+
+x[I]    = x[0]      ,   y[I]    = y[0]
+x[II]   = x[0] + h/2,   y[II]   = y[0] + k[I]/2     mit k[I]      = f(x[I]  , y[I])   * h
+x[III]  = x[0] + h/2,   y[III]  = y[0] + k[II]/2    mit k[II]     = f(x[II] , y[II])  * h
+x[IV]   = x[0] + h  ,   y[IV]   = y[0] + k[III]     mit k[III]    = f(x[III], y[III]) * h
+x[1]    = x[0] + h  ,   y[1]    = y[0] + k              k[IV]     = f(x[IV] , y[IV])  * h
+                                                    mit k         = (k[I] + 2*k[II] + 2*k[III] + k[IV])/6
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Bsp: 4*y' - 3*y = 3*cos(4*x) = (1/4) * (3*cos(4*x) + 3*y)
+     P(1,3)
+     h=1
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(all);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+f(x,y):=(1/4) * (3*cos(4*x) + 3*y);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h:1;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+pI:     [1          , 3];
+    kI:     f(pI[1], pI[2]) * h;
+pII:    [pI[1]+h/2  , pI[2]+kI];
+    kII:    f(pII[1], pII[2]) * h;
+pIII:   [pI[1]+h/2  , pI[2]+kII];
+    kIII:   f(pIII[1], pIII[2]) * h;
+pIV:    [pI[1]+h    , pI[2]+kIII];
+    kIV:    f(pIV[1], pIV[2]) * h;
+    k:      (kI + 2*kII + 2*kIII + kIV)/6;
+p1:     [pI[1]+h    , pI[2]+k];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Zeichnen
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+load(draw);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: subsect start ]
+Code
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(all);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Codeblock
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+/* runge kutta implementierung zur lösung von DGL
+ * Algorithmus laut de.wikipedia.org              */
+runge_kutta(f, P, h, n):= block (
+    /* modus auf numerisch stellen aber alten zustand merken */
+    save_num: numer,
+    numer: true,
+    /* ausreichend viele Punkte gefunden, nur den letzten zurück geben */
+    if (n < 0) then
+        return([P]),
+    /* alter Punkt */
+    x0   : P[1],
+    y0   : P[2],
+    /* Näherungsverfahren */
+    kI   : f(x0      , y0   ),
+    yI   : y0   + (h/2) *kI  ,
+    kII  : f(x0 + h/2, yI   ),
+    yII  : y0   + (h/2) *kII ,
+    kIII : f(x0 + h/2, yII  ),
+    yIII : y0   +  h    *kIII,
+    kIV  : f(x0 + h  , yIII ),
+    /* neuen Punkt erzeugen */
+    x    : x0   +           h,
+    y    : y0   + h*(1/6)*(kI + 2*(kII + kIII) + kIV),
+    p    : [x,y], /* neuer Punkt */
+    /* alten zustand wieder herstellen */
+    numer: save_num,
+    /* Erzeuge eine Liste aus dem Punkt aus der Parameterliste
+     * und hänge weitere Punkte welche durch den rekursiven
+     * Aufruf entstehen hinten an */
+   ps   : append([P], runge_kutta(f, p, h, n - 1)),
+    return(ps)    
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+fd(x,y)
+    Angabe der DGL
+        fd(x,y):= ???
+    entspricht:
+        y'      = ???
+P0
+    Startpunkt
+h
+    x-Schrittweite
+n
+    Anzahl an Schritten
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+fd(x,y):=(3 * cos(4*x) - 3*y) /4;
+P0: [1,3];
+h: 0.5;
+n: 20;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+fd('x,'y);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Aufruf des Codeblocks
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+xy:runge_kutta(fd, P0, h, n);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Erzeuge ein Grafikobjekt aus den Punkten
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: subsect start ]
+Grafiken
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: input   start ] */
+load(draw);
+load(drawdf);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+draw2d graphic object
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+ps: points(xy)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Als Linie auf Richtungsfeld
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+fd('x,'y);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdrawdf([fd('x,'y)],['x,1,11.5], ['y, -0.5, 3], 
+color=red,
+ps);
+/* [wxMaxima: input   end   ] */
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$
