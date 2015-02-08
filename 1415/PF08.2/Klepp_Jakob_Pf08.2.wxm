@@ -1,0 +1,62 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 14.09.0 ] */
+
+/* [wxMaxima: title   start ]
+   Portfolio 8.2   
+   Stochastik und  
+Zusammenhanganalyse
+    Jakob  Klepp   
+     2015-02-08    
+   [wxMaxima: title   end   ] */
+
+/* [wxMaxima: section start ]
+Abzähltechniken
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: subsect start ]
+Permutation
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: subsect start ]
+Kombination
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: subsect start ]
+Variation
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: section start ]
+Diskrete Verteilung
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: subsect start ]
+Hypergeometrische Verteilung
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: subsect start ]
+Binomialverteilung
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: subsect start ]
+Poissonverteilung
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: section start ]
+Kontinuierliche Verteilung
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: subsect start ]
+Normalverteilung
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: subsect start ]
+standard Normalverteilung
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: section start ]
+Näherungen von
+Wahrscheindlichketsverteilungen
+   [wxMaxima: section end   ] */
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$
