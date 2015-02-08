@@ -1070,6 +1070,137 @@ Kontinuierliche Verteilung
 Normalverteilung
    [wxMaxima: subsect end   ] */
 
+/* [wxMaxima: comment start ]
+Normalverteilung
+Die Zufallsgröße kann innerhalb eines Intervalls einen beliebigen Wert annehmen.
+Trifft auf wenn mehrere oder nicht eindeutige Einflüsse verantwortlich sind.
+Eine stetige Zufallsgröße, die sich als Summe sehr vieler unabhängiger Einflussgrößen
+ergibt, von denen keine dominiert ist näherunsweise Normalverteilt.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+verteilt nach Dichtefunktion der Normalverteilung:
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+norm(x, µ, sigma):=1/(sigma*sqrt(2*%pi)) * %e^-((x-µ)^2/(2*sigma^2));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+µ     = 2
+sigma = 0.5
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(
+    yrange=[0,1],
+    explicit(norm(x, 2, 0.5), x, 0, 4)
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+(1)
+µ ... Erwartungswert
+      Mittelwert
+      Maximum der Dichtefunktion
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(
+    yrange=[0,1],
+    explicit(norm(x, 2, 0.5), x, 0, 6),
+    color=red,
+    explicit(norm(x, 4, 0.5), x, 0, 6)
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+(1) Analyse,
+    durch die variation von µ ändert sich nur die Positon
+    an der x-Achse. An der Form der Kurve ändert sich nichts
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+(2) Dichtefunktion symmetrisch zu µ
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+(3) Glockenförmiger verlauf
+    -> ("Gaussche Glockenkurve")
+    Wendepunkt an µ-sigma, µ+sigma
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+(4)
+sigma ... Standardabweichung
+          maß für die Abweichung vom Maximum
+          breite der Kurve
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(
+    yrange=[0,1],
+    explicit(norm(x, 2, 0.5), x, 0, 6),
+    color=red,
+    explicit(norm(x, 2, 1.9), x, -4, 8)
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+(4) Analyse,
+Durch Variation von sigma ändert sich die Breite der Kurve,
+sowie die Höhe.
+Die position der Kurve an der x-Achse bleibt gleich.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+(5) negative Exponentialfunktion
+    lim g(x) = 0
+    x->∞
+    lim g(x) = 0
+    x->-∞
+    nähert sich asymtotisch der x-Achse an
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+(6) Man kann zeigen dass der Flächeninhalt unter jedet
+    Glockenkurve 1 ist
+   -> Eine schmale Glockenkurve muss höher als eine breite sein.
+µ legt die Lage fest
+   sigma die Form
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+(7) Wahrscheindlichkeit und Fläche unter der Glockenkurve
+    Die Wahrscheindlichkeit dass ein Merkmalswert höchstens
+    gleich x0 ist, ist gleich dem Inhalt der Fläche unter der
+    Glockenkurve von -∞ bis x0.
+                      x0
+                      /
+    G(x0, µ, sigma) = \ g(x) dx
+                      /
+                      -∞
+    Die Wahrscheindlichkeit dass ein Merkmalswert zwischen a 
+    und b liegt, ist gleich dem Inhalt der Fläche zwischen a
+    und b.
+                      b
+                      /
+    G(x0, µ, sigma) = \ g(x) dx
+                      /
+                      a
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Um konkrete Wahrscheindlichkeiten für die Normalverteilung zu
+berechnen zu können ist eine Integratuon der
+Wahrscheindlichkeitsdichte g(x) notwendig.
+g(x) ist aber nicht elementar integrierbar. (keine Stammfunktion)
+-> Integration mittels numerischer Integrationsverfahren.
+Zusätzlich zur numerischen Integration gibt es die Möglichkeit durch
+eine variablen Transformation zu einer standardisierten Normalverteilung
+zu kommen deren Integral in Tabellen gelistet ist.
+   [wxMaxima: comment end   ] */
+
 /* [wxMaxima: subsect start ]
 standard Normalverteilung
    [wxMaxima: subsect end   ] */
