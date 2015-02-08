@@ -13,6 +13,10 @@ Zusammenhanganalyse
 Stochastik
    [wxMaxima: section end   ] */
 
+/* [wxMaxima: subsect start ]
+Zufallsexperimente
+   [wxMaxima: subsect end   ] */
+
 /* [wxMaxima: comment start ]
     P(A)~= k/n
 
@@ -60,8 +64,12 @@ b) Augensumme von 8
 
    [wxMaxima: comment end   ] */
 
+/* [wxMaxima: subsect start ]
+Unabhängige Ereignisse
+   [wxMaxima: subsect end   ] */
+
 /* [wxMaxima: comment start ]
-Unabhängige Eriegnisse
+Unabhängige Ereignisse
 
   Gilt für 2 Ereignisse A,B dass die Wahrscheindlichkeit von B
   gleich der Wahrscheindlichkeit von B unter Einfluss von A ist,
@@ -339,13 +347,232 @@ Abzähltechniken
 Permutation
    [wxMaxima: subsect end   ] */
 
+/* [wxMaxima: comment start ]
+Permutation
+===========
+
+7 Personen: a,b,c,d,e,f,g
+
+In wie vielen Reihenfolgen kann man die Personen anordnen.
+
+     [4]       Auf den ersten Platz können noch 7 verschiedene.
+   +-----+     Personen gesetzt werden. Nachdem sich eine Person
+   |     |     gesetzt hat sind noch 6 Personen über. Somit
+[5]|     |[3]  kommen für den zweiten Platz 6 verschiedene über.
+   |     |
+[6]|     |[2]  Die Anzahl der Kombinationen ergibt sich schlussendlich als:
+   |     |
+[7]|     |[1]    7*6*5*4*3*2*1
+   |     |     
+               Also der Fakultät von 7.
+
+Ist aus n Elementen eine Auswahl aus n Elementen zu treffen (wobei
+Wiederholungen nicht möglich sind) spricht man von einer Permutation.
+Die Anzahl der Permutationen von n Elementen ist n Faktorielle.
+   [wxMaxima: comment end   ] */
+
 /* [wxMaxima: subsect start ]
 Kombination
    [wxMaxima: subsect end   ] */
 
+/* [wxMaxima: comment start ]
+Kombination
+===========
+
+Aus 7 Personen werden 3 Personen benötigt.
+
+Die Reihenfolge der 3er Auswahl ist belanglos.
+
+Verschiedene Auswahlen 7*6*5 = 210
+Von diesen unterscheiden sich je 3! = 3*2*1 nur durch
+die Reihenfolge.
+
+7 * 6 * 5   210
+--------- = --- = 35
+1 * 2 * 3    6
+
+Binominal Koeffizient:
+
+  /n\   n * (n-1) * (n-2) * ... * (n-k)    n ∈ ℕ
+  | | = -------------------------------    k ∈ ℕ
+  \k/              k!                      k <= n
+
+"n über k"                            /n\
+                                      | | = 1
+                                      \0/
+
+Ist aus n Elementen eine Auswahl von k Elementen zu treffen, wobei
+die Reihenfolge ohne bedeutung ist, dann gibt es dafür n über k
+Möglichkeiten. Vorraussetzung ist dass ein Element nicht mehrfach
+ausgewählt werden kann. -> "Kombination ohne Wiederholung."
+   [wxMaxima: comment end   ] */
+
 /* [wxMaxima: subsect start ]
 Variation
    [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Variation
+=========
+
+Aus den 7 Personen wählen wir wieder 3 aus. Diesmal ist die Reihenfolge
+sehrwohl von Bedeutung.
+
+n über k Verschiedene möglichkeiten an Personengruppen.
+Personengruppen können jeweils in 3! verschiedenen Arten gemischt sein.
+
+/n\        n * (n-1) * (n-2) * ... * (n-k)
+| | * k! = ------------------------------- * k! = n * (n-1) * (n-2) * ... * (n-k)
+\k/                    k!
+
+Ist aus n Elementen eine Auswahl von k Elementen zu treffen wobei die Reihenfolge
+von bedeutung istm dann gibt es (n über k) * (k!) Möglichkeiten.
+
+Eine Permutation ist ein Sonderfall einer Variation für k=n.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Variation mit Wiederholung
+
+7 Bit jedes hat 2 Möglichkeiten.
+Wie viele Zeichen können encodiert werden?
+
+n^k
+
+128
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: subsect start ]
+Beispiele
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+1) In einem Gerät werden 5 Schalter stets gleichartig beansprucht.
+   Die Ausfallswahrscheinlichkeit (während der Nutzungsdauer) liegt
+   bei einem Schalter unabhängig von den anderen bei 4%. Wie groß
+   ist die Wahrscheinlichkeit, dass
+
+Schalter: A,B,C,D,E
+
+Ausfallwahrscheindlichkeit
+P(A) = P(B) = P(C) = P(D) = P(E) = 0.04
+
+  a) keiner
+
+!A & !B & !C & !D & !E
+
+P = 0.96^5 = 81.5%
+
+  b) genau einer
+
+/5\   /5\
+| | * | |
+\1/   \4/
+
+  c) höchstens drei
+
+  d) mindestens drei Schalter ausfallen?
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+/* a) */
+(96/100)^5;
+%, float;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+/* b) */
+binomial(5, 1) * binomial(5, 4);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+2) Eine Lieferung von 20 Elektrogeräten enthält 3 fehlerhafte Geräte.
+   Man entnimmt dieser Lieferung eine Stichprobe vom Umfang 5.
+
+  a) Auf wie viele Arten kann eine solche Stichprobe entnommen werden?
+
+/20\   20*19*...*16*15
+|  | = --------------- = 15504
+\ 5/          5!
+
+  b) Wie viele dieser Arten enthalten genau ein fehlerhaftes Gerät?
+
+mögliche Stichproben(m): 15504 
+                         /3\   /17\
+günstige Stichproben(g): | | * |  | = 7140
+                         \1/   \ 4/
+g    7140 
+- = ----- = 46%
+m   15504
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+/* a) */
+binomial(20, 5);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+/* b) */
+binomial(3,1);
+binomial(17,4);
+binomial(3,1) * binomial(17,4);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+7140/15504, float;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+3) Wie groß ist die Wahrscheinlichkeit, dass in einer Schulklasse mit
+   10 Burschen und 5 Mädchen bei einer Zufallsauswahl von 3 Schülern
+
+  a) kein Mädchen
+
+    Lösung: 26.4%
+
+/5\   /10\
+| | * |  |
+\0/   \ 3/   24      .
+---------- = -- = 0.2637
+  /15\       91
+  |  |
+  \ 3/
+
+  b) mindestens ein Mädchen darunter ist?
+
+    Lösung: 73.6%
+
+    24   67     .
+1 - -- = -- = 0.736263
+    91   91
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+/* a) */
+binomial(5,0) * binomial(10,3) / binomial(15,3);
+%, float;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+4) Ein Batterietestgerät kann gleichzeitig 4 Batterien prüfen. Unter
+   20 Batterien sind 2 unbrauchbar. Wie groß ist die Wahrscheinlichkeit,
+   dass diese gleich beim ersten Test entdeckt werden?
+
+  Lösung: 3.16%
+
+/2\   /18\
+| | * |  |
+\2/   \ 2/   3
+--------- = -- = 0.03157894736842105
+  /20\      95
+  |  |
+  \ 4/
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+binomial(2,2) * binomial(18,2) / binomial(20,4);
+% , float;
+/* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: section start ]
 Diskrete Verteilung
