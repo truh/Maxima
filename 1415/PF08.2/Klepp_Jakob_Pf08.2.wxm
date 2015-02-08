@@ -115,14 +115,16 @@ Baumdiagramm
    /    \           /    \              /    \             /    \
   /      \         /      \            /      \           /      \
   ✓      x         ✓      x            ✓      x           ✓      x
-  v      v         v                   v                              Passende Ereignisse sind mit
-  ✓      ✓         ✓      ✓            x      x           x      x    v und ^ markiert
+  v      v         v                   v
+  ✓      ✓         ✓      ✓            x      x           x      x
   ✓      ✓         x      x            ✓      ✓           x      x
   ✓      x         ✓      x            ✓      x           ✓      x
   ^      ^         ^                   ^
   7      9         9      9            9      9           9      1
  --     --        --     ---          --     ---         ---    ---
  22     55        55     220          55     220         220    220
+
+Passende Ereignisse sind mit v und ^ markiert
 
 1. Pfadregel:
   Die Wahrscheindlichkeit eines Pfades ist gleich dem Produkt
@@ -248,9 +250,9 @@ P(¬(A v (¬A ^ B)))
 
 /* [wxMaxima: comment start ]
 3)
-  Eine Anlage besteht aus 2 unabhängigen Teilen. Die Wahrscheinlichkeit, dass Teil A während
-  eines Zeitraumes störungsfrei arbeitet, ist 90%, bei Teil B ist diese Wahrscheinlichkeit 80%. Wie
-  groß ist die Wahrscheinlichkeit, dass
+  Eine Anlage besteht aus 2 unabhängigen Teilen. Die Wahrscheinlichkeit, dass
+  Teil A während eines Zeitraumes störungsfrei arbeitet, ist 90%, bei Teil B
+  ist diese Wahrscheinlichkeit 80%. Wie groß ist die Wahrscheinlichkeit, dass
 
   a)
     beide Teile störungsfrei arbeiten,
@@ -292,12 +294,13 @@ d)      X         X         X
 
 /* [wxMaxima: comment start ]
 4)
-  Eine Lieferung von 20 Einheiten wird nach folgendem Doppelstichprobenplan geprüft: Man
-  entnimmt eine Zufallsstichprobe von 3 Einheiten. Ist wenigstens eine Einheit fehlerhaft, wird die
-  Lieferung zurückgewiesen. Nur wenn alle 3 Einheiten einwandfrei sind, wird nochmals eine
-  Zufallsstichprobe von wieder 3 Einheiten entnommen. Die Lieferung wird danach angenommen,
-  wenn alle Einheiten einwandfrei sind, sonst zurückgewiesen.
-  Wie groß ist die Wahrscheinlichkeit, dass eine Lieferung angenommen wird, wenn die Lieferung
+  Eine Lieferung von 20 Einheiten wird nach folgendem Doppelstichprobenplan geprüft:
+  Man entnimmt eine Zufallsstichprobe von 3 Einheiten. Ist wenigstens eine Einheit
+  fehlerhaft, wird die Lieferung zurückgewiesen. Nur wenn alle 3 Einheiten einwandfrei
+  sind, wird nochmals eine Zufallsstichprobe von wieder 3 Einheiten entnommen. Die
+  Lieferung wird danach angenommen, wenn alle Einheiten einwandfrei sind, sonst
+  zurückgewiesen. Wie groß ist die Wahrscheinlichkeit, dass eine Lieferung angenommen
+  wird, wenn die Lieferung
 
   a)
     eine fehlerhafte Einheit enthält?
