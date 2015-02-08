@@ -65,6 +65,62 @@ b) Augensumme von 8
    [wxMaxima: comment end   ] */
 
 /* [wxMaxima: subsect start ]
+Wahrscheindlichkeit zusammengesetzter Ereignisse
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+2 einzelne Ereignisse A, B -> Ein Ereigniss
+
+"A und B"     A und B treten zugleich ein
+
+"A oder B"    Mindestens eines der beiden Ereignisse tritt ein
+
+
+Beispiel: 2 Würfel werde geworfen
+
+    A ... wenigstens einam "6"
+    B ... Augensumme 8
+
+  a) P(A und B)
+
+     2/36
+
+  b) P(A oder B)
+
+     14/36
+
+Unvereinigbare Ereignisse
+=========================
+
+  2 Ereignisse heißen unvereinbar wenn sie nicht gemeinsam
+  auftreten.
+
+    P(a und b) = 0
+
+32 Karten
+    
+  8 ♠ Pique
+  8 ♣ Kreuz
+  8 ♥ Herz
+  8 ♦ Karo
+
+P(♥ oder ♦) = 16/32
+
+P(♥) = 8/32
+
+P(♦) = 8/32
+
+♥, ♦ unvereinbar
+
+P(♥ oder ♦) = P(♥) + P(♦)
+
+Vereinbare Ereignisse
+=====================
+
+P(♥ oder ♦) = P(♥) + P(♦) - P(♥ und ♦)
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: subsect start ]
 Unabhängige Ereignisse
    [wxMaxima: subsect end   ] */
 
@@ -1370,6 +1426,218 @@ Die roten Flächen sind in beiden Grafiken gleich groß.
 Näherungen von
 Wahrscheindlichketsverteilungen
    [wxMaxima: section end   ] */
+
+/* [wxMaxima: comment start ]
+                              +------------------------------+
+                              |                              |
+                              | Hypergeometrische Verteilung |
+                              |          (N, D, ^)           |
+                              |                              |
+                              +--------------+---------------+
+                                           N |     D
+                                      n < -- | p = -
+                                          10 |     N
+                              +--------------v---------------+
+                              |                              |
+                              |     Binomial^erteilung       |
+                 +------------+           (p, n)             +-------------+ µ = n*p
+                 |            |                              |             |       __________
+        p <= 0,1 |            +------------------------------+             | G = ^/ n*p*(1-p)'
+                 | µ = p*n                                     n*p(1-p) > 9|
+        n >= 50  |                                                         |
+                 |                                                         |
++----------------v------------+                              +-------------v------------------+
+|                             |          µ > 9               |                                |
+|      Poissonverteilung      |                              |         Normalverteilung       |
+|             (µ)             +------------------------------>              (µ, G)            |
+|                             |                              |                                |
++-----------------------------+               _              +--------------------------------+
+                                        G = ^/µ'
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Sobald also eine bestimmte Bedingung erfüllt ist (z.B. n < N/10)
+kann von einer Verteilung in die andere konvertiert werden (z.B.
+durch p = D/N).
+
+Die Bedingung zur Umwandlung von hypergeometrisch zu
+Binomialverteilung ist intuitiv zu verstehen, nämlich sobald die
+Grundmenge so groß ist, dass Zurücklegen keine Auswirkung mehr
+auf das Ergebnis hat. Die anderen Bedingungen können mit dem bisher
+behandelten Lehrstoff nicht wirklich erklärt werden, man sollte sie
+daher einfach als gegeben nehmen.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: subsect start ]
+Lineare Korrelation
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(all);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+load(draw);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+/*
+Da die Formeln für sämtliche dieser Regressionen ähnlich aufgebaut sind, kann das gesamte System in einen einzigen Block integriert werden.
+Der folgende Block implementiert das Verfahren einer Regression n-ten Grades.
+Parameter:
+    points  die Punktewolke in der Form [[x1, y1], .., [xn, yn]]
+    vars    die Variablen der Funktion, die berechnet werden soll [a, b]; (Grad der Regression + 1)
+return      die Funktion der Regression dieser Punkte
+*/
+regr(points, vars) := block (
+    gls: [],
+gl: 0,
+    grade: length(vars) - 1,
+    n: length(points),
+    for i: 0 thru grade do (
+    gl: 0,
+        for j: 0 thru grade do (
+            gl: gl + vars[j + 1]*sum(points[k][1]^(2*grade - (i + j)), k, 1, n)
+        ),
+        gl: gl = sum(points[k][1]^(grade - i)*points[k][2], k, 1, n),
+        gls: append(gls, [gl])
+    ),
+    return(solve(gls, vars))
+)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Wenn man in der selben Probe mehrere Merkmale vermißt dann kann man
+sich die Frage stellen ob ein Zusammenhang zwischen diesen Merkmalen
+besteht.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Es sind einge Daten zu Gewicht und Größe von verschiedenen Personen vorhanden.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+data: [[171, 75], [163, 62], [172, 69], [179, 82], [176, 74], [164, 63], [170, 72], [174, 74], [161, 60], [168, 70], [172, 74], [163, 66], [180, 77], [171, 76], [174, 72],
+       [169, 73]];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+x: [];
+y: [];
+for i: 1 thru length(data) step 1 do (
+    x: append(x, [data[i][1]]),
+    y: append(y, [data[i][2]])
+);
+x;
+y;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Diese sollen zuerst einmal in Relation zueinander grafisch dargestellt werden.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(xrange = [160, 185], yrange = [60, 80],
+         title = "Größe - Gewicht", xlabel = "Größe (cm)", ylabel = "Gewicht (kg)",
+         points(data)
+        );
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Von diesen Daten kann nun eine lineare Korrelationsgerade berechnet werden.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+s: regr(data, [a, b]);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+gl: subst(s[1], a*x + b);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(xrange = [160, 185], yrange = [60, 80],
+         title = "Größe - Gewicht", xlabel = "Größe (cm)", ylabel = "Gewicht (kg)",
+         points(data),
+         color=red, explicit(gl, 'x, 160, 185)
+        );
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+In diesem Fall besteht ein steigender Zusammenhang.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+1. Parameter: k
+
+Gerade steigend: es besteht ein Zusammenhang (z.B. "Je größer die Körpergröße, desto größer das Gewicht")
+Gerade flach:    kein Zusammenhang
+Gerade fallend:  es besteht ein Zusammenhang (z.B. "Je größer die Körpergröße, desto kleiner das Gewicht")
+
+Das `k`, gibt an welcher der 3 Fälle auftritt.
+
+2. Parameter:
+
+2D Stichprobe, Information über Schlankheit des Streudiagramms, Verteilung der Punktwolke
+
+"Korrelation" = in Wechselbeziehung stehen
+
+EMPIRISCHE KORRELATIONSKOEFFIZIENT:
+r = S_xy / (S_x*S_y)    // S_x, S_y: Standardabweichungen in x bzw. y
+
+S_x  = sqrt(1/(n-1) * sum(x_i^2 - n*avg(x)^2))
+S_y  = sqrt(1/(n-1) * sum(y_i^2 - n*avg(y)^2))
+S_xy = sqrt(1/(n-1) * (sum(x_i*y_i) - n*avg(x)*avg(y))  // EMPIRISCHE KOVARIANZ
+
+S_x/S_y hat diesselbe Einheit, wie x/y.
+
+Ist ein Schätzwert für Stärke und Richtung des linearen Zusammenhangs (der beiden Merkmale x und y):
+    - -1 <= r <= 1
+      r = 1  -> alle Werte liegen auf einer steigenden Geraden
+      r = -1 -> all Werte liegen auf einer fallenden Geraden
+    - je näher bei 1 oder -1, desto näher liegen die Punkte bei der Geraden
+      r > 0  -> Zusammenhang = steigende Gerade = "positive lineare Korrelation"
+      r < 0  -> Zusammenhang = fallende Gerade = "negative lineare Korrelation"
+      r = 0  -> kein >>linearer<< Zusammenhang
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+emp_kovarianz(x, y, n) := 1/(n-1) * (sum(x[i]*y[i], i, 1, n) - n*mean(x)*mean(y));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+emp_koeff(x, y) := emp_kovarianz(x, y, length(x)) / (std1(x) * std1(y));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+s_x: float(std1(x));
+s_y: float(std1(y));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+emp_kov: float(emp_kovarianz(x, y, length(x)));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+r: float(emp_koeff(x, y));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+BESTIMMTHEITSMASS:
+===
+B = sum((y(x_i) - mean(y))^2, i, 1, n) / sum((y_i - mean(y))^2, i, 1, n)
+B = r^2
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+r^2;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+80% der Gewichtsunterschiede sind durch die Körpergröße vollständig erklärbar.
+20% sind dadurch nicht erklärbar.
+   [wxMaxima: comment end   ] */
 
 /* Maxima can't load/batch files which end with a comment! */
 "Created with wxMaxima"$
