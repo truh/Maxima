@@ -578,17 +578,489 @@ binomial(2,2) * binomial(18,2) / binomial(20,4);
 Diskrete Verteilung
    [wxMaxima: section end   ] */
 
+/* [wxMaxima: comment start ]
+Glossar
+=======
+
+N           Größe der Grundgesamtheit
+
+D           Merkmalsträger (/defekte Einheiten) in der Grundgesamtheit
+
+n           Größe der Stichprobe
+
+x           Anzahl der Merkmalsträger in der Stichprobe
+
+µ           Erwartungswert
+
+g(x)        Wahrscheindlichkeitsdichte
+             Bei stetigen Verteilungen lassen sich Wahrscheinlichkeiten nicht als
+             Summen von Einzelwahrscheinlichkeiten berechnen, da für stetige
+             Zufallsvariablen X stets P(X=x) = 0 gilt. Sie lassen sich jedoch oft
+             als Integrale über eine Dichtefunktion (oder Wahrscheinlichkeitsdichte)
+             f(x) darstellen
+
+G(x)        Wahrscheindlichkeitsfunktion
+             Verteilungen auf den reellen Zahlen können allgemein durch die
+             (kumulative) Verteilungsfunktion (engl. cumulative distribution function,cdf)
+             F(x) beschrieben werden. Sie gibt an, mit welcher Wahrscheinlichkeit die
+             Zufallsvariable einen Wert kleiner oder gleich x annimmt
+   [wxMaxima: comment end   ] */
+
 /* [wxMaxima: subsect start ]
 Hypergeometrische Verteilung
    [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Ist eine von 3 sogennanten diskreten Verteilngen.
+Diskrete Verteilung heißt dass die Merkmale nur in ganzen Zahlen
+vorkommen.
+
+In einer Grundgesamtheit (Prüflos) befinden sich N Einheiten.
+Von diesen N Einheiten sind D defekt. Aus der Grundgesamtheit
+wird eine Stichprobe mit dem Umfang n gezogen. Wie groß ist die
+Wahrscheindlichkeit dass es x Merkmalsträger (defekte Einheiten)
+in der Stichprobe gibt.
+
+  N=15  n=3
+  D=4   x=2
+               /4\ /11\
+           g   \2/ \ 1/
+  P(x=2) = - = --------
+           m     /15\
+                 \ 3/
+
+Im Allgemeinen: Man bezeichnet mit g(x; N; D; n) die Wahrscheindlichkeit genau
+x Fehlerhafte Einheiten zu ziehen. Wenn N,D,n gegeben sind:
+
+                         /D\ /N - D\
+                         \x/ \n - x/
+  g(x; N; D; n) = g(x) = -----------
+                             /N\
+                             \n/
+  mit x=0,1,2,..., min(n,D)
+  -> x kannnicht größer als die Stichprobe sein
+
+  *Wahrscheindlichkeitsdichte der Hypergeometrischen Verteilung*
+
+(1) N; D; n
+    Parameter der Hypergeometrischen Verteilung
+(2) D
+    Merkmalsträger in der Grundgesamtheit
+    x
+    Zahl der Merkmalsträger in der Stichprobe
+(3) x
+    x kann nicht vorrausgesagt werden
+"zufallgröße", "Zufallsvariable"
+
+Die verwendung der Hypergeometrischen Verteilung im Qualitätsmanagment
+legt nahe dass die Stichprobe nicht in die Grundgesamtheit zurückgelegt wird
+  *ziehen ohne zurücklegen*
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(all);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+     g(x;  N; D; n)
+Bsp: g(x, 15, 4, 3)
+
+x= 0,1,2 ... min(n, D)
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+_N: 15;
+_D: 4;
+_n: 3;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+binomial;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+buildq erlaubt das definieren von Closures in Maxima
+Closures sind ein sehr praktisches Pattern in der funktionalen Programmierung
+Meiner Erfahrung nach ist der funktionale Weg der einzige
+mit dem man in Maxima halbwegs gut weiter kommt.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+Hypergeometric(N,D,n):=buildq(
+[N,D,n],
+lambda([x],
+    binomial(D, x) * binomial(N - D, n-x)
+    /*---------------------------------*/
+            / binomial(N, n)
+));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+makelist(Hypergeometric(15, 4, 3)(i), i, 0, 3);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+load(distrib);
+
+pdf_hypergeometric(x,n1,n2,n)
+    x ... Gewünschte Anzahl der Objekte der Art A
+    n1... the number of objects of class A
+    n2... the number of objects of class B
+    n ... Größe der Stichprobe
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Wahrscheindlichlkeitsdichte
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+barplot(_list):=makelist([
+ fill_color=[red, green, blue, magenta, cyan, yellow, orange, violet, brown, gray, black][mod(i,11)+1],
+ rectangle(
+  [i*1-1, 0],
+  [i*1-0.25, _list[i]]
+ )
+], i, length(_list));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+/* Zeichnen */
+wxdraw2d(
+    color=black,
+    barplot(
+        makelist(Hypergeometric(15, 4, 3)(i), i, 0, 3)
+    )
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Verteilungsfunktion
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+G(x):=lreduce("+", 
+        makelist(Hypergeometric(15, 4, 3)(i), i, 0, x)
+    );
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+verteilung: makelist(G(i), i, 0, 3);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+/* Zeichnen */
+wxdraw2d(
+    color=black,
+    barplot(verteilung)
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+P(genau x)
+P(mindestens x)
+P(höchstens x)
+   [wxMaxima: comment end   ] */
 
 /* [wxMaxima: subsect start ]
 Binomialverteilung
    [wxMaxima: subsect end   ] */
 
+/* [wxMaxima: comment start ]
+Die wichtigste diskrete Verteilung. Diese entspricht dem ziehen
+einer Stichprobe mit zurücklegen.
+
+Beispiel: Ein idealer Würfel wird n=8 mal geworfen. Jedes mal ist
+  die Wahrscheindlichkeit:
+  p("6") = 1/6
+  Wie groß ist die Wahrscheindlichkeit dass bei den 8 mal genau
+  2 mal "6" vorkommt.
+
+Erfolgreiche Wurffolge
+
+           # |     1     |     2     |     3     |     4     |     5     |     6     |     7     |     8
+-------------------------------------------------------------------------------------------------------------
+   Augenzahl |     1     |     6     |     3     |     4     |     2     |     5     |     6     |     2
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+   Reduziert |     N     |     6     |     N     |     N     |     N     |     N     |     6     |     N
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+p Einzelwert | (1 - 1/6) |    1/6    | (1 - 1/6) | (1 - 1/6) | (1 - 1/6) | (1 - 1/6) |    1/6    | (1 - 1/6)
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ p(N6NNNN6N) |   (1-p)   |     p     |   (1-p)   |   (1-p)   |   (1-p)   |   (1-p)   |     p     |   (1-p)
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        /8\
+Es gibt \2/ unterschiedliche anordnungen für 2 * "6" und 6 * ¬"6"
+                /8\
+-> p(2 * "6") = \2/ * p² * (1-p)
+
+                /8\
+   p(2 * "6") = \2/ * 1/6 * (1 - 1/6)^6 = 0.265
+
+Ein Zufallsvorgang wird n-mal durchgeführt. Die Wahrscheindlichkeit dass ein
+bestimmtes Ereignis A eintritt sei immer gleich und habe den Wert p. Für die
+Wahrscheindlichekti dass das Ereignis A genau eintritt gilt:
+
+                      /n\
+  g(p; n; x) = g(x) = \x/ * p^x * (1-p)^(n-x)
+
+Erwartungswert:
+
+  µ = n*p
+
+(1) p,n ... Parameter der Binomialverteilung
+(2) Erwartungswert bedeutet wieder:
+    Mittelwert der Anzahl des eintretens von bei
+    oftmaliger Durchführung
+(3) ziehen mit zurücklegen:
+    Durch die Versuchsanordnung wird die Grundgesamtheit nicht verändert
+    (Trotzdem wird in der Praxis die Stichprobe nicht in die Grundgesamtheit
+     zurückgelegt)
+    Wenn die Grundgesamtheit mehr als 10-mal so groß wie die Stichprobe ist,
+    kann man zurücklegen/nicht zurücklegen vernachlässigen und die Berechnung
+    mit der Binomialverteilung durchführen.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Beispiel:
+
+In einem Prüflos sind 2000 Einheiten, davon 80 Fehlerhafte.
+Man entnimmt eine Zufallsstichprobe vom Unfang n=50. 
+
+Berechne über Binomialverteilung wie groß die Wahrscheindlichkeit
+
+a) P(genau 0)
+b) P(genau 2)
+c) P(höchstens 2)
+d) P(mindestens 2)
+
+  fehlerhafte Einheiten vorzufinden
+
+e) berechne µ
+f) Diagramm Wahrscheindlichkeitsdichte
+g) Diagramm Wahrscheindlichkeitsfunktion
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+N = 2000            D    80
+         }  ->  p = - = ----       n=50
+D = 80              N   2000
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(all);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+Binomialverteilung(n,p):=buildq(
+[n,p],
+lambda([x],
+    binomial(n, x) * p^x * (1-p) ^ (n-x)
+));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+barplot(_list):=makelist([
+ fill_color=[red, green, blue, magenta, cyan, yellow, orange, violet, brown, gray, black][mod(i,11)+1],
+ rectangle(
+  [i*1-1, 0],
+  [i*1-0.25, _list[i]]
+ )
+], i, length(_list));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+p: 80/2000;
+n: 50;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+a) P(genau 0)
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+Binomialverteilung(n,p)(0), float;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+b) P(genau 2)
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+Binomialverteilung(n,p)(2), float;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+c) P(höchstens 2)
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+lreduce("+", makelist(Binomialverteilung(n,p)(i), i, 0, 2)), float;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+d) P(mindestens 2)
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+lreduce("+", makelist(Binomialverteilung(n,p)(i), i, 2, 50)), float;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+e) berechne µ
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+n*p;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+f) Diagramm Wahrscheindlichkeitsdichte
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(
+    color=black,
+    barplot(
+        makelist(Binomialverteilung(n,p)(i), i, 0, 8))
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+g) Diagramm Wahrscheindlichkeitsfunktion
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(
+    color=black,
+    barplot(
+        makelist(
+            lreduce("+",
+                makelist(Binomialverteilung(n,p)(j), j, 0, i)),
+            i, 0, 8))
+);
+/* [wxMaxima: input   end   ] */
+
 /* [wxMaxima: subsect start ]
 Poissonverteilung
    [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Die Poissonverteilung wird im Qualitätsmanagment bevorzugt zur angabe
+von Fehlern auf gleichartige Einheiten herangezogen. Notwendig ist nur
+die kenntniss eines Mittelwerts von Merkmalsträger pro Einheit um die
+Wahrscheindlichkeit einer bestimmten Fehlerart anzugeben.
+Ist µ die mittlere Fehleranzahl pro Einheit (der arithmetische
+Mittelwert der Fehleranzahl sehr vieler Einheiten) dann gilt für
+die Wahrscheindlichkeit g(x)  auf einer Beliebiger Einheit genau x
+Fehler vorzufinden.
+
+                 µ^x
+g(x; µ) = g(x) = --- * e^(-µ)      x=0,1,2,...
+                  x!
+
+(1) Poisson beschreibt die Verteilung der Anzahl irgendwelcher
+    vorkommnisse auf einem Zählabschnitt
+    * "pro" ... meist Poissonverteilung
+
+(2) µ  Einziger Parameter der Poissonverteilung
+       gleichzeitig Erwartungswert der Verteilung
+
+(3) Entspricht eine Verteilung von Ereignissen der Poissonverteilung
+    dann treten die Ereignisse zufällig auf
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Beispiel: Die Lackfehler pro Blechteil seien Poissonverteit, mit einer
+  mittleren Anzahl von µ=1.4
+
+a) P(genau 0)
+b) P(genau 2)
+c) P(höchstens 2)
+d) P(mindestens 2)
+e) g(x)  -  Wahrscheindlichkeitsdichte
+f) G(x)  -  Wahrscheindlichkeitsfunktion
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(all);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+Poissonverteilung(µ):=buildq(
+[µ],
+lambda([x],
+    µ^x / x! * %e^(-µ)
+));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+barplot(_list):=makelist([
+ fill_color=[red, green, blue, magenta, cyan, yellow, orange, violet, brown, gray, black][mod(i,11)+1],
+ rectangle(
+  [i*1-1, 0],
+  [i*1-0.25, _list[i]]
+ )
+], i, length(_list));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+a) P(genau 0)
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+Poissonverteilung(1.4)(0);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+b) P(genau 2)
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+Poissonverteilung(1.4)(2);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+c) P(höchstens 2)
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+lreduce("+", makelist(Poissonverteilung(1.4)(i), i, 0, 2));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+d) P(mindestens 2)
+666, als Ersatz für Unendlich
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+lreduce("+", makelist(Poissonverteilung(1.4)(i), i, 2, 666));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+e) g(x)  -  Wahrscheindlichkeitsdichte
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(
+    color=black,
+    barplot(
+        makelist(Poissonverteilung(1.4)(i), i, 0, 6))
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+f) G(x)  -  Wahrscheindlichkeitsfunktion
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(
+    color=black,
+    barplot(
+        makelist(
+            lreduce("+",
+                makelist(Poissonverteilung(1.4)(j), j, 0, i)),
+            i, 0, 6))
+);
+/* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: section start ]
 Kontinuierliche Verteilung
