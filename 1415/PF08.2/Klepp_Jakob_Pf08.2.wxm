@@ -1,0 +1,1643 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 14.09.0 ] */
+
+/* [wxMaxima: title   start ]
+   Portfolio 8.2   
+   Stochastik und  
+Zusammenhanganalyse
+    Jakob  Klepp   
+     2015-02-08    
+   [wxMaxima: title   end   ] */
+
+/* [wxMaxima: section start ]
+Stochastik
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: subsect start ]
+Zufallsexperimente
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+    P(A)~= k/n
+
+    P ... probability
+
+LAPLACE-Experiment Zufallsexperiment folgenden Eigenschaften:
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Bsp: 2 ideale Würfel werden geworfen
+Wie groß ist die Wahrscheindlichkeit:
+
+a) wenigstens einmal eine 6 zu würfeln
+
+   11  12  13  14  15 [16]
+
+   21  22  23  24  25 [26]
+
+   31  32  33  34  35 [36]
+
+   41  42  43  44  45 [46]
+
+   51  52  53  54  55 [56]
+
+  [61][62][63][64][65][66]
+
+  P(wenigstens 1x"6") = 11/36
+
+
+b) Augensumme von 8
+
+   11  12  13  14  15  16
+
+   21  22  23  24  25 [26]
+
+   31  32  33  34 [35] 36
+
+   41  42  43 [44] 45  46
+
+   51  52 [53] 54  55  56
+
+   61 [62] 63  64  65  66
+
+  P(Augensumme 8) = 5/36
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: subsect start ]
+Wahrscheindlichkeit zusammengesetzter Ereignisse
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+2 einzelne Ereignisse A, B -> Ein Ereigniss
+
+"A und B"     A und B treten zugleich ein
+
+"A oder B"    Mindestens eines der beiden Ereignisse tritt ein
+
+
+Beispiel: 2 Würfel werde geworfen
+
+    A ... wenigstens einam "6"
+    B ... Augensumme 8
+
+  a) P(A und B)
+
+     2/36
+
+  b) P(A oder B)
+
+     14/36
+
+Unvereinigbare Ereignisse
+=========================
+
+  2 Ereignisse heißen unvereinbar wenn sie nicht gemeinsam
+  auftreten.
+
+    P(a und b) = 0
+
+32 Karten
+    
+  8 ♠ Pique
+  8 ♣ Kreuz
+  8 ♥ Herz
+  8 ♦ Karo
+
+P(♥ oder ♦) = 16/32
+
+P(♥) = 8/32
+
+P(♦) = 8/32
+
+♥, ♦ unvereinbar
+
+P(♥ oder ♦) = P(♥) + P(♦)
+
+Vereinbare Ereignisse
+=====================
+
+P(♥ oder ♦) = P(♥) + P(♦) - P(♥ und ♦)
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: subsect start ]
+Unabhängige Ereignisse
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Unabhängige Ereignisse
+
+  Gilt für 2 Ereignisse A,B dass die Wahrscheindlichkeit von B
+  gleich der Wahrscheindlichkeit von B unter Einfluss von A ist,
+  so hat keinen Einfluss auf B.
+
+  A und B sind unabhängig.
+
+    P(A|B) = P(B)
+
+UND-Regel
+
+  P(A und B) = P(A) * P(B)      Wenn A,B unabhängig
+
+  P(A und B) = P(A) * P(A|B)    Wenn A,B abhängig
+
+           P(A und B)
+  P(B|A) = ----------
+              P(A)
+
+Gegenereignis
+  _
+  A, ¬A   Gegenereignis zum Ereignis A
+           _
+  P(A) + P(A) = 1
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Baumdiagramm
+
+  Bsp:
+
+  Irtümlicherweise werden 3 nicht maturable Schüler und 9 maturable
+  Schüler in einen Kurs gesteckt. Maturable und nicht maturable Schüler
+  sind äusserlich nicht unterscheidbar.
+
+  Man prüft hintereinander 3 Schüler. Wie groß ist die Wahrscheindlichkeit
+  dass mindestens 2 maturabel sind.
+
+                              _.-°-._
+                          _.-'       '-._
+                  9/12_.-'               '-._3/12
+                  _.-'                       '-._
+               .-'                               '-.
+             .✓.                                   .x.
+       8/11.'   '.3/11                       9/11.'   '.2/11
+         .'       '.                           .'       '.
+       .'           '.                       .'           '.
+      ✓               x                    ✓'               'x
+     /\               /\                  /\                 /\
+7/12/  \3/10     8/10/  \2/10        8/10/  \2/10       9/10/  \1/10
+   /    \           /    \              /    \             /    \
+  /      \         /      \            /      \           /      \
+  ✓      x         ✓      x            ✓      x           ✓      x
+  v      v         v                   v
+  ✓      ✓         ✓      ✓            x      x           x      x
+  ✓      ✓         x      x            ✓      ✓           x      x
+  ✓      x         ✓      x            ✓      x           ✓      x
+  ^      ^         ^                   ^
+  7      9         9      9            9      9           9      1
+ --     --        --     ---          --     ---         ---    ---
+ 22     55        55     220          55     220         220    220
+
+Passende Ereignisse sind mit v und ^ markiert
+
+1. Pfadregel:
+  Die Wahrscheindlichkeit eines Pfades ist gleich dem Produkt
+  der Wahrscheindlichkeiten Längs des Pfades.
+
+  Pfad #1:
+
+    (9/12) * (8/11) * (7/12) = 7/22
+
+2. Pfadregel:
+  Die Wahrscheindlichketi eines Ereignis ist gleich der Summe
+  der Wahrscheindlichkeiten die zu diesem Ereignis gehören.
+
+  Wahrscheindlichkeit dass beide Schüler Maturabel sind:
+
+    (7/22) + (9/55) + (9/55)  + (9/55) = 89/110
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Verknüpfung von Wahrscheinlichkeiten mit Tabelle
+
+  Bsp:
+
+  Bei der Fertigung von Spulen gibt es 2 unabhängige Fehlerarten:
+                      _
+    P(A) = 0.05     P(A) = 0.95
+                      _
+    P(B) = 0.08     P(B) = 0.92
+
+  a) kein Fehler
+  b) nur eine Fehlerart
+  c) höchstens eine Fehlerart
+  d) entweder A oder B
+  e) mindestens eine Fehlerart
+                      _             _         _ _
+          A B         A B         A B         A B
+      0.05 * 0.08 0.95 * 0.08 0.05 * 0.92 0.95 * 0.92
+ =========== =========== =========== ===========  
+  a)                                           ✓
+
+  b)                   ✓           ✓
+
+  c)                   ✓           ✓           ✓
+
+  d)                   ✓           ✓
+
+  e)       ✓           ✓           ✓
+
+
+                                                    _     _
+  a)                                                A und B
+                      _                    _
+  b)                 (A und B) oder (A und B)
+                      _                    _        _     _
+  c)                 (A und B) oder (A und B) oder (A und B)
+                      _                    _
+  d)                 (A und B) oder (A und B)
+                      _                    _
+  e)  (A und B) oder (A und B) oder (A und B)
+
+
+
+  a)                                                0.874
+
+  b)                  0.076     +    0.046
+
+  c)                  0.076     +    0.046     +    0.874
+
+  d)                  0.076     +    0.046
+
+  e)   0.004     +    0.076     +    0.046
+
+
+
+  a)   0.874
+
+  b)   0.122
+
+  c)   0.966
+
+  d)   0.122
+
+  e)   0.126
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+1)
+  Ein Schüler schätzt die Erfolgsaussichten bei einer Prüfung auf 70% ein.
+  Wie groß ist die Wahrscheinlichkeit, dass er spätestens beim zweiten
+  Antreten Erfolg hat?
+
+  Lösung: 91%
+
+P(A) = 70%
+P(B) = 70%
+
+P(A oder (¬A und B)) = 91%
+
+  0.7 + (0.3 * 0.7)  = 0.91
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+2)
+  Eine Fehlerdiagnose bei einem elektronischen Bauteil erfolgt in 2 Schritten:
+  Im 1.Schritt wird der Fehler mit einer Wahrscheinlichkeit von 60% entdeckt.
+  Falls der 1.Diagnoseschritt nicht erfolgreich war, wird im 2.Schritt der Fehler
+  mit einer Wahrscheinlichkeit von 80% entdeckt. Mit welcher Wahrscheinlichkeit
+  wird ein Fehler durch die beschriebene Fehlerdiagnose nicht entdeckt?
+
+  Lösung: 8%
+
+P(A) = 0.6
+P(B) = 0.8
+
+P(¬(A v (¬A ^ B)))
+
+1- (0.6 + (0.4 * 0.8))
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+1- (0.6 + (0.4 * 0.8));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+3)
+  Eine Anlage besteht aus 2 unabhängigen Teilen. Die Wahrscheinlichkeit, dass
+  Teil A während eines Zeitraumes störungsfrei arbeitet, ist 90%, bei Teil B
+  ist diese Wahrscheinlichkeit 80%. Wie groß ist die Wahrscheinlichkeit, dass
+
+  a)
+    beide Teile störungsfrei arbeiten,
+    Lösung: 72%
+
+  b)
+    nur Teil A störungsfrei arbeitet,
+    Lösung: 18%
+
+  c)
+    nur Teil B störungsfrei arbeitet,
+    Lösung: 8%
+
+  d)
+    wenigstens einer der beiden Teile störungsfrei arbeitet?
+    Lösung: 98%
+                  _
+P(A) = 0.9      P(A) = 0.1
+                  _
+P(B) = 0.8      P(B) = 0.2
+                 _           _       _ _
+       A B       A B       A B       A B
+    0.9 * 0.8 0.1 * 0.8 0.9 * 0.2 0.1 * 0.2
+       0.72      0.08      0.18      0.02
+    ========= ========= ========= =========
+a)      X
+  => 72%
+
+b)                          X
+  => 18%
+
+c)                X
+  =>  8%
+
+d)      X         X         X
+       0.72    + 0.8     + 0.18            = 0.98
+  => 98%
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+4)
+  Eine Lieferung von 20 Einheiten wird nach folgendem Doppelstichprobenplan geprüft:
+  Man entnimmt eine Zufallsstichprobe von 3 Einheiten. Ist wenigstens eine Einheit
+  fehlerhaft, wird die Lieferung zurückgewiesen. Nur wenn alle 3 Einheiten einwandfrei
+  sind, wird nochmals eine Zufallsstichprobe von wieder 3 Einheiten entnommen. Die
+  Lieferung wird danach angenommen, wenn alle Einheiten einwandfrei sind, sonst
+  zurückgewiesen. Wie groß ist die Wahrscheinlichkeit, dass eine Lieferung angenommen
+  wird, wenn die Lieferung
+
+  a)
+    eine fehlerhafte Einheit enthält?
+
+    Lösung: 70%
+
+
+P(A) = 3/20
+
+P(B) = (3/17) und ¬A
+
+P    = ¬(A oder B)
+
+  b)
+    zwei fehlerhafte Einheiten enthält?
+
+    Lösung: 47.9%
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+/* a)
+      3/20     (3/17) und ¬A     
+       A   oder       B  */
+1 - ((3/20) + ((3/17) * (17/20)));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+1 - ((6/20) + (6/17) * (14/20));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: section start ]
+Abzähltechniken
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: subsect start ]
+Permutation
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Permutation
+===========
+
+7 Personen: a,b,c,d,e,f,g
+
+In wie vielen Reihenfolgen kann man die Personen anordnen.
+
+     [4]       Auf den ersten Platz können noch 7 verschiedene.
+   +-----+     Personen gesetzt werden. Nachdem sich eine Person
+   |     |     gesetzt hat sind noch 6 Personen über. Somit
+[5]|     |[3]  kommen für den zweiten Platz 6 verschiedene über.
+   |     |
+[6]|     |[2]  Die Anzahl der Kombinationen ergibt sich schlussendlich als:
+   |     |
+[7]|     |[1]    7*6*5*4*3*2*1
+   |     |     
+               Also der Fakultät von 7.
+
+Ist aus n Elementen eine Auswahl aus n Elementen zu treffen (wobei
+Wiederholungen nicht möglich sind) spricht man von einer Permutation.
+Die Anzahl der Permutationen von n Elementen ist n Faktorielle.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: subsect start ]
+Kombination
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Kombination
+===========
+
+Aus 7 Personen werden 3 Personen benötigt.
+
+Die Reihenfolge der 3er Auswahl ist belanglos.
+
+Verschiedene Auswahlen 7*6*5 = 210
+Von diesen unterscheiden sich je 3! = 3*2*1 nur durch
+die Reihenfolge.
+
+7 * 6 * 5   210
+--------- = --- = 35
+1 * 2 * 3    6
+
+Binominal Koeffizient:
+
+  /n\   n * (n-1) * (n-2) * ... * (n-k)    n ∈ ℕ
+  | | = -------------------------------    k ∈ ℕ
+  \k/              k!                      k <= n
+
+"n über k"                            /n\
+                                      | | = 1
+                                      \0/
+
+Ist aus n Elementen eine Auswahl von k Elementen zu treffen, wobei
+die Reihenfolge ohne bedeutung ist, dann gibt es dafür n über k
+Möglichkeiten. Vorraussetzung ist dass ein Element nicht mehrfach
+ausgewählt werden kann. -> "Kombination ohne Wiederholung."
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: subsect start ]
+Variation
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Variation
+=========
+
+Aus den 7 Personen wählen wir wieder 3 aus. Diesmal ist die Reihenfolge
+sehrwohl von Bedeutung.
+
+n über k Verschiedene möglichkeiten an Personengruppen.
+Personengruppen können jeweils in 3! verschiedenen Arten gemischt sein.
+
+/n\        n * (n-1) * (n-2) * ... * (n-k)
+| | * k! = ------------------------------- * k! = n * (n-1) * (n-2) * ... * (n-k)
+\k/                    k!
+
+Ist aus n Elementen eine Auswahl von k Elementen zu treffen wobei die Reihenfolge
+von bedeutung istm dann gibt es (n über k) * (k!) Möglichkeiten.
+
+Eine Permutation ist ein Sonderfall einer Variation für k=n.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Variation mit Wiederholung
+
+7 Bit jedes hat 2 Möglichkeiten.
+Wie viele Zeichen können encodiert werden?
+
+n^k
+
+128
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: subsect start ]
+Beispiele
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+1) In einem Gerät werden 5 Schalter stets gleichartig beansprucht.
+   Die Ausfallswahrscheinlichkeit (während der Nutzungsdauer) liegt
+   bei einem Schalter unabhängig von den anderen bei 4%. Wie groß
+   ist die Wahrscheinlichkeit, dass
+
+Schalter: A,B,C,D,E
+
+Ausfallwahrscheindlichkeit
+P(A) = P(B) = P(C) = P(D) = P(E) = 0.04
+
+  a) keiner
+
+!A & !B & !C & !D & !E
+
+P = 0.96^5 = 81.5%
+
+  b) genau einer
+
+/5\   /5\
+| | * | |
+\1/   \4/
+
+  c) höchstens drei
+
+  d) mindestens drei Schalter ausfallen?
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+/* a) */
+(96/100)^5;
+%, float;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+/* b) */
+binomial(5, 1) * binomial(5, 4);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+2) Eine Lieferung von 20 Elektrogeräten enthält 3 fehlerhafte Geräte.
+   Man entnimmt dieser Lieferung eine Stichprobe vom Umfang 5.
+
+  a) Auf wie viele Arten kann eine solche Stichprobe entnommen werden?
+
+/20\   20*19*...*16*15
+|  | = --------------- = 15504
+\ 5/          5!
+
+  b) Wie viele dieser Arten enthalten genau ein fehlerhaftes Gerät?
+
+mögliche Stichproben(m): 15504 
+                         /3\   /17\
+günstige Stichproben(g): | | * |  | = 7140
+                         \1/   \ 4/
+g    7140 
+- = ----- = 46%
+m   15504
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+/* a) */
+binomial(20, 5);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+/* b) */
+binomial(3,1);
+binomial(17,4);
+binomial(3,1) * binomial(17,4);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+7140/15504, float;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+3) Wie groß ist die Wahrscheinlichkeit, dass in einer Schulklasse mit
+   10 Burschen und 5 Mädchen bei einer Zufallsauswahl von 3 Schülern
+
+  a) kein Mädchen
+
+    Lösung: 26.4%
+
+/5\   /10\
+| | * |  |
+\0/   \ 3/   24      .
+---------- = -- = 0.2637
+  /15\       91
+  |  |
+  \ 3/
+
+  b) mindestens ein Mädchen darunter ist?
+
+    Lösung: 73.6%
+
+    24   67     .
+1 - -- = -- = 0.736263
+    91   91
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+/* a) */
+binomial(5,0) * binomial(10,3) / binomial(15,3);
+%, float;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+4) Ein Batterietestgerät kann gleichzeitig 4 Batterien prüfen. Unter
+   20 Batterien sind 2 unbrauchbar. Wie groß ist die Wahrscheinlichkeit,
+   dass diese gleich beim ersten Test entdeckt werden?
+
+  Lösung: 3.16%
+
+/2\   /18\
+| | * |  |
+\2/   \ 2/   3
+--------- = -- = 0.03157894736842105
+  /20\      95
+  |  |
+  \ 4/
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+binomial(2,2) * binomial(18,2) / binomial(20,4);
+% , float;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: section start ]
+Diskrete Verteilung
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: comment start ]
+Glossar
+=======
+
+N           Größe der Grundgesamtheit
+
+D           Merkmalsträger (/defekte Einheiten) in der Grundgesamtheit
+
+n           Größe der Stichprobe
+
+x           Anzahl der Merkmalsträger in der Stichprobe
+
+µ           Erwartungswert
+
+g(x)        Wahrscheindlichkeitsdichte
+             Bei stetigen Verteilungen lassen sich Wahrscheinlichkeiten nicht als
+             Summen von Einzelwahrscheinlichkeiten berechnen, da für stetige
+             Zufallsvariablen X stets P(X=x) = 0 gilt. Sie lassen sich jedoch oft
+             als Integrale über eine Dichtefunktion (oder Wahrscheinlichkeitsdichte)
+             f(x) darstellen
+
+G(x)        Wahrscheindlichkeitsfunktion
+             Verteilungen auf den reellen Zahlen können allgemein durch die
+             (kumulative) Verteilungsfunktion (engl. cumulative distribution function,cdf)
+             F(x) beschrieben werden. Sie gibt an, mit welcher Wahrscheinlichkeit die
+             Zufallsvariable einen Wert kleiner oder gleich x annimmt
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: subsect start ]
+Hypergeometrische Verteilung
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Ist eine von 3 sogennanten diskreten Verteilngen.
+Diskrete Verteilung heißt dass die Merkmale nur in ganzen Zahlen
+vorkommen.
+
+In einer Grundgesamtheit (Prüflos) befinden sich N Einheiten.
+Von diesen N Einheiten sind D defekt. Aus der Grundgesamtheit
+wird eine Stichprobe mit dem Umfang n gezogen. Wie groß ist die
+Wahrscheindlichkeit dass es x Merkmalsträger (defekte Einheiten)
+in der Stichprobe gibt.
+
+  N=15  n=3
+  D=4   x=2
+               /4\ /11\
+           g   \2/ \ 1/
+  P(x=2) = - = --------
+           m     /15\
+                 \ 3/
+
+Im Allgemeinen: Man bezeichnet mit g(x; N; D; n) die Wahrscheindlichkeit genau
+x Fehlerhafte Einheiten zu ziehen. Wenn N,D,n gegeben sind:
+
+                         /D\ /N - D\
+                         \x/ \n - x/
+  g(x; N; D; n) = g(x) = -----------
+                             /N\
+                             \n/
+  mit x=0,1,2,..., min(n,D)
+  -> x kannnicht größer als die Stichprobe sein
+
+  *Wahrscheindlichkeitsdichte der Hypergeometrischen Verteilung*
+
+(1) N; D; n
+    Parameter der Hypergeometrischen Verteilung
+(2) D
+    Merkmalsträger in der Grundgesamtheit
+    x
+    Zahl der Merkmalsträger in der Stichprobe
+(3) x
+    x kann nicht vorrausgesagt werden
+"zufallgröße", "Zufallsvariable"
+
+Die verwendung der Hypergeometrischen Verteilung im Qualitätsmanagment
+legt nahe dass die Stichprobe nicht in die Grundgesamtheit zurückgelegt wird
+  *ziehen ohne zurücklegen*
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(all);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+     g(x;  N; D; n)
+Bsp: g(x, 15, 4, 3)
+
+x= 0,1,2 ... min(n, D)
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+_N: 15;
+_D: 4;
+_n: 3;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+binomial;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+buildq erlaubt das definieren von Closures in Maxima
+Closures sind ein sehr praktisches Pattern in der funktionalen Programmierung
+Meiner Erfahrung nach ist der funktionale Weg der einzige
+mit dem man in Maxima halbwegs gut weiter kommt.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+Hypergeometric(N,D,n):=buildq(
+[N,D,n],
+lambda([x],
+    binomial(D, x) * binomial(N - D, n-x)
+    /*---------------------------------*/
+            / binomial(N, n)
+));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+makelist(Hypergeometric(15, 4, 3)(i), i, 0, 3);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+load(distrib);
+
+pdf_hypergeometric(x,n1,n2,n)
+    x ... Gewünschte Anzahl der Objekte der Art A
+    n1... the number of objects of class A
+    n2... the number of objects of class B
+    n ... Größe der Stichprobe
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Wahrscheindlichlkeitsdichte
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+barplot(_list):=makelist([
+ fill_color=[red, green, blue, magenta, cyan, yellow, orange, violet, brown, gray, black][mod(i,11)+1],
+ rectangle(
+  [i*1-1, 0],
+  [i*1-0.25, _list[i]]
+ )
+], i, length(_list));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+/* Zeichnen */
+wxdraw2d(
+    color=black,
+    barplot(
+        makelist(Hypergeometric(15, 4, 3)(i), i, 0, 3)
+    )
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Verteilungsfunktion
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+G(x):=lreduce("+", 
+        makelist(Hypergeometric(15, 4, 3)(i), i, 0, x)
+    );
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+verteilung: makelist(G(i), i, 0, 3);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+/* Zeichnen */
+wxdraw2d(
+    color=black,
+    barplot(verteilung)
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+P(genau x)
+P(mindestens x)
+P(höchstens x)
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: subsect start ]
+Binomialverteilung
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Die wichtigste diskrete Verteilung. Diese entspricht dem ziehen
+einer Stichprobe mit zurücklegen.
+
+Beispiel: Ein idealer Würfel wird n=8 mal geworfen. Jedes mal ist
+  die Wahrscheindlichkeit:
+  p("6") = 1/6
+  Wie groß ist die Wahrscheindlichkeit dass bei den 8 mal genau
+  2 mal "6" vorkommt.
+
+Erfolgreiche Wurffolge
+
+           # |     1     |     2     |     3     |     4     |     5     |     6     |     7     |     8
+-------------------------------------------------------------------------------------------------------------
+   Augenzahl |     1     |     6     |     3     |     4     |     2     |     5     |     6     |     2
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+   Reduziert |     N     |     6     |     N     |     N     |     N     |     N     |     6     |     N
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+p Einzelwert | (1 - 1/6) |    1/6    | (1 - 1/6) | (1 - 1/6) | (1 - 1/6) | (1 - 1/6) |    1/6    | (1 - 1/6)
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ p(N6NNNN6N) |   (1-p)   |     p     |   (1-p)   |   (1-p)   |   (1-p)   |   (1-p)   |     p     |   (1-p)
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        /8\
+Es gibt \2/ unterschiedliche anordnungen für 2 * "6" und 6 * ¬"6"
+                /8\
+-> p(2 * "6") = \2/ * p² * (1-p)
+
+                /8\
+   p(2 * "6") = \2/ * 1/6 * (1 - 1/6)^6 = 0.265
+
+Ein Zufallsvorgang wird n-mal durchgeführt. Die Wahrscheindlichkeit dass ein
+bestimmtes Ereignis A eintritt sei immer gleich und habe den Wert p. Für die
+Wahrscheindlichekti dass das Ereignis A genau eintritt gilt:
+
+                      /n\
+  g(p; n; x) = g(x) = \x/ * p^x * (1-p)^(n-x)
+
+Erwartungswert:
+
+  µ = n*p
+
+(1) p,n ... Parameter der Binomialverteilung
+(2) Erwartungswert bedeutet wieder:
+    Mittelwert der Anzahl des eintretens von bei
+    oftmaliger Durchführung
+(3) ziehen mit zurücklegen:
+    Durch die Versuchsanordnung wird die Grundgesamtheit nicht verändert
+    (Trotzdem wird in der Praxis die Stichprobe nicht in die Grundgesamtheit
+     zurückgelegt)
+    Wenn die Grundgesamtheit mehr als 10-mal so groß wie die Stichprobe ist,
+    kann man zurücklegen/nicht zurücklegen vernachlässigen und die Berechnung
+    mit der Binomialverteilung durchführen.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Beispiel:
+
+In einem Prüflos sind 2000 Einheiten, davon 80 Fehlerhafte.
+Man entnimmt eine Zufallsstichprobe vom Unfang n=50. 
+
+Berechne über Binomialverteilung wie groß die Wahrscheindlichkeit
+
+a) P(genau 0)
+b) P(genau 2)
+c) P(höchstens 2)
+d) P(mindestens 2)
+
+  fehlerhafte Einheiten vorzufinden
+
+e) berechne µ
+f) Diagramm Wahrscheindlichkeitsdichte
+g) Diagramm Wahrscheindlichkeitsfunktion
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+N = 2000            D    80
+         }  ->  p = - = ----       n=50
+D = 80              N   2000
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(all);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+Binomialverteilung(n,p):=buildq(
+[n,p],
+lambda([x],
+    binomial(n, x) * p^x * (1-p) ^ (n-x)
+));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+barplot(_list):=makelist([
+ fill_color=[red, green, blue, magenta, cyan, yellow, orange, violet, brown, gray, black][mod(i,11)+1],
+ rectangle(
+  [i*1-1, 0],
+  [i*1-0.25, _list[i]]
+ )
+], i, length(_list));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+p: 80/2000;
+n: 50;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+a) P(genau 0)
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+Binomialverteilung(n,p)(0), float;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+b) P(genau 2)
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+Binomialverteilung(n,p)(2), float;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+c) P(höchstens 2)
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+lreduce("+", makelist(Binomialverteilung(n,p)(i), i, 0, 2)), float;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+d) P(mindestens 2)
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+lreduce("+", makelist(Binomialverteilung(n,p)(i), i, 2, 50)), float;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+e) berechne µ
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+n*p;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+f) Diagramm Wahrscheindlichkeitsdichte
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(
+    color=black,
+    barplot(
+        makelist(Binomialverteilung(n,p)(i), i, 0, 8))
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+g) Diagramm Wahrscheindlichkeitsfunktion
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(
+    color=black,
+    barplot(
+        makelist(
+            lreduce("+",
+                makelist(Binomialverteilung(n,p)(j), j, 0, i)),
+            i, 0, 8))
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: subsect start ]
+Poissonverteilung
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Die Poissonverteilung wird im Qualitätsmanagment bevorzugt zur angabe
+von Fehlern auf gleichartige Einheiten herangezogen. Notwendig ist nur
+die kenntniss eines Mittelwerts von Merkmalsträger pro Einheit um die
+Wahrscheindlichkeit einer bestimmten Fehlerart anzugeben.
+Ist µ die mittlere Fehleranzahl pro Einheit (der arithmetische
+Mittelwert der Fehleranzahl sehr vieler Einheiten) dann gilt für
+die Wahrscheindlichkeit g(x)  auf einer Beliebiger Einheit genau x
+Fehler vorzufinden.
+
+                 µ^x
+g(x; µ) = g(x) = --- * e^(-µ)      x=0,1,2,...
+                  x!
+
+(1) Poisson beschreibt die Verteilung der Anzahl irgendwelcher
+    vorkommnisse auf einem Zählabschnitt
+    * "pro" ... meist Poissonverteilung
+
+(2) µ  Einziger Parameter der Poissonverteilung
+       gleichzeitig Erwartungswert der Verteilung
+
+(3) Entspricht eine Verteilung von Ereignissen der Poissonverteilung
+    dann treten die Ereignisse zufällig auf
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Beispiel: Die Lackfehler pro Blechteil seien Poissonverteit, mit einer
+  mittleren Anzahl von µ=1.4
+
+a) P(genau 0)
+b) P(genau 2)
+c) P(höchstens 2)
+d) P(mindestens 2)
+e) g(x)  -  Wahrscheindlichkeitsdichte
+f) G(x)  -  Wahrscheindlichkeitsfunktion
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(all);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+Poissonverteilung(µ):=buildq(
+[µ],
+lambda([x],
+    µ^x / x! * %e^(-µ)
+));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+barplot(_list):=makelist([
+ fill_color=[red, green, blue, magenta, cyan, yellow, orange, violet, brown, gray, black][mod(i,11)+1],
+ rectangle(
+  [i*1-1, 0],
+  [i*1-0.25, _list[i]]
+ )
+], i, length(_list));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+a) P(genau 0)
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+Poissonverteilung(1.4)(0);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+b) P(genau 2)
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+Poissonverteilung(1.4)(2);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+c) P(höchstens 2)
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+lreduce("+", makelist(Poissonverteilung(1.4)(i), i, 0, 2));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+d) P(mindestens 2)
+666, als Ersatz für Unendlich
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+lreduce("+", makelist(Poissonverteilung(1.4)(i), i, 2, 666));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+e) g(x)  -  Wahrscheindlichkeitsdichte
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(
+    color=black,
+    barplot(
+        makelist(Poissonverteilung(1.4)(i), i, 0, 6))
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+f) G(x)  -  Wahrscheindlichkeitsfunktion
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(
+    color=black,
+    barplot(
+        makelist(
+            lreduce("+",
+                makelist(Poissonverteilung(1.4)(j), j, 0, i)),
+            i, 0, 6))
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: section start ]
+Kontinuierliche Verteilung
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: subsect start ]
+Normalverteilung
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Normalverteilung
+Die Zufallsgröße kann innerhalb eines Intervalls einen beliebigen Wert annehmen.
+Trifft auf wenn mehrere oder nicht eindeutige Einflüsse verantwortlich sind.
+Eine stetige Zufallsgröße, die sich als Summe sehr vieler unabhängiger Einflussgrößen
+ergibt, von denen keine dominiert ist näherunsweise Normalverteilt.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+verteilt nach Dichtefunktion der Normalverteilung:
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+norm(x, µ, sigma):=1/(sigma*sqrt(2*%pi)) * %e^-((x-µ)^2/(2*sigma^2));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+µ     = 2
+sigma = 0.5
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(
+    yrange=[0,1],
+    explicit(norm(x, 2, 0.5), x, 0, 4)
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+(1)
+µ ... Erwartungswert
+      Mittelwert
+      Maximum der Dichtefunktion
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(
+    yrange=[0,1],
+    explicit(norm(x, 2, 0.5), x, 0, 6),
+    color=red,
+    explicit(norm(x, 4, 0.5), x, 0, 6)
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+(1) Analyse,
+    durch die variation von µ ändert sich nur die Positon
+    an der x-Achse. An der Form der Kurve ändert sich nichts
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+(2) Dichtefunktion symmetrisch zu µ
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+(3) Glockenförmiger verlauf
+    -> ("Gaussche Glockenkurve")
+    Wendepunkt an µ-sigma, µ+sigma
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+(4)
+sigma ... Standardabweichung
+          maß für die Abweichung vom Maximum
+          breite der Kurve
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(
+    yrange=[0,1],
+    explicit(norm(x, 2, 0.5), x, 0, 6),
+    color=red,
+    explicit(norm(x, 2, 1.9), x, -4, 8)
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+(4) Analyse,
+Durch Variation von sigma ändert sich die Breite der Kurve,
+sowie die Höhe.
+Die position der Kurve an der x-Achse bleibt gleich.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+(5) negative Exponentialfunktion
+    lim g(x) = 0
+    x->∞
+    lim g(x) = 0
+    x->-∞
+    nähert sich asymtotisch der x-Achse an
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+(6) Man kann zeigen dass der Flächeninhalt unter jedet
+    Glockenkurve 1 ist
+   -> Eine schmale Glockenkurve muss höher als eine breite sein.
+µ legt die Lage fest
+   sigma die Form
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+(7) Wahrscheindlichkeit und Fläche unter der Glockenkurve
+    Die Wahrscheindlichkeit dass ein Merkmalswert höchstens
+    gleich x0 ist, ist gleich dem Inhalt der Fläche unter der
+    Glockenkurve von -∞ bis x0.
+                      x0
+                      /
+    G(x0, µ, sigma) = \ g(x) dx
+                      /
+                      -∞
+    Die Wahrscheindlichkeit dass ein Merkmalswert zwischen a 
+    und b liegt, ist gleich dem Inhalt der Fläche zwischen a
+    und b.
+                      b
+                      /
+    G(x0, µ, sigma) = \ g(x) dx
+                      /
+                      a
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Um konkrete Wahrscheindlichkeiten für die Normalverteilung zu
+berechnen zu können ist eine Integratuon der
+Wahrscheindlichkeitsdichte g(x) notwendig.
+g(x) ist aber nicht elementar integrierbar. (keine Stammfunktion)
+-> Integration mittels numerischer Integrationsverfahren.
+Zusätzlich zur numerischen Integration gibt es die Möglichkeit durch
+eine variablen Transformation zu einer standardisierten Normalverteilung
+zu kommen deren Integral in Tabellen gelistet ist.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: subsect start ]
+standard Normalverteilung
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(all);
+load(draw);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+norm(x, µ, sigma):=1/(sigma*sqrt(2*%pi)) * %e^-((x-µ)^2/(2*sigma^2));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Standardnormalverteilung auch u-Verteilung genannt
+
+  NV(x=u, µ=0, sigma=1) = G(u) = G(u, 0, 1)
+
+             1          -(u²/2)
+  g(u) = ---------- * e         du
+         sqrt(2*pi)
+
+         u_0
+         /     1          -(u²/2)
+  G(u) = \ ---------- * e         du
+         / sqrt(2*pi)
+         -∞
+
+  G(u) gibt es tabelliert
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+stnv_table: [
+/*   z      0.00    0.01    0.02    0.03    0.04    0.05    0.06    0.07    0.8     0.09 */
+/*****************************************************************************************/
+/* 0.00 */ 0.5000, 0.5040, 0.5080, 0.5120, 0.5160, 0.5199, 0.5239, 0.5279, 0.5319, 0.5359,
+/* 0.10 */ 0.5398, 0.5438, 0.5478, 0.5517, 0.5557, 0.5596, 0.5636, 0.5675, 0.5714, 0.5753,
+/* 0.20 */ 0.5793, 0.5832, 0.5371, 0.5911, 0.5948, 0.5987, 0.6026, 0.6064, 0.6103, 0.6141,
+/* 0.30 */ 0.6179, 0.6217, 0.6255, 0.6293, 0.6331, 0.6368, 0.6406, 0.6443, 0.6480, 0.6517,
+/* 0.40 */ 0.6554, 0.6591, 0.6628, 0.6664, 0.6700, 0.6736, 0.6772, 0.6808, 0.6844, 0.6879,
+/* 0.50 */ 0.6915, 0.6950, 0.6985, 0.7019, 0.7054, 0.7088, 0.7123, 0.7157, 0.7190, 0.7224,
+/* 0.60 */ 0.7257, 0.7291, 0.7324, 0.7357, 0.7389, 0.7422, 0.7454, 0.7486, 0.7517, 0.7549,
+/* 0.70 */ 0.7580, 0.7611, 0.7642, 0.7673, 0.7704, 0.7734, 0.7764, 0.7794, 0.7823, 0.7852,
+/* 0.80 */ 0.7881, 0.7910, 0.7939, 0.7967, 0.7995, 0.8023, 0.8051, 0.8078, 0.8106, 0.8133,
+/* 0.90 */ 0.8159, 0.8186, 0.8212, 0.8238, 0.8264, 0.8289, 0.8315, 0.8340, 0.8365, 0.8389,
+/*      */ 
+/* 1.00 */ 0.8413, 0.8438, 0.8461, 0.8485, 0.8508, 0.8531, 0.8554, 0.8577, 0.8599, 0.8621,
+/* 1.10 */ 0.8643, 0.8665, 0.8686, 0.8708, 0.8729, 0.8749, 0.8770, 0.8790, 0.8810, 0.8830,
+/* 1 20 */ 0.8849, 0.8869, 0.8888, 0.8907, 0.8925, 0.8944, 0.8962, 0.8980, 0.8997, 0.9015,
+/* 1.30 */ 0.9032, 0.9049, 0.9066, 0.9082, 0.9099, 0.9115, 0.9131, 0.9147, 0.9162, 0.9177,
+/* 1.40 */ 0.9192, 0.9207, 0.9222, 0.9236, 0.9251, 0.9265, 0.9279, 0.9292, 0.9306, 0.9319,
+/* 1.50 */ 0.9332, 0.9345, 0.9357, 0.9370, 0.9382, 0.9394, 0.9406, 0.9418, 0.9429, 0.9441,
+/* 1.60 */ 0.9452, 0.9463, 0.9474, 0.9484, 0.9495, 0.9505, 0.9515, 0.9525, 0.9535, 0.9545,
+/* 1.70 */ 0.9554, 0.9564, 0.9573, 0.9582, 0.9591, 0.9599, 0.9608, 0.9616, 0.9525, 0.9633,
+/* 1.80 */ 0.9641, 0.9649, 0.9656, 0.9664, 0.9671, 0.9678, 0.9686, 0.9693, 0.9699, 0.9706,
+/* 1.90 */ 0.9713, 0.0719, 0.9726, 0.9732, 0.9738, 0.9744, 0.9750, 0.9756, 0.9761, 0.9767,
+/*      */ 
+/* 2.00 */ 0.9772, 0.9778, 0.9783, 0.9788, 0.9793, 0.9798, 0.9803, 0.9808, 0.9812, 0.9817,
+/* 2.10 */ 0.9821, 0.9826, 0.9830, 0.9834, 0.9838, 0.9842, 0.9846, 0.9850, 0.9854, 0.9857,
+/* 2.20 */ 0.9861, 0.9864, 0.9868, 0.9871, 0.9875, 0.9878, 0.9881, 0.9884, 0.9887, 0.9890,
+/* 2.30 */ 0.9893, 0.9896, 0.9898, 0.9901, 0.9904, 0.9906, 0.9909, 0.9911, 0.9913, 0.9916,
+/* 2.40 */ 0.9918, 0.9920, 0.9922, 0.9925, 0.9927, 0.9929, 0.9931, 0.9932, 0.9934, 0.9936,
+/* 2 50 */ 0.9938, 0.9940, 0.9941, 0.9943, 0.9945, 0.9946, 0.9948, 0.9949, 0.9951, 0.9952,
+/* 2.60 */ 0.9953, 0.9955, 0.9956, 0.9957, 0.9959, 0.9960, 0.9961, 0.9962, 0.9963, 0.9964,
+/* 2.70 */ 0.9965, 0.9966, 0.9967, 0.9968, 0.9969, 0.9970, 0.9971, 0.9972, 0.9973, 0.9974,
+/* 2.80 */ 0.9974, 0.9975, 0.9976, 0.9977, 0.9977, 0.9978, 0.9979, 0.9979, 0.9980, 0.9981,
+/* 2.90 */ 0.9981, 0.9982, 0.9982, 0.9983, 0.9984, 0.9984, 0.9985, 0.9985, 0.9986, 0.9986,
+/*      */ 
+/* 3 00 */ 0.9987, 0.9987, 0.9987, 0.9988, 0.9988, 0.9989, 0.9989, 0.9989, 0.9990, 0.9990,
+/* 3.10 */ 0.9990, 0.9991, 0.9991, 0.9991, 0.9992, 0.9992, 0.9992, 0.9992, 0.9993, 0.9993,
+/* 3.20 */ 0.9993, 0.9993, 0.9994, 0.9994, 0.9994, 0.9994, 0.9994, 0.9995, 0.9995, 0.9995,
+/* 3.30 */ 0.9995, 0.9995, 0.9995, 0.9996, 0.9996, 0.9996, 0.9996, 0.9996, 0.9996, 0.9997,
+/* 3.40 */ 0.9997, 0.9997, 0.9997, 0.9997, 0.9997, 0.9997, 0.9997, 0.9997, 0.9997, 0.9998,
+/* 3.50 */ 0.9998, 0.9998, 0.9998, 0.9998, 0.9998, 0.9998, 0.9998, 0.9998, 0.9998, 0.9998,
+/* 3.60 */ 0.9998, 0.9998, 0.9999, 0.9999, 0.9999, 0.9999, 0.9999, 0.9999, 0.9999, 0.9999,
+/* 3.70 */ 0.9999, 0.9999, 0.9999, 0.9999, 0.9999, 0.9999, 0.9999, 0.9999, 0.9999, 0.9999,
+/* 3.80 */ 0.9999, 0.9999, 0.9999, 0.9999, 0.9999, 0.9999, 0.9999, 0.9999, 0.9999, 0.9999,
+/* 3.90 */ 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000, 1.0000
+]$
+sdnv_G(u):=block(
+    [_u],
+    _u:round(u*100)+1,
+    if _u > length(stnv_table) then return(1),
+    if _u < 0 then return(1 - StandardNormalverteilung(-u)),
+    return(stnv_table[_u])
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Standadisierung
+                                  x - µ
+  Mit hilfe des Zusammenhangs u = ----- lässt sich
+                                  sigma
+  jede beliebige Normalverteilung in Standardnormalverteilung
+  überführen.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+nv_G(x, µ, sigma):=sdnv_G((x-µ)/sigma);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Eigenschaften der Standadisiertennormalverteilung
+
+(1) Symmetrisch der y-Achse
+(2) G(-u) = 1-G(u)
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Beispiel, normalisierung einer gaussschen Verteilung
+
+Normalverteilung µ=6, sigma=2
+P(x höchstens 7)
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+µ:6;
+sigma:2;
+x_hoechstens: 7;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(
+xrange=[-4, 12],
+yrange=[0, 0.5],
+filled_func=true,
+explicit(norm('x, µ, sigma), x, -4, x_hoechstens), /* x höchstens 7 */
+filled_func=false,
+line_width=2,
+explicit(norm('x, µ, sigma), x, -4, 12)
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Die Wahrscheindlichkeit "x höchstens 7" ist die Fläche
+unter der Kurve bis 7.
+                                x - µ
+Mit hilfe des Zusammenhangs u = ----- lässt sich
+                                sigma
+jede beliebige Normalverteilung in Standardnormalverteilung
+überführen.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+u: (x-µ)/sigma;
+u_hoechstens: subst(['x=x_hoechstens], u);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(
+xrange=[-4, 12],
+yrange=[0, 0.5],
+filled_func=true,
+explicit(norm('x, 0, 1), x, -4, u_hoechstens),
+filled_func=false,
+line_width=2,
+explicit(norm('x, 0, 1), x, -4, 12)
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Die Normalverteilung wurde in die standadisierte Form überführt.
+Die roten Flächen sind in beiden Grafiken gleich groß.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: section start ]
+Näherungen von
+Wahrscheindlichketsverteilungen
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: comment start ]
+                              +------------------------------+
+                              |                              |
+                              | Hypergeometrische Verteilung |
+                              |          (N, D, ^)           |
+                              |                              |
+                              +--------------+---------------+
+                                           N |     D
+                                      n < -- | p = -
+                                          10 |     N
+                              +--------------v---------------+
+                              |                              |
+                              |     Binomial^erteilung       |
+                 +------------+           (p, n)             +-------------+ µ = n*p
+                 |            |                              |             |       __________
+        p <= 0,1 |            +------------------------------+             | G = ^/ n*p*(1-p)'
+                 | µ = p*n                                     n*p(1-p) > 9|
+        n >= 50  |                                                         |
+                 |                                                         |
++----------------v------------+                              +-------------v------------------+
+|                             |          µ > 9               |                                |
+|      Poissonverteilung      |                              |         Normalverteilung       |
+|             (µ)             +------------------------------>              (µ, G)            |
+|                             |                              |                                |
++-----------------------------+               _              +--------------------------------+
+                                        G = ^/µ'
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Sobald also eine bestimmte Bedingung erfüllt ist (z.B. n < N/10)
+kann von einer Verteilung in die andere konvertiert werden (z.B.
+durch p = D/N).
+
+Die Bedingung zur Umwandlung von hypergeometrisch zu
+Binomialverteilung ist intuitiv zu verstehen, nämlich sobald die
+Grundmenge so groß ist, dass Zurücklegen keine Auswirkung mehr
+auf das Ergebnis hat. Die anderen Bedingungen können mit dem bisher
+behandelten Lehrstoff nicht wirklich erklärt werden, man sollte sie
+daher einfach als gegeben nehmen.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: subsect start ]
+Lineare Korrelation
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(all);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+load(draw);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+/*
+Da die Formeln für sämtliche dieser Regressionen ähnlich aufgebaut sind, kann das gesamte System in einen einzigen Block integriert werden.
+Der folgende Block implementiert das Verfahren einer Regression n-ten Grades.
+Parameter:
+    points  die Punktewolke in der Form [[x1, y1], .., [xn, yn]]
+    vars    die Variablen der Funktion, die berechnet werden soll [a, b]; (Grad der Regression + 1)
+return      die Funktion der Regression dieser Punkte
+*/
+regr(points, vars) := block (
+    gls: [],
+gl: 0,
+    grade: length(vars) - 1,
+    n: length(points),
+    for i: 0 thru grade do (
+    gl: 0,
+        for j: 0 thru grade do (
+            gl: gl + vars[j + 1]*sum(points[k][1]^(2*grade - (i + j)), k, 1, n)
+        ),
+        gl: gl = sum(points[k][1]^(grade - i)*points[k][2], k, 1, n),
+        gls: append(gls, [gl])
+    ),
+    return(solve(gls, vars))
+)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Wenn man in der selben Probe mehrere Merkmale vermißt dann kann man
+sich die Frage stellen ob ein Zusammenhang zwischen diesen Merkmalen
+besteht.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Es sind einge Daten zu Gewicht und Größe von verschiedenen Personen vorhanden.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+data: [[171, 75], [163, 62], [172, 69], [179, 82], [176, 74], [164, 63], [170, 72], [174, 74], [161, 60], [168, 70], [172, 74], [163, 66], [180, 77], [171, 76], [174, 72],
+       [169, 73]];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+x: [];
+y: [];
+for i: 1 thru length(data) step 1 do (
+    x: append(x, [data[i][1]]),
+    y: append(y, [data[i][2]])
+);
+x;
+y;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Diese sollen zuerst einmal in Relation zueinander grafisch dargestellt werden.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(xrange = [160, 185], yrange = [60, 80],
+         title = "Größe - Gewicht", xlabel = "Größe (cm)", ylabel = "Gewicht (kg)",
+         points(data)
+        );
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Von diesen Daten kann nun eine lineare Korrelationsgerade berechnet werden.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+s: regr(data, [a, b]);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+gl: subst(s[1], a*x + b);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(xrange = [160, 185], yrange = [60, 80],
+         title = "Größe - Gewicht", xlabel = "Größe (cm)", ylabel = "Gewicht (kg)",
+         points(data),
+         color=red, explicit(gl, 'x, 160, 185)
+        );
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+In diesem Fall besteht ein steigender Zusammenhang.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+1. Parameter: k
+
+Gerade steigend: es besteht ein Zusammenhang (z.B. "Je größer die Körpergröße, desto größer das Gewicht")
+Gerade flach:    kein Zusammenhang
+Gerade fallend:  es besteht ein Zusammenhang (z.B. "Je größer die Körpergröße, desto kleiner das Gewicht")
+
+Das `k`, gibt an welcher der 3 Fälle auftritt.
+
+2. Parameter:
+
+2D Stichprobe, Information über Schlankheit des Streudiagramms, Verteilung der Punktwolke
+
+"Korrelation" = in Wechselbeziehung stehen
+
+EMPIRISCHE KORRELATIONSKOEFFIZIENT:
+r = S_xy / (S_x*S_y)    // S_x, S_y: Standardabweichungen in x bzw. y
+
+S_x  = sqrt(1/(n-1) * sum(x_i^2 - n*avg(x)^2))
+S_y  = sqrt(1/(n-1) * sum(y_i^2 - n*avg(y)^2))
+S_xy = sqrt(1/(n-1) * (sum(x_i*y_i) - n*avg(x)*avg(y))  // EMPIRISCHE KOVARIANZ
+
+S_x/S_y hat diesselbe Einheit, wie x/y.
+
+Ist ein Schätzwert für Stärke und Richtung des linearen Zusammenhangs (der beiden Merkmale x und y):
+    - -1 <= r <= 1
+      r = 1  -> alle Werte liegen auf einer steigenden Geraden
+      r = -1 -> all Werte liegen auf einer fallenden Geraden
+    - je näher bei 1 oder -1, desto näher liegen die Punkte bei der Geraden
+      r > 0  -> Zusammenhang = steigende Gerade = "positive lineare Korrelation"
+      r < 0  -> Zusammenhang = fallende Gerade = "negative lineare Korrelation"
+      r = 0  -> kein >>linearer<< Zusammenhang
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+emp_kovarianz(x, y, n) := 1/(n-1) * (sum(x[i]*y[i], i, 1, n) - n*mean(x)*mean(y));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+emp_koeff(x, y) := emp_kovarianz(x, y, length(x)) / (std1(x) * std1(y));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+s_x: float(std1(x));
+s_y: float(std1(y));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+emp_kov: float(emp_kovarianz(x, y, length(x)));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+r: float(emp_koeff(x, y));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+BESTIMMTHEITSMASS:
+===
+B = sum((y(x_i) - mean(y))^2, i, 1, n) / sum((y_i - mean(y))^2, i, 1, n)
+B = r^2
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+r^2;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+80% der Gewichtsunterschiede sind durch die Körpergröße vollständig erklärbar.
+20% sind dadurch nicht erklärbar.
+   [wxMaxima: comment end   ] */
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$
