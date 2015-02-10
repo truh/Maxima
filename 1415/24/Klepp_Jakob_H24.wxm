@@ -1,0 +1,247 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 14.09.0 ] */
+
+/* [wxMaxima: title   start ]
+Kosten- und Preistheorie
+      Jakob  Klepp      
+       2015-02-10       
+   [wxMaxima: title   end   ] */
+
+/* [wxMaxima: comment start ]
+Glossar
+=======
+
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Ziel
+====
+
+  Prinzipiel sollen wirtschaftliche Problemstellungen mathematisch
+  erfasst und gelöst werden.
+
+  Kostentheorie:
+
+    kleine, innerbetriebliche Problemdstellungen
+
+  Preistheorie:
+
+    volkswirtschaftliche Ebene, über Unternehmensgrenzen hinaus
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Kostentheorie
+=============
+
+K ^
+o |
+s |
+t |
+e |
+n |
+  |
+  +-------------------------->
+                     Stückzahl 
+
+Kosten sind in Geldeinheiten, Stückzahl in Mengeneinheiten definiert.
+Stückzahl ist in der Regel nur Ganzzahlig definiert.
+
+Man untersucht Kosten die im Unternehmen anfallen bei der Produktion
+eine bestimmten Stückzahl darzustellen.
+
+  K(X) ... Kostenfunktion
+
+  K[F] ... Fixkosten
+
+  K[V] ... variable Kosten
+
+K'(x) >= 0
+
+  Kostenfunktion muss steigen
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(all);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+load(draw);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+xr: [0,8];
+
+wxdraw2d(
+xlabel="Stückzahl",
+ylabel="Kosten",
+
+xrange=xr,
+color=orange,
+explicit(8 - x, x, xr[1], xr[2]),
+color=green,
+explicit(4 + 2 * sin(1.5 * x), x, xr[1], xr[2]),
+color=red,
+explicit((x-4)^3/15 + 4, x, xr[1], xr[2])
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Orange und Grün kann keine Kostenfunktion sein weil sie fallen.
+
+
+Grün:
+  Trigonometrische Funktionen sind nicht möglich weil sie fallen
+  und steigen.
+
+Rot:
+
+  Polynomfunktion
+
+  1. Grades: K(x) = k*x + K[F]
+  
+  2. Grades: in Praxis nicht verwendet
+
+  3. Grades: wie in Grafik, mögliche Kostenfunktion
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+xr: [0,8];
+f(x):=(x^3 - 8*x^2 + 24*x + 50);
+
+x_K: rhs(solve(diff(f(x), x, 2)=0, x)[1]);
+
+wxdraw2d(
+xlabel="Stückzahl",
+ylabel="Kosten",
+
+xrange=xr,
+explicit(f(x), x, xr[1], xr[2]),
+
+point_type=7,
+color=red,
+points([[x_K,f(x_K)]]),
+color=pink,
+points_joined=true,
+point_type=0,
+points([[x_K, 0],[x_K,f(x_K)]]),
+color=orange,
+head_length=0.2,
+vector([0, 10], [x_K, 0]),
+vector([xr[2], 10], [-xr[2]+x_K, 0]),
+label(
+    ["Degressiv", 1.4, 20],
+    ["Progressiv", x_K+2.7, 20]
+)
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Degressiver und Progressiver Kostenbereich
+
+Degressiver Kostenbereich:
+
+  Kosten steigen zunehmend langsamer
+
+Progressiver Kostenbereich:
+
+  Kosten steigen zunehmend schneller
+
+x[K] ... Kostenkehre
+     ... Wendepunkt der Kostenfunktion
+
+     K''(x[K]) = 0
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+xr: [0,4];
+
+f(x):=(x^2)/3 + 2;
+
+wxdraw2d(
+xlabel="Stückzahl",
+ylabel="Kosten",
+
+xrange=xr,
+yrange=[-1, 7.5],
+
+color=black,
+explicit(f(x), x, xr[1], xr[2]),
+
+color=blue,
+point_type=0,
+points_joined=true,
+points([[1, -1], [1, f(1)]]),
+line_type=dots,
+points([[2, -1], [2, f(2)]]),
+points([[1, f(1)], [2, f(1)]]),
+line_type=solid,
+line_width=2,
+points([[2, f(1)], [2, f(2)]]),
+label(
+    ["x0", 1.1, -0.3],
+    ["x0+1", 2.2, -0.3]
+)
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Grenzkosten Funktion
+
+  sagt aus welche zusätzlichen Kosten bei der Produktion eines weiteren 
+  Stücks auftreten.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Stückkosten:
+                    K[F] + K[V]
+  k(x) = K(x) / x = -----------
+                         x
+
+
+  k(x) = k[F](x) + k[V](x)
+
+  k[V] sind die durchschnittlichen variablen Kosten
+  k[F] sind die durchschnittlichen Fixkosten
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Von einer kubischen Kostenfunktion kennt man die Fixkosten:
+
+  K[F] = 250GE
+
+Sowie dier bei 10, 20 und 50 Stück auftretenten gesamtkosten
+
+x   10   20   50
+-----------------
+K  302  336  350
+
+a) erstelle die Gleichung dieser Kostenfunktion
+
+b) berechne die Kostenkehre und die entsprechenden Gesamtkosten
+
+c) berechne die Grenzkosten für x=10
+
+d) argumentiere ob die berechnete Kostenfunktion gültig ist
+
+e) Grafische darstellung
+
+   K
+
+   K[V]
+
+   K[F]
+
+   x[K]
+
+f) Grafische darstellung
+
+   k
+
+   k[V]
+
+   k[F]
+   [wxMaxima: comment end   ] */
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$
