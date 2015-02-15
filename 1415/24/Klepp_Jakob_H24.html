@@ -1,0 +1,792 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+ <HEAD>
+  <TITLE>Klepp_Jakob_H24</TITLE>
+  <META NAME="generator" CONTENT="wxMaxima">
+  <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+  <STYLE TYPE="text/css">
+body {
+  background-color: rgb(255,255,255);
+}
+.input {
+  color: rgb(0,0,255);
+}
+.comment {
+  color: rgb(0,0,0);
+  background-color: rgb(255,255,255);
+  padding: 2mm;
+}
+.image {
+  color: rgb(0,0,0);
+  padding: 2mm;
+}
+.section {
+  color: rgb(0,0,0);
+  font-size: 1.5em;
+  padding: 2mm;
+}
+.subsect {
+  color: rgb(0,0,0);
+  font-size: 1.2em;
+  padding: 2mm;
+}
+.title {
+  color: rgb(0,0,0);
+  font-size: 2em;
+  padding: 2mm;
+}
+.prompt {
+  color: rgb(255,0,0);
+}
+table {
+  border: 0px;
+}
+td {
+  vertical-align: top;
+  padding: 1mm;
+}
+  </STYLE>
+ </HEAD>
+ <BODY>
+
+<!---------------------------------------------------------->
+<!--          Created with wxMaxima version 14.12.0         -->
+<!---------------------------------------------------------->
+
+
+<!-- Title cell -->
+
+
+<P CLASS="title">
+Kosten- und Preistheorie<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Jakob  Klepp      <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2015-02-10       
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Glossar<BR>
+=======<BR>
+<BR>
+
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Ziel<BR>
+====<BR>
+<BR>
+&nbsp;&nbsp;Prinzipiel sollen wirtschaftliche Problemstellungen mathematisch<BR>
+&nbsp;&nbsp;erfasst und gelöst werden.<BR>
+<BR>
+&nbsp;&nbsp;Kostentheorie:<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;kleine, innerbetriebliche Problemstellungen<BR>
+<BR>
+&nbsp;&nbsp;Preistheorie:<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;volkswirtschaftliche Ebene, über Unternehmensgrenzen hinaus
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Kostentheorie<BR>
+=============<BR>
+<BR>
+K ^<BR>
+o |<BR>
+s |<BR>
+t |<BR>
+e |<BR>
+n |<BR>
+&nbsp;&nbsp;|<BR>
+&nbsp;&nbsp;+--------------------------><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stückzahl <BR>
+<BR>
+Kosten sind in Geldeinheiten, Stückzahl in Mengeneinheiten definiert.<BR>
+Stückzahl ist in der Regel nur Ganzzahlig definiert.<BR>
+<BR>
+Man untersucht Kosten die im Unternehmen anfallen bei der Produktion<BR>
+eine bestimmten Stückzahl darzustellen.<BR>
+<BR>
+&nbsp;&nbsp;K(X) ... Kostenfunktion<BR>
+<BR>
+&nbsp;&nbsp;K[F] ... Fixkosten<BR>
+<BR>
+&nbsp;&nbsp;K[V] ... variable Kosten<BR>
+<BR>
+K'(x) >= 0<BR>
+<BR>
+&nbsp;&nbsp;Kostenfunktion muss steigen
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+kill(all);
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+load(draw);
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+xr: [0,8];<BR>
+<BR>
+wxdraw2d(<BR>
+xlabel="Stückzahl",<BR>
+ylabel="Kosten",<BR>
+<BR>
+xrange=xr,<BR>
+color=orange,<BR>
+explicit(8 - x, x, xr[1], xr[2]),<BR>
+color=green,<BR>
+explicit(4 + 2 * sin(1.5 * x), x, xr[1], xr[2]),<BR>
+color=red,<BR>
+explicit((x-4)^3/15 + 4, x, xr[1], xr[2])<BR>
+);
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Orange und Grün kann keine Kostenfunktion sein weil sie fallen.<BR>
+<BR>
+<BR>
+Grün:<BR>
+&nbsp;&nbsp;Trigonometrische Funktionen sind nicht möglich weil sie fallen<BR>
+&nbsp;&nbsp;und steigen.<BR>
+<BR>
+Rot:<BR>
+<BR>
+&nbsp;&nbsp;Polynomfunktion<BR>
+<BR>
+&nbsp;&nbsp;1. Grades: K(x) = k*x + K[F]<BR>
+&nbsp;&nbsp;<BR>
+&nbsp;&nbsp;2. Grades: in Praxis nicht verwendet<BR>
+<BR>
+&nbsp;&nbsp;3. Grades: wie in Grafik, mögliche Kostenfunktion
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+xr: [0,8];<BR>
+f(x):=(x^3 - 8*x^2 + 24*x + 50);<BR>
+<BR>
+x_K: rhs(solve(diff(f(x), x, 2)=0, x)[1]);<BR>
+<BR>
+wxdraw2d(<BR>
+xlabel="Stückzahl",<BR>
+ylabel="Kosten",<BR>
+<BR>
+xrange=xr,<BR>
+explicit(f(x), x, xr[1], xr[2]),<BR>
+<BR>
+point_type=7,<BR>
+color=red,<BR>
+points([[x_K,f(x_K)]]),<BR>
+color=pink,<BR>
+points_joined=true,<BR>
+point_type=0,<BR>
+points([[x_K, 0],[x_K,f(x_K)]]),<BR>
+color=orange,<BR>
+head_length=0.2,<BR>
+vector([0, 10], [x_K, 0]),<BR>
+vector([xr[2], 10], [-xr[2]+x_K, 0]),<BR>
+label(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;["Degressiv", 1.4, 20],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;["Progressiv", x_K+2.7, 20]<BR>
+)<BR>
+);
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Degressiver und Progressiver Kostenbereich<BR>
+<BR>
+Degressiver Kostenbereich:<BR>
+<BR>
+&nbsp;&nbsp;Kosten steigen zunehmend langsamer<BR>
+<BR>
+Progressiver Kostenbereich:<BR>
+<BR>
+&nbsp;&nbsp;Kosten steigen zunehmend schneller<BR>
+<BR>
+x[K] ... Kostenkehre<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;... Wendepunkt der Kostenfunktion<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;K''(x[K]) = 0
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+xr: [0,4];<BR>
+<BR>
+f(x):=(x^2)/3 + 2;<BR>
+<BR>
+wxdraw2d(<BR>
+xlabel="Stückzahl",<BR>
+ylabel="Kosten",<BR>
+<BR>
+xrange=xr,<BR>
+yrange=[-1, 7.5],<BR>
+<BR>
+color=black,<BR>
+explicit(f(x), x, xr[1], xr[2]),<BR>
+<BR>
+color=blue,<BR>
+point_type=0,<BR>
+points_joined=true,<BR>
+points([[1, -1], [1, f(1)]]),<BR>
+line_type=dots,<BR>
+points([[2, -1], [2, f(2)]]),<BR>
+points([[1, f(1)], [2, f(1)]]),<BR>
+line_type=solid,<BR>
+line_width=2,<BR>
+points([[2, f(1)], [2, f(2)]]),<BR>
+label(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;["x0", 1.1, -0.3],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;["x0+1", 2.2, -0.3]<BR>
+)<BR>
+);
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Grenzkosten Funktion<BR>
+<BR>
+&nbsp;&nbsp;sagt aus welche zusätzlichen Kosten bei der Produktion eines weiteren <BR>
+&nbsp;&nbsp;Stücks auftreten.
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Stückkosten:<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;K[F] + K[V]<BR>
+&nbsp;&nbsp;k(x) = K(x) / x = -----------<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x<BR>
+<BR>
+<BR>
+&nbsp;&nbsp;k(x) = k[F](x) + k[V](x)<BR>
+<BR>
+&nbsp;&nbsp;k[V] sind die durchschnittlichen variablen Kosten<BR>
+&nbsp;&nbsp;k[F] sind die durchschnittlichen Fixkosten
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Von einer kubischen Kostenfunktion kennt man die Fixkosten:<BR>
+<BR>
+&nbsp;&nbsp;K[F] = 250GE<BR>
+<BR>
+Sowie die bei 10, 20 und 50 Stück auftretenten gesamtkosten<BR>
+<BR>
+x   10   20   50<BR>
+-----------------<BR>
+K  302  336  350<BR>
+<BR>
+a) erstelle die Gleichung dieser Kostenfunktion<BR>
+<BR>
+b) berechne die Kostenkehre und die entsprechenden Gesamtkosten<BR>
+<BR>
+c) berechne die Grenzkosten für x=10<BR>
+<BR>
+d) argumentiere ob die berechnete Kostenfunktion gültig ist<BR>
+<BR>
+e) Grafische darstellung<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;K<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;K[V]<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;K[F]<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;x[K]<BR>
+<BR>
+f) Grafische darstellung<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;k<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;k[V]<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;k[F]
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+a) erstelle die Gleichung dieser Kostenfunktion<BR>
+<BR>
+&nbsp;Um eine Gleichung aufgrund von x,y Paaren aufzustellen kann die<BR>
+&nbsp;umgekehrte Kurvendiskussion genutzt werden.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/* Grundform sowie ableitungen der Polynomfunktion dritter Ordnung */<BR>
+f(x):=a*x^3+b*x^2+c*x+d;<BR>
+f1(x):=''(diff(f(x),x,1));<BR>
+f2(x):=''(diff(f(x),x,2));
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/* liste der Verfügbaren Informationen */<BR>
+be: [<BR>
+&nbsp;&nbsp;f(10) = 302,<BR>
+&nbsp;&nbsp;f(20) = 336,<BR>
+&nbsp;&nbsp;f(50) = 350,<BR>
+&nbsp;&nbsp;f(0)  = 250<BR>
+];
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/* Auflösen mit algsys */<BR>
+erg:algsys(be,[a,b,c,d]);
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/* in Grundform einsetzten */<BR>
+K(x):=subst(erg, f(x));
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+ Gleichung dieser Kostenfunktion
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+K(x);
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+b) berechne die Kostenkehre und die entsprechenden Gesamtkosten<BR>
+<BR>
+&nbsp;Die Kostenkehre entspricht dem Wendepunkt der Kostenfunktion.<BR>
+&nbsp;<BR>
+&nbsp;Wendepunkte findet man dort wo die 2. Ableitung einer Funktion 0 ist.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+K2_:diff(K(x), 'x, 2);<BR>
+K2(x):=''K2_;
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+K2(x);
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+solve(K2(x)=0, x);
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+K2(100);
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+K(100);
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Der Wendepunkt ist bei x=100, y=200
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+c) berechne die Grenzkosten für x=10
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+K(11) - K(10);
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+d) argumentiere ob die berechnete Kostenfunktion gültig ist
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxdraw2d(<BR>
+explicit(K(x), x,30, 180));
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Die Kostenfunktion fällt zwischen ~40 und ~160,<BR>
+somit keine gültige Kostenfunktion.
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+e) Grafische darstellung<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;K<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;K[V]<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;K[F]<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;x[K]
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxdraw2d(<BR>
+color=black,<BR>
+key="K[F]",<BR>
+explicit(200, x, 0, 300),<BR>
+color=blue,<BR>
+key="K",<BR>
+explicit(K(x), x,0, 300),<BR>
+color=red,<BR>
+key="K[V]",<BR>
+explicit(K(x) - 200, x, 0,300),<BR>
+color=green,<BR>
+key="x[K]",<BR>
+points([100],[200]));
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+f) Grafische darstellung<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;k<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;k[V]<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;k[F]
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+k:makelist(lreduce("+", makelist(K(x), x, 0, i)) / i, i, 1, 301, 10);
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+k_F:makelist(250 / i, i, 1, 301, 10);
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+k_V: (makelist(k[i] - k_F[i], i, 1, length(k)));
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+xs:makelist(i, i, 1, 301, 10);
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxdraw2d(<BR>
+color=blue,<BR>
+key="k",<BR>
+points(xs, k),<BR>
+color=red,<BR>
+key="k[V]",<BR>
+points(xs, k_V),<BR>
+color=black,<BR>
+key="k[F]",<BR>
+points(xs, k_F)<BR>
+);
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+ <HR>
+ <SMALL> Created with <A HREF="http://wxmaxima.sourceforge.net/">wxMaxima</A>.</SMALL>
+
+ </BODY>
+</HTML>

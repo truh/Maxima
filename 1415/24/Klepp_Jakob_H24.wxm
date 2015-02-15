@@ -1,5 +1,5 @@
 /* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
-/* [ Created with wxMaxima version 14.09.0 ] */
+/* [ Created with wxMaxima version 14.12.0 ] */
 
 /* [wxMaxima: title   start ]
 Kosten- und Preistheorie
@@ -23,7 +23,7 @@ Ziel
 
   Kostentheorie:
 
-    kleine, innerbetriebliche Problemdstellungen
+    kleine, innerbetriebliche Problemstellungen
 
   Preistheorie:
 
@@ -210,7 +210,7 @@ Von einer kubischen Kostenfunktion kennt man die Fixkosten:
 
   K[F] = 250GE
 
-Sowie dier bei 10, 20 und 50 Stück auftretenten gesamtkosten
+Sowie die bei 10, 20 und 50 Stück auftretenten gesamtkosten
 
 x   10   20   50
 -----------------
@@ -242,6 +242,171 @@ f) Grafische darstellung
 
    k[F]
    [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+a) erstelle die Gleichung dieser Kostenfunktion
+
+ Um eine Gleichung aufgrund von x,y Paaren aufzustellen kann die
+ umgekehrte Kurvendiskussion genutzt werden.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+/* Grundform sowie ableitungen der Polynomfunktion dritter Ordnung */
+f(x):=a*x^3+b*x^2+c*x+d;
+f1(x):=''(diff(f(x),x,1));
+f2(x):=''(diff(f(x),x,2));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+/* liste der Verfügbaren Informationen */
+be: [
+  f(10) = 302,
+  f(20) = 336,
+  f(50) = 350,
+  f(0)  = 250
+];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+/* Auflösen mit algsys */
+erg:algsys(be,[a,b,c,d]);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+/* in Grundform einsetzten */
+K(x):=subst(erg, f(x));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+ Gleichung dieser Kostenfunktion
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+K(x);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+b) berechne die Kostenkehre und die entsprechenden Gesamtkosten
+
+ Die Kostenkehre entspricht dem Wendepunkt der Kostenfunktion.
+ 
+ Wendepunkte findet man dort wo die 2. Ableitung einer Funktion 0 ist.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+K2_:diff(K(x), 'x, 2);
+K2(x):=''K2_;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+K2(x);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+solve(K2(x)=0, x);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+K2(100);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+K(100);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Der Wendepunkt ist bei x=100, y=200
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+c) berechne die Grenzkosten für x=10
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+K(11) - K(10);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+d) argumentiere ob die berechnete Kostenfunktion gültig ist
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(
+explicit(K(x), x,30, 180));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Die Kostenfunktion fällt zwischen ~40 und ~160,
+somit keine gültige Kostenfunktion.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+e) Grafische darstellung
+
+   K
+
+   K[V]
+
+   K[F]
+
+   x[K]
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(
+color=black,
+key="K[F]",
+explicit(200, x, 0, 300),
+color=blue,
+key="K",
+explicit(K(x), x,0, 300),
+color=red,
+key="K[V]",
+explicit(K(x) - 200, x, 0,300),
+color=green,
+key="x[K]",
+points([100],[200]));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+f) Grafische darstellung
+
+   k
+
+   k[V]
+
+   k[F]
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+k:makelist(lreduce("+", makelist(K(x), x, 0, i)) / i, i, 1, 301, 10);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+k_F:makelist(250 / i, i, 1, 301, 10);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+k_V: (makelist(k[i] - k_F[i], i, 1, length(k)));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+xs:makelist(i, i, 1, 301, 10);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(
+color=blue,
+key="k",
+points(xs, k),
+color=red,
+key="k[V]",
+points(xs, k_V),
+color=black,
+key="k[F]",
+points(xs, k_F)
+);
+/* [wxMaxima: input   end   ] */
 
 /* Maxima can't load/batch files which end with a comment! */
 "Created with wxMaxima"$
