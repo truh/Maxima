@@ -135,13 +135,14 @@ K'(x) >= 0<BR>
 
 <P><TABLE><TR><TD>
   <SPAN CLASS="prompt">
--->  
+(%i1) 
   </SPAN></TD>
   <TD><SPAN CLASS="input">
 kill(all);
   </SPAN></TD>
 </TR></TABLE>
-
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H24_img/Klepp_Jakob_H24_0.png">
 </P>
 
 
@@ -150,13 +151,14 @@ kill(all);
 
 <P><TABLE><TR><TD>
   <SPAN CLASS="prompt">
--->  
+(%i1) 
   </SPAN></TD>
   <TD><SPAN CLASS="input">
 load(draw);
   </SPAN></TD>
 </TR></TABLE>
-
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H24_img/Klepp_Jakob_H24_1.png">
 </P>
 
 
@@ -165,7 +167,7 @@ load(draw);
 
 <P><TABLE><TR><TD>
   <SPAN CLASS="prompt">
--->  
+(%i2) 
   </SPAN></TD>
   <TD><SPAN CLASS="input">
 xr: [0,8];<BR>
@@ -184,7 +186,8 @@ explicit((x-4)^3/15 + 4, x, xr[1], xr[2])<BR>
 );
   </SPAN></TD>
 </TR></TABLE>
-
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H24_img/Klepp_Jakob_H24_2.png">
 </P>
 
 
@@ -216,7 +219,7 @@ Rot:<BR>
 
 <P><TABLE><TR><TD>
   <SPAN CLASS="prompt">
--->  
+(%i4) 
   </SPAN></TD>
   <TD><SPAN CLASS="input">
 xr: [0,8];<BR>
@@ -249,7 +252,8 @@ label(<BR>
 );
   </SPAN></TD>
 </TR></TABLE>
-
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H24_img/Klepp_Jakob_H24_3.png">
 </P>
 
 
@@ -279,7 +283,7 @@ x[K] ... Kostenkehre<BR>
 
 <P><TABLE><TR><TD>
   <SPAN CLASS="prompt">
--->  
+(%i8) 
   </SPAN></TD>
   <TD><SPAN CLASS="input">
 xr: [0,4];<BR>
@@ -313,7 +317,8 @@ label(<BR>
 );
   </SPAN></TD>
 </TR></TABLE>
-
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H24_img/Klepp_Jakob_H24_4.png">
 </P>
 
 
@@ -403,7 +408,7 @@ a) erstelle die Gleichung dieser Kostenfunktion<BR>
 
 <P><TABLE><TR><TD>
   <SPAN CLASS="prompt">
--->  
+(%i11) 
   </SPAN></TD>
   <TD><SPAN CLASS="input">
 /* Grundform sowie ableitungen der Polynomfunktion dritter Ordnung */<BR>
@@ -412,7 +417,8 @@ f1(x):=''(diff(f(x),x,1));<BR>
 f2(x):=''(diff(f(x),x,2));
   </SPAN></TD>
 </TR></TABLE>
-
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H24_img/Klepp_Jakob_H24_5.png">
 </P>
 
 
@@ -421,7 +427,7 @@ f2(x):=''(diff(f(x),x,2));
 
 <P><TABLE><TR><TD>
   <SPAN CLASS="prompt">
--->  
+(%i14) 
   </SPAN></TD>
   <TD><SPAN CLASS="input">
 /* liste der Verfügbaren Informationen */<BR>
@@ -433,7 +439,8 @@ be: [<BR>
 ];
   </SPAN></TD>
 </TR></TABLE>
-
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H24_img/Klepp_Jakob_H24_6.png">
 </P>
 
 
@@ -442,14 +449,15 @@ be: [<BR>
 
 <P><TABLE><TR><TD>
   <SPAN CLASS="prompt">
--->  
+(%i15) 
   </SPAN></TD>
   <TD><SPAN CLASS="input">
 /* Auflösen mit algsys */<BR>
 erg:algsys(be,[a,b,c,d]);
   </SPAN></TD>
 </TR></TABLE>
-
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H24_img/Klepp_Jakob_H24_7.png">
 </P>
 
 
@@ -458,14 +466,15 @@ erg:algsys(be,[a,b,c,d]);
 
 <P><TABLE><TR><TD>
   <SPAN CLASS="prompt">
--->  
+(%i16) 
   </SPAN></TD>
   <TD><SPAN CLASS="input">
 /* in Grundform einsetzten */<BR>
 K(x):=subst(erg, f(x));
   </SPAN></TD>
 </TR></TABLE>
-
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H24_img/Klepp_Jakob_H24_8.png">
 </P>
 
 
@@ -482,13 +491,14 @@ K(x):=subst(erg, f(x));
 
 <P><TABLE><TR><TD>
   <SPAN CLASS="prompt">
--->  
+(%i17) 
   </SPAN></TD>
   <TD><SPAN CLASS="input">
 K(x);
   </SPAN></TD>
 </TR></TABLE>
-
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H24_img/Klepp_Jakob_H24_9.png">
 </P>
 
 
@@ -509,14 +519,15 @@ b) berechne die Kostenkehre und die entsprechenden Gesamtkosten<BR>
 
 <P><TABLE><TR><TD>
   <SPAN CLASS="prompt">
--->  
+(%i18) 
   </SPAN></TD>
   <TD><SPAN CLASS="input">
 K2_:diff(K(x), 'x, 2);<BR>
 K2(x):=''K2_;
   </SPAN></TD>
 </TR></TABLE>
-
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H24_img/Klepp_Jakob_H24_10.png">
 </P>
 
 
@@ -525,13 +536,14 @@ K2(x):=''K2_;
 
 <P><TABLE><TR><TD>
   <SPAN CLASS="prompt">
--->  
+(%i20) 
   </SPAN></TD>
   <TD><SPAN CLASS="input">
 K2(x);
   </SPAN></TD>
 </TR></TABLE>
-
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H24_img/Klepp_Jakob_H24_11.png">
 </P>
 
 
@@ -540,13 +552,14 @@ K2(x);
 
 <P><TABLE><TR><TD>
   <SPAN CLASS="prompt">
--->  
+(%i21) 
   </SPAN></TD>
   <TD><SPAN CLASS="input">
 solve(K2(x)=0, x);
   </SPAN></TD>
 </TR></TABLE>
-
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H24_img/Klepp_Jakob_H24_12.png">
 </P>
 
 
@@ -555,13 +568,14 @@ solve(K2(x)=0, x);
 
 <P><TABLE><TR><TD>
   <SPAN CLASS="prompt">
--->  
+(%i22) 
   </SPAN></TD>
   <TD><SPAN CLASS="input">
 K2(100);
   </SPAN></TD>
 </TR></TABLE>
-
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H24_img/Klepp_Jakob_H24_13.png">
 </P>
 
 
@@ -570,13 +584,14 @@ K2(100);
 
 <P><TABLE><TR><TD>
   <SPAN CLASS="prompt">
--->  
+(%i23) 
   </SPAN></TD>
   <TD><SPAN CLASS="input">
 K(100);
   </SPAN></TD>
 </TR></TABLE>
-
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H24_img/Klepp_Jakob_H24_14.png">
 </P>
 
 
@@ -601,13 +616,14 @@ c) berechne die Grenzkosten für x=10
 
 <P><TABLE><TR><TD>
   <SPAN CLASS="prompt">
--->  
+(%i24) 
   </SPAN></TD>
   <TD><SPAN CLASS="input">
 K(11) - K(10);
   </SPAN></TD>
 </TR></TABLE>
-
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H24_img/Klepp_Jakob_H24_15.png">
 </P>
 
 
@@ -624,14 +640,15 @@ d) argumentiere ob die berechnete Kostenfunktion gültig ist
 
 <P><TABLE><TR><TD>
   <SPAN CLASS="prompt">
--->  
+(%i25) 
   </SPAN></TD>
   <TD><SPAN CLASS="input">
 wxdraw2d(<BR>
 explicit(K(x), x,30, 180));
   </SPAN></TD>
 </TR></TABLE>
-
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H24_img/Klepp_Jakob_H24_16.png">
 </P>
 
 
@@ -665,7 +682,7 @@ e) Grafische darstellung<BR>
 
 <P><TABLE><TR><TD>
   <SPAN CLASS="prompt">
--->  
+(%i26) 
   </SPAN></TD>
   <TD><SPAN CLASS="input">
 wxdraw2d(<BR>
@@ -683,7 +700,8 @@ key="x[K]",<BR>
 points([100],[200]));
   </SPAN></TD>
 </TR></TABLE>
-
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H24_img/Klepp_Jakob_H24_17.png">
 </P>
 
 
@@ -706,13 +724,14 @@ f) Grafische darstellung<BR>
 
 <P><TABLE><TR><TD>
   <SPAN CLASS="prompt">
--->  
+(%i27) 
   </SPAN></TD>
   <TD><SPAN CLASS="input">
 k:makelist(lreduce("+", makelist(K(x), x, 0, i)) / i, i, 1, 301, 10);
   </SPAN></TD>
 </TR></TABLE>
-
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H24_img/Klepp_Jakob_H24_18.png">
 </P>
 
 
@@ -721,13 +740,14 @@ k:makelist(lreduce("+", makelist(K(x), x, 0, i)) / i, i, 1, 301, 10);
 
 <P><TABLE><TR><TD>
   <SPAN CLASS="prompt">
--->  
+(%i28) 
   </SPAN></TD>
   <TD><SPAN CLASS="input">
 k_F:makelist(250 / i, i, 1, 301, 10);
   </SPAN></TD>
 </TR></TABLE>
-
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H24_img/Klepp_Jakob_H24_19.png">
 </P>
 
 
@@ -736,13 +756,14 @@ k_F:makelist(250 / i, i, 1, 301, 10);
 
 <P><TABLE><TR><TD>
   <SPAN CLASS="prompt">
--->  
+(%i29) 
   </SPAN></TD>
   <TD><SPAN CLASS="input">
 k_V: (makelist(k[i] - k_F[i], i, 1, length(k)));
   </SPAN></TD>
 </TR></TABLE>
-
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H24_img/Klepp_Jakob_H24_20.png">
 </P>
 
 
@@ -751,13 +772,14 @@ k_V: (makelist(k[i] - k_F[i], i, 1, length(k)));
 
 <P><TABLE><TR><TD>
   <SPAN CLASS="prompt">
--->  
+(%i30) 
   </SPAN></TD>
   <TD><SPAN CLASS="input">
 xs:makelist(i, i, 1, 301, 10);
   </SPAN></TD>
 </TR></TABLE>
-
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H24_img/Klepp_Jakob_H24_21.png">
 </P>
 
 
@@ -766,7 +788,7 @@ xs:makelist(i, i, 1, 301, 10);
 
 <P><TABLE><TR><TD>
   <SPAN CLASS="prompt">
--->  
+(%i31) 
   </SPAN></TD>
   <TD><SPAN CLASS="input">
 wxdraw2d(<BR>
@@ -782,7 +804,8 @@ points(xs, k_F)<BR>
 );
   </SPAN></TD>
 </TR></TABLE>
-
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_H24_img/Klepp_Jakob_H24_22.png">
 </P>
 
  <HR>
