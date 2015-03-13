@@ -1,0 +1,172 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 14.12.0 ] */
+
+/* [wxMaxima: title   start ]
+     Portfolio 11     
+Kosten- & Preistheorie
+     Jakob  Klepp     
+      2015-03-13      
+   [wxMaxima: title   end   ] */
+
+/* [wxMaxima: comment start ]
+Glossar
+=======
+
+  Kostenfunktion K(x)
+  ~~~~~~~~~~~~~~~~~~~
+  Beschreibt den Zusammenhang zwischen Produktionsmenge[ME]  und den
+  dafür anfallenden Kosten[GE]. Setzen sich aus variablen- und fixen Kosten
+  zusammen.
+  K(x) = KF = KV(x)
+  Eigenschaften von K(x)
+  K(x) ... stetig
+       ... monoton steigentd
+       ... Definitionsbereich x>=0
+
+    Variable Kosten K_V(x)
+    ----------------------
+    Der Teil der Gesamtkosten, der sich bei einer Änderung der Auslastung
+    im Gegensatz zu den fixen kosten verändert.
+    KV(x)=K(x)-KF
+
+    Fixkosten KF
+    ------------
+    Fixkosten sind Kosten, die in konstanter Höhe anfallen,
+    unabhängig davon, welche Menge produziert wird
+
+  Stückkosten k(x)
+  ~~~~~~~~~~~~~~~~
+  Kosten der Produktion einer einzigen Mengeneinheit
+  k(x) = K(x)/x
+  k(x) = kf+kv(x)
+
+    Variable Stückkosten k_V(x)
+    ---------------------------
+    Der Teil der Stueckkosten, der sich bei einer Änderung der Auslastung
+    ändert.
+    k_V(x) = K_V(x)/x
+
+    Stückfixkosten k_F(x)
+    ---------------------
+    k_F(x) = K_F/x
+
+  Grenzkosten
+  ~~~~~~~~~~~
+  Unter Grenzkosten versteht man wieviel, ausgehend von einer bestimmten
+  produzierten Menge, die Produktion eines zusaetzlichen Stueckes kosten
+  wuerde.
+  GK(x) = K'(x)
+
+  Kostenkehre
+  ~~~~~~~~~~~
+  In der Praxis ergibt sich ein gemischter Kostenverlauf, die Grenzkosten
+  werden zuerst niedriger, ab einer bestimmten Menge(Kostenkehre) wieder
+  höher. 
+  Kostenkehre = Wendepunkt der Kostenfunktion
+
+  Preisfunktion p(x)
+  ~~~~~~~~~~~~~~~~~~
+  Funktion welche die Preise des Marktes erfüllt.
+  Ansätze:
+      *) Vollständige Konkurrenz
+      *) Monopol
+
+  Vollständige Konkurrenz
+  ~~~~~~~~~~~~~~~~~~~~~~~
+  Die vollständige Konnkurenz beschreibt die Marktsituation, in der sehr
+  viele Anbieter.
+
+    Angebotsfunktion PA
+    -------------------
+    Beziehung zwischen Produktions- bzw. Angebotsmenge und den jeweiligen
+    Marktpreisen
+
+    Nachfragefunktion PN
+    --------------------
+    Beziehung zwischen der Nachfrage und den jeweiligen Marktpreisen.
+
+    Gleichgewichtspreis p
+    ---------------------
+    Schnittpunkt PA/PN
+    p(x)= p (=Fixpreis)
+
+  Monopol
+  ~~~~~~~
+  Ein Monopol beschreibt die Marktsituation, in der für ein Gut nur ein
+  Anbieter vorhanden ist.
+
+  Sättigungsmenge
+  ~~~~~~~~~~~~~~~
+  Die Sättigungsmenge ist diejenige Absatzmenge, bei der auf dem Markt 
+  für das Produkt der Preis gleich Null wird.
+
+  Prohibitivpreis
+  ~~~~~~~~~~~~~~~
+  Der Prohibitivpreis ist jene Absatzmenge, bei der das Produkt nicht mehr
+  gekauft wird. max(p(x)) -> oft p(0) da die Preisfunktion mit bei
+  steigender Stückzahl meist fällt.
+
+  Erlösfunktion E(x)
+  ~~~~~~~~~~~~~~~~~~
+  Der Erlös ist die Einname beim Verkauf einer Ware bezeichnet.
+  E(x) = p(x) * x
+
+  Gewinnfunktion
+  ~~~~~~~~~~~~~~
+  Beziehung zwischen maximalen Gewinn und dem Güter- und Faktorpreisen.
+  G(x) = E(x) - K(x)
+
+  Betriebsoptimum  x_opt [ME]
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  Unter dem Betriebsoptimum vesteht man jene Stückzahl, bei der die 
+  Durchschnittskosten am geringsten sind. (kein gewinn, kein verlust)
+  sinnvoll fuer den Marktaufbau und fuer Marketingzwecke.
+  Langfristig verusacht es keine Verlutse.
+  x_opt--> k'(x)=0
+  Stückpreis bei x_opt: p(x_opt)
+      --> Langfristige Preisuntergrenze
+
+  Betriebsminimum x_min [ME]
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~
+  Bei der kurzfirstingen Preisuntergrenzen werden nur die Variablen Kosten
+  gedeckt, die Fixkosten aber nicht. Voraussehbarer Verust  (Fixkosten ->
+  Verlust, sind aber bekannt)
+  x_min--> kv'(x)=0
+  Stückpreis bei x_min: p(x_min)
+      --> Kurzfristige Preisuntergrenze
+
+  Cournot'scher Punkt
+  ~~~~~~~~~~~~~~~~~~~
+  Gibt an bei welcher Stückzahl man den maximalen Gewinn machen kann & 
+  zu welchen Preis man es anbieten muss.
+  Ist ein Wert auf der Stückzahl-/Preisebene ( xMaxG | p(xmaxGewinn) ).
+  max gewinn (preis & Stückzahl)
+
+  Preiselastizität der Nachfrage
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  Elastizität: Preis sinkt. Nachfrage steigt. 
+  Das Verhaeltnis zwichen relativer Nachfrageänderung und reativer
+  Preisänderung. Ein Verhältnis ist math. Quotient:
+  eta = (- p(x)/x ) / p'(x)
+  eta < 1  --> unelastische Nachfrage 
+           --> dh. Preisänderung bewirkt relativ geringere
+               Nachfrageänderung
+  eta == 1 --> weder elastisch, noch unelastisch
+  eta > 1  --> elstische Nachfrage
+           --> dh. Perisänderung bewirkt eine relativ größere
+               Nachfrageänderung
+
+  Gewinnschwelle (break-even-point) und Gewinngrenze
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  Diese beiden Punkte bezeichnen den Zeitpunkt, an dem die Erlöse und
+  die Kosten gleich groß sind. Die Gewinnschwelle ist der Zeitpunkt ab
+  dem ein Gewinn erzielt wird und die Gewinngrenze ist der Punkt ab dem
+  kein Gewinn mehr erzielt wird. Die Gewinnschwelle ist die untere und die
+  Gewinngrenze die obere Nullstelle. 
+  Maxima: realroots(G(x)=0);    
+
+   [wxMaxima: comment end   ] */
+
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$
