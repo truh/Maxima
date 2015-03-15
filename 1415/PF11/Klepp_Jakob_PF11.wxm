@@ -10,7 +10,7 @@ Kosten- & Preistheorie
    [wxMaxima: title   end   ] */
 
 /* [wxMaxima: section start ]
-
+Kosten- & Preistheorie
    [wxMaxima: section end   ] */
 
 /* [wxMaxima: subsect start ]
@@ -177,7 +177,7 @@ Elastizität: Preis sinkt. Nachfrage steigt.
 Das Verhaeltnis zwichen relativer Nachfrageänderung und reativer
 Preisänderung. Ein Verhältnis ist math. Quotient:
        -p(x)/x
-eta =  -------                                       (- p(x)/x ) / p'(x)
+eta =  -------                             (- p(x)/x ) / ''(diff(p(x), x))
         p'(x)
 eta <  1 --> unelastische Nachfrage 
          --> dh. Preisänderung bewirkt relativ geringere
@@ -356,6 +356,191 @@ eta(x):= (- p(x)/x ) / ''(diff(p(x), x));
 /* [wxMaxima: input   start ] */
 print("Absatzelastizitaet betraegt beim Cornot'schen Punkt:")$
 eta(cornot);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: section start ]
+Lineare Optimierung
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(all);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+System von Ungleichungen
+Bsp:
+  x > y
+  x < 3*y/2
+  2*x + 2*y > 15
+  2*x + 2*y < 24
+  x >= 0
+  y >= 0
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+/* y = 1 */
+wxdraw2d(
+yrange=[0, 2],
+explicit(1, x, 0, 10)
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+/* y >= 1 */
+wxdraw2d(
+yrange=[0, 2],
+color=blue,
+fill_color=light-blue,
+rectangle([0, 1], [10, 2])
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Randgeraden
+  x > y
+  -> y = x
+  x < 3*y/2
+  -> y = 2x/3
+  2*x + 2*y > 15
+  -> y = -x + 15/2
+  2*x + 2*y < 24
+  -> y = -x + 12
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(
+yrange=[-1, 15],
+color=blue,
+key="y=x",
+explicit(x, x, 0, 10),
+color=red,
+key="y=(2*x)/3",
+explicit((2*x)/3, x, 0, 10),
+color=green,
+key="y=-x + 15/2",
+explicit(-x + 15/2, x, 0, 10),
+color=dark-violet,
+key="y=-x + 12",
+explicit(-x + 12, x, 0, 10)
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+y = x
+y = 2x/3
+y = -x + 15/2
+y = -x + 12
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+solve([y = x, y = -x + 15/2], [x,y]);
+p1: [rhs(%[1][1]), rhs(%[1][2])];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+solve([y = x, y = -x + 12], [x,y]);
+p2: [rhs(%[1][1]), rhs(%[1][2])];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+solve([y = (2*x)/3, y = -x + 12], [x,y]);
+p3: [rhs(%[1][1]), rhs(%[1][2])];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+solve([y = (2*x)/3, y = -x + 15/2], [x,y]);
+p4: [rhs(%[1][1]), rhs(%[1][2])];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(
+xrange=[2,8],
+yrange=[2, 9],
+color=blue,
+explicit(x, x, 0, 10),
+color=red,
+explicit((2*x)/3, x, 0, 10),
+color=green,
+explicit(-x + 15/2, x, 0, 10),
+color=dark-violet,
+explicit(-x + 12, x, 0, 10),
+color=black,
+key="Lösungspolygon",
+line_width=2,
+polygon([p1, p2, p3, p4])
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Es sollen 8mm starke Tafeln aus Bronze in Rechteckform gegossen werden
+so dass die Tafellänge größer ist als die Tafelbreite aber die Tafellänge
+kleiner als das 1.5 Fache der Tafelbreit ist.
+Der Tafelumfange soll zwischen 15 und 24 dm liegen.
+Seienlänge müssen Ganzzahlige in dm sein.
+a) Welche Möglichkeiten gibt es
+b) Für welche Seitenlängen sind die Materialkosten minimal
+c) Wie viel kostet die Tafel
+Dichte von Bronze 8.7 kg/dm^3
+1 kg Bronze kostet 25€
+1. Festlegung der Variablen
+x ... Länge in dm
+  x ∈ ℕ
+y ... Breite in dm
+  y ∈ ℕ
+2. Formulierung der einschränkenden Bedingungen
+   als Ungleichungen
+  x >= 0  \ Nichtnegativitätsbedingungen
+  y >= 0  / 
+  x > y
+  x < (3*y)/2
+3. Zielfunktion
+Z= x*y soll minimal werden
+4. V = x*y * 0.08 -> 1.6 dm^3
+   Masse = %roh * V -> 13.92 kg
+   Kosten = 25 * 13.92 -> €348
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+cond: [
+/* Nichtnegativitätsbedingungen */
+x >= 0,
+y >= 0,
+x > y,
+x < (3*y)/2,
+/* Umfang */
+2*x + 2*y > 15,
+2*x + 2*y < 24
+];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(
+xrange=[2,8],
+yrange=[2, 9],
+color=blue,
+explicit(x, x, 0, 10),
+color=red,
+explicit((2*x)/3, x, 0, 10),
+color=green,
+explicit(-x + 15/2, x, 0, 10),
+color=dark-violet,
+explicit(-x + 12, x, 0, 10),
+color=black,
+key="Lösungspolygon",
+line_width=2,
+polygon([p1, p2, p3, p4]),
+color=light-grey,
+key="ganzzahlige Werte",
+points([[4,3], [4,4], [4,5], [4,6],
+        [5,3], [5,4], [5,5], [5,6],
+        [6,3], [6,4], [6,5], [6,6],
+        [7,3], [7,4], [7,5], [7,6]])
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+x:5;
+y:4;
 /* [wxMaxima: input   end   ] */
 
 /* Maxima can't load/batch files which end with a comment! */
