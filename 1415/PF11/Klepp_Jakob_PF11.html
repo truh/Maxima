@@ -1,0 +1,1018 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+ <HEAD>
+  <TITLE>Klepp_Jakob_PF11</TITLE>
+  <META NAME="generator" CONTENT="wxMaxima">
+  <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+  <STYLE TYPE="text/css">
+body {
+  background-color: rgb(255,255,255);
+}
+.input {
+  color: rgb(0,0,255);
+}
+.comment {
+  color: rgb(0,0,0);
+  background-color: rgb(255,255,255);
+  padding: 2mm;
+}
+.image {
+  color: rgb(0,0,0);
+  padding: 2mm;
+}
+.section {
+  color: rgb(0,0,0);
+  font-size: 1.5em;
+  padding: 2mm;
+}
+.subsect {
+  color: rgb(0,0,0);
+  font-size: 1.2em;
+  padding: 2mm;
+}
+.title {
+  color: rgb(0,0,0);
+  font-size: 2em;
+  padding: 2mm;
+}
+.prompt {
+  color: rgb(255,0,0);
+}
+table {
+  border: 0px;
+}
+td {
+  vertical-align: top;
+  padding: 1mm;
+}
+  </STYLE>
+ </HEAD>
+ <BODY>
+
+<!---------------------------------------------------------->
+<!--          Created with wxMaxima version 14.12.0         -->
+<!---------------------------------------------------------->
+
+
+<!-- Title cell -->
+
+
+<P CLASS="title">
+     Portfolio 11     <BR>
+Kosten- & Preistheorie<BR>
+&nbsp;Lineare Optimierung  <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Jakob Klepp      <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2015-03-13      
+</P>
+
+
+<!-- Section cell -->
+
+
+<P CLASS="section">
+ 1 Kosten- & Preistheorie
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  1.1 Glossar
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Kostenfunktion K(x)<BR>
+~~~~~~~~~~~~~~~~~~~<BR>
+Beschreibt den Zusammenhang zwischen Produktionsmenge und den dafür<BR>
+anfallenden Kosten. Setzen sich aus variablen- und fixen Kosten zusammen.<BR>
+<BR>
+&nbsp;&nbsp;K(x) = K_F = K_V(x)<BR>
+<BR>
+Eigenschaften von K(x)<BR>
+K(x) ... stetig<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;... monoton steigentd<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;... Definitionsbereich x >= 0<BR>
+<BR>
+&nbsp;&nbsp;Variable Kosten K_V(x)<BR>
+&nbsp;&nbsp;----------------------<BR>
+&nbsp;&nbsp;Der Teil der Gesamtkosten, der sich bei einer Änderung der Auslastung<BR>
+&nbsp;&nbsp;im Gegensatz zu den fixen kosten verändert.<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;K_V(x) = K(x)-K_F<BR>
+<BR>
+&nbsp;&nbsp;Fixkosten K_F<BR>
+&nbsp;&nbsp;-------------<BR>
+&nbsp;&nbsp;Fixkosten sind Kosten, die in konstanter Höhe anfallen,<BR>
+&nbsp;&nbsp;unabhängig davon, welche Menge produziert wird<BR>
+<BR>
+Stückkosten k(x)<BR>
+~~~~~~~~~~~~~~~~<BR>
+Kosten der Produktion einer einzigen Mengeneinheit<BR>
+<BR>
+&nbsp;&nbsp;k(x) = K(x)/x<BR>
+&nbsp;&nbsp;k(x) = k_F + k_V(x)<BR>
+<BR>
+&nbsp;&nbsp;Variable Stückkosten k_V(x)<BR>
+&nbsp;&nbsp;---------------------------<BR>
+&nbsp;&nbsp;Der Teil der Stueckkosten, der sich bei einer Änderung der Auslastung<BR>
+&nbsp;&nbsp;ändert.<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;k_V(x) = K_V(x)/x<BR>
+<BR>
+&nbsp;&nbsp;Stückfixkosten k_F(x)<BR>
+&nbsp;&nbsp;---------------------<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;k_F(x) = K_F/x<BR>
+<BR>
+Grenzkosten<BR>
+~~~~~~~~~~~<BR>
+Unter Grenzkosten versteht man wieviel, ausgehend von einer bestimmten<BR>
+produzierten Menge, die Produktion eines zusaetzlichen Stueckes kosten<BR>
+wuerde.<BR>
+<BR>
+&nbsp;&nbsp;GK(x) = K'(x)<BR>
+<BR>
+Kostenkehre<BR>
+~~~~~~~~~~~<BR>
+In der Praxis ergibt sich ein gemischter Kostenverlauf, die Grenzkosten<BR>
+werden zuerst niedriger, ab einer bestimmten Menge(Kostenkehre) wieder<BR>
+höher. <BR>
+Kostenkehre = Wendepunkt der Kostenfunktion<BR>
+<BR>
+Preisfunktion p(x)<BR>
+~~~~~~~~~~~~~~~~~~<BR>
+Funktion welche die Preise des Marktes erfüllt.<BR>
+Ansätze:<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;*) Vollständige Konkurrenz<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;*) Monopol<BR>
+<BR>
+- Preisänderung           p'(x)<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;p(x)<BR>
+- Änderung der Nachfrage  ----<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x<BR>
+<BR>
+Vollständige Konkurrenz<BR>
+~~~~~~~~~~~~~~~~~~~~~~~<BR>
+Die vollständige Konnkurenz beschreibt die Marktsituation, in der sehr<BR>
+viele Anbieter.<BR>
+<BR>
+&nbsp;&nbsp;Angebotsfunktion PA<BR>
+&nbsp;&nbsp;-------------------<BR>
+&nbsp;&nbsp;Beziehung zwischen Produktions- bzw. Angebotsmenge und den jeweiligen<BR>
+&nbsp;&nbsp;Marktpreisen<BR>
+<BR>
+&nbsp;&nbsp;Nachfragefunktion PN<BR>
+&nbsp;&nbsp;--------------------<BR>
+&nbsp;&nbsp;Beziehung zwischen der Nachfrage und den jeweiligen Marktpreisen.<BR>
+<BR>
+&nbsp;&nbsp;Gleichgewichtspreis p<BR>
+&nbsp;&nbsp;---------------------<BR>
+&nbsp;&nbsp;Schnittpunkt PA/PN<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;p(x) = p [Fixpreis]<BR>
+<BR>
+Monopol<BR>
+~~~~~~~<BR>
+Ein Monopol beschreibt die Marktsituation, in der für ein Gut nur ein<BR>
+Anbieter vorhanden ist.<BR>
+<BR>
+Sättigungsmenge<BR>
+~~~~~~~~~~~~~~~<BR>
+Die Sättigungsmenge ist diejenige Absatzmenge, bei der auf dem Markt <BR>
+für das Produkt der Preis gleich Null wird.<BR>
+<BR>
+Prohibitivpreis<BR>
+~~~~~~~~~~~~~~~<BR>
+Der Prohibitivpreis ist jene Absatzmenge, bei der das Produkt nicht mehr<BR>
+gekauft wird.<BR>
+<BR>
+&nbsp;&nbsp;max(p(x)) ... oft p(0) da die Preisfunktion mit bei<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;steigender Stückzahl meist fällt.<BR>
+<BR>
+Bei einem Monopol entspricht der Prohibitivpreis dem Höchstpreis.<BR>
+<BR>
+Erlösfunktion E(x)<BR>
+~~~~~~~~~~~~~~~~~~<BR>
+Der Erlös ist die Einname beim Verkauf einer Ware bezeichnet.<BR>
+<BR>
+&nbsp;&nbsp;E(x) = p(x) * x<BR>
+<BR>
+Gewinnfunktion<BR>
+~~~~~~~~~~~~~~<BR>
+Beziehung zwischen maximalen Gewinn und dem Güter- und Faktorpreisen.<BR>
+<BR>
+&nbsp;&nbsp;G(x) = E(x) - K(x)<BR>
+<BR>
+Betriebsoptimum  x_opt<BR>
+~~~~~~~~~~~~~~~~~~~~~~<BR>
+Unter dem Betriebsoptimum vesteht man jene Stückzahl, bei der die <BR>
+Durchschnittskosten am geringsten sind. (kein gewinn, kein verlust)<BR>
+sinnvoll fuer den Marktaufbau und fuer Marketingzwecke.<BR>
+Langfristig verusacht es keine Verlutse.<BR>
+<BR>
+&nbsp;&nbsp;x_opt--> k'(x)=0<BR>
+<BR>
+Stückpreis bei x_opt: p(x_opt)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;--> Langfristige Preisuntergrenze<BR>
+<BR>
+Betriebsminimum x_min<BR>
+~~~~~~~~~~~~~~~~~~~~~<BR>
+Bei der kurzfirstingen Preisuntergrenzen werden nur die Variablen Kosten<BR>
+gedeckt, die Fixkosten aber nicht. Voraussehbarer Verust  (Fixkosten -><BR>
+Verlust, sind aber bekannt)<BR>
+<BR>
+&nbsp;&nbsp;x_min --> k_V'(x) = 0<BR>
+<BR>
+Stückpreis bei x_min: p(x_min)<BR>
+--> Kurzfristige Preisuntergrenze<BR>
+<BR>
+Cournot'scher Punkt<BR>
+~~~~~~~~~~~~~~~~~~~<BR>
+Gibt an bei welcher Stückzahl man den maximalen Gewinn machen kann & <BR>
+zu welchen Preis man es anbieten muss.<BR>
+Ist ein Wert auf der Stückzahl-/Preisebene ( xMaxG | p(xmaxGewinn) ).<BR>
+max gewinn (preis & Stückzahl)<BR>
+<BR>
+Preiselastizität der Nachfrage<BR>
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<BR>
+Elastizität: Preis sinkt. Nachfrage steigt. <BR>
+Das Verhaeltnis zwichen relativer Nachfrageänderung und reativer<BR>
+Preisänderung. Ein Verhältnis ist math. Quotient:<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-p(x)/x<BR>
+eta =  -------                             (- p(x)/x ) / ''(diff(p(x), x))<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;p'(x)<BR>
+eta <  1 --> unelastische Nachfrage <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--> dh. Preisänderung bewirkt relativ geringere<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nachfrageänderung<BR>
+eta == 1 --> weder elastisch, noch unelastisch<BR>
+eta >  1 --> elstische Nachfrage<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--> dh. Perisänderung bewirkt eine relativ größere<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nachfrageänderung<BR>
+<BR>
+Gewinnschwelle (break-even-point) und Gewinngrenze<BR>
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<BR>
+Diese beiden Punkte bezeichnen den Zeitpunkt, an dem die Erlöse und<BR>
+die Kosten gleich groß sind. Die Gewinnschwelle ist der Zeitpunkt ab<BR>
+dem ein Gewinn erzielt wird und die Gewinngrenze ist der Punkt ab dem<BR>
+kein Gewinn mehr erzielt wird. Die Gewinnschwelle ist die untere und die<BR>
+Gewinngrenze die obere Nullstelle. <BR>
+Maxima: realroots(G(x)=0);    <BR>
+
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  1.2 Example
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i1) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+kill(all);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_PF11_img/Klepp_Jakob_PF11_0.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i1) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+K(x):= a*x^2 + b*x + c;<BR>
+p(x):= k*x + d;<BR>
+<BR>
+eta(x):= ''((- p(x)/x ) / diff(p(x), x));<BR>
+E(x):= p(x) * x;<BR>
+G(x):= ''(E(x) - K(x));<BR>
+G1(x):= ''(diff(G(x), x));<BR>
+GK(x):= ''(diff(K(x), x));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_PF11_img/Klepp_Jakob_PF11_1.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+In einem Monopolbetrieb ist bei einer Absatzmenge von<BR>
+16000 Mengeneinheiten die Elastizität η=1.125<BR>
+Der Höchstpreis beträgt 170 GE/ME.<BR>
+Die Counitsche Menge sind 4500 ME.<BR>
+Bei einer Produktionsmenge von 10000 ME betragen die Grenzkosten 180 GE/ME.<BR>
+Bei einer Produktionsmenge von 5000 ME betragen die Gesamtkosten 605000 GE.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i8) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+gls:[<BR>
+/* 16000 Mengeneinheiten die Elastizität η=1.125 */<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;eta(16000) = 1.125,<BR>
+/* Der Höchstpreis beträgt 170 GE/ME */<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;p(0) = 170,<BR>
+/* Die Counitsche Menge sind 4500 ME */<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;subst(4500, x, G1(x))=0,<BR>
+/* Bei einer Prdouktionsmenge von 10000 ME betragen die Grenzkosten<BR>
+&nbsp;&nbsp;&nbsp;180 GE/ME */<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;GK(10000) = 180,<BR>
+/* Bei einer Produktionsmenge von 5000 ME betragen die Gesamtkosten<BR>
+&nbsp;&nbsp;&nbsp;605000 GE */<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;K(5000) = 605000<BR>
+];
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_PF11_img/Klepp_Jakob_PF11_2.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+a)<BR>
+<BR>
+&nbsp;&nbsp;Man bestimme für den Betrieb eine Quadratische Kostenfunktion.<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;K(x) = 0.005 * x^2 + 80 * x + 80000<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;eine lineare Nachfragefunktion<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;p(x) = 170 - 0.005 * x
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i9) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+sol:solve(gls)[1];
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_PF11_img/Klepp_Jakob_PF11_3.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i10) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+K(x):= ''(subst(sol, a*x^2 + b*x + c));<BR>
+p(x):= ''(subst(sol, k*x + d));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_PF11_img/Klepp_Jakob_PF11_4.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+b)<BR>
+<BR>
+&nbsp;&nbsp;Betriebsoptimum<BR>
+&nbsp;&nbsp;Minimum der Stückkosten
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i12) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+k(x):= ''(K(x) / x);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_PF11_img/Klepp_Jakob_PF11_5.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i13) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+x_opt: solve([diff(k(x), x, 1) = 0], [x]);<BR>
+x_opt: rhs(x_opt[2]);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_PF11_img/Klepp_Jakob_PF11_6.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i15) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+k_x_opt: k(x_opt);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_PF11_img/Klepp_Jakob_PF11_7.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+c)<BR>
+<BR>
+&nbsp;&nbsp;Bei welchem Preis wird der Maximale Gewinn erzielt?<BR>
+<BR>
+&nbsp;&nbsp;Wie groß ist der maximale Gewinn?
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i16) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+p(x);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_PF11_img/Klepp_Jakob_PF11_8.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i17) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+G(x);<BR>
+G(x):= ''(subst(sol, %));<BR>
+<BR>
+cornot: rhs(solve(diff(G(x), x)=0)[1]);<BR>
+<BR>
+print("Preis für den maximalen Gewinn:")$<BR>
+p(cornot), numer;<BR>
+print("Maximaler Gewinn:")$<BR>
+subst(['x=cornot], p(x) * x - K(x));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_PF11_img/Klepp_Jakob_PF11_9.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+d)<BR>
+<BR>
+&nbsp;&nbsp;Die Grenzen des Gewinnbereichs?
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i24) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+map(rhs, solve(G(x) = 0, x));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_PF11_img/Klepp_Jakob_PF11_10.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+e)<BR>
+<BR>
+&nbsp;&nbsp;Bei welcher Menge und bei welchem Preis entsteht der größte erlöß?
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i25) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+E(x);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_PF11_img/Klepp_Jakob_PF11_11.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i26) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+solve(diff(E('x), 'x) = 0);<BR>
+x_E_max: rhs(%[1]);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_PF11_img/Klepp_Jakob_PF11_12.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i28) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+print("Preis des maximalen Erlös:")$<BR>
+p(x_E_max);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_PF11_img/Klepp_Jakob_PF11_13.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i30) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+print("Maximaler Erlös:")$<BR>
+E(x_E_max);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_PF11_img/Klepp_Jakob_PF11_14.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+f)<BR>
+<BR>
+&nbsp;&nbsp;Wei groß ist die Absatzelastizität im Cornoitschen Punkt?
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i32) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+eta(x):= (- p(x)/x ) / ''(diff(p(x), x));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_PF11_img/Klepp_Jakob_PF11_15.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i33) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+print("Absatzelastizitaet betraegt beim Cornot'schen Punkt:")$<BR>
+eta(cornot);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_PF11_img/Klepp_Jakob_PF11_16.png">
+</P>
+
+
+<!-- Section cell -->
+
+
+<P CLASS="section">
+ 2 Lineare Optimierung
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i35) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+kill(all);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_PF11_img/Klepp_Jakob_PF11_17.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+System von Ungleichungen<BR>
+Bsp:<BR>
+&nbsp;&nbsp;x > y<BR>
+&nbsp;&nbsp;x < 3*y/2<BR>
+&nbsp;&nbsp;2*x + 2*y > 15<BR>
+&nbsp;&nbsp;2*x + 2*y < 24<BR>
+&nbsp;&nbsp;x >= 0<BR>
+&nbsp;&nbsp;y >= 0
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i1) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/* y = 1 */<BR>
+wxdraw2d(<BR>
+yrange=[0, 2],<BR>
+explicit(1, x, 0, 10)<BR>
+);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_PF11_img/Klepp_Jakob_PF11_18.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i2) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/* y >= 1 */<BR>
+wxdraw2d(<BR>
+yrange=[0, 2],<BR>
+color=blue,<BR>
+fill_color=light-blue,<BR>
+rectangle([0, 1], [10, 2])<BR>
+);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_PF11_img/Klepp_Jakob_PF11_19.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Randgeraden<BR>
+&nbsp;&nbsp;x > y<BR>
+&nbsp;&nbsp;-> y = x<BR>
+&nbsp;&nbsp;x < 3*y/2<BR>
+&nbsp;&nbsp;-> y = 2x/3<BR>
+&nbsp;&nbsp;2*x + 2*y > 15<BR>
+&nbsp;&nbsp;-> y = -x + 15/2<BR>
+&nbsp;&nbsp;2*x + 2*y < 24<BR>
+&nbsp;&nbsp;-> y = -x + 12
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i3) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxdraw2d(<BR>
+yrange=[-1, 15],<BR>
+color=blue,<BR>
+key="y=x",<BR>
+explicit(x, x, 0, 10),<BR>
+color=red,<BR>
+key="y=(2*x)/3",<BR>
+explicit((2*x)/3, x, 0, 10),<BR>
+color=green,<BR>
+key="y=-x + 15/2",<BR>
+explicit(-x + 15/2, x, 0, 10),<BR>
+color=dark-violet,<BR>
+key="y=-x + 12",<BR>
+explicit(-x + 12, x, 0, 10)<BR>
+);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_PF11_img/Klepp_Jakob_PF11_20.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+y = x<BR>
+y = 2x/3<BR>
+y = -x + 15/2<BR>
+y = -x + 12
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i4) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+solve([y = x, y = -x + 15/2], [x,y]);<BR>
+p1: [rhs(%[1][1]), rhs(%[1][2])];
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_PF11_img/Klepp_Jakob_PF11_21.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i6) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+solve([y = x, y = -x + 12], [x,y]);<BR>
+p2: [rhs(%[1][1]), rhs(%[1][2])];
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_PF11_img/Klepp_Jakob_PF11_22.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i8) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+solve([y = (2*x)/3, y = -x + 12], [x,y]);<BR>
+p3: [rhs(%[1][1]), rhs(%[1][2])];
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_PF11_img/Klepp_Jakob_PF11_23.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i10) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+solve([y = (2*x)/3, y = -x + 15/2], [x,y]);<BR>
+p4: [rhs(%[1][1]), rhs(%[1][2])];
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_PF11_img/Klepp_Jakob_PF11_24.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i12) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxdraw2d(<BR>
+xrange=[2,8],<BR>
+yrange=[2, 9],<BR>
+color=blue,<BR>
+explicit(x, x, 0, 10),<BR>
+color=red,<BR>
+explicit((2*x)/3, x, 0, 10),<BR>
+color=green,<BR>
+explicit(-x + 15/2, x, 0, 10),<BR>
+color=dark-violet,<BR>
+explicit(-x + 12, x, 0, 10),<BR>
+color=black,<BR>
+key="Lösungspolygon",<BR>
+line_width=2,<BR>
+polygon([p1, p2, p3, p4])<BR>
+);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_PF11_img/Klepp_Jakob_PF11_25.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Es sollen 8mm starke Tafeln aus Bronze in Rechteckform gegossen werden<BR>
+so dass die Tafellänge größer ist als die Tafelbreite aber die Tafellänge<BR>
+kleiner als das 1.5 Fache der Tafelbreit ist.<BR>
+Der Tafelumfange soll zwischen 15 und 24 dm liegen.<BR>
+Seienlänge müssen Ganzzahlige in dm sein.<BR>
+a) Welche Möglichkeiten gibt es<BR>
+b) Für welche Seitenlängen sind die Materialkosten minimal<BR>
+c) Wie viel kostet die Tafel<BR>
+Dichte von Bronze 8.7 kg/dm^3<BR>
+1 kg Bronze kostet 25€<BR>
+1. Festlegung der Variablen<BR>
+x ... Länge in dm<BR>
+&nbsp;&nbsp;x ∈ ℕ<BR>
+y ... Breite in dm<BR>
+&nbsp;&nbsp;y ∈ ℕ<BR>
+2. Formulierung der einschränkenden Bedingungen<BR>
+&nbsp;&nbsp;&nbsp;als Ungleichungen<BR>
+&nbsp;&nbsp;x >= 0  \ Nichtnegativitätsbedingungen<BR>
+&nbsp;&nbsp;y >= 0  / <BR>
+&nbsp;&nbsp;x > y<BR>
+&nbsp;&nbsp;x < (3*y)/2<BR>
+3. Zielfunktion<BR>
+Z= x*y soll minimal werden<BR>
+4. V = x*y * 0.08 -> 1.6 dm^3<BR>
+&nbsp;&nbsp;&nbsp;Masse = %roh * V -> 13.92 kg<BR>
+&nbsp;&nbsp;&nbsp;Kosten = 25 * 13.92 -> €348
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i13) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+cond: [<BR>
+/* Nichtnegativitätsbedingungen */<BR>
+x >= 0,<BR>
+y >= 0,<BR>
+x > y,<BR>
+x < (3*y)/2,<BR>
+/* Umfang */<BR>
+2*x + 2*y > 15,<BR>
+2*x + 2*y < 24<BR>
+];
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_PF11_img/Klepp_Jakob_PF11_26.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i14) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxdraw2d(<BR>
+xrange=[2,8],<BR>
+yrange=[2, 9],<BR>
+color=blue,<BR>
+explicit(x, x, 0, 10),<BR>
+color=red,<BR>
+explicit((2*x)/3, x, 0, 10),<BR>
+color=green,<BR>
+explicit(-x + 15/2, x, 0, 10),<BR>
+color=dark-violet,<BR>
+explicit(-x + 12, x, 0, 10),<BR>
+color=black,<BR>
+key="Lösungspolygon",<BR>
+line_width=2,<BR>
+polygon([p1, p2, p3, p4]),<BR>
+color=light-grey,<BR>
+key="ganzzahlige Werte",<BR>
+points([[4,3], [4,4], [4,5], [4,6],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[5,3], [5,4], [5,5], [5,6],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[6,3], [6,4], [6,5], [6,6],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[7,3], [7,4], [7,5], [7,6]])<BR>
+);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_PF11_img/Klepp_Jakob_PF11_27.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i15) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+x:5;<BR>
+y:4;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_PF11_img/Klepp_Jakob_PF11_28.png">
+</P>
+
+ <HR>
+ <SMALL> Created with <A HREF="http://wxmaxima.sourceforge.net/">wxMaxima</A>.</SMALL>
+
+ </BODY>
+</HTML>

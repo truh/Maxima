@@ -1,0 +1,547 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 14.12.0 ] */
+
+/* [wxMaxima: title   start ]
+     Portfolio 11     
+Kosten- & Preistheorie
+ Lineare Optimierung  
+     Jakob Klepp      
+      2015-03-13      
+   [wxMaxima: title   end   ] */
+
+/* [wxMaxima: section start ]
+Kosten- & Preistheorie
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: subsect start ]
+Glossar
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Kostenfunktion K(x)
+~~~~~~~~~~~~~~~~~~~
+Beschreibt den Zusammenhang zwischen Produktionsmenge und den dafür
+anfallenden Kosten. Setzen sich aus variablen- und fixen Kosten zusammen.
+
+  K(x) = K_F = K_V(x)
+
+Eigenschaften von K(x)
+K(x) ... stetig
+     ... monoton steigentd
+     ... Definitionsbereich x >= 0
+
+  Variable Kosten K_V(x)
+  ----------------------
+  Der Teil der Gesamtkosten, der sich bei einer Änderung der Auslastung
+  im Gegensatz zu den fixen kosten verändert.
+
+    K_V(x) = K(x)-K_F
+
+  Fixkosten K_F
+  -------------
+  Fixkosten sind Kosten, die in konstanter Höhe anfallen,
+  unabhängig davon, welche Menge produziert wird
+
+Stückkosten k(x)
+~~~~~~~~~~~~~~~~
+Kosten der Produktion einer einzigen Mengeneinheit
+
+  k(x) = K(x)/x
+  k(x) = k_F + k_V(x)
+
+  Variable Stückkosten k_V(x)
+  ---------------------------
+  Der Teil der Stueckkosten, der sich bei einer Änderung der Auslastung
+  ändert.
+
+    k_V(x) = K_V(x)/x
+
+  Stückfixkosten k_F(x)
+  ---------------------
+
+    k_F(x) = K_F/x
+
+Grenzkosten
+~~~~~~~~~~~
+Unter Grenzkosten versteht man wieviel, ausgehend von einer bestimmten
+produzierten Menge, die Produktion eines zusaetzlichen Stueckes kosten
+wuerde.
+
+  GK(x) = K'(x)
+
+Kostenkehre
+~~~~~~~~~~~
+In der Praxis ergibt sich ein gemischter Kostenverlauf, die Grenzkosten
+werden zuerst niedriger, ab einer bestimmten Menge(Kostenkehre) wieder
+höher. 
+Kostenkehre = Wendepunkt der Kostenfunktion
+
+Preisfunktion p(x)
+~~~~~~~~~~~~~~~~~~
+Funktion welche die Preise des Marktes erfüllt.
+Ansätze:
+    *) Vollständige Konkurrenz
+    *) Monopol
+
+- Preisänderung           p'(x)
+
+                          p(x)
+- Änderung der Nachfrage  ----
+                            x
+
+Vollständige Konkurrenz
+~~~~~~~~~~~~~~~~~~~~~~~
+Die vollständige Konnkurenz beschreibt die Marktsituation, in der sehr
+viele Anbieter.
+
+  Angebotsfunktion PA
+  -------------------
+  Beziehung zwischen Produktions- bzw. Angebotsmenge und den jeweiligen
+  Marktpreisen
+
+  Nachfragefunktion PN
+  --------------------
+  Beziehung zwischen der Nachfrage und den jeweiligen Marktpreisen.
+
+  Gleichgewichtspreis p
+  ---------------------
+  Schnittpunkt PA/PN
+
+    p(x) = p [Fixpreis]
+
+Monopol
+~~~~~~~
+Ein Monopol beschreibt die Marktsituation, in der für ein Gut nur ein
+Anbieter vorhanden ist.
+
+Sättigungsmenge
+~~~~~~~~~~~~~~~
+Die Sättigungsmenge ist diejenige Absatzmenge, bei der auf dem Markt 
+für das Produkt der Preis gleich Null wird.
+
+Prohibitivpreis
+~~~~~~~~~~~~~~~
+Der Prohibitivpreis ist jene Absatzmenge, bei der das Produkt nicht mehr
+gekauft wird.
+
+  max(p(x)) ... oft p(0) da die Preisfunktion mit bei
+                         steigender Stückzahl meist fällt.
+
+Bei einem Monopol entspricht der Prohibitivpreis dem Höchstpreis.
+
+Erlösfunktion E(x)
+~~~~~~~~~~~~~~~~~~
+Der Erlös ist die Einname beim Verkauf einer Ware bezeichnet.
+
+  E(x) = p(x) * x
+
+Gewinnfunktion
+~~~~~~~~~~~~~~
+Beziehung zwischen maximalen Gewinn und dem Güter- und Faktorpreisen.
+
+  G(x) = E(x) - K(x)
+
+Betriebsoptimum  x_opt
+~~~~~~~~~~~~~~~~~~~~~~
+Unter dem Betriebsoptimum vesteht man jene Stückzahl, bei der die 
+Durchschnittskosten am geringsten sind. (kein gewinn, kein verlust)
+sinnvoll fuer den Marktaufbau und fuer Marketingzwecke.
+Langfristig verusacht es keine Verlutse.
+
+  x_opt--> k'(x)=0
+
+Stückpreis bei x_opt: p(x_opt)
+    --> Langfristige Preisuntergrenze
+
+Betriebsminimum x_min
+~~~~~~~~~~~~~~~~~~~~~
+Bei der kurzfirstingen Preisuntergrenzen werden nur die Variablen Kosten
+gedeckt, die Fixkosten aber nicht. Voraussehbarer Verust  (Fixkosten ->
+Verlust, sind aber bekannt)
+
+  x_min --> k_V'(x) = 0
+
+Stückpreis bei x_min: p(x_min)
+--> Kurzfristige Preisuntergrenze
+
+Cournot'scher Punkt
+~~~~~~~~~~~~~~~~~~~
+Gibt an bei welcher Stückzahl man den maximalen Gewinn machen kann & 
+zu welchen Preis man es anbieten muss.
+Ist ein Wert auf der Stückzahl-/Preisebene ( xMaxG | p(xmaxGewinn) ).
+max gewinn (preis & Stückzahl)
+
+Preiselastizität der Nachfrage
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Elastizität: Preis sinkt. Nachfrage steigt. 
+Das Verhaeltnis zwichen relativer Nachfrageänderung und reativer
+Preisänderung. Ein Verhältnis ist math. Quotient:
+       -p(x)/x
+eta =  -------                             (- p(x)/x ) / ''(diff(p(x), x))
+        p'(x)
+eta <  1 --> unelastische Nachfrage 
+         --> dh. Preisänderung bewirkt relativ geringere
+             Nachfrageänderung
+eta == 1 --> weder elastisch, noch unelastisch
+eta >  1 --> elstische Nachfrage
+         --> dh. Perisänderung bewirkt eine relativ größere
+             Nachfrageänderung
+
+Gewinnschwelle (break-even-point) und Gewinngrenze
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Diese beiden Punkte bezeichnen den Zeitpunkt, an dem die Erlöse und
+die Kosten gleich groß sind. Die Gewinnschwelle ist der Zeitpunkt ab
+dem ein Gewinn erzielt wird und die Gewinngrenze ist der Punkt ab dem
+kein Gewinn mehr erzielt wird. Die Gewinnschwelle ist die untere und die
+Gewinngrenze die obere Nullstelle. 
+Maxima: realroots(G(x)=0);    
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: subsect start ]
+Example
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(all);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+K(x):= a*x^2 + b*x + c;
+p(x):= k*x + d;
+
+eta(x):= ''((- p(x)/x ) / diff(p(x), x));
+E(x):= p(x) * x;
+G(x):= ''(E(x) - K(x));
+G1(x):= ''(diff(G(x), x));
+GK(x):= ''(diff(K(x), x));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+In einem Monopolbetrieb ist bei einer Absatzmenge von
+16000 Mengeneinheiten die Elastizität η=1.125
+Der Höchstpreis beträgt 170 GE/ME.
+Die Counitsche Menge sind 4500 ME.
+Bei einer Produktionsmenge von 10000 ME betragen die Grenzkosten 180 GE/ME.
+Bei einer Produktionsmenge von 5000 ME betragen die Gesamtkosten 605000 GE.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+gls:[
+/* 16000 Mengeneinheiten die Elastizität η=1.125 */
+    eta(16000) = 1.125,
+/* Der Höchstpreis beträgt 170 GE/ME */
+    p(0) = 170,
+/* Die Counitsche Menge sind 4500 ME */
+    subst(4500, x, G1(x))=0,
+/* Bei einer Prdouktionsmenge von 10000 ME betragen die Grenzkosten
+   180 GE/ME */
+    GK(10000) = 180,
+/* Bei einer Produktionsmenge von 5000 ME betragen die Gesamtkosten
+   605000 GE */
+    K(5000) = 605000
+];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+a)
+
+  Man bestimme für den Betrieb eine Quadratische Kostenfunktion.
+
+                               K(x) = 0.005 * x^2 + 80 * x + 80000
+
+                             eine lineare Nachfragefunktion
+
+                               p(x) = 170 - 0.005 * x
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+sol:solve(gls)[1];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+K(x):= ''(subst(sol, a*x^2 + b*x + c));
+p(x):= ''(subst(sol, k*x + d));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+b)
+
+  Betriebsoptimum
+  Minimum der Stückkosten
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+k(x):= ''(K(x) / x);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+x_opt: solve([diff(k(x), x, 1) = 0], [x]);
+x_opt: rhs(x_opt[2]);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+k_x_opt: k(x_opt);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+c)
+
+  Bei welchem Preis wird der Maximale Gewinn erzielt?
+
+  Wie groß ist der maximale Gewinn?
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+p(x);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+G(x);
+G(x):= ''(subst(sol, %));
+
+cornot: rhs(solve(diff(G(x), x)=0)[1]);
+
+print("Preis für den maximalen Gewinn:")$
+p(cornot), numer;
+print("Maximaler Gewinn:")$
+subst(['x=cornot], p(x) * x - K(x));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+d)
+
+  Die Grenzen des Gewinnbereichs?
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+map(rhs, solve(G(x) = 0, x));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+e)
+
+  Bei welcher Menge und bei welchem Preis entsteht der größte erlöß?
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+E(x);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+solve(diff(E('x), 'x) = 0);
+x_E_max: rhs(%[1]);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+print("Preis des maximalen Erlös:")$
+p(x_E_max);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+print("Maximaler Erlös:")$
+E(x_E_max);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+f)
+
+  Wei groß ist die Absatzelastizität im Cornoitschen Punkt?
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+eta(x):= (- p(x)/x ) / ''(diff(p(x), x));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+print("Absatzelastizitaet betraegt beim Cornot'schen Punkt:")$
+eta(cornot);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: section start ]
+Lineare Optimierung
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(all);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+System von Ungleichungen
+Bsp:
+  x > y
+  x < 3*y/2
+  2*x + 2*y > 15
+  2*x + 2*y < 24
+  x >= 0
+  y >= 0
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+/* y = 1 */
+wxdraw2d(
+yrange=[0, 2],
+explicit(1, x, 0, 10)
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+/* y >= 1 */
+wxdraw2d(
+yrange=[0, 2],
+color=blue,
+fill_color=light-blue,
+rectangle([0, 1], [10, 2])
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Randgeraden
+  x > y
+  -> y = x
+  x < 3*y/2
+  -> y = 2x/3
+  2*x + 2*y > 15
+  -> y = -x + 15/2
+  2*x + 2*y < 24
+  -> y = -x + 12
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(
+yrange=[-1, 15],
+color=blue,
+key="y=x",
+explicit(x, x, 0, 10),
+color=red,
+key="y=(2*x)/3",
+explicit((2*x)/3, x, 0, 10),
+color=green,
+key="y=-x + 15/2",
+explicit(-x + 15/2, x, 0, 10),
+color=dark-violet,
+key="y=-x + 12",
+explicit(-x + 12, x, 0, 10)
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+y = x
+y = 2x/3
+y = -x + 15/2
+y = -x + 12
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+solve([y = x, y = -x + 15/2], [x,y]);
+p1: [rhs(%[1][1]), rhs(%[1][2])];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+solve([y = x, y = -x + 12], [x,y]);
+p2: [rhs(%[1][1]), rhs(%[1][2])];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+solve([y = (2*x)/3, y = -x + 12], [x,y]);
+p3: [rhs(%[1][1]), rhs(%[1][2])];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+solve([y = (2*x)/3, y = -x + 15/2], [x,y]);
+p4: [rhs(%[1][1]), rhs(%[1][2])];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(
+xrange=[2,8],
+yrange=[2, 9],
+color=blue,
+explicit(x, x, 0, 10),
+color=red,
+explicit((2*x)/3, x, 0, 10),
+color=green,
+explicit(-x + 15/2, x, 0, 10),
+color=dark-violet,
+explicit(-x + 12, x, 0, 10),
+color=black,
+key="Lösungspolygon",
+line_width=2,
+polygon([p1, p2, p3, p4])
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Es sollen 8mm starke Tafeln aus Bronze in Rechteckform gegossen werden
+so dass die Tafellänge größer ist als die Tafelbreite aber die Tafellänge
+kleiner als das 1.5 Fache der Tafelbreit ist.
+Der Tafelumfange soll zwischen 15 und 24 dm liegen.
+Seienlänge müssen Ganzzahlige in dm sein.
+a) Welche Möglichkeiten gibt es
+b) Für welche Seitenlängen sind die Materialkosten minimal
+c) Wie viel kostet die Tafel
+Dichte von Bronze 8.7 kg/dm^3
+1 kg Bronze kostet 25€
+1. Festlegung der Variablen
+x ... Länge in dm
+  x ∈ ℕ
+y ... Breite in dm
+  y ∈ ℕ
+2. Formulierung der einschränkenden Bedingungen
+   als Ungleichungen
+  x >= 0  \ Nichtnegativitätsbedingungen
+  y >= 0  / 
+  x > y
+  x < (3*y)/2
+3. Zielfunktion
+Z= x*y soll minimal werden
+4. V = x*y * 0.08 -> 1.6 dm^3
+   Masse = %roh * V -> 13.92 kg
+   Kosten = 25 * 13.92 -> €348
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+cond: [
+/* Nichtnegativitätsbedingungen */
+x >= 0,
+y >= 0,
+x > y,
+x < (3*y)/2,
+/* Umfang */
+2*x + 2*y > 15,
+2*x + 2*y < 24
+];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(
+xrange=[2,8],
+yrange=[2, 9],
+color=blue,
+explicit(x, x, 0, 10),
+color=red,
+explicit((2*x)/3, x, 0, 10),
+color=green,
+explicit(-x + 15/2, x, 0, 10),
+color=dark-violet,
+explicit(-x + 12, x, 0, 10),
+color=black,
+key="Lösungspolygon",
+line_width=2,
+polygon([p1, p2, p3, p4]),
+color=light-grey,
+key="ganzzahlige Werte",
+points([[4,3], [4,4], [4,5], [4,6],
+        [5,3], [5,4], [5,5], [5,6],
+        [6,3], [6,4], [6,5], [6,6],
+        [7,3], [7,4], [7,5], [7,6]])
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+x:5;
+y:4;
+/* [wxMaxima: input   end   ] */
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$
