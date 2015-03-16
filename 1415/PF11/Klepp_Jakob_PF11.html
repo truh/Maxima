@@ -86,6 +86,18 @@ Kosten- & Preistheorie<BR>
 
 
 <P CLASS="comment">
+Mengeneinheiten ME<BR>
+~~~~~~~~~~~~~~~~~~<BR>
+<BR>
+x Wert bei Kosten und Preisfunktionen<BR>
+<BR>
+Mengeneinheiten sind in der Regel Ganzzahlig.<BR>
+<BR>
+Geldeinheiten GE<BR>
+~~~~~~~~~~~~~~~~<BR>
+<BR>
+y Wert bei Kosten und Preisfunktionen<BR>
+<BR>
 Kostenfunktion K(x)<BR>
 ~~~~~~~~~~~~~~~~~~~<BR>
 Beschreibt den Zusammenhang zwischen Produktionsmenge und den dafür<BR>
@@ -280,7 +292,7 @@ Maxima: realroots(G(x)=0);    <BR>
 
 <P><TABLE><TR><TD>
   <SPAN CLASS="prompt">
-(%i1) 
+(%i19) 
   </SPAN></TD>
   <TD><SPAN CLASS="input">
 kill(all);
@@ -396,7 +408,9 @@ sol:solve(gls)[1];
 (%i10) 
   </SPAN></TD>
   <TD><SPAN CLASS="input">
+print("Die Kostenfunktion ist:")$<BR>
 K(x):= ''(subst(sol, a*x^2 + b*x + c));<BR>
+print("Die Preisfunktion ist:")$<BR>
 p(x):= ''(subst(sol, k*x + d));
   </SPAN></TD>
 </TR></TABLE>
@@ -421,7 +435,7 @@ b)<BR>
 
 <P><TABLE><TR><TD>
   <SPAN CLASS="prompt">
-(%i12) 
+(%i14) 
   </SPAN></TD>
   <TD><SPAN CLASS="input">
 k(x):= ''(K(x) / x);
@@ -437,10 +451,11 @@ k(x):= ''(K(x) / x);
 
 <P><TABLE><TR><TD>
   <SPAN CLASS="prompt">
-(%i13) 
+(%i15) 
   </SPAN></TD>
   <TD><SPAN CLASS="input">
 x_opt: solve([diff(k(x), x, 1) = 0], [x]);<BR>
+print("Das Betriebsoptimum liegt bei so vielen Mengeneinheiten:")$<BR>
 x_opt: rhs(x_opt[2]);
   </SPAN></TD>
 </TR></TABLE>
@@ -454,9 +469,10 @@ x_opt: rhs(x_opt[2]);
 
 <P><TABLE><TR><TD>
   <SPAN CLASS="prompt">
-(%i15) 
+(%i18) 
   </SPAN></TD>
   <TD><SPAN CLASS="input">
+print("Die minimalen Stückkosten betragen:")$<BR>
 k_x_opt: k(x_opt);
   </SPAN></TD>
 </TR></TABLE>
@@ -482,7 +498,7 @@ c)<BR>
 
 <P><TABLE><TR><TD>
   <SPAN CLASS="prompt">
-(%i16) 
+(%i20) 
   </SPAN></TD>
   <TD><SPAN CLASS="input">
 p(x);
@@ -498,7 +514,7 @@ p(x);
 
 <P><TABLE><TR><TD>
   <SPAN CLASS="prompt">
-(%i17) 
+(%i21) 
   </SPAN></TD>
   <TD><SPAN CLASS="input">
 G(x);<BR>
@@ -532,9 +548,10 @@ d)<BR>
 
 <P><TABLE><TR><TD>
   <SPAN CLASS="prompt">
-(%i24) 
+(%i28) 
   </SPAN></TD>
   <TD><SPAN CLASS="input">
+print("Die Grenzen des Gewinnbereichs sind:")$<BR>
 map(rhs, solve(G(x) = 0, x));
   </SPAN></TD>
 </TR></TABLE>
@@ -558,7 +575,7 @@ e)<BR>
 
 <P><TABLE><TR><TD>
   <SPAN CLASS="prompt">
-(%i25) 
+(%i30) 
   </SPAN></TD>
   <TD><SPAN CLASS="input">
 E(x);
@@ -574,7 +591,7 @@ E(x);
 
 <P><TABLE><TR><TD>
   <SPAN CLASS="prompt">
-(%i26) 
+(%i31) 
   </SPAN></TD>
   <TD><SPAN CLASS="input">
 solve(diff(E('x), 'x) = 0);<BR>
@@ -591,7 +608,7 @@ x_E_max: rhs(%[1]);
 
 <P><TABLE><TR><TD>
   <SPAN CLASS="prompt">
-(%i28) 
+(%i33) 
   </SPAN></TD>
   <TD><SPAN CLASS="input">
 print("Preis des maximalen Erlös:")$<BR>
@@ -608,7 +625,7 @@ p(x_E_max);
 
 <P><TABLE><TR><TD>
   <SPAN CLASS="prompt">
-(%i30) 
+(%i35) 
   </SPAN></TD>
   <TD><SPAN CLASS="input">
 print("Maximaler Erlös:")$<BR>
@@ -635,7 +652,7 @@ f)<BR>
 
 <P><TABLE><TR><TD>
   <SPAN CLASS="prompt">
-(%i32) 
+(%i37) 
   </SPAN></TD>
   <TD><SPAN CLASS="input">
 eta(x):= (- p(x)/x ) / ''(diff(p(x), x));
@@ -651,7 +668,7 @@ eta(x):= (- p(x)/x ) / ''(diff(p(x), x));
 
 <P><TABLE><TR><TD>
   <SPAN CLASS="prompt">
-(%i33) 
+(%i38) 
   </SPAN></TD>
   <TD><SPAN CLASS="input">
 print("Absatzelastizitaet betraegt beim Cornot'schen Punkt:")$<BR>
@@ -671,12 +688,51 @@ eta(cornot);
 </P>
 
 
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Vorgangsweise<BR>
+=============<BR>
+<BR>
+1. Festlegung der Variablen<BR>
+<BR>
+2. Nebenbedingungen aufestellen<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;Nebenbedingungen sind Gleichungen<BR>
+&nbsp;&nbsp;&nbsp;Nichtnegativitätsbedingungen nicht vergessen<BR>
+<BR>
+3. Zielfunktion<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;WAS soll maximiert oder minimiert werden?<BR>
+<BR>
+4. Erstellen eines Planungsfeld<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;z.B. Lösungspolygone<BR>
+<BR>
+5. Finden der optimalen Lösung<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;Randwerte<BR>
+<BR>
+6. Lösung mit Antwortsatz!<BR>
+
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  2.1 Beispiel
+</P>
+
+
 <!-- Code cell -->
 
 
 <P><TABLE><TR><TD>
   <SPAN CLASS="prompt">
-(%i35) 
+(%i40) 
   </SPAN></TD>
   <TD><SPAN CLASS="input">
 kill(all);

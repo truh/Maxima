@@ -18,6 +18,18 @@ Glossar
    [wxMaxima: subsect end   ] */
 
 /* [wxMaxima: comment start ]
+Mengeneinheiten ME
+~~~~~~~~~~~~~~~~~~
+
+x Wert bei Kosten und Preisfunktionen
+
+Mengeneinheiten sind in der Regel Ganzzahlig.
+
+Geldeinheiten GE
+~~~~~~~~~~~~~~~~
+
+y Wert bei Kosten und Preisfunktionen
+
 Kostenfunktion K(x)
 ~~~~~~~~~~~~~~~~~~~
 Beschreibt den Zusammenhang zwischen Produktionsmenge und den dafür
@@ -260,7 +272,9 @@ sol:solve(gls)[1];
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: input   start ] */
+print("Die Kostenfunktion ist:")$
 K(x):= ''(subst(sol, a*x^2 + b*x + c));
+print("Die Preisfunktion ist:")$
 p(x):= ''(subst(sol, k*x + d));
 /* [wxMaxima: input   end   ] */
 
@@ -277,10 +291,12 @@ k(x):= ''(K(x) / x);
 
 /* [wxMaxima: input   start ] */
 x_opt: solve([diff(k(x), x, 1) = 0], [x]);
+print("Das Betriebsoptimum liegt bei so vielen Mengeneinheiten:")$
 x_opt: rhs(x_opt[2]);
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: input   start ] */
+print("Die minimalen Stückkosten betragen:")$
 k_x_opt: k(x_opt);
 /* [wxMaxima: input   end   ] */
 
@@ -315,6 +331,7 @@ d)
    [wxMaxima: comment end   ] */
 
 /* [wxMaxima: input   start ] */
+print("Die Grenzen des Gewinnbereichs sind:")$
 map(rhs, solve(G(x) = 0, x));
 /* [wxMaxima: input   end   ] */
 
@@ -361,6 +378,37 @@ eta(cornot);
 /* [wxMaxima: section start ]
 Lineare Optimierung
    [wxMaxima: section end   ] */
+
+/* [wxMaxima: comment start ]
+Vorgangsweise
+=============
+
+1. Festlegung der Variablen
+
+2. Nebenbedingungen aufestellen
+
+   Nebenbedingungen sind Gleichungen
+   Nichtnegativitätsbedingungen nicht vergessen
+
+3. Zielfunktion
+
+   WAS soll maximiert oder minimiert werden?
+
+4. Erstellen eines Planungsfeld
+
+   z.B. Lösungspolygone
+
+5. Finden der optimalen Lösung
+
+   Randwerte
+
+6. Lösung mit Antwortsatz!
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: subsect start ]
+Beispiel
+   [wxMaxima: subsect end   ] */
 
 /* [wxMaxima: input   start ] */
 kill(all);
