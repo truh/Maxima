@@ -1,0 +1,357 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 14.12.0 ] */
+
+/* [wxMaxima: title   start ]
+Schularbeit
+2015-03-16
+Jakob Klepp
+   [wxMaxima: title   end   ] */
+
+/* [wxMaxima: section start ]
+Handschriftlich
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: section start ]
+Kosten- und Preistheorie
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: input   start ] */
+K(x):= a*x^3 + b*x^2 + c*x + d;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: subsect start ]
+Das minimum der Grenzkosten entspricht der
+Kostenkehre
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Grenzkosten
+~~~~~~~~~~~
+Unter Grenzkosten versteht man wieviel, ausgehend von einer bestimmten
+produzierten Menge, die Produktion eines zusaetzlichen Stueckes kosten
+wuerde.
+
+  GK(x) = K'(x)
+
+Kostenkehre
+~~~~~~~~~~~
+In der Praxis ergibt sich ein gemischter Kostenverlauf, die Grenzkosten
+werden zuerst niedriger, ab einer bestimmten Menge(Kostenkehre) wieder
+höher. 
+Kostenkehre = Wendepunkt der Kostenfunktion
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(all);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+/* GK(x) = K'(x) */
+GK(x):=''(diff(K(x), x));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+diff(GK(x), x)=0;
+/* minimum der Grenzkosten */
+GK_min:solve(%, x);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+/* Kostenkehre = Wendepunkt der Kostenfunktion */
+diff(K(x), x, 2);
+%=0;
+Kk:solve(%, x);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+/* Gleichheitn überprüfen */
+is(GK_min[1] = Kk[1]);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: subsect start ]
+Grenzkostenkurve und variable Stückkostenkurve
+scheinden einanander auf der Ordinatenachse und
+im Betriebsminimum
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(all);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+GK(x):=''(diff(K(x), x));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Grenzkosten
+~~~~~~~~~~~
+Unter Grenzkosten versteht man wieviel, ausgehend von einer bestimmten
+produzierten Menge, die Produktion eines zusaetzlichen Stueckes kosten
+wuerde.
+
+  GK(x) = K'(x)
+
+Stückkosten k(x)
+~~~~~~~~~~~~~~~~
+Kosten der Produktion einer einzigen Mengeneinheit
+
+  k(x) = K(x)/x
+  k(x) = k_F + k_V(x)
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: subsect start ]
+
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: subsect start ]
+
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: section start ]
+Statistik
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(all);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Fehlstunden: Ungeordnete Liste von Fehlstunden aus folgenden 3 Jahrgängen:
+fehlstunden1/2/3: aus dem 1./2./3.Jahrgang
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+fehlstunden1: [10, 55, 28, 68, 248, 36, 17, 65, 9, 48, 91, 61, 19, 3, 18, 7, 122, 
+8, 114, 18, 32, 155, 8, 65, 143, 85, 88, 36, 22, 65, 37]$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+fehlstunden2: [34, 124, 85, 126, 67, 0, 68, 167, 23, 10, 70, 7, 45, 45, 31, 36, 
+31, 79, 152, 37, 239, 96]$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+fehlstunden3: [129, 60, 8, 385, 33, 482, 17, 138, 123, 357, 33, 64, 29, 53, 34,
+258, 5, 141, 126, 25, 228, 39, 37, 14, 246, 5, 119, 71]$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Durchschnittsnote: Ungeordnete Liste von Durchschnittsnoten aus folgenden 3 Jahrgängen:
+durchschnittsnote1/2/3: aus dem 1./2./3.Jahrgang
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+durchschnittsnote1: [2.42, 2.62, 3.54, 2.67, 4.67, 3.42, 1.92, 3.5, 3.38, 3.83, 2.77, 3.67, 2.67, 2.08, 2.83,
+2.85, 4.31, 1.42, 3.75, 2.54, 1.31, 4.15, 2.42, 2.85, 4.0, 3.5, 2.92, 2.69, 2.17, 2.92, 3.75]$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+durchschnittsnote2: [2.87, 2.44, 3.6, 2.87, 3.13, 2.44, 3.47, 2.81, 2.88, 2.44, 2.67, 1.47, 2.69, 2.5, 1.73,
+2.81, 2.63, 3.06, 2.13, 3.47, 3.94, 2.8]$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+durchschnittsnote3: [2.4, 2.87, 2.4, 4.67, 2.06, 4.38, 3.06, 3.94, 2.73, 4.13, 1.0, 1.0, 2.87, 3.33, 1.38,
+4.27, 1.44, 2.88, 2.67, 2.27, 3.38, 3.0, 2.19, 2.19, 4.06, 2.5, 3.07, 2.4]$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Auswerteliste: Ungeordnete Liste aus Tupeln [Fehlstundenzahl, Durchschnittsnote] aus folgenden 3 Jahrgängen:
+auswerteliste1/2/3: aus dem 1.,2.,3.Jahrgang
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+auswerteliste1: [[10,2.42], [55,2.62], [28,3.54], [68,2.67], [248,4.67], 
+[36,3.42], [17,1.92], [65,3.5], [9,3.38], [48,3.83], 
+[91,2.77], [61,3.67], [19,2.67], [3,2.08], [18,2.83],
+[7,2.85], [122,4.31], [8,1.42], [114,3.75], [18,2.54], 
+[32,1.31], [155,4.15], [8,2.42], [65,2.85], [143,4.0], 
+[85,3.5], [88,2.92], [36,2.69], [22,2.17], [65,2.92], [37,3.75]]$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+auswerteliste2: [[34,2.87], [124,2.44], [85,3.6], [126,2.87], [67,3.13], 
+[0,2.44], [68,3.47], [167,2.81], [23,2.88], [10,2.44], 
+[70,2.67], [7,1.47], [45,2.69], [45,2.5], [31,1.73],
+[36,2.81], [31,2.63], [79,3.06], [152,2.13], [37,3.47], [239,3.94], [96,2.8]]$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+auswerteliste3: [[129,2.4], [60,2.87], [8,2.4], [385,4.67], [33,2.06], 
+[482,4.38], [17,3.06], [138,3.94], [123,2.73], [357,4.13], 
+[33,1.0], [64,1.0], [29,2.87], [53,3.33], [34,1.38],
+[258,4.27], [5,1.44], [141,2.88], [126,2.67], [25,2.27], 
+[228,3.38], [39,3.0], [37,2.19], [14,2.19], [246,4.06], [5,2.5], [119,3.07], [71,2.4]]$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Zusammengefügt
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+fehlstunden: append(fehlstunden1, fehlstunden2, fehlstunden3);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+durchschnittsnote: append(durchschnittsnote1, durchschnittsnote2, durchschnittsnote3);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+auswerteliste: append(auswerteliste1, auswerteliste2, auswerteliste3);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: subsect start ]
+Histogram Fehlstunden
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: input   start ] */
+sort(fehlstunden);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+/* ungefähre Klasseneinteilung */
+makelist(i*482/8, i, 1, 8), numer;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Zuweisung in klassen
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+l0bis60:   [0,3,5,5,7,7,8,8,8,9,10,10,14,17,17,18,18,19,22,23,25,28,29,31,31,32,33,33,34,34,36,36,36,37,37,37,39,45,45,48,53,55,60];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+l60bis120: [61,64,65,65,65,67,68,68,70,71,79,85,85,88,91,96,114,119];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+l120bis180:[122,123,124,126,126,129,138,141,143,152,155,167];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+l180bis240:[228,239];
+l240bis300:[246,248,258];
+l300bis360:[357];
+l360bis420:[];
+l420bis482:[482];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Zur Weitervararbeitung zusammenhängen
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+fehlstunden_klassen:[l0bis60, l60bis120, l120bis180, l180bis240, l240bis300, l300bis360, l360bis420,l420bis482];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Schüler pro Fehlstunden Klasse zählen
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+fehlstunden_klassen_groesse: map(length, fehlstunden_klassen);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d();
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+/*
+Funktion zum erzeugen der Draw2d Objekte eines
+Paretodiagramms
+Param list: muss Elemente folgendes Formats haben
+            /*Fehlerart   Häufigkeit*/
+            Fehlerart  --  ein Name für den aktuellen Wert
+            Häufigkeit --  Größe des Werts, wird auch zur priorisierung verwendet
+*/
+bars(list):=makelist([
+ fill_color=[red, green, blue, magenta, cyan, yellow, orange, violet, brown, gray, black][mod(i,11)],
+ rectangle(
+  [i-1, 0],
+  [i, lis[i]]
+ ),
+ label([
+  sort(list, lambda([a,b], a[2]>b[2]))[i][1],
+  i-0.5,
+  sort(list, lambda([a,b], a[2]>b[2]))[i][2]
+ ])
+], i, length(list));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+list:fehlstunden_klassen_groesse;
+label_list:["0-60", "60-120", "120-180", "180-240", "240-300", "300-360", "360-420", "420-500"];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+bars: makelist([
+fill_color=[red, green, blue, magenta, cyan, yellow, orange, violet, brown, gray, black][mod(i,11)],
+rectangle(
+  [i-1, 0],
+  [i, list[i]]
+),
+ label([
+  label_list[i],
+  i- 0.5,
+  list[i] + 2
+ ])
+], i, length(list));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+/* Zeichnen */
+wxdraw2d(
+    color=black,
+bars
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: subsect start ]
+Box Whisker Plot Fehlstundenanzahl
+erklärung eingetragener Größen
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Boxplot
+~~~~~~~
+Fast Quartilen Extremwerte einer Stichprobe in einer Grafik zusammen,
+eignet sich dementsprechend um mehrere Stichproben zu vergleichen.
+
+     #################
+|----#           #   #------------|
+     #################
+^    ^           ^   ^            ^
+|    |           |   |            |
+|    |           |   |            Maximum
+|    |           |   3. Quartile
+|    |           Median
+|    1. Quartile
+|
+Minimum
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+wxboxplot(fehlstunden);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Großteil der Schüler haben Fehlstunden Anzahlen im ersten
+Quartil. Einzelne Schüler treiben den Median sehr weit hoch.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: subsect start ]
+
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: subsect start ]
+
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: subsect start ]
+
+   [wxMaxima: subsect end   ] */
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$
