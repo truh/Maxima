@@ -100,19 +100,34 @@ Kosten der Produktion einer einzigen Mengeneinheit
    [wxMaxima: comment end   ] */
 
 /* [wxMaxima: subsect start ]
-
+Die Gewinnschwellen ergeben sich aus dem Schnitt
+der Stückkostenkurve mit dem Graphen der
+Preisfunktioin
    [wxMaxima: subsect end   ] */
 
 /* [wxMaxima: subsect start ]
-
+Die Zunahme der Kosten ist bei der Kostenkehre
+am geringsten
    [wxMaxima: subsect end   ] */
 
 /* [wxMaxima: section start ]
 Statistik
    [wxMaxima: section end   ] */
 
+/* [wxMaxima: comment start ]
+Im beigefügten File am5ahits.wxmx befindet sich eine Liste, in der
+für alle SchülerInnen einer Maturaklasse der Abteilung
+Informationstechnologie jeweils Fehlstundenanazahl und
+Durchschnittsnote als zweidimensionale Liste eingetragen sind.
+   [wxMaxima: comment end   ] */
+
 /* [wxMaxima: input   start ] */
 kill(all);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+load(draw);
+load(descriptive);
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: comment start ]
@@ -136,8 +151,8 @@ fehlstunden3: [129, 60, 8, 385, 33, 482, 17, 138, 123, 357, 33, 64, 29, 53, 34,
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: comment start ]
-Durchschnittsnote: Ungeordnete Liste von Durchschnittsnoten aus folgenden 3 Jahrgängen:
-durchschnittsnote1/2/3: aus dem 1./2./3.Jahrgang
+Durchschnittsnote: Ungeordnete Liste von Durchschnittsnoten aus folgenden
+3 Jahrgängen: durchschnittsnote1/2/3: aus dem 1./2./3.Jahrgang
    [wxMaxima: comment end   ] */
 
 /* [wxMaxima: input   start ] */
@@ -156,7 +171,8 @@ durchschnittsnote3: [2.4, 2.87, 2.4, 4.67, 2.06, 4.38, 3.06, 3.94, 2.73, 4.13, 1
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: comment start ]
-Auswerteliste: Ungeordnete Liste aus Tupeln [Fehlstundenzahl, Durchschnittsnote] aus folgenden 3 Jahrgängen:
+Auswerteliste: Ungeordnete Liste aus Tupeln [Fehlstundenzahl,
+Durchschnittsnote] aus folgenden 3 Jahrgängen:
 auswerteliste1/2/3: aus dem 1.,2.,3.Jahrgang
    [wxMaxima: comment end   ] */
 
@@ -203,6 +219,12 @@ auswerteliste: append(auswerteliste1, auswerteliste2, auswerteliste3);
 /* [wxMaxima: subsect start ]
 Histogram Fehlstunden
    [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Stelle die Fehlstundenanzahl in einem Histogramm dar. Führe, falls
+erfoderlich eine Klasseneinteilung durch . Beschreibe deine
+Vorgangsweise ausführlich.
+   [wxMaxima: comment end   ] */
 
 /* [wxMaxima: input   start ] */
 sort(fehlstunden);
@@ -258,35 +280,12 @@ wxdraw2d();
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: input   start ] */
-/*
-Funktion zum erzeugen der Draw2d Objekte eines
-Paretodiagramms
-Param list: muss Elemente folgendes Formats haben
-            /*Fehlerart   Häufigkeit*/
-            Fehlerart  --  ein Name für den aktuellen Wert
-            Häufigkeit --  Größe des Werts, wird auch zur priorisierung verwendet
-*/
-bars(list):=makelist([
- fill_color=[red, green, blue, magenta, cyan, yellow, orange, violet, brown, gray, black][mod(i,11)],
- rectangle(
-  [i-1, 0],
-  [i, lis[i]]
- ),
- label([
-  sort(list, lambda([a,b], a[2]>b[2]))[i][1],
-  i-0.5,
-  sort(list, lambda([a,b], a[2]>b[2]))[i][2]
- ])
-], i, length(list));
-/* [wxMaxima: input   end   ] */
-
-/* [wxMaxima: input   start ] */
 list:fehlstunden_klassen_groesse;
 label_list:["0-60", "60-120", "120-180", "180-240", "240-300", "300-360", "360-420", "420-500"];
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: input   start ] */
-bars: makelist([
+bars(list):= makelist([
 fill_color=[red, green, blue, magenta, cyan, yellow, orange, violet, brown, gray, black][mod(i,11)],
 rectangle(
   [i-1, 0],
@@ -304,7 +303,7 @@ rectangle(
 /* Zeichnen */
 wxdraw2d(
     color=black,
-bars
+    bars(list)
 );
 /* [wxMaxima: input   end   ] */
 
@@ -312,6 +311,10 @@ bars
 Box Whisker Plot Fehlstundenanzahl
 erklärung eingetragener Größen
    [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Erstelle einen Box-Whisker 
+   [wxMaxima: comment end   ] */
 
 /* [wxMaxima: comment start ]
 Boxplot
