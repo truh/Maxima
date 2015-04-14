@@ -1,0 +1,186 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 14.12.0 ] */
+
+/* [wxMaxima: title   start ]
+Prüfung AM SW 33
+Jakob Klepp
+   [wxMaxima: title   end   ] */
+
+/* [wxMaxima: section start ]
+Handschriftlich
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: section start ]
+Maxima
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: input   start ] */
+load(draw);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+load(descriptive);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+y: Benzinverbrauch (in Liter) / 100km
+x: Hubraum in cm^3
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+data_x: [1571, 3385, 2802, 1960, 2445, 2526, 2186, 2931,
+         1846, 3451, 2478, 1457, 1927, 1296, 2575, 1571,
+         2931, 2802, 1976, 2801];
+data_y: [ 8.8, 11.0,  9.4,  8.4,  9.0, 10.2,  9.1,  9.6,
+          8.6, 11.4,  9.7,  8.1,  8.8,  9.5, 10.4,  9.1,
+         10.6,  9.7,  9.4,  9.1];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: subsect start ]
+
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: subsect start ]
+Box-Whisker Plot Benzinverbrauch
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: input   start ] */
+wxboxplot(data_y);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+  -----       Maximum: Größter Benzinverbrauch unter den PKWs
+    |
++-------+ 3. Quartile: Wert positioniert nach dem 3. Viertel aller Werte einer sortierten Liste.
+|       |
++-------+      Median: Wert positioniert in der Mitte aller Werte einer sortierten Liste.
+|       |
++-------+ 1. Quartile: Wert positioniert nach dem 1. Viertel aller Werte einer sortierten Liste.
+    |
+  -----       Minimum: Kleinster Benzinverbrauch unter den PKWs
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: subsect start ]
+
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+stelle die gegebenen Daten graphisch da
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+data_pairs: makelist([data_x[i], data_y[i]], i, 1, length(data_x));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(
+yrange=[8, 12],
+xrange=[1400, 3500],
+points(data_pairs));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+ermittle den empirischen Korrelationskoeffizienten
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+n: length(data_x);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+Sx: std1(data_x), numer;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+Sy: std1(data_y), numer;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+Sxy: 1/(n-1) * (sum(data_x[i] * data_y[i], i, 1, n) - n * mean(data_x)*mean(data_y)), numer;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+r: Sxy/(Sx*Sy);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+r ist ein Schätzwert für die Stärke und die Richtung des linearen Zusammenhangs (Korrelation)
+der beiden Merkmale x & y.
+- -1 <= r <= 1: wenn r = +1, dann liegen alle Werte auf einer steigenden Gerade, völlig
+                             miteinander korreliert
+                wenn r = -1, dann liegen alle Werte genau auf einer fallenden Gerade
+  Je näher bei +1/-1, desto näher liegen die Punkte bei der Geraden.
+- r > 0: steigende Gerade, positive lineare Korrelation
+- r < 0: fallende Gerade, negative lineare Korrelation
+- r = 0: kein LINERARER Zusammenhang
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: subsect start ]
+berechne empirische Regressionsgerade
+trage in Graphik b ein
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: input   start ] */
+/*
+Da die Formeln für sämtliche dieser Regressionen ähnlich aufgebaut sind,
+kann das gesamte System in einen einzigen Block integriert werden.
+Der folgende Block implementiert das Verfahren einer Regression n-ten Grades.
+Parameter:
+    points  die Punktewolke in der Form [[x1, y1], .., [xn, yn]]
+    vars    die Variablen der Funktion, die berechnet werden soll [a, b];
+      (Grad der Regression + 1)
+return      die Funktion der Regression dieser Punkte
+*/
+regr(points, vars) := block (
+    gls: [],
+gl: 0,
+    grade: length(vars) - 1,
+    n: length(points),
+    for i: 0 thru grade do (
+    gl: 0,
+        for j: 0 thru grade do (
+            gl: gl + vars[j + 1]*sum(points[k][1]^(2*grade - (i + j)), k, 1, n)
+        ),
+        gl: gl = sum(points[k][1]^(grade - i)*points[k][2], k, 1, n),
+        gls: append(gls, [gl])
+    ),
+    return(solve(gls, vars))
+)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+rgerg:regr(data_pairs, [d, k]);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+gerade: x*rhs(rgerg[1][1]) + rhs(rgerg[1][2]), float;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(
+yrange=[8, 12],
+xrange=[1400, 3500],
+points(data_pairs),
+explicit(gerade,x, 1400, 3500));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: subsect start ]
+berechne Bestimmtheitsmaß der Ausgangsdaten
+erkläre Bedeutung, Verwendung
+interpretiere Ergebnis beziehend auf vorliegende Daten
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: input   start ] */
+B: r^2;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+~58% des Bezinverbrauchswerte sind durch den Hubraum beschreibbar.
+   [wxMaxima: comment end   ] */
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$

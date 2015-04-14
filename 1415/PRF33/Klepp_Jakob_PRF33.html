@@ -1,0 +1,492 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+ <HEAD>
+  <TITLE>Klepp_Jakob_PRF33</TITLE>
+  <META NAME="generator" CONTENT="wxMaxima">
+  <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+  <STYLE TYPE="text/css">
+body {
+  background-color: rgb(255,255,255);
+}
+.input {
+  color: rgb(0,0,255);
+}
+.comment {
+  color: rgb(0,0,0);
+  background-color: rgb(255,255,255);
+  padding: 2mm;
+}
+.image {
+  color: rgb(0,0,0);
+  padding: 2mm;
+}
+.section {
+  color: rgb(0,0,0);
+  font-size: 1.5em;
+  padding: 2mm;
+}
+.subsect {
+  color: rgb(0,0,0);
+  font-size: 1.2em;
+  padding: 2mm;
+}
+.title {
+  color: rgb(0,0,0);
+  font-size: 2em;
+  padding: 2mm;
+}
+.prompt {
+  color: rgb(255,0,0);
+}
+table {
+  border: 0px;
+}
+td {
+  vertical-align: top;
+  padding: 1mm;
+}
+  </STYLE>
+ </HEAD>
+ <BODY>
+
+<!---------------------------------------------------------->
+<!--          Created with wxMaxima version 14.12.0         -->
+<!---------------------------------------------------------->
+
+
+<!-- Title cell -->
+
+
+<P CLASS="title">
+Prüfung AM SW 33<BR>
+Jakob Klepp
+</P>
+
+
+<!-- Section cell -->
+
+
+<P CLASS="section">
+ 1 Handschriftlich
+</P>
+
+
+<!-- Section cell -->
+
+
+<P CLASS="section">
+ 2 Maxima
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i213) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+load(draw);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_PRF33_img/Klepp_Jakob_PRF33_0.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i214) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+load(descriptive);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_PRF33_img/Klepp_Jakob_PRF33_1.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+y: Benzinverbrauch (in Liter) / 100km<BR>
+x: Hubraum in cm^3
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i215) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+data_x: [1571, 3385, 2802, 1960, 2445, 2526, 2186, 2931,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1846, 3451, 2478, 1457, 1927, 1296, 2575, 1571,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2931, 2802, 1976, 2801];<BR>
+data_y: [ 8.8, 11.0,  9.4,  8.4,  9.0, 10.2,  9.1,  9.6,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8.6, 11.4,  9.7,  8.1,  8.8,  9.5, 10.4,  9.1,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10.6,  9.7,  9.4,  9.1];
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_PRF33_img/Klepp_Jakob_PRF33_2.png">
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  2.1 
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  2.2 Box-Whisker Plot Benzinverbrauch
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i217) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxboxplot(data_y);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_PRF33_img/Klepp_Jakob_PRF33_3.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+  -----       Maximum: Größter Benzinverbrauch unter den PKWs<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|<BR>
++-------+ 3. Quartile: Wert positioniert nach dem 3. Viertel aller Werte einer sortierten Liste.<BR>
+|       |<BR>
++-------+      Median: Wert positioniert in der Mitte aller Werte einer sortierten Liste.<BR>
+|       |<BR>
++-------+ 1. Quartile: Wert positioniert nach dem 1. Viertel aller Werte einer sortierten Liste.<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|<BR>
+&nbsp;&nbsp;-----       Minimum: Kleinster Benzinverbrauch unter den PKWs
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  2.3 
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+stelle die gegebenen Daten graphisch da
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i218) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+data_pairs: makelist([data_x[i], data_y[i]], i, 1, length(data_x));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_PRF33_img/Klepp_Jakob_PRF33_4.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i219) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxdraw2d(<BR>
+yrange=[8, 12],<BR>
+xrange=[1400, 3500],<BR>
+points(data_pairs));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_PRF33_img/Klepp_Jakob_PRF33_5.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+ermittle den empirischen Korrelationskoeffizienten
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i220) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+n: length(data_x);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_PRF33_img/Klepp_Jakob_PRF33_6.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i221) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+Sx: std1(data_x), numer;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_PRF33_img/Klepp_Jakob_PRF33_7.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i222) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+Sy: std1(data_y), numer;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_PRF33_img/Klepp_Jakob_PRF33_8.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i223) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+Sxy: 1/(n-1) * (sum(data_x[i] * data_y[i], i, 1, n) - n * mean(data_x)*mean(data_y)), numer;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_PRF33_img/Klepp_Jakob_PRF33_9.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i224) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+r: Sxy/(Sx*Sy);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_PRF33_img/Klepp_Jakob_PRF33_10.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+r ist ein Schätzwert für die Stärke und die Richtung des linearen Zusammenhangs (Korrelation)<BR>
+der beiden Merkmale x & y.<BR>
+- -1 <= r <= 1: wenn r = +1, dann liegen alle Werte auf einer steigenden Gerade, völlig<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;miteinander korreliert<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wenn r = -1, dann liegen alle Werte genau auf einer fallenden Gerade<BR>
+&nbsp;&nbsp;Je näher bei +1/-1, desto näher liegen die Punkte bei der Geraden.<BR>
+- r > 0: steigende Gerade, positive lineare Korrelation<BR>
+- r < 0: fallende Gerade, negative lineare Korrelation<BR>
+- r = 0: kein LINERARER Zusammenhang
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  2.4 berechne empirische Regressionsgerade<BR>
+trage in Graphik b ein
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i225) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/*<BR>
+Da die Formeln für sämtliche dieser Regressionen ähnlich aufgebaut sind,<BR>
+kann das gesamte System in einen einzigen Block integriert werden.<BR>
+Der folgende Block implementiert das Verfahren einer Regression n-ten Grades.<BR>
+Parameter:<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;points  die Punktewolke in der Form [[x1, y1], .., [xn, yn]]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;vars    die Variablen der Funktion, die berechnet werden soll [a, b];<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Grad der Regression + 1)<BR>
+return      die Funktion der Regression dieser Punkte<BR>
+*/<BR>
+regr(points, vars) := block (<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;gls: [],<BR>
+gl: 0,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;grade: length(vars) - 1,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;n: length(points),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;for i: 0 thru grade do (<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;gl: 0,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for j: 0 thru grade do (<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gl: gl + vars[j + 1]*sum(points[k][1]^(2*grade - (i + j)), k, 1, n)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gl: gl = sum(points[k][1]^(grade - i)*points[k][2], k, 1, n),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gls: append(gls, [gl])<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;return(solve(gls, vars))<BR>
+)$
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i226) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+rgerg:regr(data_pairs, [d, k]);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_PRF33_img/Klepp_Jakob_PRF33_11.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i227) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+gerade: x*rhs(rgerg[1][1]) + rhs(rgerg[1][2]), float;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_PRF33_img/Klepp_Jakob_PRF33_12.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i228) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxdraw2d(<BR>
+yrange=[8, 12],<BR>
+xrange=[1400, 3500],<BR>
+points(data_pairs),<BR>
+explicit(gerade,x, 1400, 3500));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_PRF33_img/Klepp_Jakob_PRF33_13.png">
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  2.5 berechne Bestimmtheitsmaß der Ausgangsdaten<BR>
+erkläre Bedeutung, Verwendung<BR>
+interpretiere Ergebnis beziehend auf vorliegende Daten
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i229) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+B: r^2;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_PRF33_img/Klepp_Jakob_PRF33_14.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+~58% des Bezinverbrauchswerte sind durch den Hubraum beschreibbar.
+</P>
+
+ <HR>
+ <SMALL> Created with <A HREF="http://wxmaxima.sourceforge.net/">wxMaxima</A>.</SMALL>
+
+ </BODY>
+</HTML>
