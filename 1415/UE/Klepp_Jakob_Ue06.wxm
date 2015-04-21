@@ -1,0 +1,133 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 14.12.0 ] */
+
+/* [wxMaxima: title   start ]
+Übungen zu Pf06
+  Jakob Klepp  
+  2015-04-21   
+   [wxMaxima: title   end   ] */
+
+/* [wxMaxima: section start ]
+
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(all);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Gegeben sie folgende Differentialgleichung mit
+Anfangsbedingung:
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+dgl: 'diff(y, x) - 2*y = 3*x^3 - 4*x;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+nb: [-2, 3.38];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: subsect start ]
+
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Erstelle zunächst eine Grafik, in der Du (ohne vorheriges Lösen
+der Differentialgleichung) das Richtungsfeld der gegeben
+Differentialgleichung einträgst.
+
+Erkläre an diesem Beispiel den Begriff Richtungsfeld.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+load(drawdf);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+solve(dgl, 'diff(y, x));
+fI: rhs(%[1]);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdrawdf(fI);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Eine unbestimmte Differentialgleichung hat unendlich viele
+Lösungsfunktionen. Diese werden im Richtungsfeld durch ein
+Feld an Steigungspfeil angedeutet.
+
+Durch eine Nebenbedingung lässt sich aus den unendlich vielen
+LÖsungsfunktion eine bestimmte auswählen.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: subsect start ]
+
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Löse die nebenstehende Differentialgleichung symbolisch mittels
+Ansatzes einer Polynomfunktion und ermittle die Gleichung jener
+Lösungskurve, die durch den Punkt P geht.
+Dokumentiere Deinen Lösungsweg ausführlich.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: subsect start ]
+
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: subsect start ]
+
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: subsect start ]
+
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: section start ]
+
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: comment start ]
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: subsect start ]
+
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: subsect start ]
+
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: subsect start ]
+
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+
+   [wxMaxima: comment end   ] */
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$
