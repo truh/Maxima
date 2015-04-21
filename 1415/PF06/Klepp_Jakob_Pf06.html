@@ -1,0 +1,1998 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+ <HEAD>
+  <TITLE>Klepp_Jakob_Pf06</TITLE>
+  <META NAME="generator" CONTENT="wxMaxima">
+  <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+  <STYLE TYPE="text/css">
+body {
+  background-color: rgb(255,255,255);
+}
+.input {
+  color: rgb(0,0,255);
+}
+.comment {
+  color: rgb(0,0,0);
+  background-color: rgb(255,255,255);
+  padding: 2mm;
+}
+.image {
+  color: rgb(0,0,0);
+  padding: 2mm;
+}
+.section {
+  color: rgb(0,0,0);
+  font-size: 1.5em;
+  padding: 2mm;
+}
+.subsect {
+  color: rgb(0,0,0);
+  font-size: 1.2em;
+  padding: 2mm;
+}
+.title {
+  color: rgb(0,0,0);
+  font-size: 2em;
+  padding: 2mm;
+}
+.prompt {
+  color: rgb(255,0,0);
+}
+table {
+  border: 0px;
+}
+td {
+  vertical-align: top;
+  padding: 1mm;
+}
+  </STYLE>
+ </HEAD>
+ <BODY>
+
+<!---------------------------------------------------------->
+<!--          Created with wxMaxima version 14.12.0         -->
+<!---------------------------------------------------------->
+
+
+<!-- Title cell -->
+
+
+<P CLASS="title">
+         Portfolio 06        <BR>
+&nbsp;&nbsp;&nbsp;Differentialgleichungen   <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Jakob Klepp         
+</P>
+
+
+<!-- Section cell -->
+
+
+<P CLASS="section">
+ 1 DGL 1. Ordnung analytisch
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  1.1 Theorie
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Übersicht<BR>
+---------<BR>
+<BR>
+* Definition<BR>
+<BR>
+* Grad & Ordnung<BR>
+<BR>
+* Lineare DGL 1. Ordnung<BR>
+<BR>
+* Allgemeine Lösung<BR>
+<BR>
+* Partikuläre Lösung<BR>
+<BR>
+* Störfunktion<BR>
+<BR>
+* Homogene Lösung<BR>
+<BR>
+* Inhomogene Lösung
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Definition<BR>
+----------<BR>
+<BR>
+Unter einer DGL versteht man eine Gleichung in der neben einer Funktion<BR>
+y=f(x) auch noch Ableitungen dieser Funktion vorkommen.
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Grad & Ordnung<BR>
+--------------<BR>
+<BR>
+Man unterscheidet zwischen dem Grad einer DGL und der Ordnung <BR>
+einer DGL,<BR>
+Grad ...<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Die höchste vorkommende Potenz von y oder einer Ableitung<BR>
+Ordnung ...<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Die höchste vorkommende Ableitng (von y)<BR>
+Beispiel<BR>
+y''' + [y']² + y = x<BR>
+&nbsp;---       -<BR>
+&nbsp;&nbsp;|        |<BR>
+&nbsp;&nbsp;|        v<BR>
+&nbsp;&nbsp;v        Grad: 2<BR>
+Ordnung: 3<BR>
+(y'')⁵ + (y')⁷ = e^x * (sin x)⁸<BR>
+&nbsp;&nbsp;--         -                -<BR>
+&nbsp;&nbsp;&nbsp;|         |                |<BR>
+&nbsp;&nbsp;&nbsp;|         |                v<BR>
+&nbsp;&nbsp;&nbsp;|         v                Nicht grad der Gleichung<BR>
+&nbsp;&nbsp;&nbsp;v         Grad: 7          weil nicht grad der Funktion<BR>
+&nbsp;&nbsp;&nbsp;Ordnung: 2
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Lineare DGL 1. Ordnung<BR>
+----------------------<BR>
+<BR>
+Eine DGL 1. Ordnung heißt Linear wenn sie in der Form:<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;y' + p*y = s(x)<BR>
+<BR>
+geschrieben werden kann.<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;p ... koeffizient<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;s(x) ... Störfunktion<BR>
+<BR>
+Die Lösung erfolgt analytisch wie folgt:<BR>
+<BR>
+1. y[H]: bestimmung der Allgemeinen Lösung der Homogenen DGL<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-> mit Trennung der Variablen<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-> ode2 in maxima (könnte mehr als das)<BR>
+<BR>
+2. y[p]: bestimmung einer Partikulären Lösung der Inhomogenen DGL<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-> Variation der Konstanten<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-> Lösung mit Lösungsansatz<BR>
+<BR>
+4. y:    Die allgemeine Lösung y der Inhomogenen DGL findet man als<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y = y[H] * y[p]<BR>
+<BR>
+5. c:    Wenn notwending: bestimmen der Integrationskonstante in<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;durch einsetzen in die Nebenbedingung.<BR>
+<BR>
+6.       Probe durch einsetzen des Ergebniss von 5. in die Inhomogene DGL<BR>
+<BR>
+7.       Grafik der Lösung 5., der Nebenbedingung und der Störfunktion<BR>
+<BR>
+8.       Interpretation der Grafik
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Allgemeine Lösung<BR>
+-----------------<BR>
+<BR>
+Die Lösung einer Differenzialgleichung ist wegen der vieldeutigkeit<BR>
+(unbestimmtheit) des Integrals immer eine Funktionen Schar, dass<BR>
+heißt unendlich vile Funktionen die sich durch eine Konstante unterscheiden.<BR>
+<BR>
+Funktionen Schar heißt auch die >>allgemeine Lösung<< der DGL.
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Partikuläre Lösung<BR>
+------------------<BR>
+<BR>
+Gibt man der Integrationskonstanten (direkt oder durch eine Nebenbedingung)<BR>
+einen speziellen Wert, dann wählt man aus der Allgemeinen Lösung eine<BR>
+Partikuläre Lösung aus.
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Störfunktion<BR>
+------------<BR>
+<BR>
+Bei einer DGL<BR>
+y'(x) = ???<BR>
+ist die Störfunktion s(x) der Term welcher kein y aber möglicherweise x enthält. 
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Homogene DGL<BR>
+------------<BR>
+<BR>
+s(x) == 0<BR>
+<BR>
+Die Homogene DGL ist eine DGL ohne Störfunktion.<BR>
+Durch das 0-setzen der Störfunktion kann aus der Inhomogenen<BR>
+DGL die Homogene DGL gewonnen werden.
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Inhomogene DGL<BR>
+--------------<BR>
+<BR>
+s(x) != 0<BR>
+<BR>
+Inhomogene DGL ist eine DGL welche eine Störfunktion beinhaltet.
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  1.2 Richtungsfeld
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Eine DGL kann zumeist so umgeformt werde dass:<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;y' = ???<BR>
+<BR>
+Durch die DGL wird somit die Steigung der allgemeinen Lösung<BR>
+bestimmt. <BR>
+<BR>
+Da die allgemeine Lösung aus unendlich vielen Funktionen besteht<BR>
+wird ihre Steigung auch als Richtungsfeld dargestellt.<BR>
+<BR>
+Durch eine Nebenbedingung kann eine partikuläre Lösung ausgezeichnet werden.
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+@M<BR>
+In Maxima lässt sich ein Richtungsfeld mit `plotdf` oder `wxdrawdf`<BR>
+zeichnen.<BR>
+<BR>
+- plotdf öffnet ein Fenster mit einer interaktive Ansicht des Richtungsfeldes <BR>
+&nbsp;&nbsp;in der sich die partikuläre Lösungen mit einem Mausklick auszeichnen lassen.<BR>
+<BR>
+- wxdrawdf wird direkt in wxmaxima eingebunden, außerdem lässt sich die Zeichnung<BR>
+&nbsp;&nbsp;um weitere Objekte erweitern.<BR>
+<BR>
+Zur Verwendung von wxdrawdf muss drawdf mit load(drawdf) geladen werden.
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+@M<BR>
+wxdrawdf(dydx, p)<BR>
+dydx:<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;allgemeine Lösung<BR>
+p:<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Punkt den die partikuläre Lösung durchquert<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Entspricht der Nebenbedingung mit der Form:<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y(x)=?<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-  -<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|  |<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v  v<BR>
+&nbsp;&nbsp;soln_at(x, ?)<BR>
+<BR>
+Weitere Parameter entsprechen wxdraw2d
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i1) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+kill(all);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_0.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i1) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+load(drawdf)$
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_1.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Angabe
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i2) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+nb:['x=2, 'y=0];<BR>
+angabe: 'yI + x^2 = x + 1;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_2.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Nach y'=??? umformen
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i4) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+solve(angabe, 'yI)[1];<BR>
+fI:rhs(%);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_3.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Nebenbedingung -> Variable
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i6) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+nb_x: rhs(nb[1]); nb_y: rhs(nb[2]);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_4.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Zeichnen
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i8) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxdrawdf(<BR>
+fI,                         /* DGL */<BR>
+[x, nb_x - 5, nb_x + 5],    /* x - Wertebereich */<BR>
+[y, nb_y - 5, nb_y + 5],    /* y - Wertebereich */<BR>
+soln_at(nb_x, nb_y),        /* Nenbenbedingung */<BR>
+color=blue,                 /* Punkt Farbe */<BR>
+point_size=3,               /* Punkt Größe */<BR>
+point_type=7,               /* Punkt Typ = Kreis */<BR>
+points([[nb_x, nb_y]])      /* draw2d Graphic Object point */<BR>
+)$
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_5.png">
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  1.3 Trennung der Variablen
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Lineare DGL 1. Ordnung lassen sich immer mithilfe der Trennung der Variablen lösen.<BR>
+<BR>
+1. Freistellen von y'<BR>
+<BR>
+2. Ersetzung y' -> dy/dx<BR>
+<BR>
+3. Auffassung von dy/dx als Bruch und Trennung der Variablen<BR>
+<BR>
+4. Integrieren<BR>
+<BR>
+5. y berechnen
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Bsp:
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i9) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+kill(all);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_6.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i1) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+s:yI+ 2*y =1;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_7.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Freistellen von y'
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i2) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+s1:solve(s, yI)[1];
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_8.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Ersetzen von y' -> dy/dx
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i3) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+s2:subst([yI = diff('y(x),'x)],s1);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_9.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Trennung der Variablen (hab ich nur manuell geschaft)
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i4) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+s3: dy/(-2*y + 1) = dx;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_10.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Integration
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i5) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+s4:integrate(1/(1-2*y), y) = integrate(1, x) +%c;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_11.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Berechnung von y<BR>
+<BR>
+Wenn manuell in der regel durch e^rhs=e^lhs
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i6) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+s5:solve(s4, y)[1];
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_12.png">
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  1.4 Tabelle mit Lösungsansätzen
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Art              s(x)                                           ya<BR>
+================ ============================================== ==============================================<BR>
+<BR>
+Polynom          A[n]*x^(n) + A[n-1]*x^(n-1) + ... + A[0]*x^(0) a[n]*x^(n) + a[n-1]*x^(n-1) + ... + a[0]*x^(0)<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A*sin(w*x)<BR>
+Trigonometrisch  B*cos(w*x)                                     a*sin(w*x) + b*cos(w*x)      //w=kleines Omega<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A*sin(w*x) + B*cos(w*x)<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a * e^(b*x)     //wenn b != -p<BR>
+Exponential      A*e^(b*x)                                      a*x*e^(b*x)     //wenn b ==  p<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// p in DGL 1. Ordnung:<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// y' + py = s(x)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//     -^-
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Bsp:
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i7) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+dgl1: 4*diff(y(x),x) - 3*y(x) = 3*cos(4*x);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_13.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Man findet den Lösungsansatz laut Tabelle 
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i8) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+ya:a*sin(4*x) + b*cos(4*x);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_14.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i9) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+yaI:diff(ya, x);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_15.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+... und setzt den Ansatz (inklusive Ableitung) in die inhomogene DGL ein<BR>
+um die noch umbestimmten Koeffizienten des Ansatzes zu berechnen.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i10) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+unKoAnsatz:subst([diff(y(x),x) = yaI, y(x) = ya], dgl1);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_16.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Koeffizientenvergleich<BR>
+Die berechnung der Koeffizienten:<BR>
+<BR>
+Man setzt die Koeffizienten der entsprechenden trigonometrischen(bzw. Potenz) -Funktion auf der linken<BR>
+und rechten Seite gleich und erhält so ein lineares Gleichungssystem.
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+@M<BR>
+Durch `expand` und `ratsimp` wird die Gleichung in eine für den Koeffizientenvergleich brauchbarere <BR>
+Form bringen.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i11) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+unKoAnsatz:expand(unKoAnsatz);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_17.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i12) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+unKoAnsatz:ratsimp(unKoAnsatz);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_18.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Das Gleichungssystem wird manuell aufgestellt.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i13) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+gls1:[<BR>
+-3*a - 16*b = 0, /* sin */<BR>
+16*a -  3*b = 3  /* cos */<BR>
+];
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_19.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+@M<BR>
+Gleichungssystem lässt sich mit solve lösen
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i14) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+solve(gls1, [a,b]);<BR>
+sol:%[1];
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_20.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Durch einsetzen der berechneten Koeffizienten in den Lösungsansatz erhält man die partikuläre Lösung<BR>
+der DGL.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i16) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+ya, sol;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_21.png">
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  1.5 Variation der Konstanten
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i17) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+kill(all);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_22.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i1) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+dgl1: 4*'diff('y,'x) - 3*'y - 3*cos(4*'x);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_23.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Störfunktion freistellen. (manuell)
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i2) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+dgl1: 4*'diff('y,'x) - 3*'y = 3*cos(4*'x);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_24.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Bilden der Homogenen DGL
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i3) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+hom: lhs(dgl1);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_25.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Berechnung der Homogenen DGL<BR>
+<BR>
+@M<BR>
+ode2 (eqn, dvar, ivar)<BR>
+<BR>
+eqn     (homogene) DGL<BR>
+dvar    abhängige Variable ... Funktion ... meist y<BR>
+ivar    unabhängige Variable ... meist x oder t
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i4) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+ode2(hom,y,x);<BR>
+yH: rhs(%) /* wir brauchen nur die rechte Seite */;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_26.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Eigentlicher beginn der Variation der Konstanten<BR>
+<BR>
+Auffassen der Integrationkonstanten als Funktion<BR>
+-> Ansatz
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i6) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+ya: yH, %c=C(x);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_27.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Ableiten von ya
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i7) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+yaI: diff(ya, x, 1);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_28.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Einsetzen des Ansatz in die DGL (Angabe)
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i8) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+h:dgl1, 'diff('y,'x)=yaI, y=ya;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_29.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Nach C'(x) umformen
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i9) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+solve(h, C(x))$<BR>
+%[1];<BR>
+CIx:rhs(%)$
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_30.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+C'(x) integrieren
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i12) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+Cx: integrate(CIx, x, 1);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_31.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+"Konstante" Cx in den Ansatz einsetzen um eine partikuläre Lösung<BR>
+der inhomogenen DGL zu erhalten.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i13) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+yp: ya, C(x)=Cx;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_32.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Durch addieren dieser partikulären Lösung und der homogenen DGL <BR>
+erhalten wir die allgemeine Lösung der DGL.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i14) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+y(x):= ''yH + ''yp;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_33.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Probe:
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i15) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+probe:dgl1,'diff(y,x)=diff(y(x),x),y=y(x);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_34.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i16) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+ratsimp(lhs(probe));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_35.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Ist die Probe erfolgreich?
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i17) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+is(%=rhs(dgl1));
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_36.png">
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  1.6 Bestimmung der Integrationskonstanten
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Nebenbedingung
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i18) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+nb: [1,3];
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_37.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Allgemeine Lösung der DGL
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i19) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+y(x);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_38.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Gleichung aufstellen
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i20) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+glc: y(nb[1])=nb[2];
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_39.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Lösen um die Konstante c zu finden
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i21) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+solve(glc, %c)$<BR>
+%[1];<BR>
+c:rhs(%)$
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_40.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Anzeigen der gefundenen Konstante
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i24) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+c;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_41.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+in allgemeine Lösung einsetzen um Partikuläre Lösung zu finden
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i25) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+yP: y(x), %c=c;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_42.png">
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  1.7 Grafik
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Eine Zeichnung mit der Partikulären Lösung sowie<BR>
+der Nebenbedingung als Punkt.
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Paket laden
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i26) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+load(draw);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_43.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Nebenbedingung und Partikuläre Lösung
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i27) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+nb;<BR>
+yP;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_44.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Grafikobjekte erzeugen
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i29) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+obj_nb: points([nb]);<BR>
+obj_yP: explicit(yP, x, -3, 2);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_45.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Zeichnen
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i31) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxdraw2d(<BR>
+key="partikuläre Lösung",<BR>
+obj_yP,<BR>
+key="Nebenbedingung",<BR>
+color="red",<BR>
+obj_nb<BR>
+);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_46.png">
+</P>
+
+
+<!-- Section cell -->
+
+
+<P CLASS="section">
+ 2 DGL 1. Ordnung numerisch<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Runge Kutta
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  2.1 Erklärung
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Ist die Differentialgleichung<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;y'=f(x,y)<BR>
+mit der Anfangsbedingung P[0](x[0],y[0]) zu integrieren, so berechnet man der Reihe nach die Werte<BR>
+<BR>
+x[I]    = x[0]      ,   y[I]    = y[0]<BR>
+x[II]   = x[0] + h/2,   y[II]   = y[0] + k[I]/2     mit k[I]      = f(x[I]  , y[I])   * h<BR>
+x[III]  = x[0] + h/2,   y[III]  = y[0] + k[II]/2    mit k[II]     = f(x[II] , y[II])  * h<BR>
+x[IV]   = x[0] + h  ,   y[IV]   = y[0] + k[III]     mit k[III]    = f(x[III], y[III]) * h<BR>
+x[1]    = x[0] + h  ,   y[1]    = y[0] + k              k[IV]     = f(x[IV] , y[IV])  * h<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mit k         = (k[I] + 2*k[II] + 2*k[III] + k[IV])/6
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Bsp: 4*y' - 3*y = 3*cos(4*x) = (1/4) * (3*cos(4*x) + 3*y)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;P(1,3)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;h=1
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i32) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+kill(all);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_47.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i1) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+f(x,y):=(1/4) * (3*cos(4*x) + 3*y);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_48.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i2) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+h:1;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_49.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i3) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+pI:     [1          , 3];<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;kI:     f(pI[1], pI[2]) * h;<BR>
+pII:    [pI[1]+h/2  , pI[2]+kI];<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;kII:    f(pII[1], pII[2]) * h;<BR>
+pIII:   [pI[1]+h/2  , pI[2]+kII];<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;kIII:   f(pIII[1], pIII[2]) * h;<BR>
+pIV:    [pI[1]+h    , pI[2]+kIII];<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;kIV:    f(pIV[1], pIV[2]) * h;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;k:      (kI + 2*kII + 2*kIII + kIV)/6;<BR>
+p1:     [pI[1]+h    , pI[2]+k];
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_50.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Zeichnen
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i13) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+load(draw);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_51.png">
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  2.2 Code
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i14) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+kill(all);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_52.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Codeblock
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i1) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/* runge kutta implementierung zur lösung von DGL<BR>
+&nbsp;* Algorithmus laut de.wikipedia.org              */<BR>
+runge_kutta(f, P, h, n):= block (<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;/* modus auf numerisch stellen aber alten zustand merken */<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;save_num: numer,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;numer: true,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;/* ausreichend viele Punkte gefunden, nur den letzten zurück geben */<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;if (n < 0) then<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return([P]),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;/* alter Punkt */<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;x0   : P[1],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;y0   : P[2],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;/* Näherungsverfahren */<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;kI   : f(x0      , y0   ),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;yI   : y0   + (h/2) *kI  ,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;kII  : f(x0 + h/2, yI   ),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;yII  : y0   + (h/2) *kII ,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;kIII : f(x0 + h/2, yII  ),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;yIII : y0   +  h    *kIII,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;kIV  : f(x0 + h  , yIII ),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;/* neuen Punkt erzeugen */<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;x    : x0   +           h,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;y    : y0   + h*(1/6)*(kI + 2*(kII + kIII) + kIV),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;p    : [x,y], /* neuer Punkt */<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;/* alten zustand wieder herstellen */<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;numer: save_num,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;/* Erzeuge eine Liste aus dem Punkt aus der Parameterliste<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* und hänge weitere Punkte welche durch den rekursiven<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Aufruf entstehen hinten an */<BR>
+&nbsp;&nbsp;&nbsp;ps   : append([P], runge_kutta(f, p, h, n - 1)),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;return(ps)    <BR>
+);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_53.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+fd(x,y)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Angabe der DGL<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fd(x,y):= ???<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;entspricht:<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y'      = ???<BR>
+P0<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Startpunkt<BR>
+h<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;x-Schrittweite<BR>
+n<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Anzahl an Schritten
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i2) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+fd(x,y):=8 * sin(x) + 6*cos(x) - y;<BR>
+P0: [0,3];<BR>
+h: 0.5;<BR>
+n: 20;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_54.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i6) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+fd('x,'y);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_55.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Aufruf des Codeblocks
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i7) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+xy:runge_kutta(fd, P0, h, n);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_56.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Erzeuge ein Grafikobjekt aus den Punkten
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  2.3 Grafiken
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i8) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+load(draw);<BR>
+load(drawdf);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_57.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+draw2d graphic object
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i10) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+ps: points(xy)$
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Als Linie auf Richtungsfeld
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i11) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+fd('x,'y);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_58.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i12) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxdrawdf([fd('x,'y)],['x,0,10], ['y, -8, 9], <BR>
+color=red,<BR>
+ps);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_59.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Die werte aus dem runge kutta Modul folgen wie zu erwarten<BR>
+dem ensprechenden Richtungsfeld.
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Das richtige Ergebnis der Differentialgleichung als Referenz.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i13) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+y(x) := 7*sin(x)-cos(x)+%e^(-x);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_60.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+(%i14) 
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxdraw2d(<BR>
+xrange=[0, 10],<BR>
+yrange=[-8, 9],<BR>
+explicit(y('x), 'x, 0, 10),<BR>
+color=red,<BR>
+point_type=7,<BR>
+ps<BR>
+);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf06_img/Klepp_Jakob_Pf06_61.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Die Punkte nähern sich nach anfänglicher ungenauigkeit schnell an<BR>
+die erwartete Funktion an.
+</P>
+
+ <HR>
+ <SMALL> Created with <A HREF="http://wxmaxima.sourceforge.net/">wxMaxima</A>.</SMALL>
+
+ </BODY>
+</HTML>
