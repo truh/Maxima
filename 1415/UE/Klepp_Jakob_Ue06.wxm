@@ -73,6 +73,92 @@ Lösungskurve, die durch den Punkt P geht.
 Dokumentiere Deinen Lösungsweg ausführlich.
    [wxMaxima: comment end   ] */
 
+/* [wxMaxima: comment start ]
+Art              s(x)                                           ya
+================ ============================================== ==============================================
+Polynom          A[n]*x^(n) + A[n-1]*x^(n-1) + ... + A[0]*x^(0) a[n]*x^(n) + a[n-1]*x^(n-1) + ... + a[0]*x^(0)
+
+                 A*sin(w*x)
+Trigonometrisch  B*cos(w*x)                                     a*sin(w*x) + b*cos(w*x)      //w=kleines Omega
+                 A*sin(w*x) + B*cos(w*x)
+
+                                                                a * e^(b*x)     //wenn b != -p
+Exponential      A*e^(b*x)                                      a*x*e^(b*x)     //wenn b ==  p
+                                                                                // p in DGL 1. Ordnung:
+                                                                                // y' + py = s(x)
+                                                                                //     -^-
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+dgl;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+s_x: A_3 * x^3 + A_2 * x^2 + A_1 * x^1 + A_0 * x^0;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+ya: a_3 * x^3 + a_2 * x^2 + a_1 * x^1 + a_0 * x^0;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+yaI: diff(ya, x);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Ansatz in inhomogene DGL einsetzen
+um die unbestimmten Koeffizienten zu berechnen
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+unKoAnsatz: subst(['diff(y, x) = yaI, y=ya], dgl);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+unKoAnsatz: expand(unKoAnsatz);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+unKoAnsatz: ratsimp(unKoAnsatz);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Aufstellen des Gleichungssystem
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+coeffs: solve([
+
+coeff(unKoAnsatz, x, 0),
+coeff(unKoAnsatz, x, 1),
+coeff(unKoAnsatz, x, 2),
+coeff(unKoAnsatz, x, 3)
+
+])[1];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Durch einsetzen der berechneten Koeffizienten in den
+Lösungsansatz erhält man die partikuläre Lösung der DGL.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+yP: subst(coeffs, ya);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(
+explicit(yP, x, -10, 10),
+color=red,
+point_type=7,
+points([nb])
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Beweis dass die Richtige Lösungsgleichung gefunden wurde.
+   [wxMaxima: comment end   ] */
+
 /* [wxMaxima: subsect start ]
 
    [wxMaxima: subsect end   ] */
