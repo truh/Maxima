@@ -67,7 +67,7 @@ LÖsungsfunktion eine bestimmte auswählen.
    [wxMaxima: subsect end   ] */
 
 /* [wxMaxima: comment start ]
-Löse die nebenstehende Differentialgleichung symbolisch mittels
+Löse die Differentialgleichung symbolisch mittels
 Ansatzes einer Polynomfunktion und ermittle die Gleichung jener
 Lösungskurve, die durch den Punkt P geht.
 Dokumentiere Deinen Lösungsweg ausführlich.
@@ -164,7 +164,126 @@ Beweis dass die Richtige Lösungsgleichung gefunden wurde.
    [wxMaxima: subsect end   ] */
 
 /* [wxMaxima: comment start ]
+Löse die Differentialgleichung symbolisch mittels Variation der
+Konstanten und ermittle die Gleichung jener Lösungskurve, die durch
+den Punkt P geht.
+Dokumentiere Deinen Lösungsweg ausführlich.
+   [wxMaxima: comment end   ] */
 
+/* [wxMaxima: input   start ] */
+dgl;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Bilden der Homogenen DGL
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+dgl_H: 'diff(y, x) - 2*y = 0;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Berechnung der Homogenen DGL
+@M
+ode2 (eqn, dvar, ivar)
+eqn     (homogene) DGL
+dvar    abhängige Variable ... Funktion ... meist y
+ivar    unabhängige Variable ... meist x oder t
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+ode2(dgl_H,y,x);
+yH: rhs(%) /* wir brauchen nur die rechte Seite */;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Auffassen der Integrationkonstanten als Funktion
+-> Ansatz
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+ya: yH, %c=C(x);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Ableiten von ya
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+yaI: diff(ya, x, 1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Einsetzen des Ansatz in die DGL (Angabe)
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+h:dgl, 'diff('y,'x)=yaI, y=ya;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Nach C'(x) umformen
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+solve(h, C(x))$
+%[1];
+CIx:rhs(%)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+C'(x) integrieren
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+Cx: integrate(CIx, x, 1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+"Konstante" Cx in den Ansatz einsetzen um eine partikuläre Lösung
+der inhomogenen DGL zu erhalten.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+yp: ya, C(x)=Cx;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Durch addieren dieser partikulären Lösung und der homogenen DGL 
+erhalten wir die allgemeine Lösung der DGL.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+y(x):= ''yH + ''yp;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Probe:
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+probe:dgl,'diff(y,x)=diff(y(x),x),y=y(x);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+ratsimp(lhs(probe));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Ist die Probe erfolgreich?
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+is(%=rhs(dgl));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: subsect start ]
+
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Löse die nebenstehende Differentialgleichung numerisch mittels des
+Verfahrens von Runga-Kutta (Schrittweite 0.1).
    [wxMaxima: comment end   ] */
 
 /* [wxMaxima: subsect start ]
@@ -172,15 +291,10 @@ Beweis dass die Richtige Lösungsgleichung gefunden wurde.
    [wxMaxima: subsect end   ] */
 
 /* [wxMaxima: comment start ]
-
-   [wxMaxima: comment end   ] */
-
-/* [wxMaxima: subsect start ]
-
-   [wxMaxima: subsect end   ] */
-
-/* [wxMaxima: comment start ]
-
+Vergleiche die Ergebnisse der numerischen und analytischen Lösung
+graphisch und tabellarisch für die Abzissenwerte: { -2, -1.5, -1,
+-0.5, 0, 0.5, 1, 1.5, 2, 2.5, 3}
+(Abzissenwert gegen Differenz von symbolischer und analytischer Lösung).
    [wxMaxima: comment end   ] */
 
 /* [wxMaxima: section start ]
