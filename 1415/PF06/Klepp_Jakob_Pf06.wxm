@@ -403,6 +403,16 @@ unKoAnsatz:ratsimp(unKoAnsatz);
 Das Gleichungssystem wird manuell aufgestellt.
    [wxMaxima: comment end   ] */
 
+/* [wxMaxima: comment start ]
+Für polynom Ansatz
+gls1: [
+coeff(unKoAnsatz, x, 0),
+coeff(unKoAnsatz, x, 1),
+coeff(unKoAnsatz, x, 2),
+coeff(unKoAnsatz, x, 3)
+];
+   [wxMaxima: comment end   ] */
+
 /* [wxMaxima: input   start ] */
 gls1:[
 -3*a - 16*b = 0, /* sin */
