@@ -1,0 +1,113 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 14.12.0 ] */
+
+/* [wxMaxima: title   start ]
+Übungen zu Pf06
+  Jakob Klepp  
+  2015-04-21   
+   [wxMaxima: title   end   ] */
+
+/* [wxMaxima: section start ]
+
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(all);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Zur Berechnung einer Kostenfunktion dritten Grades
+für ein bestimmtes Produkt stehen einem Betrieb folgende
+Werte zur Verfügung:
+
+p0 = 80 ME. Der Übergang von den degressiven zu den progressiven
+Kosten liegt bei xk = 6 ME, die Fixkosten liegen bei 300 GE.
+
+Zu berechnen sind:
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+p0: 80;
+xK: 6;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: subsect start ]
+
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Kostenfunktion, Betriebsminimum und Mindestverkaufpreis
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: subsect start ]
+
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Gewinnfunktion für p = 280 GE.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: section start ]
+
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(all);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Gegeben ist dei Kostenfunktion eines Betriebs mit
+       1
+K(x) = - * (x - 6)^3 + 42
+       6
+
+Die Preisfunktion lautet
+
+p(x) = -1.5x + 18
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: subsect start ]
+
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Berechne die Kostenfunktion für den Betrieb!
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: subsect start ]
+
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Berechne die Gewinnschwellen un den maximalen Gewinn!
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: subsect start ]
+
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Berechne den COURNOT'schen Punkt sowie Höchstpreis und
+Sättigungsmenge!
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: subsect start ]
+
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Berechne die langfristige und kurzfristige Preisuntergrenze!
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: subsect start ]
+
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Zeichne die Graphen von K(x), Kv(x), p(x) und E(x) in ein
+Koordinatensystem und bestimme graohisch die gesuchten Größen
+von b), c) und d)
+   [wxMaxima: comment end   ] */
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$
