@@ -20,15 +20,26 @@ Zur Berechnung einer Kostenfunktion dritten Grades
 für ein bestimmtes Produkt stehen einem Betrieb folgende
 Werte zur Verfügung:
 
-p0 = 80 ME. Der Übergang von den degressiven zu den progressiven
-Kosten liegt bei xk = 6 ME, die Fixkosten liegen bei 300 GE.
+Das Betrieboptimum liegt bei x0 = 10 ME.
+Der Verkaufspreis für den Grenzbetrieb ist p0 = 80 GE.
+Der Übergang von den degressiven zu den progressiven
+Kosten liegt bei xk = 6 ME,
+die Fixkosten liegen bei 300 GE.
 
 Zu berechnen sind:
    [wxMaxima: comment end   ] */
 
 /* [wxMaxima: input   start ] */
+x0: 10;
 p0: 80;
 xK: 6;
+KF: 300;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+_K(x):= a*x^3 + b*x^2 + c*x +d;
+_KI(x):= ''(diff(_K(x), x));
+_KII(x):= ''(diff(_K(x), x, 2));
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: subsect start ]
@@ -36,15 +47,105 @@ xK: 6;
    [wxMaxima: subsect end   ] */
 
 /* [wxMaxima: comment start ]
-Kostenfunktion, Betriebsminimum und Mindestverkaufpreis
+
+Kostenfunktion
+
    [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+gls: [
+_KI(x0) = 0,
+_K(x0)/x = 80,
+_KII(x0) = 0,
+ d=KF
+];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+solutions: solve(gls, [a,b,c,d])[1];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+K(x):=''(subst(solutions, _K(x)));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(explicit(K(x), x, 0, 25),
+yrange=[0, 8000]);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+
+Betriebsminimum
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+Kvar: K(x) - KF;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+Ksvar: Kvar/x;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+KsvarI(x):= ''(diff(Ksvar, x));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+solve(KsvarI(xmin)=0, xmin);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+keine Ahnung was hier falschgelaufen ist, ist mir zu Komplex
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+
+Mindestverkaufpreis
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Kurzfristige oder langfristige Preisuntergrenze?
+Gehe mal von langfristiger aus
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+Ks: K(x)/x;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+KsI(x):= ''(diff(Ks, x));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+solutions1:solve(KsI(xopt)=0, xopt);
+xopt: rhs(solutions1[length(solutions1)]);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+Ks(x):=''(Ks);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+print("Die Preisuntergrenze liegt bei:")$
+print(Ks(xopt))$
+print("GE")$
+/* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: subsect start ]
 
    [wxMaxima: subsect end   ] */
 
 /* [wxMaxima: comment start ]
+
 Gewinnfunktion für p = 280 GE.
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Preisfunktion?
    [wxMaxima: comment end   ] */
 
 /* [wxMaxima: section start ]
@@ -56,7 +157,7 @@ kill(all);
 /* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: comment start ]
-Gegeben ist dei Kostenfunktion eines Betriebs mit
+Gegeben ist die Kostenfunktion eines Betriebs mit
        1
 K(x) = - * (x - 6)^3 + 42
        6
@@ -66,20 +167,57 @@ Die Preisfunktion lautet
 p(x) = -1.5x + 18
    [wxMaxima: comment end   ] */
 
+/* [wxMaxima: input   start ] */
+K(x):=(1/6)*(x-6)^3 + 42;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+p(x):= -1.5*x + 18;
+/* [wxMaxima: input   end   ] */
+
 /* [wxMaxima: subsect start ]
 
    [wxMaxima: subsect end   ] */
 
 /* [wxMaxima: comment start ]
+
 Berechne die Kostenfunktion für den Betrieb!
+
    [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+K(x);
+/* [wxMaxima: input   end   ] */
 
 /* [wxMaxima: subsect start ]
 
    [wxMaxima: subsect end   ] */
 
 /* [wxMaxima: comment start ]
+
 Berechne die Gewinnschwellen un den maximalen Gewinn!
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+E(x):= ''(x*p(x));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+G(x):=''(E(x) - K(x));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+solve(G(x)=0,x);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(explicit(G(x), x, -5, 10));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Schaut irgendwie schon lösbar aus
+k.P. warum Maxima das nicht hinbekommt.
    [wxMaxima: comment end   ] */
 
 /* [wxMaxima: subsect start ]
@@ -87,8 +225,10 @@ Berechne die Gewinnschwellen un den maximalen Gewinn!
    [wxMaxima: subsect end   ] */
 
 /* [wxMaxima: comment start ]
+
 Berechne den COURNOT'schen Punkt sowie Höchstpreis und
 Sättigungsmenge!
+
    [wxMaxima: comment end   ] */
 
 /* [wxMaxima: subsect start ]
@@ -96,7 +236,9 @@ Sättigungsmenge!
    [wxMaxima: subsect end   ] */
 
 /* [wxMaxima: comment start ]
+
 Berechne die langfristige und kurzfristige Preisuntergrenze!
+
    [wxMaxima: comment end   ] */
 
 /* [wxMaxima: subsect start ]
@@ -104,9 +246,11 @@ Berechne die langfristige und kurzfristige Preisuntergrenze!
    [wxMaxima: subsect end   ] */
 
 /* [wxMaxima: comment start ]
+
 Zeichne die Graphen von K(x), Kv(x), p(x) und E(x) in ein
 Koordinatensystem und bestimme graohisch die gesuchten Größen
 von b), c) und d)
+
    [wxMaxima: comment end   ] */
 
 /* Maxima can't load/batch files which end with a comment! */
