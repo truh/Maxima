@@ -1,0 +1,1060 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+ <HEAD>
+  <TITLE>Klepp_Jakob_H34</TITLE>
+  <META NAME="generator" CONTENT="wxMaxima">
+  <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+  <STYLE TYPE="text/css">
+body {
+  background-color: rgb(255,255,255);
+}
+.input {
+  color: rgb(0,0,255);
+}
+.comment {
+  color: rgb(0,0,0);
+  background-color: rgb(255,255,255);
+  padding: 2mm;
+}
+.image {
+  color: rgb(0,0,0);
+  padding: 2mm;
+}
+.section {
+  color: rgb(0,0,0);
+  font-size: 1.5em;
+  padding: 2mm;
+}
+.subsect {
+  color: rgb(0,0,0);
+  font-size: 1.2em;
+  padding: 2mm;
+}
+.title {
+  color: rgb(0,0,0);
+  font-size: 2em;
+  padding: 2mm;
+}
+.prompt {
+  color: rgb(255,0,0);
+}
+table {
+  border: 0px;
+}
+td {
+  vertical-align: top;
+  padding: 1mm;
+}
+  </STYLE>
+ </HEAD>
+ <BODY>
+
+<!---------------------------------------------------------->
+<!--          Created with wxMaxima version 14.12.0         -->
+<!---------------------------------------------------------->
+
+
+<!-- Title cell -->
+
+
+<P CLASS="title">
+Übungen zu Pf06<BR>
+&nbsp;&nbsp;Jakob Klepp  <BR>
+&nbsp;&nbsp;2015-04-21   
+</P>
+
+
+<!-- Section cell -->
+
+
+<P CLASS="section">
+ 1 
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+kill(all);
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Gegeben sie folgende Differentialgleichung mit<BR>
+Anfangsbedingung:
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+dgl: 'diff(y, x) - 2*y = 3*x^3 - 4*x;
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+nb: [-2, 3.38];
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  1.1 
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Erstelle zunächst eine Grafik, in der Du (ohne vorheriges Lösen<BR>
+der Differentialgleichung) das Richtungsfeld der gegeben<BR>
+Differentialgleichung einträgst.<BR>
+<BR>
+Erkläre an diesem Beispiel den Begriff Richtungsfeld.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+load(drawdf);
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+solve(dgl, 'diff(y, x));<BR>
+fI: rhs(%[1]);
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxdrawdf(fI);
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Eine unbestimmte Differentialgleichung hat unendlich viele<BR>
+Lösungsfunktionen. Diese werden im Richtungsfeld durch ein<BR>
+Feld an Steigungspfeil angedeutet.<BR>
+<BR>
+Durch eine Nebenbedingung lässt sich aus den unendlich vielen<BR>
+LÖsungsfunktion eine bestimmte auswählen.
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  1.2 
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Löse die Differentialgleichung symbolisch mittels<BR>
+Ansatzes einer Polynomfunktion und ermittle die Gleichung jener<BR>
+Lösungskurve, die durch den Punkt P geht.<BR>
+Dokumentiere Deinen Lösungsweg ausführlich.
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Art              s(x)                                           ya<BR>
+================ ============================================== ==============================================<BR>
+Polynom          A[n]*x^(n) + A[n-1]*x^(n-1) + ... + A[0]*x^(0) a[n]*x^(n) + a[n-1]*x^(n-1) + ... + a[0]*x^(0)<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A*sin(w*x)<BR>
+Trigonometrisch  B*cos(w*x)                                     a*sin(w*x) + b*cos(w*x)      //w=kleines Omega<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A*sin(w*x) + B*cos(w*x)<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a * e^(b*x)     //wenn b != -p<BR>
+Exponential      A*e^(b*x)                                      a*x*e^(b*x)     //wenn b ==  p<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// p in DGL 1. Ordnung:<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// y' + py = s(x)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//     -^-
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+dgl;
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+s_x: A_3 * x^3 + A_2 * x^2 + A_1 * x^1 + A_0 * x^0;
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+ya: a_3 * x^3 + a_2 * x^2 + a_1 * x^1 + a_0 * x^0;
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+yaI: diff(ya, x);
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Ansatz in inhomogene DGL einsetzen<BR>
+um die unbestimmten Koeffizienten zu berechnen
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+unKoAnsatz: subst(['diff(y, x) = yaI, y=ya], dgl);
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+unKoAnsatz: expand(unKoAnsatz);
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+unKoAnsatz: ratsimp(unKoAnsatz);
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Aufstellen des Gleichungssystem
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+coeffs: solve([<BR>
+<BR>
+coeff(unKoAnsatz, x, 0),<BR>
+coeff(unKoAnsatz, x, 1),<BR>
+coeff(unKoAnsatz, x, 2),<BR>
+coeff(unKoAnsatz, x, 3)<BR>
+<BR>
+])[1];
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Durch einsetzen der berechneten Koeffizienten in den<BR>
+Lösungsansatz erhält man die partikuläre Lösung der DGL.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+yP: subst(coeffs, ya);
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxdraw2d(<BR>
+explicit(yP, x, -10, 10),<BR>
+color=red,<BR>
+point_type=7,<BR>
+points([nb])<BR>
+);
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Beweis dass die Richtige Lösungsgleichung gefunden wurde.
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  1.3 
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Löse die Differentialgleichung symbolisch mittels Variation der<BR>
+Konstanten und ermittle die Gleichung jener Lösungskurve, die durch<BR>
+den Punkt P geht.<BR>
+Dokumentiere Deinen Lösungsweg ausführlich.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+dgl;
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Bilden der Homogenen DGL
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+dgl_H: 'diff(y, x) - 2*y = 0;
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Berechnung der Homogenen DGL<BR>
+@M<BR>
+ode2 (eqn, dvar, ivar)<BR>
+eqn     (homogene) DGL<BR>
+dvar    abhängige Variable ... Funktion ... meist y<BR>
+ivar    unabhängige Variable ... meist x oder t
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+ode2(dgl_H,y,x);<BR>
+yH: rhs(%) /* wir brauchen nur die rechte Seite */;
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Auffassen der Integrationkonstanten als Funktion<BR>
+-> Ansatz
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+ya: yH, %c=C(x);
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Ableiten von ya
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+yaI: diff(ya, x, 1);
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Einsetzen des Ansatz in die DGL (Angabe)
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+h:dgl, 'diff('y,'x)=yaI, y=ya;
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Nach C'(x) umformen
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+solve(h, C(x))$<BR>
+%[1];<BR>
+CIx:rhs(%)$
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+C'(x) integrieren
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+Cx: integrate(CIx, x, 1);
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+"Konstante" Cx in den Ansatz einsetzen um eine partikuläre Lösung<BR>
+der inhomogenen DGL zu erhalten.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+yp: ya, C(x)=Cx;
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Durch addieren dieser partikulären Lösung und der homogenen DGL <BR>
+erhalten wir die allgemeine Lösung der DGL.
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+y(x):= ''yH + ''yp;
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Probe:
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+probe:dgl,'diff(y,x)=diff(y(x),x),y=y(x);
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+ratsimp(lhs(probe));
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Ist die Probe erfolgreich?
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+is(%=rhs(dgl));
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  1.4 
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Löse die nebenstehende Differentialgleichung numerisch mittels des<BR>
+Verfahrens von Runga-Kutta (Schrittweite 0.1).
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+kill(all);
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+dgl: 'diff(y, x) - 2*y = 3*x^3 - 4*x;
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/* runge kutta implementierung zur lösung von DGL<BR>
+&nbsp;* Algorithmus laut de.wikipedia.org              */<BR>
+runge_kutta(f, P, h, n):= block ([x0, y0, kI, yI, kII, yII,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;kIII, yIII, kIV, x, y, p, ps],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;/* modus auf numerisch stellen aber alten zustand merken */<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;save_num: numer,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;numer: true,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;/* ausreichend viele Punkte gefunden, nur den letzten zurück geben */<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;if (n < 0) then<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return([P]),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;/* alter Punkt */<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;x0   : P[1],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;y0   : P[2],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;/* Näherungsverfahren */<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;kI   : f(x0      , y0   ),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;yI   : y0   + (h/2) *kI  ,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;kII  : f(x0 + h/2, yI   ),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;yII  : y0   + (h/2) *kII ,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;kIII : f(x0 + h/2, yII  ),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;yIII : y0   +  h    *kIII,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;kIV  : f(x0 + h  , yIII ),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;/* neuen Punkt erzeugen */<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;x    : x0   +           h,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;y    : y0   + h*(1/6)*(kI + 2*(kII + kIII) + kIV),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;p    : [x,y], /* neuer Punkt */<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;/* alten zustand wieder herstellen */<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;numer: save_num,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;/* Erzeuge eine Liste aus dem Punkt aus der Parameterliste<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* und hänge weitere Punkte welche durch den rekursiven<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Aufruf entstehen hinten an */<BR>
+&nbsp;&nbsp;&nbsp;ps   : append([P], runge_kutta(f, p, h, n - 1)),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;return(ps)    <BR>
+);
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+fd:rhs(''solve(dgl, 'diff(y,x))[1]);
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+fd(x,y):= ''fd;
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+P0:[0, 0];
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+h:0.1;
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+n: 30;
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+''fd('x,'y);<BR>
+f(x,y):= ''%;
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+P: [0,0];
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+x0   : P[1];<BR>
+y0   : P[2];<BR>
+kI   : f(x0      , y0   );<BR>
+yI   : y0   + (h/2) *kI  ;<BR>
+kII  : f(x0 + h/2, yI   );<BR>
+yII  : y0   + (h/2) *kII ;<BR>
+kIII : f(x0 + h/2, yII  );<BR>
+yIII : y0   +  h    *kIII;<BR>
+kIV  : f(x0 + h  , yIII );<BR>
+x    : x0   +           h;<BR>
+y    : y0   + h*(1/6)*(kI + 2*(kII + kIII) + kIV);<BR>
+p    : [x, y];
+  </SPAN></TD>
+</TR></TABLE>
+
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  1.5 
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Vergleiche die Ergebnisse der numerischen und analytischen Lösung<BR>
+graphisch und tabellarisch für die Abzissenwerte: { -2, -1.5, -1,<BR>
+-0.5, 0, 0.5, 1, 1.5, 2, 2.5, 3}<BR>
+(Abzissenwert gegen Differenz von symbolischer und analytischer Lösung).
+</P>
+
+
+<!-- Section cell -->
+
+
+<P CLASS="section">
+ 2 
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  2.1 
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  2.2 
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  2.3 
+</P>
+
+ <HR>
+ <SMALL> Created with <A HREF="http://wxmaxima.sourceforge.net/">wxMaxima</A>.</SMALL>
+
+ </BODY>
+</HTML>

@@ -286,6 +286,94 @@ Löse die nebenstehende Differentialgleichung numerisch mittels des
 Verfahrens von Runga-Kutta (Schrittweite 0.1).
    [wxMaxima: comment end   ] */
 
+/* [wxMaxima: input   start ] */
+kill(all);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+dgl: 'diff(y, x) - 2*y = 3*x^3 - 4*x;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+/* runge kutta implementierung zur lösung von DGL
+ * Algorithmus laut de.wikipedia.org              */
+runge_kutta(f, P, h, n):= block ([x0, y0, kI, yI, kII, yII,
+    kIII, yIII, kIV, x, y, p, ps],
+    /* modus auf numerisch stellen aber alten zustand merken */
+    save_num: numer,
+    numer: true,
+    /* ausreichend viele Punkte gefunden, nur den letzten zurück geben */
+    if (n < 0) then
+        return([P]),
+    /* alter Punkt */
+    x0   : P[1],
+    y0   : P[2],
+    /* Näherungsverfahren */
+    kI   : f(x0      , y0   ),
+    yI   : y0   + (h/2) *kI  ,
+    kII  : f(x0 + h/2, yI   ),
+    yII  : y0   + (h/2) *kII ,
+    kIII : f(x0 + h/2, yII  ),
+    yIII : y0   +  h    *kIII,
+    kIV  : f(x0 + h  , yIII ),
+    /* neuen Punkt erzeugen */
+    x    : x0   +           h,
+    y    : y0   + h*(1/6)*(kI + 2*(kII + kIII) + kIV),
+    p    : [x,y], /* neuer Punkt */
+    /* alten zustand wieder herstellen */
+    numer: save_num,
+    /* Erzeuge eine Liste aus dem Punkt aus der Parameterliste
+     * und hänge weitere Punkte welche durch den rekursiven
+     * Aufruf entstehen hinten an */
+   ps   : append([P], runge_kutta(f, p, h, n - 1)),
+    return(ps)    
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+fd:rhs(''solve(dgl, 'diff(y,x))[1]);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+fd(x,y):= ''fd;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+P0:[0, 0];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h:0.1;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+n: 30;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+''fd('x,'y);
+f(x,y):= ''%;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+P: [0,0];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+x0   : P[1];
+y0   : P[2];
+kI   : f(x0      , y0   );
+yI   : y0   + (h/2) *kI  ;
+kII  : f(x0 + h/2, yI   );
+yII  : y0   + (h/2) *kII ;
+kIII : f(x0 + h/2, yII  );
+yIII : y0   +  h    *kIII;
+kIV  : f(x0 + h  , yIII );
+x    : x0   +           h;
+y    : y0   + h*(1/6)*(kI + 2*(kII + kIII) + kIV);
+p    : [x, y];
+/* [wxMaxima: input   end   ] */
+
 /* [wxMaxima: subsect start ]
 
    [wxMaxima: subsect end   ] */
@@ -324,10 +412,6 @@ graphisch und tabellarisch für die Abzissenwerte: { -2, -1.5, -1,
 /* [wxMaxima: subsect start ]
 
    [wxMaxima: subsect end   ] */
-
-/* [wxMaxima: comment start ]
-
-   [wxMaxima: comment end   ] */
 
 /* Maxima can't load/batch files which end with a comment! */
 "Created with wxMaxima"$
