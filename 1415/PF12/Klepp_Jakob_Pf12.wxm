@@ -1,0 +1,946 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 14.12.0 ] */
+
+/* [wxMaxima: title   start ]
+ Pf12 2014-04-23 
+ Folgen & Reihen 
+  Potenzreihen   
+  Fourierreihen  
+   Jakob Klepp   
+   [wxMaxima: title   end   ] */
+
+/* [wxMaxima: title   start ]
+Folgen & Reihen
+   [wxMaxima: title   end   ] */
+
+/* [wxMaxima: comment start ]
+Folge                               Menge
+=====                               =====
+* Glied                             * Element
+<   >                               {   }
+* Reihenfolge wesentlich            * Reihenfolge der Menge
+                                      ist irrelevant
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Arithmetische Folgen (AF)           Geometrische Folgen (GF)
+=========================           ========================
+            | Folgen fangen mit dem ersten Glied an |
+<a1, a2, a3, ..., an>             <b1, b2, b3, ..., bn>
+    \  /\  /        ^                 \  /\  /        ^
+     +d  +d         |                  *q  *q         |
+                    |                                 |
+                    /                                 /
+        an = a1+(n-1)*d                    bn = b1*q^(n-1)
+                                          /
+                                          | q!= 1 : b1 * (q^n - 1)/(q - 1) 
+sn = n * [2*a1 + (n-1)*d] / 2       sn = < 
+                                          | q = 1 : b1 * n
+                                          \      
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Eigenschaften von Folgen
+========================
+  Monotonie
+  ---------
+
+  - streng monoton steigend                 a[n] <  a[n+1]
+    Folgeglied größer als vorheriges
+  - monoton steigend                        a[n] <= a[n+1]
+    Folgeglied größer/gleich wie vorheriges 
+  - monoton fallend                         a[n] >= a[n+1]
+  - streng monoton fallend                  a[n] >  a[n+1]
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Beschränktheit
+==============
+- b ... untere Schranke                     b <= a[*]
+  Ifinum größte untere Schranke
+- B ... obere Schranke                      B >= a[*]
+  Suprenum kleinste untere Schranke
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Beispiel Beschränktheit
+  Es wird überprüft 
+  - ob die Folge monoton ist
+  - ob ``b`` eine untere Schranke ist
+  - ob ``B`` eine obere Schranke ist
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(all);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+folge: ((3*n + 2)/(2*n - 1));
+b:1;
+B:2;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+monoton steigend?
+  a[1] > a[2] 
+  --> Folge kann nicht monoton steigend sein
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+monoton fallend?
+ a[n] >= a[n+1]
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+fallend: folge >= subst(['n='(n+1)], folge);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+/* Überprüfung der Ungleichung funktioniert nicht ohne
+   weiteres da sie nicht für die Menge aller reelen Zahlen
+   gültig ist */ 
+is(fallend);
+/* Die Ungleichung steht unter der Annahme das n>=1
+   da folge beim ersten Glied beginnen */
+assume(n>=1)$
+/* Jetzt da die nötige Annahme getroffen wurde
+   kann die Überprüfung durchgeführt werden */ 
+is(fallend);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Nun zu den Schranken
+B fällt schon mal als obere Schranke aus weil
+a1 > B:
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+folge > B, n=1;
+is(%);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+untere Schranke b
+b <= a[*]
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+untereSchranke: b <= folge;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+/* Wertebereich */
+assume(n>=1)$
+/* Überprüfen */ 
+is(untereSchranke);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+b ist eine untere Schranke für alle n 
+im Wertebereich der Natürlichen Zahlen
+        (laut dieser Überprüfung sogar für alle Reelen zahlen >= 1)
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Grenzwert
+=========
+  Nullfolge
+  ---------
+    Eine folge die gegen 0 geht.
+<1/n>      lim[n->∞] <1/n> = 0
+  Konvergenz
+  ----------
+    Eine monoton steigende Folge ist genau dann Konvergen
+    wenn sie nach oben beschränkt ist.
+    Eine monoton fallende Folge ist genau dann Konvergent
+    wenn sie nach unten beschränkt ist.
+  Divergenz
+  ---------
+    Existiert der Grenzwert nicht, so ist die Folge divergent.
+  Rechenregeln
+  ------------
+    (1) lim <a[n] + b[n]>  = lim <a[n]> + lim <b[n]>
+    (2) lim <a[n] - b[n]>  = lim <a[n]> - lim <b[n]>
+
+    (3) lim <a[n] * b[n]>  = lim <a[n]> * lim <b[n]>
+
+    (4) lim <a[n] / b[n]>  = lim <a[n]> / lim <b[n]>
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Reihen
+======
+  Reihe: Ausgangspunkt Folge <a1, a2, a3, ...>
+  Reihe dieser Folge: a1 + a2 + a3 + ...
+  Summe einer unendlichen Reihe
+  -----------------------------
+    Man bildet die Folge der **Partialsummen**
+    Wenn die Folge der Partialsummen konverfiert 
+     dann bezeichnet man den Grenzwert als Summe der
+     Unendlichen Reihe
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Partialsummen
+=============
+  Geometrische Folge: <b1, b1*q, b1*q^2, ... >
+  Reihe: b1 + b1*q + b1*q^2 + ...
+  Partialsummen:
+    s1 = b1
+    s2 = b1 + b1*q
+    s3 = b1 + b1*q + b1*q^2
+    ...
+
+  Folge der Partialsummen:
+<s1, s2, s3, ...>
+  --> Lösung der Reihe:
+    s = lim[n->∞] <s[n]>
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: section start ]
+Wirtschaftmathematische Anwendungen
+von Folgen & Reihen
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: subsect start ]
+Abschreibungsrechnung
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Lineare Abschreibung
+====================
+  Eine Maschine wird zu einem Preis von a0 = 65000€
+  angeschafft. Die nutzungsdauer beträgt 5 Jahre.
+  Nach 5 Jahren hat die Maschine einen Schrottwert 
+  von 5000€
+  + - - - - - - - - - - - - - - - - - - - +
+  : Bei der Linearen Abschreibung ist der :
+  : Jährliche Abschribungsbetrag konstant :
+  + - - - - - - - - - - - - - - - - - - - +
+<65000, 53000, 41000, 29000, 17000, 5000>
+     \     / \    / \    / \    / \    /
+     d=12000   -d     -d     -d     -d
+  Die Restwertfolge bildet eine arithmetische Folge.
+  Jahr  Restwert        Abschreibung    Restwert
+         Jahresbeginn                    Jahresende
+  ====  =============   ============    ===========
+     1          65000          12000          53000
+     2          53000          12000          41000
+     3          41000          12000          29000
+     4          29000          12000          17000
+     5          17000          12000           5000
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Geometrisch degressive Abschreibung
+===================================
+  Eine Maschine wird zu einem Preis von a0 = 65000€
+  angeschafft. Die nutzungsdauer beträgt 5 Jahre.
+  Nach 5 Jahren hat die Maschine einen Schrottwert 
+  von 5000€
+  + - - - - - - - - - - - - - - - - - - - - - - - +
+  : Bei der Geometrisch degressiven Abschreibung  :
+  : werden jedes Jahr gleichbleibend i=p%         :
+  : vom jeweiligen Restwert abgeschrieben         :
+  + - - - - - - - - - - - - - - - - - - - - - - - +
+  Jahr  Restwert           Abschreibung    Restwert
+         Jahresbeginn                           Jahresende
+  ====  =============   ===============    ===============
+     1             R0    A1 = i * R0          R1 = R0 - A1
+     2             R1    A2 = i * R1          R2 = R1 - A2
+     3             R2    A3 = i * R2          R3 = R2 - A3
+     n         R[n-1]   An = i * R[n-1]    Rn = R0*(1-i)^n
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Finden des Prozentsatzes
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+5000 = 65000 * (1-i)^5;
+solve(%, i);
+%[5], numer;
+100 * rhs(%);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: subsect start ]
+Rentenrechnung
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Rente
+=====
+  Eine Rente ist eine folge von Zahlungen in
+  gleicher höhe und in gleichen Zeitabschnitten.
+  Vorschüssige Rente
+  ------------------
+    Die einzelne Rentenzahlung erfolgt am Anfang
+    des zugehörigen Zeitabschnitts.
+
+    0-----1-----2-----3-----4----> Jahre
+    ^     ^     ^     ^
+    |R    |R    |R    |R    
+  Nachschüssige Rente
+  -------------------
+    Die Zahlung erfolgt am Ende des zugehörigen 
+    Zeitabschnitts.
+    0-----1-----2-----3-----4----> Jahre
+          ^     ^     ^     ^
+          |R    |R    |R    |R    
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Barwert, Endwert
+================
+             Aufzinsen:
+             Kn = K0*q^n
+       ______________________
+      /                      \
+  Barwert                  Endwert
+      \______________________/
+             Abzinsen:
+             K0 = Kn/q^n
+  Barwert
+  -------
+    Der Barwert ist der Wert, den zukünftige Zahlungen 
+ in der Gegenwart besitzen. Er wird durch Abzinsung 
+    der zukünftigen Zahlungen und anschließendes 
+    Summieren ermittelt.
+  Endwert
+  -------
+    Der Endwert von Einzahlungen und Auszahlungen ist 
+    der Wert, der sich durch Aufzinsung ergibt. Mit 
+    seiner Hilfe kann festgestellt werden, welchen Wert 
+    eine oder mehrere während einer Betrachtungsperiode 
+    geleisteten Zahlungen am Ende haben. 
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Beispiel:
+Endwert und Barwert einer vorschüssigen Rente
+=============================================
+  Zu jedem Jahresbeginn wird ein Betrag R = 1000€
+  eingezahlt und zu 5% verzinst.
+  Berechne:
+    a) Den Endwert nach 4 Jahren
+    b) Barwert der Rente
+     --------------------     :R*q^4
+    /                    \
+    |      ---------------\   :R*q^3
+    |     /                \
+    |     |      -----------\ :R*q^2
+    |     |     /           |
+    |     |     |      -----| :R*q
+    |     |     |     /     v
+    0-----1-----2-----3-----4----> Jahre
+    ^     ^     ^     ^     |E
+   R|    R|    R|    R|     v
+E4 = R*q^4 + R*q^3 + R*q^2 + R*q
+En = R*q*(q^n-1)/(q-1)
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+R: 1000;
+q: 1.05;
+n: 4;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Endwert
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+E: R*q*(q^n-1)/(q-1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Barwert
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+E/q^4;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Beispiel:
+Endwert und Barwert einer nachschüssigen Rente
+==============================================
+  Zu jedem Jahresbeginn wird ein Betrag R = 1000€
+  eingezahlt und zu 5% verzinst.
+  Berechne:
+    a) Den Endwert nach 4 Jahren
+    b) Barwert der Rente
+
+           ---------------     :R*q^3
+          /               \
+          |      ----------\   :R*q^2
+          |     /           \
+          |     |      ------\ :R*q
+          |     |     /   ,--|
+     |     |     |   `. v :R
+    0-----1-----2-----3-----4----> Jahre
+          ^     ^     ^     ^
+         R|    R|    R|    R|E    
+                            v
+E4 = R*q^3 + R*q^2 + R*q^1 + R
+En = R * (q^n-1)/(q-1)
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+R: 1000;
+q: 1.05;
+n: 4;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Endwert
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+E: R*(q^n-1)/(q-1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Barwert
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+E/q^4;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: subsect start ]
+Ratenzahlung
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Folgende 2 Angebote für eine Firma sind zu vergleichen:
+a) 6 Mio € sofort, 7x2 Mio in Jahresabständen
+   beginnend 1 Jahr nach der Sofortzahlung
+b) 5 Jahre hindurch 4 Mio €
+Kalkulationszinsatz 8%
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Die beiden Zahlungsarten werden 3 Jahre nach Zahlungsbeginn verglichen
+a)
+                                         2/1.08^4
+                         ------------------------
+                        /          2/1.08^3      \
+                       /-------------------      |
+  6*1.08^3            /      2/1.08^2      \     |
+  ----------------   /---------------      |     |
+ /      2*1.08^3  \ /    2/1.08      \     |     |
+ |      -----------|-----------      |     |     |
+ |     /     2*1.08|2/1.08     \     |     |     |
+ |     |      -----|-----      |     |     |     |
+ |     |     /     v     \     |     |     |     |
+ 0-----1-----2-----3-----4-----5-----6-----7-----8----> Jahre
+ ^     ^     ^     ^     ^     ^     ^     ^
+6|    2|    2|    2|    2|    2|    2|    2|
+b)
+  4*1.08^3
+  ----------------
+ /      4*1.08^2  \
+ |      -----------|
+ |     /     4*1.08|4/1.08
+ |     |      -----|-----
+ |     |     /     v     \
+ 0-----1-----2-----3-----4-----5-----6-----7-----8----> Jahre
+ ^     ^     ^     ^     ^
+4|    4|    4|    4|    4|
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Berechnung mit Geburtsmonat als Jahr
+Monat=1
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+/* Mit diesem Paket lassen sich unter anderem 
+   die summe einer geometrischen Folge berechnen */
+load(functs);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+q:1.08;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+6*q + 2 + 2/q + 2/q^2 + 2/q^3 + 2/q^4 + 2/q^5 + 2/q^6
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+a: 6*q              /* Die erste Zahlung */
+ + geosum(2, q, 7)  /* 7 weitere Zahlungen */
+ / q^5              /* Verschiebung weil die Abrechnung 
+                       für Jahr 1 durchgeführt wird */;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+4*q + 4 + 4/q + 4/q^2 + 4/q^3
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+b: geosum(4, q, 5)  /* Die 5 Zahlungen */
+ / q^3              /* Verschiebung weil die Abrechnung 
+                       für Jahr 1 durchgeführt wird */;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Der ganzen Idee unterliegt das Äquivalenzprinzip.
+Kapitalien können nur im bezug auf den gleichen Zeitpunkt
+verglichen werden.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: subsect start ]
+Rückzahlung eines Kredits
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Kredit über 10000 zu 10%
+Für die Rückzahlung wird vereinbart:
+    3000 nach einem Jahr
+    2000 nach dem 2. Jahr
+    4000 nach dem 3. Jahr
+    Rest nach dem 4. Jahr
+Wert Kredit:        10000 * 1.1^4 = 14641        \
+Wert 1. Rückzahlung  3000 * 1.1^3 =  3993 \       \
+Wert 2. Rückzahlung  2000 * 1.1^2 =  2420  > 10813 > Restrate: 3828
+Wert 3. Rückzahlung  4000 * 1.1   =  4400 /       /
+Tilgungsplan
+============
+==== ============ ====== ======== ======= ==========
+     Schuld                               Schuld
+Jahr Jahresbeginn Zinsen Annuität Tilgung Jahresende
+==== ============ ====== ======== ======= ==========
+   1        10000   1000     3000    2000       8000
+   2         8000    800     2000    1200       6800
+   3         6800    680     4000    3320       3480
+   4         3480    348     3828    3480          0
+==== ============ ====== ======== ======= ==========
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Folgende Rückzahlungsformen einer Schuld sind üblich
+Jährliche und Gleichbleibende Rückzahlungen
+    A (Annuität)
+ Die Rückzahlung erfolgt Nachschüssig 
+ Das heißt die erste Rückzahlung erfolgt ein Jahr nach der
+ Kreditvergabe
+ -> es handelt sich um einen nachschüssigen Rentenvorgang
+    Der Endwert entspricht dem Endwert der Schuld
+
+    Endwert der Schuld: K   K[0]*q^n
+    Endwert nachschüssige Rente: A*(q^n -1)/(q-1)
+    K[0]*q^n = A*(q^n -1)/(q-1)
+
+    A=K[0]*q^n*(q-1)/(q^n-1)
+Bsp:
+====
+ K[0] = 10000; i=10%
+ Gleichbleibende Annuität
+ Tilgungsplan:
+  Kreditsumme: 10000
+  Jahre 4
+  Prozentsatz 10%
+ Annuität 3154.71
+==== ============ ======= ======== ======= ==========
+     Schuld                                Schuld
+Jahr Jahresbeginn  Zinsen Annuität Tilgung Jahresende
+==== ============ ======= ======== ======= ==========
+   1     10000.00 1000.00  3154.71 2154.71    7845.29
+   2      7845.29  784.53  3154.71 2370.18    5475.11
+   3      5475.11  547.51  3154.71 2607.20    2867.91
+   4      2867.91  286.79  3154.71 2867.91          0
+==== ============ ======= ======== ======= ==========
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: subsect start ]
+Block: Kredit Tilgungsplan
+   [wxMaxima: subsect end   ] */
+
+/* [wxMaxima: comment start ]
+Berechnung der Annuität
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+annuitat(K0, q, n):=K0 * q^n * (q-1) / (q^n - 1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Kredit Tilgungsplan
+<-
+  Kreditsumme   K0
+  Laufzeit       n
+  Prozentsatz    s
+  Annuität       A
+->
+  List²
+  // (K0=10000, n=4, s=10/100, A=3154.71)->
+  //     , Schuld      ,        ,         ,        , Schuld 
+  // Jahr, Jahresbeginn,  Zinsen, Annuität, Tilgung, Jahresende
+   [[   1,     10000.00, 1000.00,  3154.71, 2154.71,    7845.29], 
+    [   2,      7845.29,  784.53,  3154.71, 2370.18,    5475.11],
+    [   3,      5475.11,  547.51,  3154.71, 2607.20,    2867.91],
+    [   4,      2867.91,  286.79,  3154.71, 2867.91,       0.00]]
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+kredit_tilgung(K0, n, s, A):=block(
+    [i:1,
+     K_beginn,
+     zinsen,
+     tilgung,
+     K_ende:K0,
+     list:[]],
+loop, if(i>n) then (return(list)),
+    K_beginn: K_ende,
+    zinsen: K_beginn*s,
+    tilgung: A - zinsen,
+    K_ende: K_beginn - tilgung,
+    list: append(list, [[i, K_beginn, zinsen, A, tilgung, K_ende]]),
+    i:i+1,
+    go(loop)
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+/* Kreditsumme */
+K0: 10000;
+/* Laufzeit */
+n: 4;
+/* Zinssatz */
+s: 10/100; /* = 10% */
+/* Annuität */
+A: annuitat(K0, 1+s, n);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+kredit_tilgung(K0, n, s, A);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: title   start ]
+Unendliche Reihen
+   [wxMaxima: title   end   ] */
+
+/* [wxMaxima: comment start ]
+Unendliche geometrische Reihen:
+
+  a + a*q + a*q^2 = a/(1-q)  ...  wenn |q| < 1
+  ∞
+  Σ a*q^n = a/(1-q)          ...  Konvergent für |q| < 1
+ n=0
+Allgemein:
+                         ∞
+  Eine unendliche Reihe  Σ c[n] = c[1] + c[2] + c[3] + … + c[n] + …
+                        n=0
+  Summe der Partialsummen konvergiert
+  Der Grenzwert der Folge der Partialsummen heißt 
+"Summe der unendlichen Reihen."
+Konvergenz von Reihen:
+  Kriterien:
+  - Notwendige Kriterien                      ∞
+    Erforderlich für due Konvergenz der Reihe Σ c[n]
+    ist dass die Glieder dieser Reihe eine   n=0
+    Nullfolge bilden: lim c[n] = 0 
+                      n→∞
+  - Hinreichende Kriterien
+    Quozientenkriterium:                ∞
+      gegeben sei die Unendliche Reihe: Σ c[n]
+      man berechne den lim der         n=0
+      Quotienten zweier aufeinander folgender Glieder: g = lim |c[n+1]/c[n]|
+        g < 1: Reihe konvergent                            n→∞
+        g = 1: ?
+        g > 1: Reihe divergent
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: title   start ]
+Potenzreihen
+   [wxMaxima: title   end   ] */
+
+/* [wxMaxima: comment start ]
+     ∞
+Def: Σ a[n]*x^n = a[0] + a[1]*x + a[2]*x^2 + a[3]*x^3 + …
+    n=0
+  Zahlen a[n] (n= 0,1,2,3) Koeffizienten der Potenzreihe
+  Konvergenz von Potenzreihen (3 Möglichkeiten):
+  - Potenzreihe konvergiert nur für x=0
+  - Potenzreihe konvergiert für alle x
+  - Die Potenzreihe hat ein r>0 (Konvergenzradius) so dass
+    die Reihe für |x|<r Konvergent ist 
+          und für |x|>r Divergent ist
+      findet man mit r = lim |a[n]/(a[n+1])|
+                         n→∞
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Anwendung von Potenzreihen
+Basis für Anwendung:
+  Mit konvergenten Potenzreihen können die gleichen
+  Rechenoperationen (+,*, ...) wir mit endlichen Summen
+  Insbesonders können konvergente Potenzreihen gliedweise
+  differenziert und integriert werden
+ *Beispiele für die Anwendung:
+  - berechnung von Funktionswerten
+    (sin, cos, tan e^*, ...)
+  - aufstellen von Näherungsformeln
+  - integration nach Potenreihen entwicklung
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Entwicklung von Potenzreihen
+angenommen man hat eine Funktion f(x) als Potenzreihe
+entwickelt. Das heißt man kann f(x) schreiben als
+  f(x) = a[0] + a[1]*x + a[2]*x^2 + a[3]*x^3 + …
+Dann sind konkret die unbekannten Koeffizienten 
+  a[0], a[1], a[2], a[3]
+zu bestimmen
+                                       |                |
+f   (x) = a[0] + a[1]*x + a[2]*x^2 + a[3]*x^3 + … | f   (0) = a[0] | a[0] = f   (0) / 0!
+                                                  |                |
+f'  (x) =        a[1]*x + a[2]*x^2 + a[3]*x^3 + … | f'  (0) = a[1] | a[1] = f'  (0) / 1!
+                                                  |                |
+f'' (x) =                 a[2]*x^2 + a[3]*x^3 + … | f'' (0) = a[2] | a[2] = f'' (0) / 2!
+                                                  |                |
+f'''(x) =                            a[3]*x^3 + … | f'''(0) = a[3] | a[3] = f'''(0) / 3!
+                                                  |                |
+Def: n! = n * (n-1) * (n-2) * … * 1
+     0! = 1
+"n Faktorielle"  "n Fakultät"
+Damit erhält man 
+ +-------------------------------------------------------------+
+ |                                                             |
+ |  f(x) = f(0) + f'(0)*x/1! + f''(0)*x^2/2! + f'''(0)*x^3/3!  |
+ |                                                             |
+ +-------------------------------------------------------------+
+                        Taylorreihe
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: title   start ]
+Taylor Reihen
+   [wxMaxima: title   end   ] */
+
+/* [wxMaxima: comment start ]
+ +-------------------------------------------------------------+
+ |                                                             |
+ |  f(x) = f(0) + f'(0)*x/1! + f''(0)*x^2/2! + f'''(0)*x^3/3!  |
+ |                                                             |
+ +-------------------------------------------------------------+
+                        Taylorreihe
+Entwicklung von sin(x) als Taylorreihe
+                    |
+  f   (x) =  sin(x) | f   (0) =  0
+                    |
+  f'  (x) =  cos(x) | f'  (0) =  1 
+                    |
+  f'' (x) = -sin(x) | f'' (0) = -0
+                    |
+  f'''(x) = -cos(x) | f'''(0) = -1
+                    |
+sin(x) = 0*x^0/0! + 1*x^1/1! - 0*x^2/2! - 1*x^3/3! + 0*x^4/4! + 1*x^5/5! + ...
+sin(x) = x^1/1! - x^3/3! + x^5/5! - x^7/7! + x^9/9! - x^11/11! + ...
+         ∞
+sin(x) = Σ (-1)^(i+1) * x^(2*i -1) / (2*i -1)!
+        n=1
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: section start ]
+Test der Taylorreihe sin(x)
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: input   start ] */
+numer:false;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(all);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+taylor_sin(x):=sum( ((-1)^(i+1) * x^(2*i -1) / factorial(2*i -1)), i, 1, 888)
+/* 888 = ∞ */;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+taylor_sin(0)
+/*nicht anzeigen, Ergebnis zu lang=Maxima crash */$
+float(%), numer;
+sin(0);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+taylor_sin(1)
+/*nicht anzeigen, Ergebnis zu lang=Maxima crash */$
+float(%), numer;
+sin(1), numer;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+taylor_sin(%pi/2)
+/*nicht anzeigen, Ergebnis zu lang=Maxima crash */$
+float(%), numer;
+sin(%pi/2);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+taylor_sin(%pi)
+/*nicht anzeigen, Ergebnis zu lang=Maxima crash */$
+float(%), numer;
+sin(%pi);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: title   start ]
+Differenzieren & Integrieren
+mit Taylorreihen
+   [wxMaxima: title   end   ] */
+
+/* [wxMaxima: section start ]
+"Taylorreihen sind differenzierbar"
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: comment start ]
+Durch das differenzieren jedes einzelnen Gliedes einer
+Taylorreihe erhält man eine Taylorreihedie dem Differential
+der Funktion entspricht.
+
+sin(x)  = x/1! - x^3/3!   + x^5/5!   - x^7/7!   + ...
+
+sin'(x) = 1/1! - 3*x^2/3! + 5*x^4/5! - 7*x^6/7! + ... =
+
+        = 1    -   x^2/2! + x^4/4!   - x^6/6!   + ... = cos(x)
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: section start ]
+Eulersche Identidät
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(all);
+load(draw)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Reihen in C (komplexer Zahlenraum):
+
+            a=r*cos(φ)
+            b=r*sin(φ)
+            __________
+           /          V
+  z = a + j*b        z = r( cos(φ) + j*sin(φ) )
+           ^__________/
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(
+    xrange=[-0.1, 2.2], yrange=[-0.2, 1.1], 
+    head_length = 0.05, head_type = 'nofilled,
+    color=blue,
+    vector([0,0], [2,0]), label(["a", 1,-0.1]),
+ vector([2,0], [0,1]), label(["b", 2.1, 0.5]),
+    color=green,
+    vector([0,0], [2,1]), label(["r", 1,0.6])
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+komplexe Zahl als Vektor
+
+  z = a + j*b 
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+phi:0.5;
+wxdraw2d(
+    xrange=[-1.8, 1.8],
+    yrange=[-1.1, 1.1],
+    grid=true,
+
+    transparent=true,
+    ellipse(0,0,1,1,0,360),
+
+    head_length = 0.05, head_type = 'nofilled,
+    color=blue,
+    vector([0,0],[cos(phi), 0]),            label(["cos φ", cos(phi)/2,           0]),
+    vector([cos(phi), 0],[0, sin(phi)]),    label(["sin φ",   cos(phi),  sin(phi)/2]),
+    color=green,
+    vector([0,0],[cos(phi),sin(phi)]),      label([    "1", cos(phi)/2,  sin(phi)/2])
+);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+komplexe Zahl im Einheitskreis
+
+  z = r( cos(φ) + j*sin(φ) )
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+komplexe Zahl in Exponentialform
+
+  e^(j*φ) = cos(φ) + j*sin(φ)
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+komplexe Zahl als Taylorreihe
+
+  e^(j*φ) = 1 + (j*φ)/1! + (j*φ)^2/2! + (j*φ)^3/3! + (j*φ)^4/4! + ... =
+
+          = 1 +   j*φ/1! -     φ^2/2! +   j*φ^3/3! +     φ^4/4! + j*φ^5/5! - φ^6/6! - j*φ^7/7! + ... =
+           ---   ~~~~~~~~     --------   ~~~~~~~~~~     -------- ~~~~~~~~~~ -------- ~~~~~~~~~~
+
+          = 1 - φ^2/2! + φ^4/4! - φ^6/6! + ... + j( φ/1! - φ^3/3! + φ^5/5! - φ^7/7! + ...)
+           ------------------------------------ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                      cos(φ)                                  j*sin(φ)
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: section start ]
+Integration durch Reihenentwicklung
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: comment start ]
+Dichtefunktion der standardisierten Normalverteilung
+
+  g(x) = 1/sqrt(2*π) * e^(-x^2/2)
+
+Aufgabe:
+         u                 u
+         /                 /
+  G(u) = \ g(x) dx = 1/2 + \ g(x) dx
+         /                 /
+        -∞                 0
+
+u
+/
+\ g(x) dx    nicht analytisch lösbar
+/
+0
+
+\----> Integration durch Reihenentwicklung
+  Der Integrant wird als Taylorreihe entwickelt und
+  die Integration gliedweise durchgeführt
+
+  e^(-x^2/2) = 1 - x^2/2 + (x^2/2)^2/2! + (x^2/2)^3/3! + ...
+
+  /
+  \ e^(-x^2/2) dx = x - x^3/(2*3) + x^5/(2!*4*5) - x^7/(3!*7*8) + ...
+  /
+
+  u
+  /
+  \ e^(-x^2/2) dx = u - u^3/(2*3) + u^5/(2!*4*5) - u^7/(3!*7*8) + ... - 0
+  /
+  0
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: title   start ]
+Fourierreihen
+   [wxMaxima: title   end   ] */
+
+/* [wxMaxima: comment start ]
+Noch nicht gelernt
+   [wxMaxima: comment end   ] */
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$

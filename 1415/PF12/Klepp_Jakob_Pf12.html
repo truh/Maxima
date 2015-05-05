@@ -1,0 +1,1641 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+ <HEAD>
+  <TITLE>Klepp_Jakob_Pf12</TITLE>
+  <META NAME="generator" CONTENT="wxMaxima">
+  <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+  <STYLE TYPE="text/css">
+body {
+  background-color: rgb(255,255,255);
+}
+.input {
+  color: rgb(0,0,255);
+}
+.comment {
+  color: rgb(0,0,0);
+  background-color: rgb(255,255,255);
+  padding: 2mm;
+}
+.image {
+  color: rgb(0,0,0);
+  padding: 2mm;
+}
+.section {
+  color: rgb(0,0,0);
+  font-size: 1.5em;
+  padding: 2mm;
+}
+.subsect {
+  color: rgb(0,0,0);
+  font-size: 1.2em;
+  padding: 2mm;
+}
+.title {
+  color: rgb(0,0,0);
+  font-size: 2em;
+  padding: 2mm;
+}
+.prompt {
+  color: rgb(255,0,0);
+}
+table {
+  border: 0px;
+}
+td {
+  vertical-align: top;
+  padding: 1mm;
+}
+  </STYLE>
+ </HEAD>
+ <BODY>
+
+<!---------------------------------------------------------->
+<!--          Created with wxMaxima version 14.12.0         -->
+<!---------------------------------------------------------->
+
+
+<!-- Title cell -->
+
+
+<P CLASS="title">
+ Pf12 2014-04-23 <BR>
+&nbsp;Folgen & Reihen <BR>
+&nbsp;&nbsp;Potenzreihen   <BR>
+&nbsp;&nbsp;Fourierreihen  <BR>
+&nbsp;&nbsp;&nbsp;Jakob Klepp   
+</P>
+
+
+<!-- Title cell -->
+
+
+<P CLASS="title">
+Folgen & Reihen
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Folge                               Menge<BR>
+=====                               =====<BR>
+* Glied                             * Element<BR>
+<   >                               {   }<BR>
+* Reihenfolge wesentlich            * Reihenfolge der Menge<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ist irrelevant
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Arithmetische Folgen (AF)           Geometrische Folgen (GF)<BR>
+=========================           ========================<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| Folgen fangen mit dem ersten Glied an |<BR>
+<a1, a2, a3, ..., an>             <b1, b2, b3, ..., bn><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;\  /\  /        ^                 \  /\  /        ^<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+d  +d         |                  *q  *q         |<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|                                 |<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/                                 /<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;an = a1+(n-1)*d                    bn = b1*q^(n-1)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| q!= 1 : b1 * (q^n - 1)/(q - 1) <BR>
+sn = n * [2*a1 + (n-1)*d] / 2       sn = < <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| q = 1 : b1 * n<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\      
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Eigenschaften von Folgen<BR>
+========================<BR>
+&nbsp;&nbsp;Monotonie<BR>
+&nbsp;&nbsp;---------<BR>
+<BR>
+&nbsp;&nbsp;- streng monoton steigend                 a[n] <  a[n+1]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Folgeglied größer als vorheriges<BR>
+&nbsp;&nbsp;- monoton steigend                        a[n] <= a[n+1]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Folgeglied größer/gleich wie vorheriges <BR>
+&nbsp;&nbsp;- monoton fallend                         a[n] >= a[n+1]<BR>
+&nbsp;&nbsp;- streng monoton fallend                  a[n] >  a[n+1]
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Beschränktheit<BR>
+==============<BR>
+- b ... untere Schranke                     b <= a[*]<BR>
+&nbsp;&nbsp;Ifinum größte untere Schranke<BR>
+- B ... obere Schranke                      B >= a[*]<BR>
+&nbsp;&nbsp;Suprenum kleinste untere Schranke
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Beispiel Beschränktheit<BR>
+&nbsp;&nbsp;Es wird überprüft <BR>
+&nbsp;&nbsp;- ob die Folge monoton ist<BR>
+&nbsp;&nbsp;- ob ``b`` eine untere Schranke ist<BR>
+&nbsp;&nbsp;- ob ``B`` eine obere Schranke ist
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+kill(all);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf12_img/Klepp_Jakob_Pf12_0.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+folge: ((3*n + 2)/(2*n - 1));<BR>
+b:1;<BR>
+B:2;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf12_img/Klepp_Jakob_Pf12_1.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+monoton steigend?<BR>
+&nbsp;&nbsp;a[1] > a[2] <BR>
+&nbsp;&nbsp;--> Folge kann nicht monoton steigend sein
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+monoton fallend?<BR>
+&nbsp;a[n] >= a[n+1]
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+fallend: folge >= subst(['n='(n+1)], folge);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf12_img/Klepp_Jakob_Pf12_2.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/* Überprüfung der Ungleichung funktioniert nicht ohne<BR>
+&nbsp;&nbsp;&nbsp;weiteres da sie nicht für die Menge aller reelen Zahlen<BR>
+&nbsp;&nbsp;&nbsp;gültig ist */ <BR>
+is(fallend);<BR>
+/* Die Ungleichung steht unter der Annahme das n>=1<BR>
+&nbsp;&nbsp;&nbsp;da folge beim ersten Glied beginnen */<BR>
+assume(n>=1)$<BR>
+/* Jetzt da die nötige Annahme getroffen wurde<BR>
+&nbsp;&nbsp;&nbsp;kann die Überprüfung durchgeführt werden */ <BR>
+is(fallend);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf12_img/Klepp_Jakob_Pf12_3.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Nun zu den Schranken<BR>
+B fällt schon mal als obere Schranke aus weil<BR>
+a1 > B:
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+folge > B, n=1;<BR>
+is(%);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf12_img/Klepp_Jakob_Pf12_4.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+untere Schranke b<BR>
+b <= a[*]
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+untereSchranke: b <= folge;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf12_img/Klepp_Jakob_Pf12_5.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/* Wertebereich */<BR>
+assume(n>=1)$<BR>
+/* Überprüfen */ <BR>
+is(untereSchranke);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf12_img/Klepp_Jakob_Pf12_6.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+b ist eine untere Schranke für alle n <BR>
+im Wertebereich der Natürlichen Zahlen<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(laut dieser Überprüfung sogar für alle Reelen zahlen >= 1)
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Grenzwert<BR>
+=========<BR>
+&nbsp;&nbsp;Nullfolge<BR>
+&nbsp;&nbsp;---------<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Eine folge die gegen 0 geht.<BR>
+<1/n>      lim[n->∞] <1/n> = 0<BR>
+&nbsp;&nbsp;Konvergenz<BR>
+&nbsp;&nbsp;----------<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Eine monoton steigende Folge ist genau dann Konvergen<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;wenn sie nach oben beschränkt ist.<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Eine monoton fallende Folge ist genau dann Konvergent<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;wenn sie nach unten beschränkt ist.<BR>
+&nbsp;&nbsp;Divergenz<BR>
+&nbsp;&nbsp;---------<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Existiert der Grenzwert nicht, so ist die Folge divergent.<BR>
+&nbsp;&nbsp;Rechenregeln<BR>
+&nbsp;&nbsp;------------<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;(1) lim <a[n] + b[n]>  = lim <a[n]> + lim <b[n]><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;(2) lim <a[n] - b[n]>  = lim <a[n]> - lim <b[n]><BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;(3) lim <a[n] * b[n]>  = lim <a[n]> * lim <b[n]><BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;(4) lim <a[n] / b[n]>  = lim <a[n]> / lim <b[n]><BR>
+
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Reihen<BR>
+======<BR>
+&nbsp;&nbsp;Reihe: Ausgangspunkt Folge <a1, a2, a3, ...><BR>
+&nbsp;&nbsp;Reihe dieser Folge: a1 + a2 + a3 + ...<BR>
+&nbsp;&nbsp;Summe einer unendlichen Reihe<BR>
+&nbsp;&nbsp;-----------------------------<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Man bildet die Folge der **Partialsummen**<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Wenn die Folge der Partialsummen konverfiert <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dann bezeichnet man den Grenzwert als Summe der<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Unendlichen Reihe
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Partialsummen<BR>
+=============<BR>
+&nbsp;&nbsp;Geometrische Folge: <b1, b1*q, b1*q^2, ... ><BR>
+&nbsp;&nbsp;Reihe: b1 + b1*q + b1*q^2 + ...<BR>
+&nbsp;&nbsp;Partialsummen:<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;s1 = b1<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;s2 = b1 + b1*q<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;s3 = b1 + b1*q + b1*q^2<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;...<BR>
+<BR>
+&nbsp;&nbsp;Folge der Partialsummen:<BR>
+<s1, s2, s3, ...><BR>
+&nbsp;&nbsp;--> Lösung der Reihe:<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;s = lim[n->∞] <s[n]>
+</P>
+
+
+<!-- Section cell -->
+
+
+<P CLASS="section">
+ 1 Wirtschaftmathematische Anwendungen<BR>
+von Folgen & Reihen
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  1.1 Abschreibungsrechnung
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Lineare Abschreibung<BR>
+====================<BR>
+&nbsp;&nbsp;Eine Maschine wird zu einem Preis von a0 = 65000€<BR>
+&nbsp;&nbsp;angeschafft. Die nutzungsdauer beträgt 5 Jahre.<BR>
+&nbsp;&nbsp;Nach 5 Jahren hat die Maschine einen Schrottwert <BR>
+&nbsp;&nbsp;von 5000€<BR>
+&nbsp;&nbsp;+ - - - - - - - - - - - - - - - - - - - +<BR>
+&nbsp;&nbsp;: Bei der Linearen Abschreibung ist der :<BR>
+&nbsp;&nbsp;: Jährliche Abschribungsbetrag konstant :<BR>
+&nbsp;&nbsp;+ - - - - - - - - - - - - - - - - - - - +<BR>
+<65000, 53000, 41000, 29000, 17000, 5000><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\     / \    / \    / \    / \    /<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;d=12000   -d     -d     -d     -d<BR>
+&nbsp;&nbsp;Die Restwertfolge bildet eine arithmetische Folge.<BR>
+&nbsp;&nbsp;Jahr  Restwert        Abschreibung    Restwert<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Jahresbeginn                    Jahresende<BR>
+&nbsp;&nbsp;====  =============   ============    ===========<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1          65000          12000          53000<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2          53000          12000          41000<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3          41000          12000          29000<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4          29000          12000          17000<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5          17000          12000           5000
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Geometrisch degressive Abschreibung<BR>
+===================================<BR>
+&nbsp;&nbsp;Eine Maschine wird zu einem Preis von a0 = 65000€<BR>
+&nbsp;&nbsp;angeschafft. Die nutzungsdauer beträgt 5 Jahre.<BR>
+&nbsp;&nbsp;Nach 5 Jahren hat die Maschine einen Schrottwert <BR>
+&nbsp;&nbsp;von 5000€<BR>
+&nbsp;&nbsp;+ - - - - - - - - - - - - - - - - - - - - - - - +<BR>
+&nbsp;&nbsp;: Bei der Geometrisch degressiven Abschreibung  :<BR>
+&nbsp;&nbsp;: werden jedes Jahr gleichbleibend i=p%         :<BR>
+&nbsp;&nbsp;: vom jeweiligen Restwert abgeschrieben         :<BR>
+&nbsp;&nbsp;+ - - - - - - - - - - - - - - - - - - - - - - - +<BR>
+&nbsp;&nbsp;Jahr  Restwert           Abschreibung    Restwert<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Jahresbeginn                           Jahresende<BR>
+&nbsp;&nbsp;====  =============   ===============    ===============<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1             R0    A1 = i * R0          R1 = R0 - A1<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2             R1    A2 = i * R1          R2 = R1 - A2<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3             R2    A3 = i * R2          R3 = R2 - A3<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;n         R[n-1]   An = i * R[n-1]    Rn = R0*(1-i)^n
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Finden des Prozentsatzes
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+5000 = 65000 * (1-i)^5;<BR>
+solve(%, i);<BR>
+%[5], numer;<BR>
+100 * rhs(%);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf12_img/Klepp_Jakob_Pf12_7.png">
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  1.2 Rentenrechnung
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Rente<BR>
+=====<BR>
+&nbsp;&nbsp;Eine Rente ist eine folge von Zahlungen in<BR>
+&nbsp;&nbsp;gleicher höhe und in gleichen Zeitabschnitten.<BR>
+&nbsp;&nbsp;Vorschüssige Rente<BR>
+&nbsp;&nbsp;------------------<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Die einzelne Rentenzahlung erfolgt am Anfang<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;des zugehörigen Zeitabschnitts.<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;0-----1-----2-----3-----4----> Jahre<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;^     ^     ^     ^<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|R    |R    |R    |R    <BR>
+&nbsp;&nbsp;Nachschüssige Rente<BR>
+&nbsp;&nbsp;-------------------<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Die Zahlung erfolgt am Ende des zugehörigen <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Zeitabschnitts.<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;0-----1-----2-----3-----4----> Jahre<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;^     ^     ^     ^<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|R    |R    |R    |R    
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Barwert, Endwert<BR>
+================<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aufzinsen:<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Kn = K0*q^n<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______________________<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/                      \<BR>
+&nbsp;&nbsp;Barwert                  Endwert<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\______________________/<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Abzinsen:<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;K0 = Kn/q^n<BR>
+&nbsp;&nbsp;Barwert<BR>
+&nbsp;&nbsp;-------<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Der Barwert ist der Wert, den zukünftige Zahlungen <BR>
+&nbsp;in der Gegenwart besitzen. Er wird durch Abzinsung <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;der zukünftigen Zahlungen und anschließendes <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Summieren ermittelt.<BR>
+&nbsp;&nbsp;Endwert<BR>
+&nbsp;&nbsp;-------<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Der Endwert von Einzahlungen und Auszahlungen ist <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;der Wert, der sich durch Aufzinsung ergibt. Mit <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;seiner Hilfe kann festgestellt werden, welchen Wert <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;eine oder mehrere während einer Betrachtungsperiode <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;geleisteten Zahlungen am Ende haben. 
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Beispiel:<BR>
+Endwert und Barwert einer vorschüssigen Rente<BR>
+=============================================<BR>
+&nbsp;&nbsp;Zu jedem Jahresbeginn wird ein Betrag R = 1000€<BR>
+&nbsp;&nbsp;eingezahlt und zu 5% verzinst.<BR>
+&nbsp;&nbsp;Berechne:<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;a) Den Endwert nach 4 Jahren<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;b) Barwert der Rente<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--------------------     :R*q^4<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;/                    \<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|      ---------------\   :R*q^3<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|     /                \<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|     |      -----------\ :R*q^2<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|     |     /           |<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|     |     |      -----| :R*q<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|     |     |     /     v<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;0-----1-----2-----3-----4----> Jahre<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;^     ^     ^     ^     |E<BR>
+&nbsp;&nbsp;&nbsp;R|    R|    R|    R|     v<BR>
+E4 = R*q^4 + R*q^3 + R*q^2 + R*q<BR>
+En = R*q*(q^n-1)/(q-1)
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+R: 1000;<BR>
+q: 1.05;<BR>
+n: 4;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf12_img/Klepp_Jakob_Pf12_8.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Endwert
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+E: R*q*(q^n-1)/(q-1);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf12_img/Klepp_Jakob_Pf12_9.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Barwert
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+E/q^4;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf12_img/Klepp_Jakob_Pf12_10.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Beispiel:<BR>
+Endwert und Barwert einer nachschüssigen Rente<BR>
+==============================================<BR>
+&nbsp;&nbsp;Zu jedem Jahresbeginn wird ein Betrag R = 1000€<BR>
+&nbsp;&nbsp;eingezahlt und zu 5% verzinst.<BR>
+&nbsp;&nbsp;Berechne:<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;a) Den Endwert nach 4 Jahren<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;b) Barwert der Rente<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;---------------     :R*q^3<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/               \<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|      ----------\   :R*q^2<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|     /           \<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|     |      ------\ :R*q<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|     |     /   ,--|<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|     |     |   `. v :R<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;0-----1-----2-----3-----4----> Jahre<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;^     ^     ^     ^<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;R|    R|    R|    R|E    <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v<BR>
+E4 = R*q^3 + R*q^2 + R*q^1 + R<BR>
+En = R * (q^n-1)/(q-1)
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+R: 1000;<BR>
+q: 1.05;<BR>
+n: 4;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf12_img/Klepp_Jakob_Pf12_11.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Endwert
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+E: R*(q^n-1)/(q-1);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf12_img/Klepp_Jakob_Pf12_12.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Barwert
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+E/q^4;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf12_img/Klepp_Jakob_Pf12_13.png">
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  1.3 Ratenzahlung
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Folgende 2 Angebote für eine Firma sind zu vergleichen:<BR>
+a) 6 Mio € sofort, 7x2 Mio in Jahresabständen<BR>
+&nbsp;&nbsp;&nbsp;beginnend 1 Jahr nach der Sofortzahlung<BR>
+b) 5 Jahre hindurch 4 Mio €<BR>
+Kalkulationszinsatz 8%
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Die beiden Zahlungsarten werden 3 Jahre nach Zahlungsbeginn verglichen<BR>
+a)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2/1.08^4<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;------------------------<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/          2/1.08^3      \<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/-------------------      |<BR>
+&nbsp;&nbsp;6*1.08^3            /      2/1.08^2      \     |<BR>
+&nbsp;&nbsp;----------------   /---------------      |     |<BR>
+&nbsp;/      2*1.08^3  \ /    2/1.08      \     |     |<BR>
+&nbsp;|      -----------|-----------      |     |     |<BR>
+&nbsp;|     /     2*1.08|2/1.08     \     |     |     |<BR>
+&nbsp;|     |      -----|-----      |     |     |     |<BR>
+&nbsp;|     |     /     v     \     |     |     |     |<BR>
+&nbsp;0-----1-----2-----3-----4-----5-----6-----7-----8----> Jahre<BR>
+&nbsp;^     ^     ^     ^     ^     ^     ^     ^<BR>
+6|    2|    2|    2|    2|    2|    2|    2|<BR>
+b)<BR>
+&nbsp;&nbsp;4*1.08^3<BR>
+&nbsp;&nbsp;----------------<BR>
+&nbsp;/      4*1.08^2  \<BR>
+&nbsp;|      -----------|<BR>
+&nbsp;|     /     4*1.08|4/1.08<BR>
+&nbsp;|     |      -----|-----<BR>
+&nbsp;|     |     /     v     \<BR>
+&nbsp;0-----1-----2-----3-----4-----5-----6-----7-----8----> Jahre<BR>
+&nbsp;^     ^     ^     ^     ^<BR>
+4|    4|    4|    4|    4|
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Berechnung mit Geburtsmonat als Jahr<BR>
+Monat=1
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/* Mit diesem Paket lassen sich unter anderem <BR>
+&nbsp;&nbsp;&nbsp;die summe einer geometrischen Folge berechnen */<BR>
+load(functs);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf12_img/Klepp_Jakob_Pf12_14.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+q:1.08;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf12_img/Klepp_Jakob_Pf12_15.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+6*q + 2 + 2/q + 2/q^2 + 2/q^3 + 2/q^4 + 2/q^5 + 2/q^6
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+a: 6*q              /* Die erste Zahlung */<BR>
+&nbsp;+ geosum(2, q, 7)  /* 7 weitere Zahlungen */<BR>
+&nbsp;/ q^5              /* Verschiebung weil die Abrechnung <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;für Jahr 1 durchgeführt wird */;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf12_img/Klepp_Jakob_Pf12_16.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+4*q + 4 + 4/q + 4/q^2 + 4/q^3
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+b: geosum(4, q, 5)  /* Die 5 Zahlungen */<BR>
+&nbsp;/ q^3              /* Verschiebung weil die Abrechnung <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;für Jahr 1 durchgeführt wird */;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf12_img/Klepp_Jakob_Pf12_17.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Der ganzen Idee unterliegt das Äquivalenzprinzip.<BR>
+Kapitalien können nur im bezug auf den gleichen Zeitpunkt<BR>
+verglichen werden.
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  1.4 Rückzahlung eines Kredits
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Kredit über 10000 zu 10%<BR>
+Für die Rückzahlung wird vereinbart:<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;3000 nach einem Jahr<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;2000 nach dem 2. Jahr<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;4000 nach dem 3. Jahr<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Rest nach dem 4. Jahr<BR>
+Wert Kredit:        10000 * 1.1^4 = 14641        \<BR>
+Wert 1. Rückzahlung  3000 * 1.1^3 =  3993 \       \<BR>
+Wert 2. Rückzahlung  2000 * 1.1^2 =  2420  > 10813 > Restrate: 3828<BR>
+Wert 3. Rückzahlung  4000 * 1.1   =  4400 /       /<BR>
+Tilgungsplan<BR>
+============<BR>
+==== ============ ====== ======== ======= ==========<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Schuld                               Schuld<BR>
+Jahr Jahresbeginn Zinsen Annuität Tilgung Jahresende<BR>
+==== ============ ====== ======== ======= ==========<BR>
+&nbsp;&nbsp;&nbsp;1        10000   1000     3000    2000       8000<BR>
+&nbsp;&nbsp;&nbsp;2         8000    800     2000    1200       6800<BR>
+&nbsp;&nbsp;&nbsp;3         6800    680     4000    3320       3480<BR>
+&nbsp;&nbsp;&nbsp;4         3480    348     3828    3480          0<BR>
+==== ============ ====== ======== ======= ==========
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Folgende Rückzahlungsformen einer Schuld sind üblich<BR>
+Jährliche und Gleichbleibende Rückzahlungen<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;A (Annuität)<BR>
+&nbsp;Die Rückzahlung erfolgt Nachschüssig <BR>
+&nbsp;Das heißt die erste Rückzahlung erfolgt ein Jahr nach der<BR>
+&nbsp;Kreditvergabe<BR>
+&nbsp;-> es handelt sich um einen nachschüssigen Rentenvorgang<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Der Endwert entspricht dem Endwert der Schuld<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Endwert der Schuld: K   K[0]*q^n<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Endwert nachschüssige Rente: A*(q^n -1)/(q-1)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;K[0]*q^n = A*(q^n -1)/(q-1)<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;A=K[0]*q^n*(q-1)/(q^n-1)<BR>
+Bsp:<BR>
+====<BR>
+&nbsp;K[0] = 10000; i=10%<BR>
+&nbsp;Gleichbleibende Annuität<BR>
+&nbsp;Tilgungsplan:<BR>
+&nbsp;&nbsp;Kreditsumme: 10000<BR>
+&nbsp;&nbsp;Jahre 4<BR>
+&nbsp;&nbsp;Prozentsatz 10%<BR>
+&nbsp;Annuität 3154.71<BR>
+==== ============ ======= ======== ======= ==========<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Schuld                                Schuld<BR>
+Jahr Jahresbeginn  Zinsen Annuität Tilgung Jahresende<BR>
+==== ============ ======= ======== ======= ==========<BR>
+&nbsp;&nbsp;&nbsp;1     10000.00 1000.00  3154.71 2154.71    7845.29<BR>
+&nbsp;&nbsp;&nbsp;2      7845.29  784.53  3154.71 2370.18    5475.11<BR>
+&nbsp;&nbsp;&nbsp;3      5475.11  547.51  3154.71 2607.20    2867.91<BR>
+&nbsp;&nbsp;&nbsp;4      2867.91  286.79  3154.71 2867.91          0<BR>
+==== ============ ======= ======== ======= ==========
+</P>
+
+
+<!-- Subsection cell -->
+
+
+<P CLASS="subsect">
+  1.5 Block: Kredit Tilgungsplan
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Berechnung der Annuität
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+annuitat(K0, q, n):=K0 * q^n * (q-1) / (q^n - 1);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf12_img/Klepp_Jakob_Pf12_18.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Kredit Tilgungsplan<BR>
+<-<BR>
+&nbsp;&nbsp;Kreditsumme   K0<BR>
+&nbsp;&nbsp;Laufzeit       n<BR>
+&nbsp;&nbsp;Prozentsatz    s<BR>
+&nbsp;&nbsp;Annuität       A<BR>
+-><BR>
+&nbsp;&nbsp;List²<BR>
+&nbsp;&nbsp;// (K0=10000, n=4, s=10/100, A=3154.71)-><BR>
+&nbsp;&nbsp;//     , Schuld      ,        ,         ,        , Schuld <BR>
+&nbsp;&nbsp;// Jahr, Jahresbeginn,  Zinsen, Annuität, Tilgung, Jahresende<BR>
+&nbsp;&nbsp;&nbsp;[[   1,     10000.00, 1000.00,  3154.71, 2154.71,    7845.29], <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;[   2,      7845.29,  784.53,  3154.71, 2370.18,    5475.11],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;[   3,      5475.11,  547.51,  3154.71, 2607.20,    2867.91],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;[   4,      2867.91,  286.79,  3154.71, 2867.91,       0.00]]
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+kredit_tilgung(K0, n, s, A):=block(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;[i:1,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;K_beginn,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;zinsen,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tilgung,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;K_ende:K0,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;list:[]],<BR>
+loop, if(i>n) then (return(list)),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;K_beginn: K_ende,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;zinsen: K_beginn*s,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;tilgung: A - zinsen,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;K_ende: K_beginn - tilgung,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;list: append(list, [[i, K_beginn, zinsen, A, tilgung, K_ende]]),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;i:i+1,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;go(loop)<BR>
+);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf12_img/Klepp_Jakob_Pf12_19.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+/* Kreditsumme */<BR>
+K0: 10000;<BR>
+/* Laufzeit */<BR>
+n: 4;<BR>
+/* Zinssatz */<BR>
+s: 10/100; /* = 10% */<BR>
+/* Annuität */<BR>
+A: annuitat(K0, 1+s, n);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf12_img/Klepp_Jakob_Pf12_20.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+kredit_tilgung(K0, n, s, A);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf12_img/Klepp_Jakob_Pf12_21.png">
+</P>
+
+
+<!-- Title cell -->
+
+
+<P CLASS="title">
+Unendliche Reihen
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Unendliche geometrische Reihen:<BR>
+<BR>
+&nbsp;&nbsp;a + a*q + a*q^2 = a/(1-q)  ...  wenn |q| < 1<BR>
+&nbsp;&nbsp;∞<BR>
+&nbsp;&nbsp;Σ a*q^n = a/(1-q)          ...  Konvergent für |q| < 1<BR>
+&nbsp;n=0<BR>
+Allgemein:<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;∞<BR>
+&nbsp;&nbsp;Eine unendliche Reihe  Σ c[n] = c[1] + c[2] + c[3] + … + c[n] + …<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;n=0<BR>
+&nbsp;&nbsp;Summe der Partialsummen konvergiert<BR>
+&nbsp;&nbsp;Der Grenzwert der Folge der Partialsummen heißt <BR>
+"Summe der unendlichen Reihen."<BR>
+Konvergenz von Reihen:<BR>
+&nbsp;&nbsp;Kriterien:<BR>
+&nbsp;&nbsp;- Notwendige Kriterien                      ∞<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Erforderlich für due Konvergenz der Reihe Σ c[n]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;ist dass die Glieder dieser Reihe eine   n=0<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Nullfolge bilden: lim c[n] = 0 <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;n→∞<BR>
+&nbsp;&nbsp;- Hinreichende Kriterien<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Quozientenkriterium:                ∞<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gegeben sei die Unendliche Reihe: Σ c[n]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;man berechne den lim der         n=0<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quotienten zweier aufeinander folgender Glieder: g = lim |c[n+1]/c[n]|<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;g < 1: Reihe konvergent                            n→∞<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;g = 1: ?<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;g > 1: Reihe divergent
+</P>
+
+
+<!-- Title cell -->
+
+
+<P CLASS="title">
+Potenzreihen
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+     ∞<BR>
+Def: Σ a[n]*x^n = a[0] + a[1]*x + a[2]*x^2 + a[3]*x^3 + …<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;n=0<BR>
+&nbsp;&nbsp;Zahlen a[n] (n= 0,1,2,3) Koeffizienten der Potenzreihe<BR>
+&nbsp;&nbsp;Konvergenz von Potenzreihen (3 Möglichkeiten):<BR>
+&nbsp;&nbsp;- Potenzreihe konvergiert nur für x=0<BR>
+&nbsp;&nbsp;- Potenzreihe konvergiert für alle x<BR>
+&nbsp;&nbsp;- Die Potenzreihe hat ein r>0 (Konvergenzradius) so dass<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;die Reihe für |x|<r Konvergent ist <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;und für |x|>r Divergent ist<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;findet man mit r = lim |a[n]/(a[n+1])|<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;n→∞
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Anwendung von Potenzreihen<BR>
+Basis für Anwendung:<BR>
+&nbsp;&nbsp;Mit konvergenten Potenzreihen können die gleichen<BR>
+&nbsp;&nbsp;Rechenoperationen (+,*, ...) wir mit endlichen Summen<BR>
+&nbsp;&nbsp;Insbesonders können konvergente Potenzreihen gliedweise<BR>
+&nbsp;&nbsp;differenziert und integriert werden<BR>
+&nbsp;*Beispiele für die Anwendung:<BR>
+&nbsp;&nbsp;- berechnung von Funktionswerten<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;(sin, cos, tan e^*, ...)<BR>
+&nbsp;&nbsp;- aufstellen von Näherungsformeln<BR>
+&nbsp;&nbsp;- integration nach Potenreihen entwicklung
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Entwicklung von Potenzreihen<BR>
+angenommen man hat eine Funktion f(x) als Potenzreihe<BR>
+entwickelt. Das heißt man kann f(x) schreiben als<BR>
+&nbsp;&nbsp;f(x) = a[0] + a[1]*x + a[2]*x^2 + a[3]*x^3 + …<BR>
+Dann sind konkret die unbekannten Koeffizienten <BR>
+&nbsp;&nbsp;a[0], a[1], a[2], a[3]<BR>
+zu bestimmen<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|                |<BR>
+f   (x) = a[0] + a[1]*x + a[2]*x^2 + a[3]*x^3 + … | f   (0) = a[0] | a[0] = f   (0) / 0!<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|                |<BR>
+f'  (x) =        a[1]*x + a[2]*x^2 + a[3]*x^3 + … | f'  (0) = a[1] | a[1] = f'  (0) / 1!<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|                |<BR>
+f'' (x) =                 a[2]*x^2 + a[3]*x^3 + … | f'' (0) = a[2] | a[2] = f'' (0) / 2!<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|                |<BR>
+f'''(x) =                            a[3]*x^3 + … | f'''(0) = a[3] | a[3] = f'''(0) / 3!<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|                |<BR>
+Def: n! = n * (n-1) * (n-2) * … * 1<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0! = 1<BR>
+"n Faktorielle"  "n Fakultät"<BR>
+Damit erhält man <BR>
+&nbsp;+-------------------------------------------------------------+<BR>
+&nbsp;|                                                             |<BR>
+&nbsp;|  f(x) = f(0) + f'(0)*x/1! + f''(0)*x^2/2! + f'''(0)*x^3/3!  |<BR>
+&nbsp;|                                                             |<BR>
+&nbsp;+-------------------------------------------------------------+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Taylorreihe
+</P>
+
+
+<!-- Title cell -->
+
+
+<P CLASS="title">
+Taylor Reihen
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+ +-------------------------------------------------------------+<BR>
+&nbsp;|                                                             |<BR>
+&nbsp;|  f(x) = f(0) + f'(0)*x/1! + f''(0)*x^2/2! + f'''(0)*x^3/3!  |<BR>
+&nbsp;|                                                             |<BR>
+&nbsp;+-------------------------------------------------------------+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Taylorreihe<BR>
+Entwicklung von sin(x) als Taylorreihe<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<BR>
+&nbsp;&nbsp;f   (x) =  sin(x) | f   (0) =  0<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<BR>
+&nbsp;&nbsp;f'  (x) =  cos(x) | f'  (0) =  1 <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<BR>
+&nbsp;&nbsp;f'' (x) = -sin(x) | f'' (0) = -0<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<BR>
+&nbsp;&nbsp;f'''(x) = -cos(x) | f'''(0) = -1<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<BR>
+sin(x) = 0*x^0/0! + 1*x^1/1! - 0*x^2/2! - 1*x^3/3! + 0*x^4/4! + 1*x^5/5! + ...<BR>
+sin(x) = x^1/1! - x^3/3! + x^5/5! - x^7/7! + x^9/9! - x^11/11! + ...<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;∞<BR>
+sin(x) = Σ (-1)^(i+1) * x^(2*i -1) / (2*i -1)!<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;n=1
+</P>
+
+
+<!-- Section cell -->
+
+
+<P CLASS="section">
+ 1 Test der Taylorreihe sin(x)
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+numer:false;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf12_img/Klepp_Jakob_Pf12_22.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+kill(all);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf12_img/Klepp_Jakob_Pf12_23.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+taylor_sin(x):=sum( ((-1)^(i+1) * x^(2*i -1) / factorial(2*i -1)), i, 1, 888)<BR>
+/* 888 = ∞ */;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf12_img/Klepp_Jakob_Pf12_24.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+taylor_sin(0)<BR>
+/*nicht anzeigen, Ergebnis zu lang=Maxima crash */$<BR>
+float(%), numer;<BR>
+sin(0);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf12_img/Klepp_Jakob_Pf12_25.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+taylor_sin(1)<BR>
+/*nicht anzeigen, Ergebnis zu lang=Maxima crash */$<BR>
+float(%), numer;<BR>
+sin(1), numer;
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf12_img/Klepp_Jakob_Pf12_26.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+taylor_sin(%pi/2)<BR>
+/*nicht anzeigen, Ergebnis zu lang=Maxima crash */$<BR>
+float(%), numer;<BR>
+sin(%pi/2);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf12_img/Klepp_Jakob_Pf12_27.png">
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+taylor_sin(%pi)<BR>
+/*nicht anzeigen, Ergebnis zu lang=Maxima crash */$<BR>
+float(%), numer;<BR>
+sin(%pi);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf12_img/Klepp_Jakob_Pf12_28.png">
+</P>
+
+
+<!-- Title cell -->
+
+
+<P CLASS="title">
+Differenzieren & Integrieren<BR>
+mit Taylorreihen
+</P>
+
+
+<!-- Section cell -->
+
+
+<P CLASS="section">
+ 1 "Taylorreihen sind differenzierbar"
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Durch das differenzieren jedes einzelnen Gliedes einer<BR>
+Taylorreihe erhält man eine Taylorreihedie dem Differential<BR>
+der Funktion entspricht.<BR>
+<BR>
+sin(x)  = x/1! - x^3/3!   + x^5/5!   - x^7/7!   + ...<BR>
+<BR>
+sin'(x) = 1/1! - 3*x^2/3! + 5*x^4/5! - 7*x^6/7! + ... =<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= 1    -   x^2/2! + x^4/4!   - x^6/6!   + ... = cos(x)<BR>
+
+</P>
+
+
+<!-- Section cell -->
+
+
+<P CLASS="section">
+ 2 Eulersche Identidät
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+kill(all);<BR>
+load(draw)$
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf12_img/Klepp_Jakob_Pf12_29.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Reihen in C (komplexer Zahlenraum):<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a=r*cos(φ)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b=r*sin(φ)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;__________<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/          V<BR>
+&nbsp;&nbsp;z = a + j*b        z = r( cos(φ) + j*sin(φ) )<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;^__________/<BR>
+
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+wxdraw2d(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;xrange=[-0.1, 2.2], yrange=[-0.2, 1.1], <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;head_length = 0.05, head_type = 'nofilled,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;color=blue,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;vector([0,0], [2,0]), label(["a", 1,-0.1]),<BR>
+&nbsp;vector([2,0], [0,1]), label(["b", 2.1, 0.5]),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;color=green,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;vector([0,0], [2,1]), label(["r", 1,0.6])<BR>
+);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf12_img/Klepp_Jakob_Pf12_30.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+komplexe Zahl als Vektor<BR>
+<BR>
+&nbsp;&nbsp;z = a + j*b 
+</P>
+
+
+<!-- Code cell -->
+
+
+<P><TABLE><TR><TD>
+  <SPAN CLASS="prompt">
+-->  
+  </SPAN></TD>
+  <TD><SPAN CLASS="input">
+phi:0.5;<BR>
+wxdraw2d(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;xrange=[-1.8, 1.8],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;yrange=[-1.1, 1.1],<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;grid=true,<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;transparent=true,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;ellipse(0,0,1,1,0,360),<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;head_length = 0.05, head_type = 'nofilled,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;color=blue,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;vector([0,0],[cos(phi), 0]),            label(["cos φ", cos(phi)/2,           0]),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;vector([cos(phi), 0],[0, sin(phi)]),    label(["sin φ",   cos(phi),  sin(phi)/2]),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;color=green,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;vector([0,0],[cos(phi),sin(phi)]),      label([    "1", cos(phi)/2,  sin(phi)/2])<BR>
+);
+  </SPAN></TD>
+</TR></TABLE>
+  <BR>
+  <IMG ALT="Result" SRC="Klepp_Jakob_Pf12_img/Klepp_Jakob_Pf12_31.png">
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+komplexe Zahl im Einheitskreis<BR>
+<BR>
+&nbsp;&nbsp;z = r( cos(φ) + j*sin(φ) )
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+komplexe Zahl in Exponentialform<BR>
+<BR>
+&nbsp;&nbsp;e^(j*φ) = cos(φ) + j*sin(φ)
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+komplexe Zahl als Taylorreihe<BR>
+<BR>
+&nbsp;&nbsp;e^(j*φ) = 1 + (j*φ)/1! + (j*φ)^2/2! + (j*φ)^3/3! + (j*φ)^4/4! + ... =<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= 1 +   j*φ/1! -     φ^2/2! +   j*φ^3/3! +     φ^4/4! + j*φ^5/5! - φ^6/6! - j*φ^7/7! + ... =<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;---   ~~~~~~~~     --------   ~~~~~~~~~~     -------- ~~~~~~~~~~ -------- ~~~~~~~~~~<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= 1 - φ^2/2! + φ^4/4! - φ^6/6! + ... + j( φ/1! - φ^3/3! + φ^5/5! - φ^7/7! + ...)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;------------------------------------ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cos(φ)                                  j*sin(φ)
+</P>
+
+
+<!-- Section cell -->
+
+
+<P CLASS="section">
+ 3 Integration durch Reihenentwicklung
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Dichtefunktion der standardisierten Normalverteilung<BR>
+<BR>
+&nbsp;&nbsp;g(x) = 1/sqrt(2*π) * e^(-x^2/2)<BR>
+<BR>
+Aufgabe:<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u                 u<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/                 /<BR>
+&nbsp;&nbsp;G(u) = \ g(x) dx = 1/2 + \ g(x) dx<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/                 /<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-∞                 0<BR>
+<BR>
+u<BR>
+/<BR>
+\ g(x) dx    nicht analytisch lösbar<BR>
+/<BR>
+0<BR>
+<BR>
+\----> Integration durch Reihenentwicklung<BR>
+&nbsp;&nbsp;Der Integrant wird als Taylorreihe entwickelt und<BR>
+&nbsp;&nbsp;die Integration gliedweise durchgeführt<BR>
+<BR>
+&nbsp;&nbsp;e^(-x^2/2) = 1 - x^2/2 + (x^2/2)^2/2! + (x^2/2)^3/3! + ...<BR>
+<BR>
+&nbsp;&nbsp;/<BR>
+&nbsp;&nbsp;\ e^(-x^2/2) dx = x - x^3/(2*3) + x^5/(2!*4*5) - x^7/(3!*7*8) + ...<BR>
+&nbsp;&nbsp;/<BR>
+<BR>
+&nbsp;&nbsp;u<BR>
+&nbsp;&nbsp;/<BR>
+&nbsp;&nbsp;\ e^(-x^2/2) dx = u - u^3/(2*3) + u^5/(2!*4*5) - u^7/(3!*7*8) + ... - 0<BR>
+&nbsp;&nbsp;/<BR>
+&nbsp;&nbsp;0
+</P>
+
+
+<!-- Title cell -->
+
+
+<P CLASS="title">
+Fourierreihen
+</P>
+
+
+<!-- Text cell -->
+
+
+<P CLASS="comment">
+Noch nicht gelernt
+</P>
+
+ <HR>
+ <SMALL> Created with <A HREF="http://wxmaxima.sourceforge.net/">wxMaxima</A>.</SMALL>
+
+ </BODY>
+</HTML>
